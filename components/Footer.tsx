@@ -198,12 +198,12 @@ export default function Footer() {
         <div>
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mx-auto text-left" style={{ maxWidth: '90%' }}>
             {/* Copyright */}
-            <div className="font-[clother] font-normal not-italic text-[14px] sm:text-[18px] leading-[20px] sm:leading-[26px] tracking-normal text-gray-500">
+            <div className="font-[clother] font-normal not-italic text-[14px] sm:text-[18px] leading-[20px] sm:leading-[26px] tracking-normal text-gray-400">
               ©2026 SYNERGOS Tech Consulting Services Pvt Ltd. All Rights Reserved.
             </div>
 
             {/* Privacy Policy & T&C */}
-            <div className="font-[clother] font-normal not-italic text-[14px] sm:text-[18px] leading-[20px] sm:leading-[26px] tracking-normal text-gray-500">
+            <div className="font-[clother] font-normal not-italic text-[14px] sm:text-[18px] leading-[20px] sm:leading-[26px] tracking-normal text-gray-400">
               <Link href="#" className="hover:text-white transition-colors duration-300">Privacy Policy</Link> | <Link href="#" className="hover:text-white transition-colors duration-300">T&C</Link>
             </div>
           </div>

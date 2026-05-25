@@ -65,6 +65,29 @@ body::-webkit-scrollbar-track {
 ========================================= */
 
 @layer utilities {
+  .text-gray,
+  .text-gray-400,
+  .text-gray-500 {
+    color: #AEAEAE !important;
+  }
+
+  a.text-gray:hover,
+  a.text-gray-400:hover,
+  a.text-gray-500:hover,
+  .text-gray a:hover,
+  .text-gray-400 a:hover,
+  .text-gray-500 a:hover {
+    color: #FF0000 !important;
+  }
+
+  a.text-gray:active,
+  a.text-gray-400:active,
+  a.text-gray-500:active,
+  .text-gray a:active,
+  .text-gray-400 a:active,
+  .text-gray-500 a:active {
+    color: #FFFFFF !important;
+  }
 
   /* =========================
      GLASS PANEL

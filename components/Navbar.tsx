@@ -28,8 +28,18 @@ export default function Navbar() {
   
   // Container width and centering
   const containerMaxWidth = useTransform(scrollY, [0, scrollThreshold, scrollThreshold + 20], ['100%', '100%', '1200px']);
-  const containerPaddingX = 50;
+  const [containerPaddingX, setContainerPaddingX] = useState(50);
   const containerPaddingY = useTransform(scrollY, [0, scrollThreshold, scrollThreshold + 20], [16, 16, 12]);
+  
+  // Update horizontal padding based on screen size
+  useEffect(() => {
+    const handleResize = () => {
+      setContainerPaddingX(window.innerWidth < 1024 ? 25 : 50);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   
   // Border radius and gap
   const borderRadius = useTransform(scrollY, [0, scrollThreshold, scrollThreshold + 20], [0, 0, 8]);

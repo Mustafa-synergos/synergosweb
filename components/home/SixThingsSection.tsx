@@ -365,25 +365,6 @@ export default function Sticky3DStackCards() {
                 />
               ))}
             </div>
-
-            {/* SQUARE NAVIGATION — Mobile: horizontal bottom */}
-            <div className="lg:hidden absolute bottom-8 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3">
-              {services.map((service, index) => (
-                <button
-                  key={service.id}
-                  onClick={() => scrollToCard(index)}
-                  aria-label={`Go to ${service.title}`}
-                  className={`
-                    w-2 h-2 transition-all duration-300
-                    ${
-                      index === activeIndex
-                        ? "bg-white"
-                        : "bg-white/30 hover:bg-white/60"
-                    }
-                  `}
-                />
-              ))}
-            </div>
           </div>
         </div>
       </div>

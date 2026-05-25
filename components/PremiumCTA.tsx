@@ -24,7 +24,7 @@ export default function PremiumCTA({
   className = '',
   magnetic = false,
 }: PremiumCTAProps) {
-  const ref = useRef<HTMLButtonElement>(null);
+  const ref = useRef<any>(null);
 
   const [isRedSection, setIsRedSection] = useState(false);
   const [magnetArmed, setMagnetArmed] = useState(false);
@@ -108,7 +108,7 @@ export default function PremiumCTA({
   });
 
   const handleMouseMove = (
-    e: React.MouseEvent<HTMLButtonElement>
+    e: React.MouseEvent<HTMLElement>
   ) => {
     if (!magnetic) return;
     if (!ref.current) return;
@@ -174,10 +174,13 @@ export default function PremiumCTA({
     }
   };
 
-  const ButtonContent = () => (
-    <motion.button
+  const Component = href ? motion.a : motion.button;
+  const extraProps = href ? { href } : { onClick };
+
+  return (
+    <Component
       ref={ref}
-      onClick={onClick}
+      {...extraProps}
       onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -341,19 +344,6 @@ export default function PremiumCTA({
           </span>
         ))}
       </div>
-    </motion.button>
+    </Component>
   );
-
-  if (href) {
-    return (
-      <a
-        href={href}
-        className="inline-block"
-      >
-        <ButtonContent />
-      </a>
-    );
-  }
-
-  return <ButtonContent />;
 }

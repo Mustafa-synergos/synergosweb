@@ -93,13 +93,13 @@ export default function Hero() {
         className="relative z-10 flex items-center min-h-screen px-5 sm:px-6 lg:px-8 pt-20 sm:pt-24 lg:pt-20"
       >
         <div className="max-w-7xl mx-auto w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-[8rem] items-baseline">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 items-baseline">
             {/* Left Column - "CAN A BRAND" */}
             <motion.div
               initial={{ opacity: 0, x: -50, y: 20 }}
               animate={{ opacity: 1, x: 0, y: -60 }}
               transition={{ duration: 1, delay: 0.3 }}
-              className="lg:col-span-2 text-left flex items-center justify-start order-1 lg:order-1 mb-2 sm:mb-4 lg:mb-0"
+              className="lg:col-span-3 text-left flex items-center justify-space-around lg:pl-16 order-1 lg:order-1 mb-2 sm:mb-4 lg:mb-0"
             >
               <h2 className="responsive-h2 text-white italic font-black leading-[0.85] tracking-tighter">
                 CAN A
@@ -113,7 +113,7 @@ export default function Hero() {
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, delay: 0.4 }}
-              className="lg:col-span-10 text-left order-2 lg:order-2"
+              className="lg:col-span-9 text-left order-2 lg:order-2"
             >
               <h1 className="responsive-h1 text-white mb-4 sm:mb-6 lg:mb-6">
                 GO
@@ -122,22 +122,22 @@ export default function Hero() {
               </h1>
               
               {/* Split paragraphs in 50-50 columns with button */}
-              <div className="grid grid-cols-1 md:grid-cols-[35%_65%] gap-6 sm:gap-6 lg:gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-[40%_60%] gap-6 sm:gap-6 lg:gap-6">
                 <motion.p
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.6 }}
-                  className="responsive-paragraph text-white/80 leading-[2rem] mb-3 sm:mb-4 lg:mb-0 max-w-[50%]"
+                  className="responsive-paragraph text-white/80 leading-[2rem] mb-3 sm:mb-4 lg:mb-0 max-w-[60%]"
                 >
                   The sky isn't limit. For us, it is just first checkpoint.
                 </motion.p>
 
-                <div className="flex flex-col gap-3 sm:gap-4 lg:gap-4 -ml-6 sm:-ml-8 lg:-ml-12 pr-4 sm:pr-6 lg:pr-8">
+                <div className="flex flex-col gap-3 sm:gap-4 lg:gap-4">
                  <motion.p
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.7 }}
-                    className="responsive-paragraph text-white/80 !leading-[1.4]  !mb-1 max-w-[50%]"
+                    className="responsive-paragraph text-white/80 !leading-[1.4]  !mb-1 max-w-[60%]"
                   >
                     Synergos is a brand acceleration system built for brands that refuse to stay in one place. Strategy, storytelling, and delivery, firing together, for your next orbit.
                   </motion.p>
