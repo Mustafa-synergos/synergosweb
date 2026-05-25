@@ -1,0 +1,296 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================================
+   ROOT TYPOGRAPHY SYSTEM
+========================================= */
+
+:root {
+  font-family: "clother", sans-serif;
+  --font-display: "clother", sans-serif;
+  --font-body: "clother", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+/* =========================================
+   GLOBAL STYLES
+========================================= */
+
+/* html {
+  scroll-behavior: smooth;
+} */
+html,
+body {
+  /* overflow-x: hidden; */
+}
+
+
+body {
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  /* background: #000; */
+  color: var(--text-primary);
+  /* perspective: 2000px;
+  transform-style: preserve-3d; */
+}
+.text-grey {
+  color: #AEAEAE;
+}
+.text-grey-400{
+   color: #AEAEAE;
+}
+/* =========================================
+   SCROLLBAR
+========================================= */
+
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.35);
+  border-radius: 9999px;
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* =========================================
+   UTILITIES
+========================================= */
+
+@layer utilities {
+
+  /* =========================
+     GLASS PANEL
+  ========================= */
+
+  .glass-panel {
+    @apply bg-slate-950/65 backdrop-blur-xl border border-white/10;
+  }
+
+  /* =========================
+     RESPONSIVE H1
+  ========================= */
+
+  .responsive-h1 {
+    font-family: var(--font-display);
+    font-size: clamp(65px, 10vw, 194px);
+    line-height: 0.88;
+    font-weight: 700;
+    letter-spacing: var(--letter-extra-tight);
+    text-transform: uppercase;
+  }
+
+  /* =========================
+     RESPONSIVE H2
+  ========================= */
+
+  .responsive-h2 {
+    font-family: var(--font-display);
+    font-size: clamp(27px, 4.5vw, 69px);
+    line-height: 0.95;
+    font-weight: 700;
+    letter-spacing: var(--letter-tight);
+    text-transform: uppercase;
+  }
+
+  /* =========================
+     LARGE CINEMATIC H2
+  ========================= */
+
+  .responsive-large-h2 {
+    font-family: var(--font-display);
+    font-size: clamp(38px, 8vw, 134px);
+    line-height: 0.9;
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+  }
+
+  /* =========================
+     SYNERGY ENGINE HEADING
+  ========================= */
+
+  .responsive-synergy-heading {
+    font-family: var(--font-display);
+    font-size: clamp(38px, 8vw, 134px);
+    line-height: 0.88;
+    font-weight: 700;
+    letter-spacing: -0.06em;
+    text-transform: uppercase;
+  }
+
+  /* =========================
+     H3 DISPLAY
+  ========================= */
+
+  .responsive-clother-h3 {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 4vw, 52px);
+    line-height: 1;
+    font-weight: 200;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+  }
+
+  /* =========================
+     PARAGRAPH
+  ========================= */
+
+  .responsive-paragraph {
+    font-family: var(--font-body);
+    font-size: clamp(16px, 1.1vw, 18px);
+    line-height: 1.7;
+    font-weight: 200;
+    color: var(--text-secondary);
+  }
+
+  /* =========================
+     CLOTHER PARAGRAPH
+  ========================= */
+
+  .responsive-clother-paragraph {
+    font-family: var(--font-display);
+    font-size: clamp(15px, 1vw, 16px);
+    line-height: 1.6;
+    font-weight: 200;
+    color: var(--text-secondary);
+  }
+
+  /* =========================
+     CTA TEXT
+  ========================= */
+
+  .responsive-cta {
+    font-family: var(--font-body);
+    font-size: clamp(16px, 1vw, 18px);
+    line-height: 1;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  /* =========================
+     RED SPAN
+  ========================= */
+
+  .responsive-red-span {
+    font-family: var(--font-display);
+    font-size: clamp(18px, 2vw, 28px);
+    line-height: 1;
+    font-weight: 200;
+    letter-spacing: -0.02em;
+    color: #ff3b30;
+    text-transform: uppercase;
+  }
+
+  /* =========================
+     CLOTHER RED SPAN
+  ========================= */
+
+  .responsive-clother-red-span {
+    font-family: var(--font-display);
+    font-size: clamp(16px, 1.3vw, 20px);
+    line-height: 1;
+    font-weight: 200;
+    font-style: italic;
+    letter-spacing: -0.01em;
+    color: #ff3b30;
+  }
+
+  /* =========================
+     SYNERGY SELECT TEXT
+  ========================= */
+
+  .synergy-select-text {
+    font-family: var(--font-display);
+    font-size: clamp(20px, 2vw, 28px);
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+
+  /* =========================
+     LABELS
+  ========================= */
+
+  .font-clother-label {
+    font-family: var(--font-display);
+    font-size: clamp(18px, 2vw, 28px);
+    line-height: 1;
+    font-weight: 200;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+
+  /* =========================
+     SECTION SPACING
+  ========================= */
+
+  .section-spacing {
+    padding-top: clamp(80px, 10vw, 180px);
+    padding-bottom: clamp(80px, 10vw, 180px);
+  }
+
+  /* =========================
+     CONTAINER WIDTH
+  ========================= */
+
+  .cinematic-container {
+    width: min(100% - 40px, 1800px);
+    margin-inline: auto;
+  }
+
+  /* =========================
+     PREMIUM TEXT BALANCE
+  ========================= */
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* =========================
+     HIDE SCROLLBAR
+  ========================= */
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* =========================================
+   MOBILE OPTIMIZATION
+========================================= */
+
+@media screen and (max-width: 768px) {
+
+  .responsive-h1 {
+    line-height: 0.9;
+  }
+
+  .responsive-large-h2 {
+    line-height: 0.95;
+  }
+
+  .responsive-synergy-heading {
+    line-height: 0.92;
+  }
+
+  .responsive-paragraph {
+    line-height: 1.6;
+  }
+
+  .cinematic-container {
+    width: calc(100% - 24px);
+  }
+}

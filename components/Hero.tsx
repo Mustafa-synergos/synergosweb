@@ -1,0 +1,182 @@
+'use client';
+
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useEffect, useState, useRef } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import PremiumCTA from './PremiumCTA';
+
+export default function Hero() {
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const [currentDevice, setCurrentDevice] = useState<'desktop' | 'tablet' | 'mobile'>('desktop');
+  const videoRef = useRef<HTMLVideoElement>(null);
+  
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 500], [0, -150]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+
+  // Detect device type for responsive media
+  useEffect(() => {
+    const checkDevice = () => {
+      const width = window.innerWidth;
+      if (width < 768) setCurrentDevice('mobile');
+      else if (width < 1024) setCurrentDevice('tablet');
+      else setCurrentDevice('desktop');
+    };
+
+    checkDevice();
+    window.addEventListener('resize', checkDevice);
+    return () => window.removeEventListener('resize', checkDevice);
+  }, []);
+
+  // Media sources based on device
+  const mediaSources = {
+    desktop: {
+      video: '/videos/2547170_Travel_Futuristic_1920x1080.mp4',
+      poster: '/images/hero-desktop.jpg',
+      fallback: '/images/hero-desktop.jpg'
+    },
+    tablet: {
+      video: '/videos/2547170_Travel_Futuristic_1920x1080.mp4',
+      poster: '/images/hero-tablet.jpg',
+      fallback: '/images/hero-tablet.jpg'
+    },
+    mobile: {
+      video: '/videos/2547170_Travel_Futuristic_1920x1080.mp4',
+      poster: '/images/hero-mobile.jpg',
+      fallback: '/images/hero-mobile.jpg'
+    }
+  };
+
+  const currentMedia = mediaSources[currentDevice];
+
+  return (
+    <section className="relative min-h-screen overflow-hidden">
+      {/* Background Media Layer */}
+      <div className="absolute inset-0">
+        {/* Video Background for All Devices */}
+        <div className="relative w-full h-full">
+          <video
+            ref={videoRef}
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster={currentMedia.poster}
+            className="absolute inset-0 w-full h-full object-cover object-center"
+            onLoadedData={() => setIsVideoLoaded(true)}
+            onError={() => setIsVideoLoaded(false)}
+          >
+            <source src={currentMedia.video} type="video/mp4" />
+          </video>
+          
+          {/* Video Fallback Image */}
+          {/* <motion.img
+            src={currentMedia.fallback}
+            alt="Hero background"
+            className="absolute inset-0 w-full h-full object-cover object-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: isVideoLoaded ? 0 : 1 }}
+            transition={{ duration: 1 }}
+          /> */}
+        </div>
+
+        {/* Overlay Gradients */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30" />
+        
+              </div>
+
+      {/* Hero Content - Split Layout */}
+      <motion.div
+        style={{ y, opacity }}
+        className="relative z-10 flex items-center min-h-screen px-5 sm:px-6 lg:px-8 pt-20 sm:pt-24 lg:pt-20"
+      >
+        <div className="max-w-7xl mx-auto w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-[8rem] items-baseline">
+            {/* Left Column - "CAN A BRAND" */}
+            <motion.div
+              initial={{ opacity: 0, x: -50, y: 20 }}
+              animate={{ opacity: 1, x: 0, y: -60 }}
+              transition={{ duration: 1, delay: 0.3 }}
+              className="lg:col-span-2 text-left flex items-center justify-start order-1 lg:order-1 mb-2 sm:mb-4 lg:mb-0"
+            >
+              <h2 className="responsive-h2 text-white italic font-black leading-[0.85] tracking-tighter">
+                CAN A
+                <br />
+                BRAND
+              </h2>
+            </motion.div>
+
+            {/* Right Column - "GO BEYOND" and split paragraphs */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1, delay: 0.4 }}
+              className="lg:col-span-10 text-left order-2 lg:order-2"
+            >
+              <h1 className="responsive-h1 text-white mb-4 sm:mb-6 lg:mb-6">
+                GO
+                <br />
+                BEYOND.
+              </h1>
+              
+              {/* Split paragraphs in 50-50 columns with button */}
+              <div className="grid grid-cols-1 md:grid-cols-[35%_65%] gap-6 sm:gap-6 lg:gap-6">
+                <motion.p
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.6 }}
+                  className="responsive-paragraph text-white/80 leading-relaxed  mb-3 sm:mb-4 lg:mb-0  max-w-[50%]"
+                >
+                  The sky isn't limit. For us, it is just first checkpoint.
+                </motion.p>
+
+                <div className="flex flex-col gap-3 sm:gap-4 lg:gap-4 -ml-6 sm:-ml-8 lg:-ml-12 pr-4 sm:pr-6 lg:pr-8">
+                 <motion.p
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.7 }}
+                    className="responsive-paragraph text-white/80 !leading-[1.4]  !mb-1 max-w-[50%]"
+                  >
+                    Synergos is a brand acceleration system built for brands that refuse to stay in one place. Strategy, storytelling, and delivery, firing together, for your next orbit.
+                  </motion.p>
+                  
+                  {/* START PROJECT Button */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.8 }}
+                  >
+                    <PremiumCTA href="/projects" className="text-xs sm:text-sm lg:text-base" title="START PROJECT" hoverTitle="START PROJECT" />
+                  </motion.div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+        </div>
+      </motion.div>
+
+      {/* Banner Vector Left */}
+      <div className="hidden sm:block absolute bottom-0 w-64 h-96 max-w-[500px] xl:w-[450px] opacity-100 z-50" style={{ left: '-4rem' }}>
+        <Image
+          src="/images/banner-vector-left.webp"
+          alt="Banner vector decoration"
+          fill
+          style={{ objectFit: 'contain' }}
+        />
+      </div>
+
+      {/* Banner Vector Right */}
+      <div className="hidden sm:block absolute right-0 w-[600px] h-[600px] max-w-[700px] xl:w-[700px] xl:h-[700px] opacity-100 z-50" style={{ top: '-120px' }}>
+        <Image
+          src="/images/banner-vector-right.webp"
+          alt="Banner vector decoration"
+          fill
+          style={{ objectFit: 'contain' }}
+        />
+      </div>
+    </section>
+  );
+}
