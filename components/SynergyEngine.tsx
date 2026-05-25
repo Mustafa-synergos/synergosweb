@@ -35,7 +35,7 @@ const engineCards = [
   {
     title: 'DELIVERY',
     description: 'The thrust. A vision without velocity remains a dream. From SEO to performance marketing, from social media to studio production. Delivery answers the question:',
-    question: 'why?',
+    question: 'what happens now?',
     icon: (
       <img 
         src="/images/Delivery.svg" 

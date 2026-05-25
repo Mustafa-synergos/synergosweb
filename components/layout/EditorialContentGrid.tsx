@@ -60,7 +60,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
         transition={{ delay: 0.2, duration: 0.6 }}
         viewport={{ once: true }}
       >
-        <span className={`inline-block font-clother-black font-normal uppercase tracking-normal ${labelColor} text-[18px] lg:text-[28px] leading-[100%]`}>
+        <span className={`inline-block font-clother font-normal uppercase tracking-normal ${labelColor} text-[18px] lg:text-[28px] leading-[100%]`}>
           {label}
         </span>
       </motion.div>

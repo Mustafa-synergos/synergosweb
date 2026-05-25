@@ -48,7 +48,7 @@ export default function BeforeFooterCTA() {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 viewport={{ once: true }}
               >
-                <span className="text-red-500 font-clother-black font-normal text-[18px] lg:text-[28px] leading-[100%] tracking-normal uppercase">
+                <span className="text-red-500 font-clother font-normal text-[18px] lg:text-[28px] leading-[100%] tracking-normal uppercase">
                   Let's connect
                 </span>
               </motion.div>
@@ -59,7 +59,7 @@ export default function BeforeFooterCTA() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, delay: 0.5 }}
                 viewport={{ once: true }}
-                className="text-white font-clother-black font-bold text-[38px] lg:text-[134px] leading-[40px] lg:leading-[134px] tracking-normal uppercase whitespace-nowrap"
+                className="text-white font-clother font-bold text-[38px] lg:text-[134px] leading-[40px] lg:leading-[134px] tracking-normal uppercase whitespace-nowrap"
               >
                 WE REDEFINE THE
                 <br />
@@ -85,7 +85,7 @@ export default function BeforeFooterCTA() {
                 viewport={{ once: true }}
                 className="pt-8 lg:pt-32 w-full"
               >
-                <div className="relative flex items-center border-b border-white/30 focus-within:border-white/60 transition-colors duration-300 w-full overflow-hidden pb-4">
+                <div className="relative flex items-center border-b border-white/30 focus-within:border-white/60 transition-colors duration-300 w-full pb-4">
                   <input
                     type="email"
                     placeholder="@youremailid"
@@ -100,7 +100,53 @@ export default function BeforeFooterCTA() {
                     onHoverEnd={() => setIsHovered(false)}
                     className="flex items-center gap-1 lg:gap-2 text-white uppercase tracking-[0.08em] lg:tracking-[0.1em] text-xs lg:text-base font-bold shrink-0 ml-2"
                   >
-                    <span>LET'S LIFT OFF</span>
+                    <motion.span
+                      initial="rest"
+                      animate={isHovered ? 'hover' : 'rest'}
+                      className="relative flex overflow-hidden"
+                    >
+                      {"LET'S LIFT OFF".split('').map((char, i) => (
+                        <span
+                          key={i}
+                          className="relative inline-block overflow-hidden"
+                          style={{ marginRight: char === ' ' ? '6px' : '1px' }}
+                        >
+                          <motion.span
+                            className="block text-white"
+                            initial={{ y: 0 }}
+                            variants={{
+                              hover: {
+                                y: '-120%',
+                                transition: {
+                                  delay: i * 0.03,
+                                  duration: 0.35,
+                                  ease: [0.76, 0, 0.24, 1],
+                                },
+                              },
+                            }}
+                          >
+                            {char === ' ' ? '\u00A0' : char}
+                          </motion.span>
+
+                          <motion.span
+                            className="absolute left-0 top-full block text-white"
+                            initial={{ y: 0 }}
+                            variants={{
+                              hover: {
+                                y: '-100%',
+                                transition: {
+                                  delay: i * 0.03,
+                                  duration: 0.4,
+                                  ease: [0.76, 0, 0.24, 1],
+                                },
+                              },
+                            }}
+                          >
+                            {char === ' ' ? '\u00A0' : char}
+                          </motion.span>
+                        </span>
+                      ))}
+                    </motion.span>
                     <motion.div
                       animate={{ rotate: isHovered ? 360 : 0 }}
                       transition={{ duration: 0.6, ease: "easeInOut" }}

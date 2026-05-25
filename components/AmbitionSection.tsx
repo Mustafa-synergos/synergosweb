@@ -159,29 +159,28 @@ export default function AmbitionSection() {
   }, []);
 
   return (
-    <section className="relative min-h-[80vh] lg:min-h-[140vh] overflow-hidden px-6 lg:px-8 py-20 lg:pb-40 lg:pt-0" style={{ backgroundColor: '#171717' }}>
+    <section className="relative min-h-[80vh] lg:min-h-[140vh] overflow-hidden py-20 lg:pb-40 lg:pt-0" style={{ backgroundColor: '#171717' }}>
       {/* Interactive Dots Background */}
       <InteractiveDots variant="dark" />
 
+      {/* Vector Image separating sections - hidden on mobile, outside container, flush-left */}
+      <motion.div
+        initial={{ opacity: 0, x: -30 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1, ease: "easeInOut" }}
+        viewport={{ once: true }}
+        className="hidden md:block  left-0 top-0 z-10"
+        style={{ transform: 'translateY(var(--tw-translate-y, 0px))' }}
+      >
+        <img
+          src="/images/who-we-are-vector.webp"
+          alt="Who We Are Vector"
+          className="w-auto h-[400px] object-contain"
+        />
+      </motion.div>
+
       {/* Content Wrapper - z-index to sit above canvas */}
-      <div className="relative z-10">
-
-       {/* Vector Image separating sections - hidden on mobile */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, ease: "easeInOut" }}
-          viewport={{ once: true }}
-          className="mb-2 hidden md:block"
-          style={{ transform: 'translateY(var(--tw-translate-y, 0px))' }}
-        >
-          <img 
-            src="/images/who-we-are-vector.webp" 
-            alt="Who We Are Vector" 
-            className="w-auto h-[400px] object-contain"
-          />
-        </motion.div>
-
+      <div className="relative z-10 px-6 lg:px-8">
 
       <div ref={containerRef} className="relative z-10 max-w-7xl mx-auto min-h-[80vh] flex flex-col justify-between">
         {/* Shared Logo - Absolutely positioned inside container */}
@@ -218,7 +217,7 @@ export default function AmbitionSection() {
               transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <h3 ref={mobileHeading1Ref} className="text-white uppercase flex items-center gap-4" style={{ fontFamily: 'Clother-black', fontWeight: 400, fontStyle: 'normal', fontSize: '17px', lineHeight: '20px', letterSpacing: '0%' }}>
+              <h3 ref={mobileHeading1Ref} className="text-white uppercase flex items-center gap-4" style={{ fontFamily: 'clother', fontWeight: 400, fontStyle: 'normal', fontSize: '17px', lineHeight: '20px', letterSpacing: '0%' }}>
                 <img src="/images/white-logo.webp" alt="Logo" className="w-12 h-12" />
                 YOU BRING THE AMBITION.
               </h3>
@@ -231,7 +230,7 @@ export default function AmbitionSection() {
               transition={{ duration: 0.8, delay: 0.4 }}
               viewport={{ once: true }}
             >
-              <h3 ref={mobileHeading2Ref} className="text-grey uppercase" style={{ fontFamily: 'Clother-black', fontWeight: 400, fontStyle: 'normal', fontSize: '17px', lineHeight: '20px', letterSpacing: '0%' }}>
+              <h3 ref={mobileHeading2Ref} className="text-grey uppercase" style={{ fontFamily: 'clother', fontWeight: 400, fontStyle: 'normal', fontSize: '17px', lineHeight: '20px', letterSpacing: '0%' }}>
                 WE BRING THE COMPASS,<br />
                 THE FUEL, AND THE THRUST.
               </h3>
@@ -244,7 +243,7 @@ export default function AmbitionSection() {
               transition={{ duration: 0.8, delay: 0.6 }}
               viewport={{ once: true }}
             >
-              <h3 ref={mobileHeading3Ref} className="text-grey uppercase" style={{ fontFamily: 'Clother-black', fontWeight: 400, fontStyle: 'normal', fontSize: '17px', lineHeight: '20px', letterSpacing: '0%' }}>
+              <h3 ref={mobileHeading3Ref} className="text-grey uppercase" style={{ fontFamily: 'clother', fontWeight: 400, fontStyle: 'normal', fontSize: '17px', lineHeight: '20px', letterSpacing: '0%' }}>
                 WE ARE NOT HERE FOR<br />
                 ONE CAMPAIGN.
               </h3>
@@ -257,7 +256,7 @@ export default function AmbitionSection() {
               transition={{ duration: 0.8, delay: 0.8 }}
               viewport={{ once: true }}
             >
-              <h3 ref={mobileHeading4Ref} className="text-grey uppercase" style={{ fontFamily: 'Clother-black', fontWeight: 400, fontStyle: 'normal', fontSize: '17px', lineHeight: '20px', letterSpacing: '0%' }}>
+              <h3 ref={mobileHeading4Ref} className="text-grey uppercase" style={{ fontFamily: 'clother', fontWeight: 400, fontStyle: 'normal', fontSize: '17px', lineHeight: '20px', letterSpacing: '0%' }}>
                 WE ARE BUILT FOR<br />
                 THE LONG HAUL.
               </h3>
@@ -274,7 +273,7 @@ export default function AmbitionSection() {
               viewport={{ once: true }}
               className="md:col-start-1"
             >
-              <h3 ref={desktopHeading1Ref} className={`${activeHeading === 1 ? 'text-white' : 'text-grey'} uppercase max-w-xs transition-colors duration-300`} style={{ fontFamily: 'Clother-black', fontWeight: 400, fontStyle: 'normal', fontSize: '40px', lineHeight: '48px', letterSpacing: '0%' }}>
+              <h3 ref={desktopHeading1Ref} className={`${activeHeading === 1 ? 'text-white' : 'text-grey'} uppercase max-w-xs transition-colors duration-300`} style={{ fontFamily: 'clother', fontWeight: 400, fontStyle: 'normal', fontSize: '40px', lineHeight: '48px', letterSpacing: '0%' }}>
                 YOU BRING THE AMBITION.
               </h3>
             </motion.div>
@@ -287,7 +286,7 @@ export default function AmbitionSection() {
               viewport={{ once: true }}
               className="md:col-start-2 md:justify-self-end text-right md:text-left mt-40"
             >
-              <h3 ref={desktopHeading2Ref} className={`${activeHeading === 2 ? 'text-white' : 'text-grey'} uppercase max-w-sm ml-auto md:ml-0 transition-colors duration-300`} style={{ fontFamily: 'Clother-black', fontWeight: 400, fontStyle: 'normal', fontSize: '40px', lineHeight: '48px', letterSpacing: '0%' }}>
+              <h3 ref={desktopHeading2Ref} className={`${activeHeading === 2 ? 'text-white' : 'text-grey'} uppercase max-w-sm ml-auto md:ml-0 transition-colors duration-300`} style={{ fontFamily: 'clother', fontWeight: 400, fontStyle: 'normal', fontSize: '40px', lineHeight: '48px', letterSpacing: '0%' }}>
                 WE BRING THE COMPASS,<br />
                 THE FUEL, AND THE THRUST.
               </h3>
@@ -301,7 +300,7 @@ export default function AmbitionSection() {
               viewport={{ once: true }}
               className="md:col-start-1 -mt-32"
             >
-              <h3 ref={desktopHeading3Ref} className={`${activeHeading === 3 ? 'text-white' : 'text-grey'} uppercase max-w-sm transition-colors duration-300`} style={{ fontFamily: 'Clother-black', fontWeight: 400, fontStyle: 'normal', fontSize: '40px', lineHeight: '48px', letterSpacing: '0%' }}>
+              <h3 ref={desktopHeading3Ref} className={`${activeHeading === 3 ? 'text-white' : 'text-grey'} uppercase max-w-sm transition-colors duration-300`} style={{ fontFamily: 'clother', fontWeight: 400, fontStyle: 'normal', fontSize: '40px', lineHeight: '48px', letterSpacing: '0%' }}>
                 WE ARE NOT HERE FOR<br />
                 ONE CAMPAIGN.
               </h3>
@@ -315,7 +314,7 @@ export default function AmbitionSection() {
               viewport={{ once: true }}
               className="md:col-start-2 md:justify-self-end mt-auto self-end"
             >
-              <h3 ref={desktopHeading4Ref} className={`${activeHeading === 4 ? 'text-white' : 'text-grey'} uppercase max-w-sm ml-auto md:ml-0 transition-colors duration-300`} style={{ fontFamily: 'Clother-black', fontWeight: 400, fontStyle: 'normal', fontSize: '40px', lineHeight: '48px', letterSpacing: '0%' }}>
+              <h3 ref={desktopHeading4Ref} className={`${activeHeading === 4 ? 'text-white' : 'text-grey'} uppercase max-w-sm ml-auto md:ml-0 transition-colors duration-300`} style={{ fontFamily: 'clother', fontWeight: 400, fontStyle: 'normal', fontSize: '40px', lineHeight: '48px', letterSpacing: '0%' }}>
                 WE ARE BUILT FOR<br />
                 THE LONG HAUL.
               </h3>

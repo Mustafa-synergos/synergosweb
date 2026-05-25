@@ -27,7 +27,7 @@ export default function Navbar() {
   const backdropBlur = useTransform(scrollY, [0, scrollThreshold, scrollThreshold + 20], [0, 8, 16]);
   
   // Container width and centering
-  const containerMaxWidth = useTransform(scrollY, [0, scrollThreshold, scrollThreshold + 20], ['100%', '100%', '1000px']);
+  const containerMaxWidth = useTransform(scrollY, [0, scrollThreshold, scrollThreshold + 20], ['100%', '100%', '1200px']);
   const containerPaddingX = 50;
   const containerPaddingY = useTransform(scrollY, [0, scrollThreshold, scrollThreshold + 20], [16, 16, 12]);
   
@@ -95,7 +95,53 @@ export default function Navbar() {
                   href={item.href}
                   className="px-3 py-2 responsive-cta text-white/90 hover:text-white transition-colors duration-200"
                 >
-                  {item.label}
+                  <motion.span
+                    initial="rest"
+                    whileHover="hover"
+                    className="relative flex overflow-hidden"
+                  >
+                    {item.label.split('').map((char, i) => (
+                      <span
+                        key={i}
+                        className="relative inline-block overflow-hidden"
+                        style={{ marginRight: char === ' ' ? '6px' : '1px' }}
+                      >
+                        <motion.span
+                          className="block text-white/90"
+                          initial={{ y: 0 }}
+                          variants={{
+                            hover: {
+                              y: '-120%',
+                              transition: {
+                                delay: i * 0.03,
+                                duration: 0.35,
+                                ease: [0.76, 0, 0.24, 1],
+                              },
+                            },
+                          }}
+                        >
+                          {char === ' ' ? '\u00A0' : char}
+                        </motion.span>
+
+                        <motion.span
+                          className="absolute left-0 top-full block text-white"
+                          initial={{ y: 0 }}
+                          variants={{
+                            hover: {
+                              y: '-100%',
+                              transition: {
+                                delay: i * 0.03,
+                                duration: 0.40,
+                                ease: [0.76, 0, 0.24, 1],
+                              },
+                            },
+                          }}
+                        >
+                          {char === ' ' ? '\u00A0' : char}
+                        </motion.span>
+                      </span>
+                    ))}
+                  </motion.span>
                 </Link>
               ))}
             </nav>

@@ -127,7 +127,7 @@ export default function Hero() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.6 }}
-                  className="responsive-paragraph text-white/80 leading-relaxed  mb-3 sm:mb-4 lg:mb-0  max-w-[50%]"
+                  className="responsive-paragraph text-white/80 leading-[2rem] mb-3 sm:mb-4 lg:mb-0 max-w-[50%]"
                 >
                   The sky isn't limit. For us, it is just first checkpoint.
                 </motion.p>
@@ -169,7 +169,7 @@ export default function Hero() {
       </div>
 
       {/* Banner Vector Right */}
-      <div className="hidden sm:block absolute right-0 w-[600px] h-[600px] max-w-[700px] xl:w-[700px] xl:h-[700px] opacity-100 z-50" style={{ top: '-120px' }}>
+      <div className="hidden sm:block absolute right-0 w-[600px] h-[600px] max-w-[700px] xl:w-[700px] xl:h-[700px] opacity-100 " style={{ top: '-120px' }}>
         <Image
           src="/images/banner-vector-right.webp"
           alt="Banner vector decoration"

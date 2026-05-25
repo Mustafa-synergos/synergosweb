@@ -202,8 +202,10 @@ export default function Sticky3DStackCards() {
               </div>
             </div>
 
-            {/* ORBIT IMAGE - OUTSIDE CONTAINER ON RIGHT */}
-            <div className="hidden lg:block absolute -right-48 top-1/2 -translate-y-1/2 xl:-right-64">
+           
+          </div>
+           {/* ORBIT IMAGE - OUTSIDE CONTAINER ON RIGHT */}
+            <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 xl:right-0">
               <Image
                 src="/images/six-things-orbital.png"
                 alt="Six Things Orbital"
@@ -212,7 +214,6 @@ export default function Sticky3DStackCards() {
                 className="w-full h-full object-contain"
               />
             </div>
-          </div>
         </div>
 
         {/* CINEMATIC STACKED CARDS */}
