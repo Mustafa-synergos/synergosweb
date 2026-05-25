@@ -13,6 +13,7 @@ interface InteractiveDotsProps {
   interactionRadius?: number;
   animationSpeed?: number;
   className?: string;
+  containerRef?: React.RefObject<HTMLElement>;
 }
 
 const VARIANT_CONFIGS: Record<InteractiveDotsVariant, { dotColor: string; opacity: number; hoverOpacity: number; rippleOpacity: number }> = {
@@ -45,6 +46,7 @@ export default function InteractiveDots({
   interactionRadius = 200,
   animationSpeed = 0.002,
   className = '',
+  containerRef,
 }: InteractiveDotsProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const timeRef = useRef<number>(0);
@@ -200,25 +202,22 @@ export default function InteractiveDots({
     const dpr = window.devicePixelRatio || 1;
     dprRef.current = dpr;
 
-    const displayWidth = canvas.parentElement?.clientWidth || window.innerWidth;
-    const displayHeight = canvas.parentElement?.clientHeight || window.innerHeight;
-
-    // Ensure minimum height is at least window height
-    const finalHeight = Math.max(displayHeight, window.innerHeight);
+    // Use containerRef if provided, otherwise use parent
+    const container = containerRef?.current || canvas.parentElement;
+    const displayWidth = container?.clientWidth || window.innerWidth;
+    const displayHeight = container?.clientHeight || window.innerHeight;
 
     canvas.width = displayWidth * dpr;
-    canvas.height = finalHeight * dpr;
+    canvas.height = displayHeight * dpr;
 
     canvas.style.width = displayWidth + 'px';
-    canvas.style.height = finalHeight + 'px';
+    canvas.style.height = displayHeight + 'px';
 
     const ctx = canvas.getContext('2d');
     if (ctx) {
       ctx.scale(dpr, dpr);
     }
-
-    initializeDots();
-  }, [initializeDots]);
+  }, [initializeDots, containerRef]);
 
   const handlePointerMove = useCallback((e: PointerEvent) => {
     const canvas = canvasRef.current;
@@ -442,6 +441,20 @@ if (mouseData.influence > 0) {
     // window.addEventListener('pointerup', handlePointerUp);
     window.addEventListener('pointermove', handlePointerMove);
 
+    // Add ResizeObserver to watch parent container size changes
+    let resizeObserver: ResizeObserver | null = null;
+    if (canvas.parentElement && typeof ResizeObserver !== 'undefined') {
+      resizeObserver = new ResizeObserver(() => {
+        resizeCanvas();
+        requestAnimationFrame(() => initializeDots()); // Re-initialize dots on resize
+      });
+      resizeObserver.observe(canvas.parentElement);
+    }
+
+    // Initialize dots after initial resize with a small delay to ensure dimensions are set
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => initializeDots());
+    });
     animate();
 
     return () => {
@@ -451,6 +464,10 @@ if (mouseData.influence > 0) {
       canvas.removeEventListener('pointerup', handlePointerUp);
       canvas.removeEventListener('pointerleave', handlePointerLeave);
       // window.removeEventListener('pointerup', handlePointerUp);
+
+      if (resizeObserver && canvas.parentElement) {
+        resizeObserver.unobserve(canvas.parentElement);
+      }
 
       if (animationFrameId.current) {
         cancelAnimationFrame(animationFrameId.current);
@@ -463,7 +480,7 @@ if (mouseData.influence > 0) {
   }, [animate, resizeCanvas, handlePointerMove, handlePointerDown, handlePointerUp, handlePointerLeave]);
 
   return (
-    <div className={`absolute inset-0 w-full h-full overflow-hidden ${className}`} style={{ zIndex: 0 }}>
+    <div className={`absolute inset-0 w-full h-full overflow-hidden ${className}`} style={{ zIndex: 1 }}>
       <canvas 
         ref={canvasRef} 
         className="block w-full h-full" 

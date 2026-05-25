@@ -287,7 +287,7 @@ export default function SixThingsSection() {
                   className={`w-3 h-3 transition-all duration-300 ${
                     activeCard === index 
                       ? 'bg-white' 
-                      : 'bg-gray-600 hover:bg-gray-400'
+                      : 'bg-gray-400 hover:bg-gray-300'
                   }`}
                   aria-label={`Go to card ${index + 1}`}
                 />

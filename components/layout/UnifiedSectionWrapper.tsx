@@ -10,6 +10,8 @@ interface UnifiedSectionWrapperProps {
   id?: string;
   backgroundImage?: string;
   customBgColor?: string;
+  backgroundElement?: React.ReactNode;
+  sectionRef?: React.RefObject<HTMLElement>;
 }
 
 const UnifiedSectionWrapper: React.FC<UnifiedSectionWrapperProps> = ({ 
@@ -18,7 +20,9 @@ const UnifiedSectionWrapper: React.FC<UnifiedSectionWrapperProps> = ({
   background = 'dark',
   id,
   backgroundImage,
-  customBgColor
+  customBgColor,
+  backgroundElement,
+  sectionRef
 }) => {
   const getBackgroundClass = () => {
     switch (background) {
@@ -55,13 +59,17 @@ const UnifiedSectionWrapper: React.FC<UnifiedSectionWrapperProps> = ({
       viewport={{ once: true, margin: "-50px" }}
       className={`relative w-full overflow-hidden ${getBackgroundClass()} ${className}`}
       style={getBackgroundStyle()}
+      ref={sectionRef as any}
     >
       {/* Unified Background Grid Pattern - Only show if no custom background image */}
       {!backgroundImage && (
-        <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0 opacity-10 z-0">
           <div className="h-full w-full bg-[radial-gradient(circle_1px_at_1px_1px,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:40px_40px]" />
         </div>
       )}
+
+      {/* Custom Background Element */}
+      {backgroundElement}
 
       {/* Unified Content Container - PERFECT ALIGNMENT SYSTEM */}
       <div className="relative z-10">

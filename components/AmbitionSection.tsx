@@ -182,7 +182,7 @@ export default function AmbitionSection() {
       {/* Content Wrapper - z-index to sit above canvas */}
       <div className="relative z-10 px-6 lg:px-8">
 
-      <div ref={containerRef} className="relative z-10 max-w-7xl mx-auto min-h-[80vh] flex flex-col justify-between">
+      <div ref={containerRef} className="relative z-10 max-w-7xl mx-auto min-h-[100vh] flex flex-col justify-between">
         {/* Shared Logo - Absolutely positioned inside container */}
         <img 
           ref={logoRef}
@@ -207,9 +207,9 @@ export default function AmbitionSection() {
           />
         </motion.div> */}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-y-48 md:gap-y-56">
+        <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-4 gap-y-64 md:gap-y-72">
           {/* Mobile: Stacked vertical layout with logo on first line */}
-          <div className="md:hidden space-y-24 flex flex-col">
+          <div className="md:hidden space-y-32 flex flex-col">
             {/* First line with logo */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -271,7 +271,7 @@ export default function AmbitionSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: true }}
-              className="md:col-start-1"
+              className="md:col-start-1 md:row-start-1"
             >
               <h3 ref={desktopHeading1Ref} className={`${activeHeading === 1 ? 'text-white' : 'text-grey'} uppercase max-w-xs transition-colors duration-300`} style={{ fontFamily: 'clother', fontWeight: 400, fontStyle: 'normal', fontSize: '40px', lineHeight: '48px', letterSpacing: '0%' }}>
                 YOU BRING THE AMBITION.
@@ -284,7 +284,7 @@ export default function AmbitionSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
               viewport={{ once: true }}
-              className="md:col-start-2 md:justify-self-end text-right md:text-left mt-40"
+              className="md:col-start-2 md:row-start-2 md:justify-self-end text-right md:text-left"
             >
               <h3 ref={desktopHeading2Ref} className={`${activeHeading === 2 ? 'text-white' : 'text-grey'} uppercase max-w-sm ml-auto md:ml-0 transition-colors duration-300`} style={{ fontFamily: 'clother', fontWeight: 400, fontStyle: 'normal', fontSize: '40px', lineHeight: '48px', letterSpacing: '0%' }}>
                 WE BRING THE COMPASS,<br />
@@ -298,7 +298,7 @@ export default function AmbitionSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
               viewport={{ once: true }}
-              className="md:col-start-1 -mt-32"
+              className="md:col-start-1 md:row-start-3"
             >
               <h3 ref={desktopHeading3Ref} className={`${activeHeading === 3 ? 'text-white' : 'text-grey'} uppercase max-w-sm transition-colors duration-300`} style={{ fontFamily: 'clother', fontWeight: 400, fontStyle: 'normal', fontSize: '40px', lineHeight: '48px', letterSpacing: '0%' }}>
                 WE ARE NOT HERE FOR<br />
@@ -312,7 +312,7 @@ export default function AmbitionSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
               viewport={{ once: true }}
-              className="md:col-start-2 md:justify-self-end mt-auto self-end"
+              className="md:col-start-2 md:row-start-4 md:justify-self-end"
             >
               <h3 ref={desktopHeading4Ref} className={`${activeHeading === 4 ? 'text-white' : 'text-grey'} uppercase max-w-sm ml-auto md:ml-0 transition-colors duration-300`} style={{ fontFamily: 'clother', fontWeight: 400, fontStyle: 'normal', fontSize: '40px', lineHeight: '48px', letterSpacing: '0%' }}>
                 WE ARE BUILT FOR<br />

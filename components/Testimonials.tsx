@@ -176,10 +176,10 @@ const TestimonialSlide: React.FC<{ testimonial: Testimonial; isActive: boolean; 
             
             {/* Client Info */}
             <div className="space-y-1 text-left">
-              <h3 className="text-white font-clother-black font-normal text-[16px] lg:text-[18px] leading-[22px] lg:leading-[26px] tracking-normal">
+              <h3 className="text-white font-clother font-normal text-[16px] lg:text-[18px] leading-[22px] lg:leading-[26px] tracking-normal">
                 {testimonial.name}
               </h3>
-              <p className="text-gray-500 font-clother font-normal text-[13px] lg:text-[18px] leading-[18px] lg:leading-[26px] tracking-normal">
+              <p className="text-gray-500 font-clother font-light text-[13px] lg:text-[18px] leading-[18px] lg:leading-[26px] tracking-normal">
                 {testimonial.role}
               </p>
             </div>
@@ -187,7 +187,7 @@ const TestimonialSlide: React.FC<{ testimonial: Testimonial; isActive: boolean; 
           
           {/* Testimonial Content */}
           <div className="flex-1 text-left">
-            <p className="text-gray-400 font-clother font-normal text-[13px] lg:text-[18px] leading-[20px] lg:leading-[26px] tracking-normal">
+            <p className="text-gray-400 font-clother font-light text-[13px] lg:text-[18px] leading-[20px] lg:leading-[26px] tracking-normal">
               {words.map((word, index) => (
                 <span
                   key={index}
@@ -310,7 +310,7 @@ export const Testimonials: React.FC = () => {
             pagination={{
               clickable: true,
               renderBullet: (index, className) => {
-                return `<span class="${className} w-2 h-2 lg:w-2 lg:h-2 bg-gray-500 rounded-full transition-all duration-300 ${
+                return `<span class="${className} w-2 h-2 lg:w-2 lg:h-2 bg-gray-400 rounded-full transition-all duration-300 ${
                   index === activeIndex ? 'bg-white w-2.5 h-2.5 lg:w-3 lg:h-3' : ''
                 }"></span>`;
               }

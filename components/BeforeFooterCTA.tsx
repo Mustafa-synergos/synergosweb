@@ -11,6 +11,7 @@ export default function BeforeFooterCTA() {
   const [email, setEmail] = useState('');
   const [isHovered, setIsHovered] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"]
@@ -26,8 +27,14 @@ export default function BeforeFooterCTA() {
   const rocketFloat = useSpring(useTransform(scrollYProgress, [0, 0.5, 1], [0, -10, 0]), { stiffness: 200, damping: 20 });
 
   return (
-    <UnifiedSectionWrapper background="custom" id="final-cta" customBgColor="bg-[#171717]" className="h-[100vh] lg:h-auto">
-      <InteractiveDots variant="dark" />
+    <UnifiedSectionWrapper 
+      background="custom" 
+      id="final-cta" 
+      customBgColor="bg-[#171717]" 
+      className="h-[100vh] lg:h-[120vh]"
+      sectionRef={sectionRef}
+      backgroundElement={<InteractiveDots variant="dark" containerRef={sectionRef} />}
+    >
       <EditorialContentGrid className="pb-16 lg:pb-24">
         {/* Two Column Layout - Text on left, Rocket on right */}
         <ContentBlock size="full">
@@ -72,7 +79,7 @@ export default function BeforeFooterCTA() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
                 viewport={{ once: true }}
-                className="text-[#AEAEAE] font-clother font-normal text-[16px] lg:text-[18px] leading-[24px] lg:leading-[26px] tracking-normal"
+                className="font-clother font-light text-[16px] lg:text-[18px] leading-[24px] lg:leading-[26px] tracking-normal"
               >
                 We have spent over a decade and a half perfecting the mechanics of flight through imagination, craft, dexterity, and sheer will. Your next launch is already on the pad.
               </motion.p>
@@ -98,7 +105,7 @@ export default function BeforeFooterCTA() {
                     whileTap={{ scale: 0.98 }}
                     onHoverStart={() => setIsHovered(true)}
                     onHoverEnd={() => setIsHovered(false)}
-                    className="flex items-center gap-1 lg:gap-2 text-white uppercase tracking-[0.08em] lg:tracking-[0.1em] text-xs lg:text-base font-bold shrink-0 ml-2"
+                    className="flex items-center gap-1 lg:gap-2 text-white uppercase text-[16px] lg:text-[28px] font-[300] lg:font-[300] shrink-0 ml-2"
                   >
                     <motion.span
                       initial="rest"
@@ -167,14 +174,14 @@ export default function BeforeFooterCTA() {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, delay: 0.4 }}
               viewport={{ once: true }}
-              className="relative h-[300px] lg:h-[500px] flex items-center justify-center lg:justify-end order-2 lg:order-1"
+              className="relative h-[330px] lg:h-[500px] flex items-center justify-center lg:justify-end order-2 lg:order-1"
             >
               {/* Orbital background - hidden on mobile */}
-              <div className="absolute -top-6 -right-32 hidden lg:block">
+              <div className="absolute -top-12 -right-64 hidden lg:block">
                 <img
-                  src="/images/voices-of-real-.webp"
+                  src="/images/we-redefine-the-finish-line-vector.webp"
                   alt="Orbital background"
-                  className="w-80 h-80 lg:w-96 lg:h-96 object-contain opacity-60"
+                  className="w-[625px] h-[330px] min-w-[625px] min-h-[330px] object-contain opacity-60"
                 />
               </div>
 
@@ -208,7 +215,7 @@ export default function BeforeFooterCTA() {
                   repeat: Infinity,
                   ease: "easeInOut"
                 }}
-                className="relative z-20 mt-16"
+                className="relative z-20 mt-40"
               >
                 <Image
                   src="/images/rocket.png"

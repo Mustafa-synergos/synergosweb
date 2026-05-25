@@ -223,21 +223,23 @@ export default function SynergyEngine() {
                   <InteractiveDots variant="card" className="rounded-[28px]" />
                   {/* Content overlay */}
                   <div className="relative z-10 flex-1 flex flex-col">
-                    {/* Icon — large top placement */}
-                    <div className="flex-1 flex items-start justify-center pt-2">
-                      <div className="w-80 h-100 xl:w-50 xl:h-50">
+                    {/* Icon — large top placement with fixed height */}
+                    <div className="h-[450px] flex items-start justify-center pt-2">
+                      <div className="w-full h-full max-w-[350px] flex items-center justify-center">
                         {card.icon}
                       </div>
                     </div>
 
                     {/* Content */}
-                    <div className="flex-shrink-0">
-                      <h3 className="responsive-clother-h3 text-white mb-3">
-                        {card.title}
-                      </h3>
-                      <p className="responsive-clother-paragraph mb-6">
-                        {card.description}
-                      </p>
+                    <div className="flex-shrink-0 flex flex-col justify-between h-[180px]">
+                      <div>
+                        <h3 className="responsive-clother-h3 text-white mb-3">
+                          {card.title}
+                        </h3>
+                        <p className="responsive-clother-paragraph max-h-[120px]">
+                          {card.description}
+                        </p>
+                      </div>
                       <p className="responsive-clother-red-span text-red-500 lowercase">
                         {card.question}
                       </p>
@@ -279,20 +281,22 @@ export default function SynergyEngine() {
                 {/* Content overlay */}
                 <div className="relative z-10 flex flex-col justify-between h-full">
                   {/* Icon */}
-                  <div className="flex justify-center pt-2">
-                    <div style={{ width: '13rem', height: '13rem' }}>
+                  <div className="h-[180px] flex items-center justify-center pt-2">
+                    <div className="w-full h-full max-w-[150px] flex items-center justify-center">
                       {card.icon}
                     </div>
                   </div>
 
                   {/* Content */}
-                  <div className="flex flex-col">
-                    <h3 className="text-white text-xl font-bold mb-2">
-                      {card.title}
-                    </h3>
-                    <p className="text-white/80 text-sm leading-relaxed mb-3">
-                      {card.description}
-                    </p>
+                  <div className="flex flex-col justify-between h-[140px]">
+                    <div>
+                      <h3 className="text-white text-xl font-bold mb-2">
+                        {card.title}
+                      </h3>
+                      <p className="text-white/80 text-sm leading-relaxed max-h-[120px]">
+                        {card.description}
+                      </p>
+                    </div>
                     <p className="text-red-500 text-sm lowercase">
                       {card.question}
                     </p>
@@ -309,7 +313,7 @@ export default function SynergyEngine() {
                 key={index}
                 className="w-2 h-2 rounded-full transition-all duration-300"
                 style={{
-                  backgroundColor: index === 0 ? '#FFFFFF' : '#6B7280',
+                  backgroundColor: index === 0 ? '#FFFFFF' : '#9CA3AF',
                 }}
               />
             ))}

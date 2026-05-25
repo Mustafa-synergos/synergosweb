@@ -60,7 +60,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
         transition={{ delay: 0.2, duration: 0.6 }}
         viewport={{ once: true }}
       >
-        <span className={`inline-block font-clother font-normal uppercase tracking-normal ${labelColor} text-[18px] lg:text-[28px] leading-[100%]`}>
+        <span className={`inline-block font-clother font-normal tracking-normal ${labelColor} text-[18px] lg:text-[28px] leading-[100%]`} style={{ textTransform: 'capitalize' }}>
           {label}
         </span>
       </motion.div>
@@ -79,7 +79,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
       {/* Description - PERFECTLY ALIGNED */}
       {description && (
         <motion.p
-          className="text-gray-400 font-clother font-normal text-[16px] lg:text-[18px] leading-[24px] lg:leading-[26px] tracking-normal mb-8 lg:mb-12 max-w-3xl"
+          className=" font-clother font-light text-[16px] lg:text-[18px] leading-[24px] lg:leading-[26px] tracking-normal mb-8 lg:mb-12 max-w-3xl"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.6 }}

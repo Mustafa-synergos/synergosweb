@@ -211,12 +211,12 @@ const BlogCard: React.FC<{ post: BlogPost; index: number; onHover: (hovering: bo
           </h3>
 
           {/* Excerpt */}
-          <p className="text-gray-400 font-clother font-normal text-[13px] sm:text-[15px] lg:text-[18px] leading-[20px] sm:leading-[24px] lg:leading-[26px] tracking-normal line-clamp-2">
+          <p className="text-gray-400 font-clother font-light text-[13px] sm:text-[15px] lg:text-[18px] leading-[20px] sm:leading-[24px] lg:leading-[26px] tracking-normal line-clamp-2">
             {post.excerpt}
           </p>
 
           {/* Metadata */}
-          <div className="text-[13px] sm:text-[15px] lg:text-[18px] text-gray-500 font-clother font-normal tracking-normal mt-3 sm:mt-4">
+          <div className="text-[13px] sm:text-[15px] lg:text-[18px] text-gray-500 font-clother font-light tracking-normal mt-3 sm:mt-4">
             {post.category} | {post.date}
           </div>
         </div>

@@ -139,9 +139,10 @@ export default function Sticky3DStackCards() {
               <div className="lg:col-span-12">
                 <div className="mb-6">
                   <span
-                    className="text-[#ff3b30] uppercase text-[18px] lg:text-[28px]"
+                    className="text-[#ff3b30] text-[18px] lg:text-[28px]"
                     style={{
                       fontFamily: '"clother", sans-serif;',
+                      textTransform: 'capitalize',
                     }}
                   >
                     Six Thrusters, One Engine
@@ -185,11 +186,13 @@ export default function Sticky3DStackCards() {
                 </h1>
 
                 <p
-                  className="text-white/50 max-w-xl mb-10 text-base lg:text-lg"
+                  className="text-white max-w-[850px] mb-10 text-base lg:text-lg"
                   style={{
                     fontFamily: '"clother", sans-serif;',
-                    fontWeight: 700,
+                    fontWeight: 200,
                     lineHeight: "24px",
+                    fontStyle: "normal",
+                    fontSize :"18px"
                   }}
                 >
                   Each capability is a thruster.

@@ -47,7 +47,7 @@ export const services: Service[] = [
     number: "06",
     title: "Influencer Marketing & Management",
     description: "People trust people. We find the creators whose audiences overlap with your customers, build the briefs that give them room to be genuine, and manage everything from outreach to reporting, so the partnership earns its place.",
-    illustration: "/images/illustrations/Social Media Management.svg"
+    illustration: "/images/illustrations/Influencer Marketing & Management.svg"
   },
   {
     id: 7,

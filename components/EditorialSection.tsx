@@ -218,7 +218,7 @@ export default function EditorialSection() {
                         <h3 className="font-bold text-2xl mb-3 tracking-tight">
                           {card.title}
                         </h3>
-                        <p className="text-white/70 leading-relaxed">
+                        <p className="text-white/70 leading-relaxed font-light">
                           {card.description}
                         </p>
                       </div>

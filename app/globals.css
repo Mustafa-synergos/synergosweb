@@ -170,7 +170,7 @@ body::-webkit-scrollbar-track {
     font-family: var(--font-body);
     font-size: clamp(16px, 1.1vw, 18px);
     line-height: 1.7;
-    font-weight: 200;
+    font-weight: 300;
     color: var(--text-secondary);
   }
 
@@ -182,7 +182,7 @@ body::-webkit-scrollbar-track {
     font-family: var(--font-display);
     font-size: clamp(15px, 1vw, 16px);
     line-height: 1.6;
-    font-weight: 200;
+    font-weight: 300;
     color: var(--text-secondary);
   }
 

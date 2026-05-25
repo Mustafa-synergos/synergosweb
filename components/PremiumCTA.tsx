@@ -208,8 +208,7 @@ export default function PremiumCTA({
         px-6 pr-12
         py-3
         uppercase
-        tracking-[0.12em]
-        font-normal
+        font-[300]
         bg-transparent
         transition-all
         duration-700
