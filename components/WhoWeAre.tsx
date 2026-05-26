@@ -46,7 +46,7 @@ export default function WhoWeAre() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
                 viewport={{ once: true }}
-                className="mb-8"
+                className="mb-6"
               >
                 <span className="text-red-500 responsive-red-span" style={{ textTransform: 'capitalize' }}>
                   Who We Are
@@ -59,7 +59,7 @@ export default function WhoWeAre() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 viewport={{ once: true }}
-                className="responsive-large-h2 text-white leading-none mb-8"
+                className="responsive-large-h2 text-white leading-none"
               >
                 WE ARE
                 <br />
@@ -102,15 +102,23 @@ export default function WhoWeAre() {
             {/* Right Column - Rocket Image */}
             <div className="relative h-[400px] lg:h-[600px] min-h-[300px] flex items-center justify-center">
               <div className="relative w-full h-full max-w-md">
+                {/* Desktop rocket image */}
                 <Image
                   src="/images/vector-rocket.png"
                   alt="Rocket"
                   fill
                   style={{ objectFit: 'contain' }}
-                  className="object-contain rotate-45 md:rotate-0"
+                  className="object-contain hidden md:block"
+                />
+                {/* Mobile alternative image */}
+                <img
+                  src="/images/exponential-impact-vector-2.webp"
+                  alt="Particle wave effect"
+                  className="w-full h-auto object-contain relative z-10 block md:hidden"
                 />
               </div>
             </div>
+
           </div>
         </div>
       </div>

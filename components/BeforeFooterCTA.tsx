@@ -6,6 +6,7 @@ import Image from 'next/image';
 import UnifiedSectionWrapper from './layout/UnifiedSectionWrapper';
 import { EditorialContentGrid, SectionHeader, EditorialHeading, EditorialCTA, ContentBlock } from './layout/EditorialContentGrid';
 import InteractiveDots from './InteractiveDots';
+import PremiumCTA from './PremiumCTA';
 
 export default function BeforeFooterCTA() {
   const [email, setEmail] = useState('');
@@ -31,7 +32,7 @@ export default function BeforeFooterCTA() {
       background="custom" 
       id="final-cta" 
       customBgColor="bg-[#171717]" 
-      className="h-[100vh] lg:h-[120vh]"
+      className="h-[115vh] lg:h-[120vh]"
       sectionRef={sectionRef}
       backgroundElement={<InteractiveDots variant="dark" containerRef={sectionRef} />}
     >
@@ -92,14 +93,15 @@ export default function BeforeFooterCTA() {
                 viewport={{ once: true }}
                 className="pt-8 lg:pt-32 w-full"
               >
-                <div className="relative flex items-center border-b border-white/30 focus-within:border-white/60 transition-colors duration-300 w-full pb-4">
+                <div className="relative flex flex-col lg:flex-row items-stretch lg:items-center w-full gap-6 lg:gap-0 lg:border-b lg:border-white/30 lg:focus-within:border-white/60 transition-colors duration-300 lg:pb-4">
                   <input
                     type="email"
                     placeholder="@youremailid"
                     onChange={(e) => setEmail(e.target.value)}
-                    className="flex-1 min-w-0 bg-transparent text-white focus:outline-none pb-4 text-[28px]"
+                    className="flex-1 min-w-0 bg-transparent text-white focus:outline-none pb-4 text-[16px] lg:text-[28px] border-b border-white/30 focus:border-white/60 transition-colors duration-300 lg:border-none"
                   />
 
+                  {/* Desktop button — unchanged */}
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.98 }}
@@ -109,7 +111,7 @@ export default function BeforeFooterCTA() {
                     onTouchStart={() => setIsHovered(true)}
                     onTouchEnd={() => setIsHovered(false)}
                     onTouchCancel={() => setIsHovered(false)}
-                    className="flex items-center gap-1 lg:gap-2 text-white uppercase text-[16px] lg:text-[28px] font-[300] lg:font-[300] shrink-0 ml-2"
+                    className="hidden lg:flex items-center gap-1 lg:gap-2 text-white uppercase text-[16px] lg:text-[28px] font-[300] lg:font-[300] shrink-0 ml-2"
                   >
                     <motion.span
                       initial="rest"
@@ -168,6 +170,11 @@ export default function BeforeFooterCTA() {
                       </svg>
                     </motion.div>
                   </motion.button>
+
+                  {/* Mobile CTA */}
+                  <div className="flex lg:hidden justify-end pt-2">
+                    <PremiumCTA title="LET'S LIFT OFF" hoverTitle="LET'S LIFT OFF" className="text-[16px]" />
+                  </div>
                 </div>
               </motion.div>
             </motion.div>

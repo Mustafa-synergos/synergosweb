@@ -48,15 +48,14 @@ export default function Navbar() {
       <motion.header 
         className="fixed top-0 left-0 right-0 z-50"
       >
-        <motion.div 
-          className="mx-auto flex items-center border-x border-white/10 shadow-2xl rounded-full px-[25px] lg:px-[50px]"
+        <motion.div
+          className="mx-auto flex items-center border-x border-white/10 shadow-2xl rounded-full px-[25px] lg:px-[50px] mt-0 lg:mt-8"
           style={{
             maxWidth: containerMaxWidth,
             paddingTop: containerPaddingY,
             paddingBottom: containerPaddingY,
             borderRadius: borderRadius,
             gap: gap,
-            marginTop: '2rem',
             justifyContent: useTransform(scrollY, (value) => {
               // Always use space-between on mobile, center on desktop when scrolled
               if (typeof window !== 'undefined' && window.innerWidth < 1024) {

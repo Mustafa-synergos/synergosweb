@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import InteractiveDots from './InteractiveDots';
@@ -66,6 +66,8 @@ export default function SynergyEngine() {
   const deskCardsRef = useRef<HTMLDivElement>(null);
   const mobHeadingRef = useRef<HTMLDivElement>(null);
   const mobCardsRef = useRef<HTMLDivElement>(null);
+  const mobileSliderRef = useRef<HTMLDivElement>(null);
+  const [activeCard, setActiveCard] = useState(0);
 
   useEffect(() => {
 
@@ -158,20 +160,23 @@ export default function SynergyEngine() {
           }
         );
 
-        const mobileCards = mobCardsRef.current?.children;
-        if (mobileCards) {
-          gsap.fromTo(mobileCards,
-            { opacity: 0, y: 40 },
-            {
-              opacity: 1, y: 0,
-              duration: 0.8, stagger: 0.1, ease: 'power2.out',
-              scrollTrigger: {
-                trigger: mobCardsRef.current,
-                start: 'top 85%', end: 'bottom 70%',
-                scrub: 0.5,
+        const slider = mobileSliderRef.current;
+        if (slider) {
+          const cardElements = slider.children;
+          if (cardElements.length > 0) {
+            gsap.fromTo(cardElements,
+              { opacity: 0, x: 60 },
+              {
+                opacity: 1, x: 0,
+                duration: 0.8, stagger: 0.15, ease: 'power2.out',
+                scrollTrigger: {
+                  trigger: mobCardsRef.current,
+                  start: 'top 85%', end: 'bottom 60%',
+                  scrub: 0.5,
+                }
               }
-            }
-          );
+            );
+          }
         }
       }
 
@@ -189,6 +194,23 @@ export default function SynergyEngine() {
     return () => {
       ctx.revert();
       window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  // Mobile carousel scroll tracking
+  useEffect(() => {
+    const slider = mobileSliderRef.current;
+    if (!slider) return;
+
+    const handleScroll = () => {
+      const cardWidth = slider.offsetWidth * 0.88;
+      const index = Math.round(slider.scrollLeft / cardWidth);
+      setActiveCard((prev) => (prev !== index ? index : prev));
+    };
+
+    slider.addEventListener('scroll', handleScroll);
+    return () => {
+      slider.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -290,11 +312,17 @@ export default function SynergyEngine() {
 
         {/* Cards Carousel */}
         <div ref={mobCardsRef} className="relative">
-          <div className="flex gap-4 overflow-x-auto pb-12 snap-x snap-mandatory hide-scrollbar">
+          <div
+            ref={mobileSliderRef}
+            data-lenis-prevent
+            className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth gap-4 pb-12 hide-scrollbar"
+            style={{ WebkitOverflowScrolling: 'touch' }}
+          >
             {engineCards.map((card, index) => (
               <div
                 key={index}
-                className="flex-shrink-0 w-[319px] h-[444px] rounded-2xl shadow-2xl p-5 flex flex-col justify-between snap-center relative overflow-hidden" style={{ backgroundColor: '#171717' }}
+                className="flex-shrink-0 w-[88vw] snap-center rounded-2xl shadow-2xl p-5 flex flex-col justify-between relative overflow-hidden h-[444px]"
+                style={{ backgroundColor: '#171717' }}
               >
                 {/* Interactive Dots Background */}
                 <InteractiveDots variant="card" className="rounded-2xl" />
@@ -331,10 +359,17 @@ export default function SynergyEngine() {
             {engineCards.map((_, index) => (
               <button
                 key={index}
-                className="w-2 h-2 rounded-full transition-all duration-300"
-                style={{
-                  backgroundColor: index === 0 ? '#FFFFFF' : '#9CA3AF',
+                onClick={() => {
+                  mobileSliderRef.current?.scrollTo({
+                    left: index * (window.innerWidth * 0.88),
+                    behavior: 'smooth',
+                  });
                 }}
+                className={`transition-all duration-300 rounded-full ${
+                  activeCard === index
+                    ? 'w-6 bg-white'
+                    : 'w-2 bg-gray-500'
+                } h-2`}
               />
             ))}
           </div>

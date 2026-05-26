@@ -255,8 +255,10 @@ export default function Sticky3DStackCards() {
                     border-white/10
                     rounded-[15px]
                     shadow-2xl
-                    w-[361px]
+                    // w-[361px]
+                    h-[627px]
                     lg:w-[1280px]
+                    lg:h-auto
                     lg:min-h-[400px]
                     overflow-visible
                   "
@@ -274,11 +276,11 @@ export default function Sticky3DStackCards() {
                       <div className="flex-1">
                         {/* NUMBER */}
                         <div
-                          className="mb-10 tracking-tight leading-none"
+                          className="mb-2 lg:mb-10 tracking-tight leading-none"
                           style={{
                             fontFamily: '"clother", sans-serif',
                             fontWeight: 300,
-                            fontSize: "28px",
+                            fontSize: "24px",
                             lineHeight: "32px",
                             color: "#AEAEAE",
                           }}
@@ -302,7 +304,7 @@ export default function Sticky3DStackCards() {
                           style={{
                             fontFamily: '"clother", sans-serif',
                             fontWeight: 400,
-                            fontSize: "24px",
+                            fontSize: "22px",
                             lineHeight: "32px",
                             color: "#AEAEAE",
                           }}
@@ -333,7 +335,7 @@ export default function Sticky3DStackCards() {
 
                       {/* RIGHT */}
                       <div className="w-full lg:w-auto flex justify-center lg:justify-end">
-                        <div className="relative w-[500px] h-[350px] lg:w-[500px] lg:h-[350px] xl:w-[500px] xl:h-[350px] opacity-60">
+                        <div className="relative  opacity-60">
                           <img
                             src={service.illustration}
                             alt={service.title}

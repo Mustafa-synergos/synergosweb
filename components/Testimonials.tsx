@@ -117,7 +117,7 @@ const OrbitalGraphic: React.FC = () => {
 
 const ProgressBar: React.FC<{ activeIndex: number; totalSlides: number }> = ({ activeIndex }) => {
   return (
-    <div className="h-[3px] w-full bg-[#424242] overflow-hidden mb-6 lg:mb-8">
+    <div className="h-[4px] w-full bg-[#424242] overflow-hidden mb-10 lg:mb-8">
       <motion.div
         className="h-full bg-[#ACACAC]"
         initial={{ width: '0%' }}
