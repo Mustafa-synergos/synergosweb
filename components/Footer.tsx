@@ -198,12 +198,12 @@ export default function Footer() {
         <div>
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mx-auto text-left" style={{ maxWidth: '90%' }}>
             {/* Copyright */}
-            <div className="font-[clother] font-light not-italic text-[14px] sm:text-[18px] leading-[20px] sm:leading-[26px] tracking-normal text-gray-400">
+            <div className="font-[clother] font-light not-italic text-[14px] sm:text-[18px] leading-[20px] sm:leading-[26px] tracking-normal" style={{ color: '#FF0000' }}>
               ©2026 SYNERGOS Tech Consulting Services Pvt Ltd. All Rights Reserved.
             </div>
 
             {/* Privacy Policy & T&C */}
-            <div className="font-[clother] font-light not-italic text-[14px] sm:text-[18px] leading-[20px] sm:leading-[26px] tracking-normal text-gray-400">
+            <div className="font-[clother] font-light not-italic text-[14px] sm:text-[18px] leading-[20px] sm:leading-[26px] tracking-normal" style={{ color: '#FF0000' }}>
               <Link href="#" className="hover:text-white transition-colors duration-300">Privacy Policy</Link> | <Link href="#" className="hover:text-white transition-colors duration-300">T&C</Link>
             </div>
           </div>
@@ -211,9 +211,9 @@ export default function Footer() {
       </div>
 
       {/* Decorative elements - exact positioning */}
-      <div className="hidden lg:block absolute bottom-0 right-[15rem] w-[20rem] h-[20rem]">
+      <div className="hidden lg:block absolute bottom-0 right-[15rem] w-[30rem] h-[30rem] opacity-50">
         <img
-          src="/images/voices-of-real-.webp"
+          src="/images/foter-vector.webp"
           alt="Decorative element"
           className="w-full h-full object-contain"
         />

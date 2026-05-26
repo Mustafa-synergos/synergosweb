@@ -55,7 +55,7 @@ export default function BeforeFooterCTA() {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 viewport={{ once: true }}
               >
-                <span className="text-red-500 font-clother font-normal text-[18px] lg:text-[28px] leading-[100%] tracking-normal uppercase">
+                <span className="text-red-500 font-clother font-normal text-[18px] lg:text-[28px] leading-[100%] tracking-normal" style={{ textTransform: 'capitalize' }}>
                   Let's connect
                 </span>
               </motion.div>
@@ -97,7 +97,7 @@ export default function BeforeFooterCTA() {
                     type="email"
                     placeholder="@youremailid"
                     onChange={(e) => setEmail(e.target.value)}
-                    className="flex-1 min-w-0 bg-transparent text-white focus:outline-none pb-4 text-base lg:text-lg"
+                    className="flex-1 min-w-0 bg-transparent text-white focus:outline-none pb-4 text-[28px]"
                   />
 
                   <motion.button
@@ -105,6 +105,9 @@ export default function BeforeFooterCTA() {
                     whileTap={{ scale: 0.98 }}
                     onHoverStart={() => setIsHovered(true)}
                     onHoverEnd={() => setIsHovered(false)}
+                    onTouchStart={() => setIsHovered(true)}
+                    onTouchEnd={() => setIsHovered(false)}
+                    onTouchCancel={() => setIsHovered(false)}
                     className="flex items-center gap-1 lg:gap-2 text-white uppercase text-[16px] lg:text-[28px] font-[300] lg:font-[300] shrink-0 ml-2"
                   >
                     <motion.span

@@ -206,7 +206,7 @@ const BlogCard: React.FC<{ post: BlogPost; index: number; onHover: (hovering: bo
         {/* Card Content */}
         <div className="flex flex-col h-full justify-between">
           {/* Title */}
-          <h3 className="text-gray-100 font-clother font-bold text-[15px] sm:text-[17px] lg:text-[20px] leading-[20px] sm:leading-[22px] lg:leading-[30px] tracking-normal mb-2 sm:mb-3">
+          <h3 className="text-gray-400 font-clother font-bold text-[15px] sm:text-[17px] lg:text-[20px] leading-[20px] sm:leading-[22px] lg:leading-[30px] tracking-normal mb-2 sm:mb-3">
             {post.title}
           </h3>
 
@@ -216,7 +216,7 @@ const BlogCard: React.FC<{ post: BlogPost; index: number; onHover: (hovering: bo
           </p>
 
           {/* Metadata */}
-          <div className="text-[13px] sm:text-[15px] lg:text-[18px] text-gray-500 font-clother font-light tracking-normal mt-3 sm:mt-4">
+          <div className="text-[16px] text-gray-500 font-clother font-light tracking-[0.08rem] mt-3 sm:mt-4">
             {post.category} | {post.date}
           </div>
         </div>
@@ -356,7 +356,7 @@ const InsightsCursor: React.FC = () => {
       style={{
         width: '100px',
         height: '100px',
-        backgroundColor: 'rgba(255, 59, 48, 0.95)',
+        backgroundColor: '#FF0000',
         opacity: 0,
         transform: 'translate(-50%, -50%) scale(0.8)',
         // boxShadow: '0 0 40px rgba(255, 59, 48, 0.5), 0 0 80px rgba(255, 59, 48, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.1)',

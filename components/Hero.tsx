@@ -51,7 +51,7 @@ export default function Hero() {
   const currentMedia = mediaSources[currentDevice];
 
   return (
-    <section className="relative min-h-screen overflow-hidden">
+    <section className="relative min-h-[80vh] lg:min-h-screen overflow-hidden">
       {/* Background Media Layer */}
       <div className="absolute inset-0">
         {/* Video Background for All Devices */}
@@ -90,22 +90,24 @@ export default function Hero() {
       {/* Hero Content - Split Layout */}
       <motion.div
         style={{ y, opacity }}
-        className="relative z-10 flex items-center min-h-screen px-5 sm:px-6 lg:px-8 pt-20 sm:pt-24 lg:pt-20"
+        className="relative z-10 flex items-center min-h-screen px-6 sm:px-8 lg:px-8 pt-20 sm:pt-24 lg:pt-20"
       >
-        <div className="max-w-7xl mx-auto w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 items-baseline">
+        <div className="max-w-7xl mx-auto w-full px-4 sm:px-0">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-2 sm:gap-12 lg:gap-16 items-baseline">
             {/* Left Column - "CAN A BRAND" */}
             <motion.div
-              initial={{ opacity: 0, x: -50, y: 20 }}
-              animate={{ opacity: 1, x: 0, y: -60 }}
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, delay: 0.3 }}
-              className="lg:col-span-3 text-left flex items-center justify-space-around lg:pl-16 order-1 lg:order-1 mb-2 sm:mb-4 lg:mb-0"
+              className="lg:col-span-3 text-left flex items-center lg:pl-16 order-1 lg:order-1 mb-2 sm:mb-4 lg:mb-0"
             >
-              <h2 className="responsive-h2 text-white italic font-black leading-[0.85] tracking-tighter">
-                CAN A
-                <br />
-                BRAND
-              </h2>
+              <div className="lg:-translate-y-[60px]">
+                <h2 className="responsive-h2 text-white italic font-black leading-[0.85] tracking-tighter">
+                  CAN A
+                  <br />
+                  BRAND
+                </h2>
+              </div>
             </motion.div>
 
             {/* Right Column - "GO BEYOND" and split paragraphs */}
@@ -127,7 +129,7 @@ export default function Hero() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.6 }}
-                  className="responsive-paragraph text-white/80 leading-[2rem] mb-3 sm:mb-4 lg:mb-0 max-w-[60%]"
+                  className="responsive-paragraph text-white/80 leading-[2rem] mb-3 sm:mb-4 lg:mb-0 max-w-full lg:max-w-[60%]"
                 >
                   The sky isn't limit. For us, it is just first checkpoint.
                 </motion.p>
@@ -137,7 +139,7 @@ export default function Hero() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.7 }}
-                    className="responsive-paragraph text-white/80 !leading-[1.4]  !mb-1 max-w-[60%]"
+                    className="responsive-paragraph text-white/80 !leading-[1.4]  !mb-1 max-w-full lg:max-w-[60%]"
                   >
                     Synergos is a brand acceleration system built for brands that refuse to stay in one place. Strategy, storytelling, and delivery, firing together, for your next orbit.
                   </motion.p>

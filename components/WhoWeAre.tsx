@@ -48,8 +48,8 @@ export default function WhoWeAre() {
                 viewport={{ once: true }}
                 className="mb-8"
               >
-                <span className="text-red-500 responsive-red-span uppercase">
-                  WHO WE ARE
+                <span className="text-red-500 responsive-red-span" style={{ textTransform: 'capitalize' }}>
+                  Who We Are
                 </span>
               </motion.div>
 

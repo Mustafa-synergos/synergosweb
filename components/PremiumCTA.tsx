@@ -29,6 +29,7 @@ export default function PremiumCTA({
   const [isRedSection, setIsRedSection] = useState(false);
   const [magnetArmed, setMagnetArmed] = useState(false);
   const [hoverScale, setHoverScale] = useState(64);
+  const [isHovered, setIsHovered] = useState(false);
   const circleRef = useRef<HTMLDivElement>(null);
 
   // DETECT RED BACKGROUND
@@ -181,11 +182,14 @@ export default function PremiumCTA({
     <Component
       ref={ref}
       {...extraProps}
-      onMouseEnter={handleMouseEnter}
+      onMouseEnter={() => { setIsHovered(true); handleMouseEnter(); }}
       onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+      onMouseLeave={() => { setIsHovered(false); handleMouseLeave(); }}
+      onTouchStart={() => setIsHovered(true)}
+      onTouchEnd={() => setIsHovered(false)}
+      onTouchCancel={() => setIsHovered(false)}
       initial="rest"
-      whileHover="hover"
+      animate={isHovered ? 'hover' : 'rest'}
       whileTap={{
         scale: 0.985,
       }}
@@ -195,6 +199,7 @@ export default function PremiumCTA({
         borderColor: isRedSection
           ? '#ffffff'
           : 'rgba(255,255,255,0.2)',
+        fontFamily: '"clother", sans-serif',
       }}
       className={`
         relative
@@ -227,8 +232,8 @@ export default function PremiumCTA({
         "
         ref={circleRef}
         initial={{
-          width: 12,
-          height: 12,
+          width: 15,
+          height: 15,
           x: 0,
           y: '-50%',
           scale: 1,
@@ -260,8 +265,8 @@ export default function PremiumCTA({
           rounded-full
         "
         initial={{
-          width: 12,
-          height: 12,
+          width: 15,
+          height: 15,
           y: '-50%',
           backgroundColor: '#ffffff',
         }}
@@ -288,14 +293,11 @@ export default function PremiumCTA({
               inline-block
               overflow-hidden
             "
-            style={{
-              marginRight:
-                char === ' ' ? '6px' : '1px',
-            }}
           >
             {/* TOP TEXT */}
             <motion.span
               className="block text-white"
+              style={{ fontFamily: '"clother", sans-serif' }}
               initial={{ y: 0 }}
               variants={{
                 hover: {
@@ -321,6 +323,12 @@ export default function PremiumCTA({
                 top-full
                 block
               "
+              style={{
+                fontFamily: '"clother", sans-serif',
+                color: isRedSection
+                  ? '#ff0000'
+                  : '#ffffff',
+              }}
               initial={{ y: 0 }}
               variants={{
                 hover: {
@@ -331,11 +339,6 @@ export default function PremiumCTA({
                     ease: [0.76, 0, 0.24, 1],
                   },
                 },
-              }}
-              style={{
-                color: isRedSection
-                  ? '#ff0000'
-                  : '#ffffff',
               }}
             >
               {hoverTitle[i] || char}

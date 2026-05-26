@@ -68,6 +68,26 @@ export default function SynergyEngine() {
   const mobCardsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+
+
+ 
+    const elements = document.querySelectorAll(
+      '.responsive-clother-paragraph'
+    ) as NodeListOf<HTMLElement>;
+
+    let maxHeight = 0;
+
+    elements.forEach((el) => {
+      el.style.height = 'auto';
+      maxHeight = Math.max(maxHeight, el.offsetHeight);
+    });
+
+    elements.forEach((el) => {
+      el.style.height = `${maxHeight}px`;
+    });
+
+
+
     const ctx = gsap.context(() => {
       /* ================================================================
          DESKTOP — Cinematic staged scroll: ENTER → PIN → HOLD → SLIDE
@@ -173,7 +193,7 @@ export default function SynergyEngine() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen lg:min-h-screen overflow-hidden" style={{ backgroundColor: '#FF0000' }}>
+    <section ref={sectionRef} className="relative min-h-[80vh] lg:min-h-screen overflow-hidden" style={{ backgroundColor: '#FF0000' }}>
 
       {/* ── Interactive Dots Background ── */}
       <InteractiveDots variant="red" />
@@ -240,9 +260,9 @@ export default function SynergyEngine() {
                           {card.description}
                         </p>
                       </div>
-                      <p className="responsive-clother-red-span text-red-500 lowercase">
+                      <a href='#' className="responsive-clother-red-span text-red-500 lowercase mt-3">
                         {card.question}
-                      </p>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -293,13 +313,13 @@ export default function SynergyEngine() {
                       <h3 className="text-white text-xl font-bold mb-2">
                         {card.title}
                       </h3>
-                      <p className="text-white/80 text-sm leading-relaxed max-h-[120px]">
+                      <p className="text-white/80 text-sm leading-relaxed max-h-[140px] ">
                         {card.description}
                       </p>
                     </div>
-                    <p className="text-red-500 text-sm lowercase">
+                    <a href="#" className="text-red-500 text-sm lowercase mt-6" style={{marginTop: '10px'}}>
                       {card.question}
-                    </p>
+                    </a>
                   </div>
                 </div>
               </div>

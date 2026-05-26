@@ -141,7 +141,7 @@ export default function Sticky3DStackCards() {
                   <span
                     className="text-[#ff3b30] text-[18px] lg:text-[28px]"
                     style={{
-                      fontFamily: '"clother", sans-serif;',
+                      fontFamily: '"clother", sans-serif',
                       textTransform: 'capitalize',
                     }}
                   >
@@ -152,7 +152,7 @@ export default function Sticky3DStackCards() {
                 <h1
                   className="text-white mb-8 uppercase"
                   style={{
-                    fontFamily: '"clother", sans-serif;',
+                    fontFamily: '"clother", sans-serif',
                     fontWeight: 700,
                   }}
                 >
@@ -188,7 +188,7 @@ export default function Sticky3DStackCards() {
                 <p
                   className="text-white max-w-[850px] mb-10 text-base lg:text-lg"
                   style={{
-                    fontFamily: '"clother", sans-serif;',
+                    fontFamily: '"clother", sans-serif',
                     fontWeight: 200,
                     lineHeight: "24px",
                     fontStyle: "normal",
@@ -276,7 +276,7 @@ export default function Sticky3DStackCards() {
                         <div
                           className="mb-10 tracking-tight leading-none"
                           style={{
-                            fontFamily: '"clother", sans-serif;',
+                            fontFamily: '"clother", sans-serif',
                             fontWeight: 300,
                             fontSize: "28px",
                             lineHeight: "32px",
@@ -300,7 +300,7 @@ export default function Sticky3DStackCards() {
                         <h3
                           className="mb-4 leading-tight uppercase lg:normal-case"
                           style={{
-                            fontFamily: '"clother", sans-serif;',
+                            fontFamily: '"clother", sans-serif',
                             fontWeight: 400,
                             fontSize: "24px",
                             lineHeight: "32px",

@@ -28,18 +28,7 @@ export default function Navbar() {
   
   // Container width and centering
   const containerMaxWidth = useTransform(scrollY, [0, scrollThreshold, scrollThreshold + 20], ['100%', '100%', '1200px']);
-  const [containerPaddingX, setContainerPaddingX] = useState(50);
   const containerPaddingY = useTransform(scrollY, [0, scrollThreshold, scrollThreshold + 20], [16, 16, 12]);
-  
-  // Update horizontal padding based on screen size
-  useEffect(() => {
-    const handleResize = () => {
-      setContainerPaddingX(window.innerWidth < 1024 ? 25 : 50);
-    };
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
   
   // Border radius and gap
   const borderRadius = useTransform(scrollY, [0, scrollThreshold, scrollThreshold + 20], [0, 0, 8]);
@@ -60,11 +49,9 @@ export default function Navbar() {
         className="fixed top-0 left-0 right-0 z-50"
       >
         <motion.div 
-          className="mx-auto flex items-center border-x border-white/10 shadow-2xl rounded-full"
+          className="mx-auto flex items-center border-x border-white/10 shadow-2xl rounded-full px-[25px] lg:px-[50px]"
           style={{
             maxWidth: containerMaxWidth,
-            paddingLeft: containerPaddingX,
-            paddingRight: containerPaddingX,
             paddingTop: containerPaddingY,
             paddingBottom: containerPaddingY,
             borderRadius: borderRadius,

@@ -120,10 +120,10 @@ const ProgressBar: React.FC<{ activeIndex: number; totalSlides: number; isPlayin
       {Array.from({ length: totalSlides }).map((_, index) => (
         <div
           key={index}
-          className="h-0.5 flex-1 bg-gray-600 overflow-hidden"
+          className="h-[3px] flex-1 bg-[#424242] overflow-hidden"
         >
           <motion.div
-            className="h-full bg-white"
+            className="h-full bg-[#ACACAC]"
             initial={{ width: '0%' }}
             animate={{
               width: index === activeIndex ? (isPlaying ? '100%' : '0%') : '0%'
@@ -176,10 +176,10 @@ const TestimonialSlide: React.FC<{ testimonial: Testimonial; isActive: boolean; 
             
             {/* Client Info */}
             <div className="space-y-1 text-left">
-              <h3 className="text-white font-clother font-normal text-[16px] lg:text-[18px] leading-[22px] lg:leading-[26px] tracking-normal">
+              <h3 className="text-white font-clother font-normal text-[22px] lg:text-[22px] leading-[22px] lg:leading-[26px] tracking-normal">
                 {testimonial.name}
               </h3>
-              <p className="text-gray-500 font-clother font-light text-[13px] lg:text-[18px] leading-[18px] lg:leading-[26px] tracking-normal">
+              <p className="text-white font-clother font-light text-[16px] lg:text-[16px] leading-[18px] lg:leading-[26px] tracking-normal">
                 {testimonial.role}
               </p>
             </div>
@@ -187,7 +187,7 @@ const TestimonialSlide: React.FC<{ testimonial: Testimonial; isActive: boolean; 
           
           {/* Testimonial Content */}
           <div className="flex-1 text-left">
-            <p className="text-gray-400 font-clother font-light text-[13px] lg:text-[18px] leading-[20px] lg:leading-[26px] tracking-normal">
+            <p className="text-gray-400 font-clother font-light text-[30px] lg:text-[30px] leading-[38px] lg:leading-[38px] tracking-normal">
               {words.map((word, index) => (
                 <span
                   key={index}
@@ -308,12 +308,7 @@ export const Testimonials: React.FC = () => {
             }}
             onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
             pagination={{
-              clickable: true,
-              renderBullet: (index, className) => {
-                return `<span class="${className} w-2 h-2 lg:w-2 lg:h-2 bg-gray-400 rounded-full transition-all duration-300 ${
-                  index === activeIndex ? 'bg-white w-2.5 h-2.5 lg:w-3 lg:h-3' : ''
-                }"></span>`;
-              }
+              clickable: true
             }}
             className="testimonial-swiper !overflow-hidden !pb-10 lg:!pb-12"
           >
@@ -332,34 +327,6 @@ export const Testimonials: React.FC = () => {
         </motion.div>
       </EditorialContentGrid>
       
-      <style jsx>{`
-        .testimonial-swiper .swiper-pagination {
-          bottom: 0;
-        }
-        .testimonial-swiper .swiper-pagination-bullet {
-          margin: 0 3px;
-        }
-        .testimonial-swiper .swiper-pagination-bullet-active {
-          background: #ffffff !important;
-        }
-        .testimonial-swiper .swiper-slide {
-          position: absolute !important;
-          top: 0 !important;
-          left: 0 !important;
-          width: 100% !important;
-          height: 100% !important;
-          opacity: 0 !important;
-          visibility: hidden !important;
-          pointer-events: none !important;
-          transition: opacity 0.5s ease, visibility 0.5s ease;
-        }
-        .testimonial-swiper .swiper-slide-active {
-          opacity: 1 !important;
-          visibility: visible !important;
-          pointer-events: auto !important;
-          position: relative !important;
-        }
-      `}</style>
     </UnifiedSectionWrapper>
   );
 };

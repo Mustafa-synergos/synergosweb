@@ -25,6 +25,9 @@ export default function AmbitionSection() {
   const mobileHeading3Ref = useRef<HTMLHeadingElement>(null);
   const mobileHeading4Ref = useRef<HTMLHeadingElement>(null);
 
+  // Mobile floating logo ref
+  const mobileLogoRef = useRef<HTMLImageElement>(null);
+
   useEffect(() => {
     const container = containerRef.current;
     const logo = logoRef.current;
@@ -158,8 +161,88 @@ export default function AmbitionSection() {
     };
   }, []);
 
+  // Mobile-only floating logo effect
+  useEffect(() => {
+    const mm = gsap.matchMedia();
+
+    mm.add('(max-width: 767px)', () => {
+      const mobileContainer = containerRef.current;
+      const mobileLogo = mobileLogoRef.current;
+      const mh1 = mobileHeading1Ref.current;
+      const mh2 = mobileHeading2Ref.current;
+      const mh3 = mobileHeading3Ref.current;
+      const mh4 = mobileHeading4Ref.current;
+
+      if (!mobileContainer || !mobileLogo || !mh1 || !mh2 || !mh3 || !mh4) return;
+
+      // Hardcoded positions measured from browser inspector
+      const pos1 = { x: 24.9844, y: 8 };
+      const pos2 = { x: 24.9844, y: 180.813 };
+      const pos3 = { x: 30.9844, y: 358.233 };
+      const pos4 = { x: 50.9844, y: 535.477 };
+
+      gsap.set(mobileLogo, { x: pos1.x, y: pos1.y });
+
+      const mTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: mobileContainer,
+          start: 'top center',
+          end: 'bottom center',
+          scrub: 1.5,
+          onUpdate: (self) => {
+            const progress = self.progress;
+            if (progress < 0.33) setActiveHeading(1);
+            else if (progress < 0.66) setActiveHeading(2);
+            else if (progress < 1) setActiveHeading(3);
+            else setActiveHeading(4);
+          },
+        },
+      });
+
+      mTl.to(mobileLogo, {
+        x: pos2.x,
+        y: pos2.y,
+        duration: 1,
+        force3D: true,
+        ease: 'power2.inOut',
+      })
+      .to(mobileLogo, {
+        x: pos3.x,
+        y: pos3.y,
+        duration: 1,
+        force3D: true,
+        ease: 'power2.inOut',
+      })
+      .to(mobileLogo, {
+        x: pos4.x,
+        y: pos4.y,
+        duration: 1,
+        force3D: true,
+        ease: 'power2.inOut',
+      });
+
+      const handleResize = () => {
+        ScrollTrigger.refresh();
+        gsap.set(mobileLogo, { x: pos1.x, y: pos1.y });
+        mTl.seek(0).clear()
+          .to(mobileLogo, { x: pos2.x, y: pos2.y, duration: 1, ease: 'power2.inOut' })
+          .to(mobileLogo, { x: pos3.x, y: pos3.y, duration: 1, ease: 'power2.inOut' })
+          .to(mobileLogo, { x: pos4.x, y: pos4.y, duration: 1, ease: 'power2.inOut' });
+      };
+
+      window.addEventListener('resize', handleResize);
+
+      return () => {
+        window.removeEventListener('resize', handleResize);
+        mTl.kill();
+      };
+    });
+
+    return () => mm.revert();
+  }, []);
+
   return (
-    <section className="relative min-h-[80vh] lg:min-h-[140vh] overflow-hidden py-20 lg:pb-40 lg:pt-0" style={{ backgroundColor: '#171717' }}>
+    <section className="relative min-h-[80vh] lg:min-h-[140vh] overflow-hidden pt-20 pb-0 lg:pb-40 lg:pt-0" style={{ backgroundColor: '#171717' }}>
       {/* Interactive Dots Background */}
       <InteractiveDots variant="dark" />
 
@@ -191,6 +274,13 @@ export default function AmbitionSection() {
           className="absolute w-16 h-16 hidden md:block will-change-transform"
           style={{ pointerEvents: 'none' }}
         />
+        <img 
+          ref={mobileLogoRef}
+          src="/images/white-logo.webp" 
+          alt="Logo" 
+          className="absolute w-12 h-12 md:hidden will-change-transform"
+          style={{ pointerEvents: 'none' }}
+        />
         {/* Vector Image separating sections - hidden on mobile */}
         {/* <motion.div
           initial={{ opacity: 0, x: -30 }}
@@ -208,18 +298,19 @@ export default function AmbitionSection() {
         </motion.div> */}
 
         <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-4 gap-y-64 md:gap-y-72">
-          {/* Mobile: Stacked vertical layout with logo on first line */}
-          <div className="md:hidden space-y-32 flex flex-col">
-            {/* First line with logo */}
+          {/* Mobile: Stacked vertical layout with floating logo */}
+          <div className="md:hidden space-y-32 flex flex-col items-center">
+            {/* First line */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: true }}
+              className="flex justify-center"
             >
-              <h3 ref={mobileHeading1Ref} className="text-white uppercase flex items-center gap-4" style={{ fontFamily: 'clother', fontWeight: 400, fontStyle: 'normal', fontSize: '17px', lineHeight: '20px', letterSpacing: '0%' }}>
-                <img src="/images/white-logo.webp" alt="Logo" className="w-12 h-12" />
-                YOU BRING THE AMBITION.
+              <h3 ref={mobileHeading1Ref} className={`${activeHeading === 1 ? 'text-white' : 'text-grey'} uppercase inline-flex items-center gap-4 transition-colors duration-300`} style={{ fontFamily: 'clother', fontWeight: 400, fontStyle: 'normal', fontSize: '17px', lineHeight: '20px', letterSpacing: '0%' }}>
+                <span className="w-12 h-12 flex-shrink-0" aria-hidden="true" />
+                <span>YOU BRING THE AMBITION.</span>
               </h3>
             </motion.div>
 
@@ -229,10 +320,11 @@ export default function AmbitionSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
               viewport={{ once: true }}
+              className="flex justify-center"
             >
-              <h3 ref={mobileHeading2Ref} className="text-grey uppercase" style={{ fontFamily: 'clother', fontWeight: 400, fontStyle: 'normal', fontSize: '17px', lineHeight: '20px', letterSpacing: '0%' }}>
-                WE BRING THE COMPASS,<br />
-                THE FUEL, AND THE THRUST.
+              <h3 ref={mobileHeading2Ref} className={`${activeHeading === 2 ? 'text-white' : 'text-grey'} uppercase inline-flex items-center gap-4 transition-colors duration-300`} style={{ fontFamily: 'clother', fontWeight: 400, fontStyle: 'normal', fontSize: '17px', lineHeight: '20px', letterSpacing: '0%' }}>
+                <span className="w-12 h-12 flex-shrink-0" aria-hidden="true" />
+                <span>WE BRING THE COMPASS,<br />THE FUEL, AND THE THRUST.</span>
               </h3>
             </motion.div>
 
@@ -242,10 +334,11 @@ export default function AmbitionSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
               viewport={{ once: true }}
+              className="flex justify-center"
             >
-              <h3 ref={mobileHeading3Ref} className="text-grey uppercase" style={{ fontFamily: 'clother', fontWeight: 400, fontStyle: 'normal', fontSize: '17px', lineHeight: '20px', letterSpacing: '0%' }}>
-                WE ARE NOT HERE FOR<br />
-                ONE CAMPAIGN.
+              <h3 ref={mobileHeading3Ref} className={`${activeHeading === 3 ? 'text-white' : 'text-grey'} uppercase inline-flex items-center gap-4 transition-colors duration-300`} style={{ fontFamily: 'clother', fontWeight: 400, fontStyle: 'normal', fontSize: '17px', lineHeight: '20px', letterSpacing: '0%' }}>
+                <span className="w-12 h-12 flex-shrink-0" aria-hidden="true" />
+                <span>WE ARE NOT HERE FOR<br />ONE CAMPAIGN.</span>
               </h3>
             </motion.div>
 
@@ -255,10 +348,11 @@ export default function AmbitionSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
               viewport={{ once: true }}
+              className="flex justify-center"
             >
-              <h3 ref={mobileHeading4Ref} className="text-grey uppercase" style={{ fontFamily: 'clother', fontWeight: 400, fontStyle: 'normal', fontSize: '17px', lineHeight: '20px', letterSpacing: '0%' }}>
-                WE ARE BUILT FOR<br />
-                THE LONG HAUL.
+              <h3 ref={mobileHeading4Ref} className={`${activeHeading === 4 ? 'text-white' : 'text-grey'} uppercase inline-flex items-center gap-4 transition-colors duration-300`} style={{ fontFamily: 'clother', fontWeight: 400, fontStyle: 'normal', fontSize: '17px', lineHeight: '20px', letterSpacing: '0%' }}>
+                <span className="w-12 h-12 flex-shrink-0" aria-hidden="true" />
+                <span>WE ARE BUILT FOR<br />THE LONG HAUL.</span>
               </h3>
             </motion.div>
           </div>

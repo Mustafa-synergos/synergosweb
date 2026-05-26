@@ -18,7 +18,7 @@ export default function ExponentialImpactSection() {
               <img
                 src="/images/exponential-impact-vector-1.webp"
                 alt="Impact vector background"
-                className="absolute right-20 top-0 object-contain opacity-100 -z-10 transform scale-150 -translate-x-12"
+                className="hidden md:block absolute right-20 top-0 object-contain opacity-100 -z-10 transform scale-150 -translate-x-12"
                 style={{ width: '500px', height: '400px' }}
               />
               <EditorialHeading size="large">
