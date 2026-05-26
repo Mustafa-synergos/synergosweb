@@ -3,8 +3,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay, Mousewheel } from 'swiper/modules';
+import { Navigation, Pagination, Autoplay, Mousewheel, EffectFade } from 'swiper/modules';
 import 'swiper/css';
+import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import UnifiedSectionWrapper from './layout/UnifiedSectionWrapper';
@@ -114,38 +115,29 @@ const OrbitalGraphic: React.FC = () => {
   );
 };
 
-const ProgressBar: React.FC<{ activeIndex: number; totalSlides: number; isPlaying: boolean }> = ({ activeIndex, totalSlides, isPlaying }) => {
+const ProgressBar: React.FC<{ activeIndex: number; totalSlides: number }> = ({ activeIndex }) => {
   return (
-    <div className="flex mb-6 lg:mb-8">
-      {Array.from({ length: totalSlides }).map((_, index) => (
-        <div
-          key={index}
-          className="h-[3px] flex-1 bg-[#424242] overflow-hidden"
-        >
-          <motion.div
-            className="h-full bg-[#ACACAC]"
-            initial={{ width: '0%' }}
-            animate={{
-              width: index === activeIndex ? (isPlaying ? '100%' : '0%') : '0%'
-            }}
-            transition={{
-              duration: 4.5,
-              ease: 'linear'
-            }}
-            key={`${activeIndex}-${isPlaying}`}
-          />
-        </div>
-      ))}
+    <div className="h-[3px] w-full bg-[#424242] overflow-hidden mb-6 lg:mb-8">
+      <motion.div
+        className="h-full bg-[#ACACAC]"
+        initial={{ width: '0%' }}
+        animate={{ width: '100%' }}
+        transition={{
+          duration: 4.5,
+          ease: 'linear'
+        }}
+        key={activeIndex}
+      />
     </div>
   );
 };
 
-const TestimonialSlide: React.FC<{ testimonial: Testimonial; isActive: boolean; activeIndex: number; totalSlides: number; isPlaying: boolean }> = ({ testimonial, isActive, activeIndex, totalSlides, isPlaying }) => {
+const TestimonialSlide: React.FC<{ testimonial: Testimonial; isActive: boolean; activeIndex: number; totalSlides: number }> = ({ testimonial, isActive, activeIndex, totalSlides }) => {
   const words = testimonial.content.split(' ');
   
   return (
     <motion.div
-      className="flex flex-col lg:flex-row items-start gap-0 lg:gap-[7rem] text-center lg:text-left px-5 lg:px-0 pl-4 lg:pl-36"
+      className="flex flex-col lg:flex-row items-start gap-0 lg:gap-[7rem] text-center lg:text-left px-5 lg:px-0 pl-4 lg:pl-[10rem]"
       initial={{ opacity: 0, y: 20 }}
       animate={{ 
         opacity: isActive ? 1 : 0.3, 
@@ -157,7 +149,7 @@ const TestimonialSlide: React.FC<{ testimonial: Testimonial; isActive: boolean; 
       {/* Content with Progress Bar */}
       <div className="flex-1 max-w-4xl lg:max-w-4xl">
         {/* Progress Bar */}
-        <ProgressBar activeIndex={activeIndex} totalSlides={totalSlides} isPlaying={isPlaying} />
+        <ProgressBar activeIndex={activeIndex} totalSlides={totalSlides} />
         
         {/* Client Info and Testimonial Content */}
         <div className="flex flex-col lg:flex-row items-start gap-4 lg:gap-[7rem]">
@@ -211,7 +203,6 @@ const TestimonialSlide: React.FC<{ testimonial: Testimonial; isActive: boolean; 
 export const Testimonials: React.FC = () => {
   const [mounted, setMounted] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
   const swiperRef = useRef<any>(null);
 
   useEffect(() => {
@@ -279,8 +270,6 @@ export const Testimonials: React.FC = () => {
           transition={{ duration: 1.2, delay: 0.3 }}
           viewport={{ once: true }}
           className="relative"
-          onMouseEnter={() => setIsPlaying(false)}
-          onMouseLeave={() => setIsPlaying(true)}
         >
           {/* Fixed Quote Icon - Desktop Only */}
           <div className="absolute z-10 hidden lg:block" style={{ left: '0rem', top: '-22px' }}>
@@ -295,9 +284,11 @@ export const Testimonials: React.FC = () => {
 
           <Swiper
             ref={swiperRef}
-            modules={[Autoplay, Pagination]}
+            modules={[Autoplay, Pagination, EffectFade]}
             spaceBetween={0}
             slidesPerView={1}
+            effect="fade"
+            fadeEffect={{ crossFade: true }}
             loop={true}
             allowTouchMove={true}
             grabCursor={true}
@@ -319,7 +310,6 @@ export const Testimonials: React.FC = () => {
                   isActive={testimonials[activeIndex].id === testimonial.id}
                   activeIndex={activeIndex}
                   totalSlides={testimonials.length}
-                  isPlaying={isPlaying}
                 />
               </SwiperSlide>
             ))}

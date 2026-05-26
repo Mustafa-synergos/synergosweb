@@ -29,7 +29,7 @@ export default function Footer() {
         </div>
 
         {/* Four columns - exact spacing */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-6 sm:gap-x-12 gap-y-6 sm:gap-y-8 mb-12 sm:mb-20 mx-auto" style={{ maxWidth: '90%' }}>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[0.8fr_0.7fr_1.4fr_0.7fr] gap-x-4 sm:gap-x-2 gap-y-6 sm:gap-y-8 mb-12 sm:mb-20 mx-auto" style={{ maxWidth: '100%' }}>
           {/* OFFICE LOCATION */}
           <div>
             <h3 className="font-[clother] font-normal not-italic text-[18px] sm:text-[22px] leading-[100%] tracking-normal text-white/90 mb-4 sm:mb-6 uppercase">OFFICE LOCATION</h3>
@@ -46,14 +46,14 @@ export default function Footer() {
             <h3 className="font-[clother] font-normal not-italic text-[18px] sm:text-[22px] leading-[100%] tracking-normal text-white/90 mb-4 sm:mb-6 uppercase">BROWSE</h3>
             <div className="grid grid-cols-2 gap-x-4 gap-y-3">
               <div className="space-y-3">
-                <div><Link href="#" className="font-[clother] font-light not-italic text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] tracking-normal text-gray-400 hover:text-white transition-colors duration-300">Who we are</Link></div>
-                <div><Link href="#" className="font-[clother] font-light not-italic text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] tracking-normal text-gray-400 hover:text-white transition-colors duration-300">What we offer</Link></div>
-                <div><Link href="#" className="font-[clother] font-light not-italic text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] tracking-normal text-gray-400 hover:text-white transition-colors duration-300">Our work</Link></div>
+                <div><Link href="#" className="font-[clother] font-light not-italic text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] tracking-normal text-gray-400 hover:text-white transition-colors duration-300 whitespace-nowrap">Who we are</Link></div>
+                <div><Link href="#" className="font-[clother] font-light not-italic text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] tracking-normal text-gray-400 hover:text-white transition-colors duration-300 whitespace-nowrap">What we offer</Link></div>
+                <div><Link href="#" className="font-[clother] font-light not-italic text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] tracking-normal text-gray-400 hover:text-white transition-colors duration-300 whitespace-nowrap">Our work</Link></div>
               </div>
               <div className="space-y-3">
-                <div><Link href="#" className="font-[clother] font-light not-italic text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] tracking-normal text-gray-400 hover:text-white transition-colors duration-300">Resources</Link></div>
-                <div><Link href="#" className="font-[clother] font-light not-italic text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] tracking-normal text-gray-400 hover:text-white transition-colors duration-300">Career</Link></div>
-                <div><Link href="#" className="font-[clother] font-light not-italic text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] tracking-normal text-gray-400 hover:text-white transition-colors duration-300">Contact us</Link></div>
+                <div><Link href="#" className="font-[clother] font-light not-italic text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] tracking-normal text-gray-400 hover:text-white transition-colors duration-300 whitespace-nowrap">Resources</Link></div>
+                <div><Link href="#" className="font-[clother] font-light not-italic text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] tracking-normal text-gray-400 hover:text-white transition-colors duration-300 whitespace-nowrap">Career</Link></div>
+                <div><Link href="#" className="font-[clother] font-light not-italic text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] tracking-normal text-gray-400 hover:text-white transition-colors duration-300 whitespace-nowrap">Contact us</Link></div>
               </div>
             </div>
           </div>
@@ -63,14 +63,14 @@ export default function Footer() {
             <h3 className="font-[clother] font-normal not-italic text-[18px] sm:text-[22px] leading-[100%] tracking-normal text-white/90 mb-4 sm:mb-6 uppercase">WHAT WE OFFER</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3">
               <div className="space-y-3">
-                <div><Link href="#" className="font-[clother] font-light not-italic text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] tracking-normal text-gray-400 hover:text-white transition-colors duration-300">Strategy & Research</Link></div>
-                <div><Link href="#" className="font-[clother] font-light not-italic text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] tracking-normal text-gray-400 hover:text-white transition-colors duration-300">Storytelling & Performance</Link></div>
-                <div><Link href="#" className="font-[clother] font-light not-italic text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] tracking-normal text-gray-400 hover:text-white transition-colors duration-300">Digital Marketing & Performance</Link></div>
+                <div><Link href="#" className="font-[clother] font-light not-italic text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] tracking-normal text-gray-400 hover:text-white transition-colors duration-300 whitespace-nowrap">Strategy & Research</Link></div>
+                <div><Link href="#" className="font-[clother] font-light not-italic text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] tracking-normal text-gray-400 hover:text-white transition-colors duration-300 whitespace-nowrap">Storytelling & Performance</Link></div>
+                <div><Link href="#" className="font-[clother] font-light not-italic text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] tracking-normal text-gray-400 hover:text-white transition-colors duration-300 whitespace-nowrap">Digital Marketing & Performance</Link></div>
               </div>
               <div className="space-y-3">
-                <div><Link href="#" className="font-[clother] font-light not-italic text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] tracking-normal text-gray-400 hover:text-white transition-colors duration-300">Web & App Development</Link></div>
-                <div><Link href="#" className="font-[clother] font-light not-italic text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] tracking-normal text-gray-400 hover:text-white transition-colors duration-300">Brand films & Production</Link></div>
-                <div><Link href="#" className="font-[clother] font-light not-italic text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] tracking-normal text-gray-400 hover:text-white transition-colors duration-300">Offline & OOH</Link></div>
+                <div><Link href="#" className="font-[clother] font-light not-italic text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] tracking-normal text-gray-400 hover:text-white transition-colors duration-300 whitespace-nowrap">Web & App Development</Link></div>
+                <div><Link href="#" className="font-[clother] font-light not-italic text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] tracking-normal text-gray-400 hover:text-white transition-colors duration-300 whitespace-nowrap">Brand films & Production</Link></div>
+                <div><Link href="#" className="font-[clother] font-light not-italic text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] tracking-normal text-gray-400 hover:text-white transition-colors duration-300 whitespace-nowrap">Offline & OOH</Link></div>
               </div>
             </div>
           </div>
@@ -96,11 +96,11 @@ export default function Footer() {
 
         {/* Text Animation - slides left on hover */}
         <span className="relative w-[max-content] overflow-hidden">
-          <span className="block font-[clother] font-light text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-gray-400 transition-all duration-500 group-hover:-translate-x-full">
+          <span className="block font-[clother] font-light text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-gray-400 transition-all duration-500 group-hover:-translate-x-full whitespace-nowrap">
             Linkedin
           </span>
 
-          <span className="absolute -left-full top-0 block font-[clother] font-light text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-red-500 transition-all duration-500 group-hover:left-0">
+          <span className="absolute -left-full top-0 block font-[clother] font-light text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-red-500 transition-all duration-500 group-hover:left-0 whitespace-nowrap">
             Linkedin
           </span>
         </span>
@@ -122,11 +122,11 @@ export default function Footer() {
 
         {/* Text Animation - slides left on hover */}
         <span className="relative w-[max-content] overflow-hidden">
-          <span className="block font-[clother] font-light text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-gray-400 transition-all duration-500 group-hover:-translate-x-full">
+          <span className="block font-[clother] font-light text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-gray-400 transition-all duration-500 group-hover:-translate-x-full whitespace-nowrap">
             Facebook
           </span>
 
-          <span className="absolute -left-full top-0 block font-[clother] font-light text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-red-500 transition-all duration-500 group-hover:left-0">
+          <span className="absolute -left-full top-0 block font-[clother] font-light text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-red-500 transition-all duration-500 group-hover:left-0 whitespace-nowrap">
             Facebook
           </span>
         </span>
@@ -152,11 +152,11 @@ export default function Footer() {
 
         {/* Text Animation - slides left on hover */}
         <span className="relative w-[max-content] overflow-hidden">
-          <span className="block font-[clother] font-light text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-gray-400 transition-all duration-500 group-hover:-translate-x-full">
+          <span className="block font-[clother] font-light text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-gray-400 transition-all duration-500 group-hover:-translate-x-full whitespace-nowrap">
             Instagram
           </span>
 
-          <span className="absolute -left-full top-0 block font-[clother] font-light text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-red-500 transition-all duration-500 group-hover:left-0">
+          <span className="absolute -left-full top-0 block font-[clother] font-light text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-red-500 transition-all duration-500 group-hover:left-0 whitespace-nowrap">
             Instagram
           </span>
         </span>
@@ -178,11 +178,11 @@ export default function Footer() {
 
         {/* Text Animation - slides left on hover */}
         <span className="relative w-[max-content] overflow-hidden">
-          <span className="block font-[clother] font-light text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-gray-400 transition-all duration-500 group-hover:-translate-x-full">
+          <span className="block font-[clother] font-light text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-gray-400 transition-all duration-500 group-hover:-translate-x-full whitespace-nowrap">
             X
           </span>
 
-          <span className="absolute -left-full top-0 block font-[clother] font-light text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-red-500 transition-all duration-500 group-hover:left-0">
+          <span className="absolute -left-full top-0 block font-[clother] font-light text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-red-500 transition-all duration-500 group-hover:left-0 whitespace-nowrap">
             X
           </span>
         </span>
@@ -196,7 +196,7 @@ export default function Footer() {
 
         {/* Bottom section with border */}
         <div>
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mx-auto text-left" style={{ maxWidth: '90%' }}>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mx-auto text-left" style={{ maxWidth: '100%' }}>
             {/* Copyright */}
             <div className="font-[clother] font-light not-italic text-[14px] sm:text-[18px] leading-[20px] sm:leading-[26px] tracking-normal text-gray-400">
               ©2026 SYNERGOS Tech Consulting Services Pvt Ltd. All Rights Reserved.
@@ -204,7 +204,7 @@ export default function Footer() {
 
             {/* Privacy Policy & T&C */}
             <div className="font-[clother] font-light not-italic text-[14px] sm:text-[18px] leading-[20px] sm:leading-[26px] tracking-normal text-gray-400">
-              <Link href="#" className="hover:text-[#FF0000] active:text-white transition-colors duration-300">Privacy Policy</Link> | <Link href="#" className="hover:text-[#FF0000] active:text-white transition-colors duration-300">T&C</Link>
+              <Link href="#" className="text-gray-400 hover:text-[#FF0000] active:text-white transition-colors duration-300">Privacy Policy</Link> | <Link href="#" className="text-gray-400 hover:text-[#FF0000] active:text-white transition-colors duration-300">T&C</Link>
             </div>
           </div>
         </div>

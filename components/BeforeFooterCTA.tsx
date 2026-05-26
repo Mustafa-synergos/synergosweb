@@ -101,8 +101,9 @@ export default function BeforeFooterCTA() {
                   />
 
                   <motion.button
-                    whileHover={{ scale: 1.05, x: 5 }}
+                    whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.98 }}
+                    transition={{ duration: 0.3, ease: [0.76, 0, 0.24, 1] }}
                     onHoverStart={() => setIsHovered(true)}
                     onHoverEnd={() => setIsHovered(false)}
                     onTouchStart={() => setIsHovered(true)}
