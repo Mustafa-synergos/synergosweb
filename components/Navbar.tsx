@@ -44,7 +44,7 @@ export default function Navbar() {
   const backgroundColor = useTransform(backgroundOpacity, (value) => `rgba(42, 42, 42, ${value})`);
   const backdropFilter = useTransform(backdropBlur, (value) => `blur(${value}px)`);
   const justifyContent = useTransform(scrollY, (value) =>
-    value > scrollThreshold ? 'center' : 'space-between'
+    value > scrollThreshold ? 'space-between' : 'space-between'
   );
   const gifOpacity = useTransform(scrollY, [0, 60, 80], [0, 0, 1]);
   const pngOpacity = useTransform(scrollY, [0, 60, 80], [1, 1, 0]);
@@ -56,7 +56,7 @@ export default function Navbar() {
         className="fixed top-0 left-0 right-0 z-50"
       >
         <motion.div
-          className="mx-auto flex items-center lg:border-x lg:border-white/10 shadow-2xl rounded-none lg:rounded-full px-[25px] lg:px-[50px] mt-0 lg:mt-8 justify-between lg:justify-normal"
+          className="mx-auto flex items-center lg:border-x lg:border-white/10 shadow-2xl rounded-none lg:rounded-full px-[25px] lg:px-[50px] mt-0 lg:mt-8 justify-between lg:justify-between"
           style={{
             maxWidth: containerMaxWidth,
             paddingTop: containerPaddingY,
