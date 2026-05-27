@@ -26,6 +26,10 @@ body {
   /* perspective: 2000px;
   transform-style: preserve-3d; */
 }
+
+p {
+  line-height: 1.5;
+}
 .text-grey {
   color: #AEAEAE;
 }

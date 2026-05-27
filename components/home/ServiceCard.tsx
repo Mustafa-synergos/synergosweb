@@ -29,7 +29,7 @@ export default function ServiceCard({ service, isActive, index }: ServiceCardPro
               </h3>
               
               {/* Description */}
-              <p className="responsive-paragraph text-white/60 mb-8 leading-relaxed max-w-xl">
+              <p className="responsive-paragraph text-white/60 mb-8 max-w-xl">
                 {service.description}
               </p>
               

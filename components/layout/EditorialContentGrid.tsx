@@ -79,7 +79,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
       {/* Description - PERFECTLY ALIGNED */}
       {description && (
         <motion.p
-          className=" font-clother font-light text-[16px] lg:text-[18px] leading-[24px] lg:leading-[26px] tracking-normal mb-8 lg:mb-12 max-w-3xl"
+          className=" font-clother font-light text-[16px] lg:text-[18px] tracking-normal mb-8 lg:mb-12 max-w-3xl"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.6 }}

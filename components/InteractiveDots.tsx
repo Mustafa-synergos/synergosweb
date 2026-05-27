@@ -51,19 +51,21 @@ export default function InteractiveDots({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const timeRef = useRef<number>(0);
   const animationFrameId = useRef<number | null>(null);
-  const mouseRef = useRef({ 
-    x: -1000, 
-    y: -1000, 
+  const isVisibleRef = useRef<boolean>(true); // Track if canvas is in viewport
+  const prefersReducedMotionRef = useRef<boolean>(false);
+  const mouseRef = useRef({
+    x: -1000,
+    y: -1000,
     isDown: false,
     vx: 0,
     vy: 0,
     lastX: -1000,
     lastY: -1000
   });
-  const ripples = useRef<Array<{ 
-    x: number; 
-    y: number; 
-    time: number; 
+  const ripples = useRef<Array<{
+    x: number;
+    y: number;
+    time: number;
     intensity: number;
     layer: number;
   }>>([]);
@@ -310,6 +312,12 @@ const newY =
     const canvas = canvasRef.current;
     if (!canvas) return;
 
+    // Skip animation if not in viewport or reduced motion is preferred
+    if (!isVisibleRef.current || prefersReducedMotionRef.current) {
+      animationFrameId.current = requestAnimationFrame(animate);
+      return;
+    }
+
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
@@ -432,6 +440,25 @@ if (mouseData.influence > 0) {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
+    // Check for prefers-reduced-motion
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    prefersReducedMotionRef.current = mediaQuery.matches;
+    const handleMediaChange = (e: MediaQueryListEvent) => {
+      prefersReducedMotionRef.current = e.matches;
+    };
+    mediaQuery.addEventListener('change', handleMediaChange);
+
+    // IntersectionObserver to stop animation when not in viewport
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          isVisibleRef.current = entry.isIntersecting;
+        });
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(canvas);
+
     resizeCanvas();
 
     const handleResize = () => {
@@ -472,6 +499,9 @@ if (mouseData.influence > 0) {
       canvas.removeEventListener('pointerup', handlePointerUp);
       canvas.removeEventListener('pointerleave', handlePointerLeave);
       // window.removeEventListener('pointerup', handlePointerUp);
+
+      mediaQuery.removeEventListener('change', handleMediaChange);
+      observer.disconnect();
 
       if (resizeObserver && canvas.parentElement) {
         resizeObserver.unobserve(canvas.parentElement);

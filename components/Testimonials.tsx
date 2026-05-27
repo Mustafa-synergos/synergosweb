@@ -171,7 +171,7 @@ const TestimonialSlide: React.FC<{ testimonial: Testimonial; isActive: boolean; 
               <h3 className="text-white font-clother font-normal text-[22px] lg:text-[22px] leading-[22px] lg:leading-[26px] tracking-normal">
                 {testimonial.name}
               </h3>
-              <p className="text-white font-clother font-light text-[16px] lg:text-[16px] leading-[18px] lg:leading-[26px] tracking-normal">
+              <p className="text-white font-clother font-light text-[16px] lg:text-[16px] tracking-normal">
                 {testimonial.role}
               </p>
             </div>
@@ -179,7 +179,7 @@ const TestimonialSlide: React.FC<{ testimonial: Testimonial; isActive: boolean; 
           
           {/* Testimonial Content */}
           <div className="flex-1 text-left">
-            <p className="text-gray-400 font-clother font-light text-[16px] lg:text-[30px] leading-[38px] lg:leading-[38px] tracking-normal">
+            <p className="text-gray-400 font-clother font-light text-[16px] lg:text-[30px] tracking-normal">
               {words.map((word, index) => (
                 <span
                   key={index}

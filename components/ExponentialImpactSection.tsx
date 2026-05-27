@@ -47,7 +47,7 @@ export default function ExponentialImpactSection() {
                 Impact Shaping Voices
               </h2>
               
-              <p className=" font-clother font-light text-[16px] lg:text-[18px] leading-[24px] lg:leading-[26px] tracking-normal">
+              <p className=" font-clother font-light text-[16px] lg:text-[18px] tracking-normal">
                Each brand is unique. Each trajectory upwards is a singular journey. As a one-stop solutions partner, we fine-tune every single aspect, setting up a blueprint that considers identity, market, barriers, and narrative. No two stories are alike. Everyone deserves their own script.
               </p>
                <PremiumCTA title="CASE STUDIES" hoverTitle="CASE STUDIES" />

@@ -129,7 +129,7 @@ export default function Hero() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.6 }}
-                  className="responsive-paragraph text-white/80 leading-[2rem] mb-0 lg:mb-3 sm:mb-4 lg:mb-0 max-w-full"
+                  className="responsive-paragraph text-white/80 mb-0 lg:mb-3 sm:mb-4 lg:mb-0 max-w-full"
                 >
                   The sky isn't limit. For us, it is <br/>just first checkpoint.
                 </motion.p>

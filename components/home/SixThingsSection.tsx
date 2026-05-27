@@ -335,11 +335,14 @@ export default function Sticky3DStackCards() {
 
                       {/* RIGHT */}
                       <div className="w-full lg:w-auto flex justify-center lg:justify-end">
-                        <div className="relative  opacity-60">
-                          <img
+                        <div className="relative opacity-60">
+                          <Image
                             src={service.illustration}
                             alt={service.title}
-                            className="w-full h-full object-contain"
+                            width={400}
+                            height={400}
+                            className="w-full h-auto object-contain"
+                            loading="lazy"
                           />
                         </div>
                       </div>

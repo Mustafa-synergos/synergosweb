@@ -157,7 +157,7 @@ export default function StickyCards() {
                       </span>
                     </h2>
 
-                    <p className="text-white/60 mt-6 max-w-md text-lg leading-relaxed">
+                    <p className="text-white/60 mt-6 max-w-md text-lg">
                       {card.desc}
                     </p>
                   </div>

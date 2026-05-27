@@ -211,7 +211,7 @@ const BlogCard: React.FC<{ post: BlogPost; index: number; onHover: (hovering: bo
           </h3>
 
           {/* Excerpt */}
-          <p className="text-gray-400 font-clother font-light text-[13px] sm:text-[15px] lg:text-[18px] leading-[20px] sm:leading-[24px] lg:leading-[26px] tracking-normal line-clamp-2">
+          <p className="text-gray-400 font-clother font-light text-[13px] sm:text-[15px] lg:text-[18px] tracking-normal line-clamp-2">
             {post.excerpt}
           </p>
 

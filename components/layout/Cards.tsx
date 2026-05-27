@@ -178,7 +178,7 @@ export default function Sticky3DStackCards() {
           margin-top: 25px;
           font-size: 18px;
           max-width: 450px;
-          line-height: 1.6;
+          line-height: 1.5;
         }
 
         .card1 {
