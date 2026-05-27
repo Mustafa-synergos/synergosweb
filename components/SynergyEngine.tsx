@@ -315,13 +315,13 @@ export default function SynergyEngine() {
           <div
             ref={mobileSliderRef}
             data-lenis-prevent
-            className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth gap-4 pb-6 hide-scrollbar"
+            className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth pb-6 hide-scrollbar"
             style={{ WebkitOverflowScrolling: 'touch' }}
           >
             {engineCards.map((card, index) => (
               <div
                 key={index}
-                className="flex-shrink-0 w-[88vw] snap-center rounded-2xl shadow-2xl p-5 flex flex-col relative z-10 overflow-hidden h-[450px]"
+                className="flex-shrink-0 w-[88vw] snap-center rounded-2xl p-5 flex flex-col relative z-10 overflow-hidden h-[450px] lg:h-[520px] mr-4 last:mr-0"
                 style={{ backgroundColor: '#171717' }}
               >
                 {/* Interactive Dots Background */}
@@ -329,23 +329,21 @@ export default function SynergyEngine() {
                 {/* Content overlay */}
                 <div className="relative z-10 flex flex-col h-full">
                   {/* Icon */}
-                  <div className="h-[150px] flex-shrink-0 flex items-center justify-center pt-2">
-                    <div className="w-full h-full max-w-[150px] flex items-center justify-center">
+                  <div className="h-[200px] flex-shrink-0 flex items-center justify-center pt-2">
+                    <div className="w-full h-full max-w-[180px] flex items-center justify-center">
                       {card.icon}
                     </div>
                   </div>
 
                   {/* Content */}
-                  <div className="flex-1 flex flex-col justify-end gap-4">
-                    <div>
-                      <h3 className="text-white text-xl font-bold mb-2">
-                        {card.title}
-                      </h3>
-                      <p className="text-white/80 text-sm leading-relaxed">
-                        {card.description}
-                      </p>
-                    </div>
-                    <a href="#" className="text-red-500 text-sm lowercase">
+                  <div className="flex-1 flex flex-col gap-3">
+                    <h3 className="text-white text-xl font-bold flex-shrink-0">
+                      {card.title}
+                    </h3>
+                    <p className="text-white/80 text-sm leading-relaxed flex-1 overflow-hidden">
+                      {card.description}
+                    </p>
+                    <a href="#" className="text-red-500 text-sm lowercase flex-shrink-0">
                       {card.question}
                     </a>
                   </div>

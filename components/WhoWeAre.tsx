@@ -46,9 +46,9 @@ export default function WhoWeAre() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
                 viewport={{ once: true }}
-                className="mb-0 lg:mb-6"
+                className="mb-0 lg:mb-6 mt-0 lg:mt-3"
               >
-                <span className="text-red-500 responsive-red-span" style={{ textTransform: 'capitalize' }}>
+                <span className="text-red-500 responsive-red-span !mb-0 lg:!mb-6" style={{ textTransform: 'capitalize' }}>
                   Who We Are
                 </span>
               </motion.div>
@@ -59,7 +59,7 @@ export default function WhoWeAre() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 viewport={{ once: true }}
-                className="responsive-large-h2 text-white leading-none mt-0 lg:mt-6"
+                className="responsive-large-h2 text-white leading-none !mt-0 lg:!mt-6"
               >
                 WE ARE
                 <br />
@@ -72,7 +72,7 @@ export default function WhoWeAre() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
                 viewport={{ once: true }}
-                className="responsive-paragraph text-white/90 leading-relaxed mb-6 max-w-lg"
+                className="responsive-paragraph text-white/90 leading-relaxed !mb-3 lg:!mb-6 max-w-lg"
               >
                 We lift brands off the ground, keep them in sustained flight, and push them into orbit.
               </motion.p>
@@ -83,7 +83,7 @@ export default function WhoWeAre() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
                 viewport={{ once: true }}
-                className="responsive-paragraph text-white/90 leading-relaxed mb-6 max-w-lg"
+                className="responsive-paragraph text-white/90 leading-relaxed !mb-3 lg:!mb-6 !mt-0 lg:!mt-3 max-w-lg"
               >
                 For over 16 years, we have partnered with founders, legacy businesses, and marketing leaders to navigate launches, pivots, and plateaus. Across fintech, fitness, healthcare, education, manufacturing, and more, our longest relationships are built on one simple idea: consistency creates lift.
               </motion.p>

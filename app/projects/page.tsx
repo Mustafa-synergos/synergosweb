@@ -8,7 +8,7 @@ export default async function ProjectsPage() {
     const projects = await getProjects();
     items = projects.data || [];
   } catch (error) {
-    console.error('Failed to fetch projects:', error);
+    console.warn('Failed to fetch projects:', error);
   }
 
   return (

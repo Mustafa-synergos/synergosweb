@@ -52,7 +52,6 @@ async function fetchAPI<T>(
 
     return response.json();
   } catch (error) {
-    console.error("Fetch API Error:", error);
     throw error;
   }
 }

@@ -8,7 +8,7 @@ export default async function ServicesPage() {
     const servicesData = await getServices();
     services = servicesData.data || [];
   } catch (error) {
-    console.error('Failed to fetch services:', error);
+    console.warn('Failed to fetch services:', error);
   }
   return (
     <main className="min-h-screen bg-slate-950 text-white">

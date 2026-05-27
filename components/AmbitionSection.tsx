@@ -265,7 +265,7 @@ export default function AmbitionSection() {
   }, []);
 
   return (
-    <section className="relative min-h-[80vh] lg:min-h-[140vh] overflow-hidden pt-0 pb-0 lg:pb-40 lg:pt-20" style={{ backgroundColor: '#171717' }}>
+    <section className="relative min-h-[70vh] lg:min-h-[140vh] overflow-hidden pt-0 pb-0 lg:pb-40 lg:pt-20" style={{ backgroundColor: '#171717' }}>
       {/* Interactive Dots Background */}
       <InteractiveDots variant="dark" />
 
@@ -288,7 +288,7 @@ export default function AmbitionSection() {
       {/* Content Wrapper - z-index to sit above canvas */}
       <div className="relative z-10 px-6 lg:px-8">
 
-      <div ref={containerRef} className="relative z-10 max-w-7xl mx-auto min-h-[100vh] flex flex-col justify-between">
+      <div ref={containerRef} className="relative z-10 max-w-7xl mx-auto min-h-auto lg:min-h-[100vh] flex flex-col justify-between">
         {/* Shared Logo - Absolutely positioned inside container */}
         <img 
           ref={logoRef}

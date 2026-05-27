@@ -14,7 +14,7 @@ export default async function AboutPage() {
     const teamData = await getTeam();
     teamMembers = teamData.data || [];
   } catch (error) {
-    console.error('Failed to fetch team data:', error);
+    console.warn('Failed to fetch team data:', error);
   }
 
   return (

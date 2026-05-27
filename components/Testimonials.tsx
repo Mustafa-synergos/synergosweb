@@ -179,14 +179,14 @@ const TestimonialSlide: React.FC<{ testimonial: Testimonial; isActive: boolean; 
           
           {/* Testimonial Content */}
           <div className="flex-1 text-left">
-            <p className="text-gray-400 font-clother font-light text-[30px] lg:text-[30px] leading-[38px] lg:leading-[38px] tracking-normal">
+            <p className="text-gray-400 font-clother font-light text-[16px] lg:text-[30px] leading-[38px] lg:leading-[38px] tracking-normal">
               {words.map((word, index) => (
                 <span
                   key={index}
                   className={
                     testimonial.highlightedWords?.includes(index)
-                      ? ' decoration-2 underline-offset-4'
-                      : ''
+                      ? ' decoration-2 underline-offset-4 !mb-0 lg:!mb-6'
+                      : '!mb-0 lg:!mb-6'
                   }
                 >
                   {word}{' '}

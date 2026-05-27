@@ -367,7 +367,7 @@ const InsightsCursor: React.FC = () => {
       }}
       onClick={handleClick}
     >
-      <span className="text-white font-bold uppercase tracking-[0.15em] text-sm" style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)' }}>
+      <span className="text-white font-bold uppercase tracking-[0.15em] text-sm !mb-0 lg:!mb-6" style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)' }}>
         Read More
       </span>
     </div>

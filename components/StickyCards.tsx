@@ -143,7 +143,7 @@ export default function StickyCards() {
                 {/* LEFT */}
                 <div className="flex flex-col justify-between p-8 lg:p-16">
                   <div>
-                    <span className="text-[90px] lg:text-[120px] text-lime-200 italic leading-none font-light">
+                    <span className="text-[90px] lg:text-[120px] text-lime-200 italic leading-none font-light !mb-0 lg:!mb-6">
                       {card.id}
                     </span>
                   </div>
@@ -152,7 +152,7 @@ export default function StickyCards() {
                     <h2 className="text-white text-5xl lg:text-7xl leading-none uppercase font-semibold tracking-tight">
                       {card.title}
                       <br />
-                      <span className="italic lowercase text-neutral-300 font-light">
+                      <span className="italic lowercase text-neutral-300 font-light !mb-0 lg:!mb-6">
                         {card.italic}
                       </span>
                     </h2>

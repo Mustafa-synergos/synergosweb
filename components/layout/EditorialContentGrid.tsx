@@ -46,7 +46,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
 }) => {
   return (
     <motion.div 
-      className={`mb-16 lg:mb-20 ${className}`}
+      className={`!mb-6 lg:!mb-20${className}`}
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
@@ -54,13 +54,13 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
     >
       {/* Small Label - PERFECTLY ALIGNED */}
       <motion.div
-        className="mb-6 lg:mb-8"
+        className="!mb-0 lg:!mb-6"
         initial={{ opacity: 0, x: -20 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.2, duration: 0.6 }}
         viewport={{ once: true }}
       >
-        <span className={`inline-block font-clother font-normal tracking-normal ${labelColor} text-[18px] lg:text-[28px] leading-[100%]`} style={{ textTransform: 'capitalize' }}>
+        <span className={`inline-block font-clother font-normal tracking-normal ${labelColor} text-[18px] lg:text-[28px] leading-[100%] !mb-0 lg:!mb-6`} style={{ textTransform: 'capitalize' }}>
           {label}
         </span>
       </motion.div>

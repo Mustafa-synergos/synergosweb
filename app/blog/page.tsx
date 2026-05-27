@@ -8,7 +8,7 @@ export default async function BlogPage() {
     const posts = await getBlogPosts();
     items = posts.data || [];
   } catch (error) {
-    console.error('Failed to fetch blog posts:', error);
+    console.warn('Failed to fetch blog posts:', error);
   }
 
   return (

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { Search, Menu } from 'lucide-react';
-import { motion, AnimatePresence, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import PremiumCTA from './PremiumCTA';
 
 const navItems = [
@@ -16,69 +16,76 @@ const navItems = [
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [useAnimatedLogo, setUseAnimatedLogo] = useState(false);
-  const { scrollY, scrollYProgress } = useScroll();
-  
+  const [isDesktop, setIsDesktop] = useState(false);
+  const { scrollY } = useScroll();
+
+  useEffect(() => {
+    const check = () => setIsDesktop(window.innerWidth >= 1024);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
   // Smooth scroll-based animations
   const scrollThreshold = 60;
-  
+
   // Background opacity and blur effect
   const backgroundOpacity = useTransform(scrollY, [0, scrollThreshold, scrollThreshold + 20], [0, 0.4, 0.95]);
   const backdropBlur = useTransform(scrollY, [0, scrollThreshold, scrollThreshold + 20], [0, 8, 16]);
-  
+
   // Container width and centering
   const containerMaxWidth = useTransform(scrollY, [0, scrollThreshold, scrollThreshold + 20], ['100%', '100%', '1200px']);
   const containerPaddingY = useTransform(scrollY, [0, scrollThreshold, scrollThreshold + 20], [16, 16, 12]);
-  
+
   // Border radius and gap
   const borderRadius = useTransform(scrollY, [0, scrollThreshold, scrollThreshold + 20], [0, 0, 8]);
   const gap = useTransform(scrollY, [0, scrollThreshold, scrollThreshold + 20], [24, 24, 32]);
-  
-  // Header stays always visible - no hide/reveal logic
 
-  // Detect when header reaches max-width: 900px to change logo
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    // When scroll > 80, containerMaxWidth becomes 900px
-    setUseAnimatedLogo(latest > 80);
-  });
+  const backgroundColor = useTransform(backgroundOpacity, (value) => `rgba(42, 42, 42, ${value})`);
+  const backdropFilter = useTransform(backdropBlur, (value) => `blur(${value}px)`);
+  const justifyContent = useTransform(scrollY, (value) =>
+    value > scrollThreshold ? 'center' : 'space-between'
+  );
+  const gifOpacity = useTransform(scrollY, [0, 60, 80], [0, 0, 1]);
+  const pngOpacity = useTransform(scrollY, [0, 60, 80], [1, 1, 0]);
 
   return (
     <>
       {/* Main Header - Animated and Sticky */}
-      <motion.header 
+      <motion.header
         className="fixed top-0 left-0 right-0 z-50"
       >
         <motion.div
-          className="mx-auto flex items-center lg:border-x lg:border-white/10 shadow-2xl rounded-none lg:rounded-full px-[25px] lg:px-[50px] mt-0 lg:mt-8"
+          className="mx-auto flex items-center lg:border-x lg:border-white/10 shadow-2xl rounded-none lg:rounded-full px-[25px] lg:px-[50px] mt-0 lg:mt-8 justify-between lg:justify-normal"
           style={{
             maxWidth: containerMaxWidth,
             paddingTop: containerPaddingY,
             paddingBottom: containerPaddingY,
             borderRadius: borderRadius,
             gap: gap,
-            justifyContent: useTransform(scrollY, (value) => {
-              // Always use space-between on mobile, center on desktop when scrolled
-              if (typeof window !== 'undefined' && window.innerWidth < 1024) {
-                return 'space-between';
-              }
-              return value > scrollThreshold ? 'center' : 'space-between';
-            }),
-            background: useTransform(backgroundOpacity, (value) => `rgba(42, 42, 42, ${value})`),
-            backdropFilter: useTransform(backdropBlur, (value) => `blur(${value}px)`),
-            WebkitBackdropFilter: useTransform(backdropBlur, (value) => `blur(${value}px)`),
-            transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)'
+            justifyContent: isDesktop ? justifyContent : 'space-between',
+            background: backgroundColor,
+            backdropFilter: isDesktop ? backdropFilter : undefined,
+            WebkitBackdropFilter: isDesktop ? backdropFilter : undefined,
           }}
         >
             {/* Logo */}
-            <Link 
-              href="/" 
+            <Link
+              href="/"
               className="flex items-center"
             >
-              <div className="relative">
-                <img
-                  src={useAnimatedLogo ? "/images/logo.gif" : "/images/logo.png"}
+              <div className="relative w-[120px] h-[40px] sm:w-[150px] sm:h-[50px] lg:w-[180px] lg:h-[60px]">
+                <motion.img
+                  src="/images/logo.png"
                   alt="Synergos Logo"
-                  style={{ objectFit: 'contain' }}
+                  className="w-full h-full object-contain"
+                  style={{ opacity: pngOpacity }}
+                />
+                <motion.img
+                  src="/images/logo.gif"
+                  alt="Synergos Logo"
+                  className="absolute top-0 left-0 w-full h-full object-contain pointer-events-none"
+                  style={{ opacity: gifOpacity }}
                 />
               </div>
             </Link>

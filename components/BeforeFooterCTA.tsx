@@ -56,7 +56,7 @@ export default function BeforeFooterCTA() {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 viewport={{ once: true }}
               >
-                <span className="text-red-500 font-clother font-normal text-[18px] lg:text-[28px] leading-[100%] tracking-normal" style={{ textTransform: 'capitalize' }}>
+                <span className="text-red-500 font-clother font-normal text-[18px] lg:text-[28px] leading-[100%] tracking-normal mb-0 lg:mb-2" style={{ textTransform: 'capitalize' }}>
                   Let's connect
                 </span>
               </motion.div>
