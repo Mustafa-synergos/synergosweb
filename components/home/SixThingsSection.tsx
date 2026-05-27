@@ -360,7 +360,7 @@ export default function Sticky3DStackCards() {
                   onClick={() => scrollToCard(index)}
                   aria-label={`Go to ${service.title}`}
                   className={`
-                    w-2 h-2 transition-all duration-300
+                    w-2 h-2 rounded-full transition-all duration-300
                     ${
                       index === activeIndex
                         ? "bg-white"

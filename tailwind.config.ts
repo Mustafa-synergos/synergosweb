@@ -20,6 +20,13 @@ const config: Config = {
       },
       fontFamily: {
         'clother': ['clother', 'sans-serif']
+      },
+      colors: {
+        gray: {
+          400: '#AEAEAE',
+          500: '#AEAEAE',
+          DEFAULT: '#AEAEAE'
+        }
       }
     }
   },
@@ -41,7 +48,7 @@ const config: Config = {
         },
         '.responsive-clother-paragraph': {
           fontFamily: 'clother, sans-serif',
-          fontWeight: '200',
+          fontWeight: '300',
           fontStyle: 'normal',
           fontSize: '16px',
           lineHeight: '24px',

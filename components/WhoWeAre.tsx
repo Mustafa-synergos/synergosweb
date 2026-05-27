@@ -22,15 +22,15 @@ export default function WhoWeAre() {
   }, []);
 
   return (
-    <section className="relative min-h-screen overflow-hidden px-6 lg:px-8" style={{ backgroundColor: '#171717' }}>
+    <section className="relative min-h-[70vh] md:min-h-screen overflow-hidden px-6 lg:px-8" style={{ backgroundColor: '#171717' }}>
       {/* Interactive Dots Background */}
       <InteractiveDots variant="dark" />
 
 
       {/* Two Column Layout */}
-      <div className="relative z-10 flex items-center justify-center min-h-screen py-20 lg:py-24">
+      <div className="relative z-10 flex items-center justify-center min-h-[70vh] md:min-h-screen py-12 md:py-20 lg:py-24">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-16 lg:gap-24 items-center">
             
             {/* Left Column - Text Content */}
             <motion.div
@@ -46,7 +46,7 @@ export default function WhoWeAre() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
                 viewport={{ once: true }}
-                className="mb-6"
+                className="mb-0 lg:mb-6"
               >
                 <span className="text-red-500 responsive-red-span" style={{ textTransform: 'capitalize' }}>
                   Who We Are
@@ -59,7 +59,7 @@ export default function WhoWeAre() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 viewport={{ once: true }}
-                className="responsive-large-h2 text-white leading-none"
+                className="responsive-large-h2 text-white leading-none mt-0 lg:mt-6"
               >
                 WE ARE
                 <br />
@@ -83,7 +83,7 @@ export default function WhoWeAre() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
                 viewport={{ once: true }}
-                className="responsive-paragraph text-white/90 leading-relaxed mb-8 max-w-lg"
+                className="responsive-paragraph text-white/90 leading-relaxed mb-6 max-w-lg"
               >
                 For over 16 years, we have partnered with founders, legacy businesses, and marketing leaders to navigate launches, pivots, and plateaus. Across fintech, fitness, healthcare, education, manufacturing, and more, our longest relationships are built on one simple idea: consistency creates lift.
               </motion.p>
@@ -100,7 +100,7 @@ export default function WhoWeAre() {
             </motion.div>
 
             {/* Right Column - Rocket Image */}
-            <div className="relative h-[400px] lg:h-[600px] min-h-[300px] flex items-center justify-center">
+            <div className="relative h-[80px] sm:h-[100px] md:h-[200px] lg:h-[200px] xl:h-[480px] 2xl:h-[650px] flex items-center justify-center">
               <div className="relative w-full h-full max-w-md">
                 {/* Desktop rocket image */}
                 <Image

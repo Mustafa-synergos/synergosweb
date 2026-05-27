@@ -49,7 +49,7 @@ export default function Navbar() {
         className="fixed top-0 left-0 right-0 z-50"
       >
         <motion.div
-          className="mx-auto flex items-center border-x border-white/10 shadow-2xl rounded-full px-[25px] lg:px-[50px] mt-0 lg:mt-8"
+          className="mx-auto flex items-center lg:border-x lg:border-white/10 shadow-2xl rounded-none lg:rounded-full px-[25px] lg:px-[50px] mt-0 lg:mt-8"
           style={{
             maxWidth: containerMaxWidth,
             paddingTop: containerPaddingY,
@@ -154,9 +154,9 @@ export default function Navbar() {
               <button
                 type="button"
                 aria-label="Search"
-                className="flex items-center justify-center w-12 h-12 sm:w-10 sm:h-10 rounded-full text-white/80 transition-all duration-200 relative z-20"
+                className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full text-white/80 transition-all duration-200 relative z-20"
               >
-                <div className="relative w-6 h-6 sm:w-5 sm:h-5">
+                <div className="relative w-4 h-4 sm:w-5 sm:h-5">
                   <Image
                     src="/images/search-icon.png"
                     alt="Search"
@@ -171,9 +171,9 @@ export default function Navbar() {
                 type="button"
                 aria-label="Toggle menu"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="flex items-center justify-center w-12 h-12 sm:w-10 sm:h-10 rounded-full text-white/80 transition-all duration-200 relative z-30"
+                className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full text-white/80 transition-all duration-200 relative z-30"
               >
-                <div className="relative w-12 h-12 sm:w-10 sm:h-10">
+                <div className="relative w-8 h-8 sm:w-10 sm:h-10">
                   <Image
                     src="/images/menu-icon.png"
                     alt="Menu"

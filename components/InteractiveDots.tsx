@@ -82,6 +82,7 @@ export default function InteractiveDots({
   }>>([]);
   
   const dprRef = useRef<number>(1);
+  const isMobileRef = useRef<boolean>(false);
 
   const config = {
     dotColor: customDotColor || VARIANT_CONFIGS[variant].dotColor,
@@ -220,6 +221,8 @@ export default function InteractiveDots({
   }, [initializeDots, containerRef]);
 
   const handlePointerMove = useCallback((e: PointerEvent) => {
+    if (isMobileRef.current) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -431,7 +434,12 @@ if (mouseData.influence > 0) {
 
     resizeCanvas();
 
-    const handleResize = () => resizeCanvas();
+    const handleResize = () => {
+      isMobileRef.current = window.innerWidth < 768;
+      resizeCanvas();
+    };
+
+    isMobileRef.current = window.innerWidth < 768;
 
     window.addEventListener('resize', handleResize);
     // canvas.addEventListener('pointermove', handlePointerMove);

@@ -175,86 +175,89 @@ export default function AmbitionSection() {
 
       if (!mobileContainer || !mobileLogo || !mh1 || !mh2 || !mh3 || !mh4) return;
 
-      // Calculate logo position from heading element — responsive to any screen width
+      // Calculate logo position from heading element — runs after layout settles
       const getMobileLogoPosition = (heading: HTMLElement) => {
         const containerRect = mobileContainer.getBoundingClientRect();
         const headingRect = heading.getBoundingClientRect();
         const logoWidth = mobileLogo.offsetWidth;
         const logoHeight = mobileLogo.offsetHeight;
+        const computedStyle = window.getComputedStyle(heading);
+        const lineHeight = parseFloat(computedStyle.lineHeight);
 
-        // x: sit inside the pl-16 (64px) padding area of the heading
-        // Logo is 48px (w-12), center it in that 64px space
+        // x: align logo inside the pl-16 (64px) padding area, centered horizontally
         const x = headingRect.left - containerRect.left + (64 - logoWidth) / 2;
 
-        // y: vertically center logo with the entire heading block
-        const y = headingRect.top - containerRect.top + (headingRect.height / 2) - (logoHeight / 2);
+        // y: align logo center with FIRST LINE center (same as desktop)
+        const y = headingRect.top - containerRect.top + (lineHeight / 2) - (logoHeight / 2);
 
         return { x, y };
       };
 
-      const pos1 = getMobileLogoPosition(mh1);
-      const pos2 = getMobileLogoPosition(mh2);
-      const pos3 = getMobileLogoPosition(mh3);
-      const pos4 = getMobileLogoPosition(mh4);
+      let mTl: gsap.core.Timeline;
 
-      gsap.set(mobileLogo, { x: pos1.x, y: pos1.y });
+      const setup = () => {
+        const pos1 = getMobileLogoPosition(mh1);
+        const pos2 = getMobileLogoPosition(mh2);
+        const pos3 = getMobileLogoPosition(mh3);
+        const pos4 = getMobileLogoPosition(mh4);
 
-      const mTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: mobileContainer,
-          start: 'top center',
-          end: 'bottom center',
-          scrub: 1.5,
-          onUpdate: (self) => {
-            const progress = self.progress;
-            if (progress < 0.33) setActiveHeading(1);
-            else if (progress < 0.66) setActiveHeading(2);
-            else if (progress < 1) setActiveHeading(3);
-            else setActiveHeading(4);
+        gsap.set(mobileLogo, { x: pos1.x, y: pos1.y });
+
+        mTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: mobileContainer,
+            start: 'top center',
+            end: 'bottom center',
+            scrub: 1.5,
+            onUpdate: (self) => {
+              const progress = self.progress;
+              if (progress < 0.33) setActiveHeading(1);
+              else if (progress < 0.66) setActiveHeading(2);
+              else if (progress < 1) setActiveHeading(3);
+              else setActiveHeading(4);
+            },
           },
-        },
-      });
+        });
 
-      mTl.to(mobileLogo, {
-        x: pos2.x,
-        y: pos2.y,
-        duration: 1,
-        force3D: true,
-        ease: 'power2.inOut',
-      })
-      .to(mobileLogo, {
-        x: pos3.x,
-        y: pos3.y,
-        duration: 1,
-        force3D: true,
-        ease: 'power2.inOut',
-      })
-      .to(mobileLogo, {
-        x: pos4.x,
-        y: pos4.y,
-        duration: 1,
-        force3D: true,
-        ease: 'power2.inOut',
+        mTl.to(mobileLogo, {
+          x: pos2.x,
+          y: pos2.y,
+          duration: 1,
+          force3D: true,
+          ease: 'power2.inOut',
+        })
+        .to(mobileLogo, {
+          x: pos3.x,
+          y: pos3.y,
+          duration: 1,
+          force3D: true,
+          ease: 'power2.inOut',
+        })
+        .to(mobileLogo, {
+          x: pos4.x,
+          y: pos4.y,
+          duration: 1,
+          force3D: true,
+          ease: 'power2.inOut',
+        });
+      };
+
+      // Wait one frame so layout + fonts are fully settled before measuring
+      requestAnimationFrame(() => {
+        requestAnimationFrame(setup);
       });
 
       const handleResize = () => {
         ScrollTrigger.refresh();
-        const newPos1 = getMobileLogoPosition(mh1);
-        const newPos2 = getMobileLogoPosition(mh2);
-        const newPos3 = getMobileLogoPosition(mh3);
-        const newPos4 = getMobileLogoPosition(mh4);
-        gsap.set(mobileLogo, { x: newPos1.x, y: newPos1.y });
-        mTl.seek(0).clear()
-          .to(mobileLogo, { x: newPos2.x, y: newPos2.y, duration: 1, ease: 'power2.inOut' })
-          .to(mobileLogo, { x: newPos3.x, y: newPos3.y, duration: 1, ease: 'power2.inOut' })
-          .to(mobileLogo, { x: newPos4.x, y: newPos4.y, duration: 1, ease: 'power2.inOut' });
+        if (mTl) mTl.kill();
+        setup();
       };
 
       window.addEventListener('resize', handleResize);
 
       return () => {
         window.removeEventListener('resize', handleResize);
-        mTl.kill();
+        if (mTl) mTl.kill();
       };
     });
 
@@ -262,7 +265,7 @@ export default function AmbitionSection() {
   }, []);
 
   return (
-    <section className="relative min-h-[80vh] lg:min-h-[140vh] overflow-hidden pt-20 pb-0 lg:pb-40 lg:pt-0" style={{ backgroundColor: '#171717' }}>
+    <section className="relative min-h-[80vh] lg:min-h-[140vh] overflow-hidden pt-0 pb-0 lg:pb-40 lg:pt-20" style={{ backgroundColor: '#171717' }}>
       {/* Interactive Dots Background */}
       <InteractiveDots variant="dark" />
 

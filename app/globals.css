@@ -14,17 +14,6 @@
   font-style: normal;
 }
 
-/* =========================================
-   GLOBAL STYLES
-========================================= */
-
-/* html {
-  scroll-behavior: smooth;
-} */
-html,
-body {
-  /* overflow-x: hidden; */
-}
 
 
 body {
@@ -335,7 +324,7 @@ body::-webkit-scrollbar-track {
   margin: 0 4px;
   opacity: 1;
   background: #3a3a3a;
-  border-radius: 0;
+  border-radius: 50%;
   transition: all 0.3s ease-out;
 }
 

@@ -298,7 +298,7 @@ export default function SynergyEngine() {
       {/* ==============================================================
           MOBILE / TABLET — Vertical stack layout with carousel
           ============================================================== */}
-      <div className="lg:hidden py-8 px-4 sm:px-6">
+      <div className="lg:hidden relative z-20 py-8 px-4 sm:px-6 pb-16">
         {/* Heading - Left aligned at top */}
         <div ref={mobHeadingRef} className="relative mb-8">
           <h2 className="responsive-synergy-heading text-white text-left">
@@ -315,37 +315,37 @@ export default function SynergyEngine() {
           <div
             ref={mobileSliderRef}
             data-lenis-prevent
-            className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth gap-4 pb-12 hide-scrollbar"
+            className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth gap-4 pb-6 hide-scrollbar"
             style={{ WebkitOverflowScrolling: 'touch' }}
           >
             {engineCards.map((card, index) => (
               <div
                 key={index}
-                className="flex-shrink-0 w-[88vw] snap-center rounded-2xl shadow-2xl p-5 flex flex-col justify-between relative overflow-hidden h-[444px]"
+                className="flex-shrink-0 w-[88vw] snap-center rounded-2xl shadow-2xl p-5 flex flex-col relative z-10 overflow-hidden h-[450px]"
                 style={{ backgroundColor: '#171717' }}
               >
                 {/* Interactive Dots Background */}
                 <InteractiveDots variant="card" className="rounded-2xl" />
                 {/* Content overlay */}
-                <div className="relative z-10 flex flex-col justify-between h-full">
+                <div className="relative z-10 flex flex-col h-full">
                   {/* Icon */}
-                  <div className="h-[180px] flex items-center justify-center pt-2">
+                  <div className="h-[150px] flex-shrink-0 flex items-center justify-center pt-2">
                     <div className="w-full h-full max-w-[150px] flex items-center justify-center">
                       {card.icon}
                     </div>
                   </div>
 
                   {/* Content */}
-                  <div className="flex flex-col justify-between h-[140px]">
+                  <div className="flex-1 flex flex-col justify-end gap-4">
                     <div>
                       <h3 className="text-white text-xl font-bold mb-2">
                         {card.title}
                       </h3>
-                      <p className="text-white/80 text-sm leading-relaxed max-h-[140px] ">
+                      <p className="text-white/80 text-sm leading-relaxed">
                         {card.description}
                       </p>
                     </div>
-                    <a href="#" className="text-red-500 text-sm lowercase mt-6" style={{marginTop: '10px'}}>
+                    <a href="#" className="text-red-500 text-sm lowercase">
                       {card.question}
                     </a>
                   </div>
@@ -355,7 +355,7 @@ export default function SynergyEngine() {
           </div>
 
           {/* Pagination Dots */}
-          <div className="flex justify-center gap-2 mt-4">
+          <div className="flex justify-center gap-2 mt-6">
             {engineCards.map((_, index) => (
               <button
                 key={index}
