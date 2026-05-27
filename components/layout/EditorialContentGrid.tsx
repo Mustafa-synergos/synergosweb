@@ -46,7 +46,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
 }) => {
   return (
     <motion.div 
-      className={`!mb-6 lg:!mb-20${className}`}
+      className={`!mb-6 lg:!mb-10${className}`}
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
@@ -54,20 +54,20 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
     >
       {/* Small Label - PERFECTLY ALIGNED */}
       <motion.div
-        className="!mb-0 lg:!mb-6"
+        className="!mb-0 lg:!mb-0 mt-0 lg:mt-10"
         initial={{ opacity: 0, x: -20 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.2, duration: 0.6 }}
         viewport={{ once: true }}
       >
-        <span className={`inline-block font-clother font-normal tracking-normal ${labelColor} text-[18px] lg:text-[28px] leading-[100%] !mb-0 lg:!mb-6`} style={{ textTransform: 'capitalize' }}>
+        <span className={`inline-block font-clother font-normal tracking-normal ${labelColor} text-[18px] lg:text-[28px] leading-[100%] !mb-0 lg:!mb-0`} style={{ textTransform: 'capitalize' }}>
           {label}
         </span>
       </motion.div>
 
       {/* Main Heading - PERFECTLY ALIGNED */}
       <motion.div
-        className="mb-8 lg:mb-12"
+        className="mb-0"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.8 }}
@@ -304,7 +304,7 @@ export const EditorialCTA: React.FC<{
           style={{ willChange: 'transform' }}
         >
           <motion.span
-            className="block leading-6"
+            className="block leading-[1.5]"
             variants={{
               hover: {
                 color: colors.hoverText,
@@ -321,7 +321,7 @@ export const EditorialCTA: React.FC<{
             {children}
           </motion.span>
           <motion.span
-            className="block leading-6"
+            className="block leading-[1.5]"
             variants={{
               hover: {
                 color: colors.defaultText,

@@ -74,17 +74,18 @@ export default function Navbar() {
               href="/"
               className="flex items-center"
             >
-              <div className="relative w-[120px] h-[40px] sm:w-[150px] sm:h-[50px] lg:w-[180px] lg:h-[60px]">
+              <div className="relative w-[120px] h-[40px] sm:w-[50px] sm:h-[50px] lg:w-[180px] lg:h-[80px]">
                 <motion.img
                   src="/images/logo.png"
                   alt="Synergos Logo"
-                  className="w-full h-full object-contain"
+                
+                  className="w-full h-full object-contain w-[120px] h-full lg:w-[130px] lg:h-[80px]"
                   style={{ opacity: pngOpacity }}
                 />
                 <motion.img
                   src="/images/logo.gif"
                   alt="Synergos Logo"
-                  className="absolute top-0 left-0 w-full h-full object-contain pointer-events-none"
+                  className="absolute top-0 left-0 w-full h-full object-contain pointer-events-none w-[40px] h-full lg:w-[50px] lg:h-full"
                   style={{ opacity: gifOpacity }}
                 />
               </div>

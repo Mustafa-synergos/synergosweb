@@ -44,7 +44,7 @@ export default async function ProjectDetailPage({ params }: { params: { slug: st
           <div className="rounded-[2rem] border border-white/10 bg-slate-900/80 p-10 shadow-soft backdrop-blur-xl">
             <p className="text-sm uppercase tracking-[0.28em] text-sky-300">Project story</p>
             <h1 className="mt-4 text-4xl font-semibold text-white sm:text-5xl">{project.title}</h1>
-            <p className="mt-6 text-slate-300 leading-8">{project.description}</p>
+            <p className="mt-6 text-slate-300 leading-[1.5]">{project.description}</p>
             <div className="mt-8 grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
               <div className="relative h-[420px] overflow-hidden rounded-[2rem] bg-slate-800">
                 {cover ? (

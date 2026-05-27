@@ -67,7 +67,7 @@ export default function BeforeFooterCTA() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, delay: 0.5 }}
                 viewport={{ once: true }}
-                className="text-white font-clother font-bold text-[38px] lg:text-[134px] leading-[40px] lg:leading-[134px] tracking-normal uppercase whitespace-nowrap"
+                className="text-white font-clother font-bold text-[38px] lg:text-[134px] leading-[40px] lg:leading-[134px] tracking-normal uppercase whitespace-nowrap !mt-0 lg:!mt-0"
               >
                 WE REDEFINE THE
                 <br />
@@ -80,7 +80,7 @@ export default function BeforeFooterCTA() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
                 viewport={{ once: true }}
-                className="font-clother font-light text-[16px] lg:text-[18px] leading-[24px] lg:leading-[26px] tracking-normal"
+                className="font-clother font-light text-[16px] lg:text-[18px] leading-[24px] lg:leading-[26px] tracking-normal mt-2 lg:mt-3"
               >
                 We have spent over a decade and a half perfecting the mechanics of flight through imagination, craft, dexterity, and sheer will. Your next launch is already on the pad.
               </motion.p>

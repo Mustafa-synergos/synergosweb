@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import InteractiveDots from './InteractiveDots';
@@ -232,10 +233,13 @@ export default function SynergyEngine() {
 
             {/* ── Vector ── */}
             <div ref={deskVectorRef} className="jsx-96a4049c8728edbe relative flex-shrink-0 animate-float" style={{ width: '564px', height: '397px', left: '-50px', top: '-18px' }}>
-              <img
+              <Image
                 src="/images/Frame 71.png"
                 alt="Synergy Engine Vector"
+                width={564}
+                height={397}
                 className="w-full h-auto object-contain drop-shadow-2xl"
+                loading="lazy"
               />
               <div className="absolute inset-0 bg-white/10 blur-3xl rounded-full -z-10" />
             </div>

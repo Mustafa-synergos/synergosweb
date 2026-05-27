@@ -30,7 +30,7 @@ export default async function ServicesPage() {
         <div className="glass-panel rounded-[2rem] border border-white/10 p-10 shadow-soft">
           <p className="text-sm uppercase tracking-[0.3em] text-sky-300">Integrated approach</p>
           <h2 className="mt-4 text-3xl font-semibold text-white">Services that align with your full digital experience.</h2>
-          <p className="mt-6 leading-8 text-slate-300">
+          <p className="mt-6 leading-[1.5] text-slate-300">
             Showcase every service with thoughtful layout, distinct brand positioning, and deeply curated content — powered by a connected CMS backend.
           </p>
         </div>

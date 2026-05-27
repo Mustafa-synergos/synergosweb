@@ -185,8 +185,8 @@ const TestimonialSlide: React.FC<{ testimonial: Testimonial; isActive: boolean; 
                   key={index}
                   className={
                     testimonial.highlightedWords?.includes(index)
-                      ? ' decoration-2 underline-offset-4 !mb-0 lg:!mb-6'
-                      : '!mb-0 lg:!mb-6'
+                      ? ' decoration-2 underline-offset-4 !mb-0 lg:!mb-2'
+                      : '!mb-0 lg:!mb-2'
                   }
                 >
                   {word}{' '}

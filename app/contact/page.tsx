@@ -33,7 +33,7 @@ export default function ContactPage() {
           <div className="mt-12 grid gap-10 lg:grid-cols-[0.9fr_0.7fr]">
             <div className="glass-panel rounded-[2rem] border border-white/10 p-10 shadow-soft">
               <p className="text-lg font-semibold text-white">Ready to transform your marketing and product pages?</p>
-              <p className="mt-4 leading-7 text-slate-300">
+              <p className="mt-4 leading-[1.5] text-slate-300">
                 Tell us about your project, and we’ll help map the content experience, service pages, and launch narrative.
               </p>
             </div>

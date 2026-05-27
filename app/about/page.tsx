@@ -44,7 +44,7 @@ export default async function AboutPage() {
           <div className="glass-panel rounded-[2rem] border border-white/10 p-10 shadow-soft">
             <p className="text-sm uppercase tracking-[0.3em] text-sky-300">Our mission</p>
             <h2 className="mt-4 text-3xl font-semibold text-white">Deliver digital experiences that feel effortless and confident.</h2>
-            <p className="mt-6 leading-8 text-slate-300">
+            <p className="mt-6 leading-[1.5] text-slate-300">
               Synergos helps brands and agencies align their product narrative with service positioning, empowering teams to ship announcements, case studies, and internal launches with ease.
             </p>
           </div>

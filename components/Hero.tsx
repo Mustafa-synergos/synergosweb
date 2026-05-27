@@ -139,7 +139,7 @@ export default function Hero() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.7 }}
-                    className="responsive-paragraph text-white/80 !leading-[1.7]  !mb-1 max-w-full"
+                    className="responsive-paragraph text-white/80 !leading-[1.5]  !mb-1 max-w-full"
                   >
                     Synergos is a brand acceleration system built for brands that refuse to stay in one place. Strategy, storytelling, and delivery, firing together, for your next orbit.
                   </motion.p>

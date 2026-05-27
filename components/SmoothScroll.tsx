@@ -21,12 +21,7 @@ export default function SmoothScroll() {
 
     lenisRef.current = lenis;
 
-    // Sync Lenis RAF with GSAP ticker for perfect synchronization
-    const rafId = requestAnimationFrame((time) => {
-      lenis.raf(time);
-    });
-
-    // Integrate Lenis with GSAP ticker
+    // Integrate Lenis with GSAP ticker (GSAP ticker runs on RAF)
     gsap.ticker.add((time) => {
       lenis.raf(time * 1000);
     }, false); // false = add to end of ticker queue
@@ -45,7 +40,6 @@ export default function SmoothScroll() {
     return () => {
       window.removeEventListener('resize', handleResize);
       gsap.ticker.remove(lenis.raf);
-      cancelAnimationFrame(rafId);
       lenis.destroy();
     };
   }, []);

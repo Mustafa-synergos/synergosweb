@@ -88,19 +88,19 @@ export default function Footer() {
         className="group inline-flex items-center gap-2 overflow-hidden"
       >
         {/* Icon - appears from left on hover */}
-        <span className="flex w-0 overflow-hidden opacity-0 transition-all duration-500 group-hover:w-5 group-hover:opacity-100 !mb-0 lg:!mb-6">
-          <span className="text-[18px] text-red-500 !mb-0 lg:!mb-6">
+        <span className="flex w-0 overflow-hidden opacity-0 transition-all duration-500 group-hover:w-5 group-hover:opacity-100 !mb-0 lg:!mb-2">
+          <span className="text-[18px] text-red-500 !mb-0 lg:!mb-2">
             <FaLinkedinIn />
           </span>
         </span>
 
         {/* Text Animation - slides left on hover */}
-        <span className="relative w-[max-content] overflow-hidden !mb-0 lg:!mb-6">
-          <span className="block font-[clother] font-light text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-gray-400 transition-all duration-500 group-hover:-translate-x-full whitespace-nowrap !mb-0 lg:!mb-6">
+        <span className="relative w-[max-content] overflow-hidden !mb-0 lg:!mb-2">
+          <span className="block font-[clother] font-light text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-gray-400 transition-all duration-500 group-hover:-translate-x-full whitespace-nowrap !mb-0 lg:!mb-2">
             Linkedin
           </span>
 
-          <span className="absolute -left-full top-0 block font-[clother] font-light text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-red-500 transition-all duration-500 group-hover:left-0 whitespace-nowrap !mb-0 lg:!mb-6">
+          <span className="absolute -left-full top-0 block font-[clother] font-light text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-red-500 transition-all duration-500 group-hover:left-0 whitespace-nowrap !mb-0 lg:!mb-2">
             Linkedin
           </span>
         </span>
@@ -114,19 +114,19 @@ export default function Footer() {
         className="group inline-flex items-center gap-2 overflow-hidden"
       >
         {/* Icon - appears from left on hover */}
-        <span className="flex w-0 overflow-hidden opacity-0 transition-all duration-500 group-hover:w-5 group-hover:opacity-100 !mb-0 lg:!mb-6">
-          <span className="text-[18px] text-red-500 !mb-0 lg:!mb-6">
+        <span className="flex w-0 overflow-hidden opacity-0 transition-all duration-500 group-hover:w-5 group-hover:opacity-100 !mb-0 lg:!mb-2">
+          <span className="text-[18px] text-red-500 !mb-0 lg:!mb-2">
             <FaFacebookF />
           </span>
         </span>
 
         {/* Text Animation - slides left on hover */}
-        <span className="relative w-[max-content] overflow-hidden !mb-0 lg:!mb-6">
-          <span className="block font-[clother] font-light text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-gray-400 transition-all duration-500 group-hover:-translate-x-full whitespace-nowrap !mb-0 lg:!mb-6">
+        <span className="relative w-[max-content] overflow-hidden !mb-0 lg:!mb-2">
+          <span className="block font-[clother] font-light text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-gray-400 transition-all duration-500 group-hover:-translate-x-full whitespace-nowrap !mb-0 lg:!mb-2">
             Facebook
           </span>
 
-          <span className="absolute -left-full top-0 block font-[clother] font-light text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-red-500 transition-all duration-500 group-hover:left-0 whitespace-nowrap !mb-0 lg:!mb-6">
+          <span className="absolute -left-full top-0 block font-[clother] font-light text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-red-500 transition-all duration-500 group-hover:left-0 whitespace-nowrap !mb-0 lg:!mb-2">
             Facebook
           </span>
         </span>
@@ -144,19 +144,19 @@ export default function Footer() {
         className="group inline-flex items-center gap-2 overflow-hidden"
       >
         {/* Icon - appears from left on hover */}
-        <span className="flex w-0 overflow-hidden opacity-0 transition-all duration-500 group-hover:w-5 group-hover:opacity-100 !mb-0 lg:!mb-6">
-          <span className="text-[18px] text-red-500 !mb-0 lg:!mb-6">
+        <span className="flex w-0 overflow-hidden opacity-0 transition-all duration-500 group-hover:w-5 group-hover:opacity-100 !mb-0 lg:!mb-2">
+          <span className="text-[18px] text-red-500 !mb-0 lg:!mb-2">
             <FaInstagram />
           </span>
         </span>
 
         {/* Text Animation - slides left on hover */}
-        <span className="relative w-[max-content] overflow-hidden !mb-0 lg:!mb-6">
-          <span className="block font-[clother] font-light text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-gray-400 transition-all duration-500 group-hover:-translate-x-full whitespace-nowrap !mb-0 lg:!mb-6">
+        <span className="relative w-[max-content] overflow-hidden !mb-0 lg:!mb-2">
+          <span className="block font-[clother] font-light text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-gray-400 transition-all duration-500 group-hover:-translate-x-full whitespace-nowrap !mb-0 lg:!mb-2">
             Instagram
           </span>
 
-          <span className="absolute -left-full top-0 block font-[clother] font-light text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-red-500 transition-all duration-500 group-hover:left-0 whitespace-nowrap !mb-0 lg:!mb-6">
+          <span className="absolute -left-full top-0 block font-[clother] font-light text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-red-500 transition-all duration-500 group-hover:left-0 whitespace-nowrap !mb-0 lg:!mb-2">
             Instagram
           </span>
         </span>
@@ -170,19 +170,19 @@ export default function Footer() {
         className="group inline-flex items-center gap-2 overflow-hidden"
       >
         {/* Icon - appears from left on hover */}
-        <span className="flex w-0 overflow-hidden opacity-0 transition-all duration-500 group-hover:w-5 group-hover:opacity-100 !mb-0 lg:!mb-6">
-          <span className="text-[18px] text-red-500 !mb-0 lg:!mb-6">
+        <span className="flex w-0 overflow-hidden opacity-0 transition-all duration-500 group-hover:w-5 group-hover:opacity-100 !mb-0 lg:!mb-2">
+          <span className="text-[18px] text-red-500 !mb-0 lg:!mb-2">
             <FaXTwitter />
           </span>
         </span>
 
         {/* Text Animation - slides left on hover */}
-        <span className="relative w-[max-content] overflow-hidden !mb-0 lg:!mb-6">
-          <span className="block font-[clother] font-light text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-gray-400 transition-all duration-500 group-hover:-translate-x-full whitespace-nowrap !mb-0 lg:!mb-6">
+        <span className="relative w-[max-content] overflow-hidden !mb-0 lg:!mb-2">
+          <span className="block font-[clother] font-light text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-gray-400 transition-all duration-500 group-hover:-translate-x-full whitespace-nowrap !mb-0 lg:!mb-2">
             X
           </span>
 
-          <span className="absolute -left-full top-0 block font-[clother] font-light text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-red-500 transition-all duration-500 group-hover:left-0 whitespace-nowrap !mb-0 lg:!mb-6">
+          <span className="absolute -left-full top-0 block font-[clother] font-light text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-red-500 transition-all duration-500 group-hover:left-0 whitespace-nowrap !mb-0 lg:!mb-2">
             X
           </span>
         </span>

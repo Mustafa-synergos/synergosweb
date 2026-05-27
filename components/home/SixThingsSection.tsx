@@ -137,7 +137,7 @@ export default function Sticky3DStackCards() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               {/* LEFT - FULL WIDTH */}
               <div className="lg:col-span-12">
-                <div className="!mb-0 lg:!mb-6">
+                <div className="!mb-0 lg:!mb-0">
                   <span
                     className="text-[#ff3b30] text-[18px] lg:text-[28px]"
                     style={{
@@ -150,7 +150,7 @@ export default function Sticky3DStackCards() {
                 </div>
 
                 <h1
-                  className="text-white !mb-0 lg:!mb-6 !mt-0 lg:!mt-8 uppercase"
+                  className="text-white !mb-0 lg:!mb-2 !mt-0 lg:!mt-0 uppercase"
                   style={{
                     fontFamily: '"clother", sans-serif',
                     fontWeight: 700,
@@ -190,7 +190,7 @@ export default function Sticky3DStackCards() {
                   style={{
                     fontFamily: '"clother", sans-serif',
                     fontWeight: 200,
-                    lineHeight: "24px",
+                    lineHeight: "1.5",
                     fontStyle: "normal",
                     fontSize :"18px"
                   }}

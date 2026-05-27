@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import UnifiedSectionWrapper from './layout/UnifiedSectionWrapper';
 import { EditorialContentGrid, SectionHeader, EditorialHeading, ContentBlock } from './layout/EditorialContentGrid';
@@ -15,11 +16,13 @@ export default function ExponentialImpactSection() {
           label="Exponential Impact"
           heading={
             <div className="relative">
-              <img
+              <Image
                 src="/images/exponential-impact-vector-1.webp"
                 alt="Impact vector background"
+                width={500}
+                height={400}
                 className="hidden md:block absolute right-20 top-0 object-contain opacity-100 -z-10 transform scale-150 -translate-x-12"
-                style={{ width: '500px', height: '400px' }}
+                loading="lazy"
               />
               <EditorialHeading size="large">
                 EXPONENTIAL
@@ -58,10 +61,13 @@ export default function ExponentialImpactSection() {
               className="relative flex justify-end items-end"
             >
               <div className="relative w-full max-w-lg">
-                <img
+                <Image
                   src="/images/exponential-impact-vector-2.webp"
                   alt="Particle wave effect"
+                  width={512}
+                  height={512}
                   className="w-full h-auto object-contain relative z-10"
+                  loading="lazy"
                 />
               </div>
             </motion.div>
