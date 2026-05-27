@@ -54,7 +54,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
     >
       {/* Small Label - PERFECTLY ALIGNED */}
       <motion.div
-        className="!mb-0 lg:!mb-0 mt-0 lg:mt-10"
+        className="!mb-0 lg:!mb-0 mt-0 lg:mt-6"
         initial={{ opacity: 0, x: -20 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.2, duration: 0.6 }}
@@ -67,7 +67,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
 
       {/* Main Heading - PERFECTLY ALIGNED */}
       <motion.div
-        className="mb-0"
+        className="mb-3 lg:mb-6"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.8 }}

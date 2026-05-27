@@ -130,15 +130,16 @@ export default function BrandsThatTrustUs() {
         <SectionHeader
           label="Long-Haul Partners"
           labelColor="text-[#FFFFFF]"
+          className="!mb-0 lg:!mb-6 mt-0 lg:mt-6"
           heading={
-            <EditorialHeading size="large">
+            <EditorialHeading size="large" className="mb-4">
               BRANDS THAT
               <br />
               TRUST US.
             </EditorialHeading>
           }
           cta={
-            <PremiumCTA title="PARTNER WITH US" hoverTitle="PARTNER WITH US" />
+            <PremiumCTA  title="PARTNER WITH US" hoverTitle="PARTNER WITH US" />
           }
         />
 
