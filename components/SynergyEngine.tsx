@@ -219,8 +219,9 @@ export default function SynergyEngine() {
     <section ref={sectionRef} className="relative min-h-[80vh] lg:min-h-screen overflow-hidden" style={{ backgroundColor: '#FF0000' }}>
 
       {/* ── Interactive Dots Background ── */}
-      <InteractiveDots variant="red" />
-
+     <div className="hidden lg:block">
+       <InteractiveDots variant="red" />
+      </div>
       {/* ── Ambient glow ── */}
       <div className="hidden lg:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/10 rounded-full blur-3xl pointer-events-none"  />
 
@@ -302,7 +303,12 @@ export default function SynergyEngine() {
       {/* ==============================================================
           MOBILE / TABLET — Vertical stack layout with carousel
           ============================================================== */}
-      <div className="lg:hidden relative z-20 py-8 px-4 sm:px-6 pb-16">
+      <div className="lg:hidden relative z-20 py-8 px-4 sm:px-6 pb-16" 
+      style={{
+  // backgroundColor: '#171717',
+  isolation: 'isolate'
+}}
+      >
         {/* Heading - Left aligned at top */}
         <div ref={mobHeadingRef} className="relative mb-8">
           <h2 className="responsive-synergy-heading text-white text-left">
@@ -325,7 +331,7 @@ export default function SynergyEngine() {
             {engineCards.map((card, index) => (
               <div
                 key={index}
-                className="flex-shrink-0 w-[88vw] snap-center rounded-2xl p-5 flex flex-col relative z-10 overflow-hidden h-[450px] lg:h-[520px] mr-4 last:mr-0"
+                className="flex-shrink-0 w-[92vw] snap-center rounded-2xl p-5 flex flex-col relative z-10 overflow-hidden h-[450px] lg:h-[520px] mr-4 last:mr-0"
                 style={{ backgroundColor: '#171717' }}
               >
                 {/* Interactive Dots Background */}
