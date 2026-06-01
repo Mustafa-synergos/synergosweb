@@ -304,7 +304,7 @@ export default function SynergyEngine() {
           MOBILE / TABLET — Vertical stack layout with carousel
           ============================================================== */}
       <div
-  className="lg:hidden relative z-20 py-8 px-4 sm:px-6 pb-16 bg-[#171717]"
+  className="lg:hidden relative z-20 py-8 px-4 sm:px-6 pb-16 "
   style={{
     isolation: 'isolate'
   }}
