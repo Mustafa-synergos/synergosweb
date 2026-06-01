@@ -166,9 +166,9 @@ export default function SynergyEngine() {
           const cardElements = slider.children;
           if (cardElements.length > 0) {
             gsap.fromTo(cardElements,
-              { opacity: 0, x: 60 },
-              {
-                opacity: 1, x: 0,
+  { x: 60 },
+  {
+    x: 0,
                 duration: 0.8, stagger: 0.15, ease: 'power2.out',
                 scrollTrigger: {
                   trigger: mobCardsRef.current,
@@ -216,7 +216,7 @@ export default function SynergyEngine() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative min-h-[80vh] lg:min-h-screen overflow-hidden" style={{ backgroundColor: '#FF0000' }}>
+    <section ref={sectionRef} className="relative min-h-[80vh] lg:min-h-screen overflow-hidden" style={{ backgroundColor: '#FF0000', isolation: 'isolate' }}>
 
       {/* ── Interactive Dots Background ── */}
      <div className="hidden lg:block">
@@ -303,12 +303,12 @@ export default function SynergyEngine() {
       {/* ==============================================================
           MOBILE / TABLET — Vertical stack layout with carousel
           ============================================================== */}
-      <div className="lg:hidden relative z-20 py-8 px-4 sm:px-6 pb-16" 
-      style={{
-  // backgroundColor: '#171717',
-  isolation: 'isolate'
-}}
-      >
+      <div
+  className="lg:hidden relative z-20 py-8 px-4 sm:px-6 pb-16 bg-[#171717]"
+  style={{
+    isolation: 'isolate'
+  }}
+>
         {/* Heading - Left aligned at top */}
         <div ref={mobHeadingRef} className="relative mb-8">
           <h2 className="responsive-synergy-heading text-white text-left">
@@ -332,10 +332,10 @@ export default function SynergyEngine() {
               <div
                 key={index}
                 className="flex-shrink-0 w-[92vw] snap-center rounded-2xl p-5 flex flex-col relative z-10 overflow-hidden h-[450px] lg:h-[520px] mr-4 last:mr-0"
-                style={{ backgroundColor: '#171717' }}
+                style={{ backgroundColor: '#171717', isolation: 'isolate' }}
               >
                 {/* Interactive Dots Background */}
-                <InteractiveDots variant="card" className="rounded-2xl" />
+                 <div className="hidden lg:block"><InteractiveDots variant="card" className="rounded-2xl" /></div>
                 {/* Content overlay */}
                 <div className="relative z-10 flex flex-col h-full">
                   {/* Icon */}
