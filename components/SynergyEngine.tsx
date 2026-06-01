@@ -227,7 +227,7 @@ export default function SynergyEngine() {
       {/* ==============================================================
           DESKTOP — Single-viewport tight composition (no gaps)
           ============================================================== */}
-      <div className="hidden lg:block h-screen overflow-visible">
+      <div className="hidden lg:block h-screen overflow-hidden">
         <div ref={containerRef} className="h-full flex items-center px-6 lg:px-8">
           <div className="flex items-center gap-20 xl:gap-24 w-full max-w-7xl mx-auto">
 
@@ -387,6 +387,11 @@ export default function SynergyEngine() {
           animation: float 6s ease-in-out infinite;
         }
       `}</style>
+      <script>
+        {window.innerWidth >= 1024 && (
+  <InteractiveDots variant="red" />
+)}
+      </script>
     </section>
   );
 }
