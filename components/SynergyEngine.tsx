@@ -227,7 +227,7 @@ export default function SynergyEngine() {
       {/* ==============================================================
           DESKTOP — Single-viewport tight composition (no gaps)
           ============================================================== */}
-      <div className="hidden lg:block h-screen overflow-hidden">
+      <div className="hidden lg:block h-screen overflow-visible">
         <div ref={containerRef} className="h-full flex items-center px-6 lg:px-8">
           <div className="flex items-center gap-20 xl:gap-24 w-full max-w-7xl mx-auto">
 
