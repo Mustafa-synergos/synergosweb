@@ -61,7 +61,7 @@ export default function Navbar() {
             maxWidth: containerMaxWidth,
             paddingTop: containerPaddingY,
             paddingBottom: containerPaddingY,
-            borderRadius: borderRadius,
+            borderRadius: isDesktop ? borderRadius : 0,
             gap: gap,
             justifyContent: isDesktop ? justifyContent : 'space-between',
             background: backgroundColor,
