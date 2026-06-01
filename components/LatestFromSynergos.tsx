@@ -154,9 +154,24 @@ const additionalBlogPosts: BlogPost[] = [
     category: "Technology",
     date: "15 Apr 2024",
     readTime: "9 min read"
+    
   }
+  
+
+];  
+const infiniteBlogPosts = [
+  ...blogPosts,
+  ...blogPosts,
+  ...blogPosts,
+  ...blogPosts,
 ];
 
+const infiniteAdditionalBlogPosts = [
+  ...additionalBlogPosts,
+  ...additionalBlogPosts,
+  ...additionalBlogPosts,
+  ...additionalBlogPosts,
+];
 const BlogCard: React.FC<{ post: BlogPost; index: number; onHover: (hovering: boolean) => void; onClick: () => void }> = ({ post, index, onHover, onClick }) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -173,14 +188,14 @@ const BlogCard: React.FC<{ post: BlogPost; index: number; onHover: (hovering: bo
   return (
     <motion.div
       className="relative group cursor-pointer"
-      initial={{ opacity: 0, y: 30, scale: 0.95 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ 
-        duration: 0.8, 
-        delay: index * 0.08,
-        ease: [0.23, 1, 0.32, 1]
-      }}
+      // initial={{ opacity: 0, y: 30, scale: 0.95 }}
+      // whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      // viewport={{ once: true, margin: "-50px" }}
+      // transition={{ 
+      //   duration: 0.8, 
+      //   delay: index * 0.08,
+      //   ease: [0.23, 1, 0.32, 1]
+      // }}
       onHoverStart={handleHoverStart}
       onHoverEnd={handleHoverEnd}
       onClick={onClick}
@@ -502,20 +517,22 @@ export const LatestFromSynergos: React.FC = () => {
         />
 
         {/* Blog Slider - PERFECTLY ALIGNED */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.3 }}
-          viewport={{ once: true }}
+        <div
+          // initial={{ opacity: 0, y: 50 }}
+          // whileInView={{ opacity: 1, y: 0 }}
+          // transition={{ duration: 1.2, delay: 0.3 }}
+          // viewport={{ once: true }}
           className="relative"
         >
           <Swiper
             ref={swiperRef}
+            
             modules={[Autoplay, Mousewheel]}
             spaceBetween={40}
+            
             slidesPerView={'auto'}
             centeredSlides={false}
-            loop={false}
+            loop={true}
             allowTouchMove={true}
             grabCursor={true}
             mousewheel={{
@@ -524,10 +541,11 @@ export const LatestFromSynergos: React.FC = () => {
               releaseOnEdges: false
             }}
             autoplay={{
-              delay: 8000,
-              disableOnInteraction: true,
-              pauseOnMouseEnter: true
-            }}
+  delay: 0,
+  disableOnInteraction: false,
+  pauseOnMouseEnter: false
+}}
+speed={6000}
             slidesOffsetAfter={0}
             resistance={true}
             resistanceRatio={0.85}
@@ -541,29 +559,30 @@ export const LatestFromSynergos: React.FC = () => {
             }}
             className="!overflow-visible !cursor-grab active:!cursor-grabbing"
           >
-            {blogPosts.map((post, index) => (
-              <SwiperSlide key={post.id} className="!w-auto !h-auto">
+{infiniteBlogPosts.map((post, index) => (
+                <SwiperSlide key={post.id} className="!w-auto !h-auto">
                 <BlogCard post={post} index={index} onHover={handleCardHover} onClick={() => handleCardClick(post)} />
               </SwiperSlide>
             ))}
           </Swiper>
-        </motion.div>
+        </div>
 
         {/* Second Blog Slider - PERFECTLY ALIGNED */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.5 }}
-          viewport={{ once: true }}
+        <div
+          // initial={{ opacity: 0, y: 50 }}
+          // whileInView={{ opacity: 1, y: 0 }}
+          // transition={{ duration: 1.2, delay: 0.5 }}
+          // viewport={{ once: true }}
           className="relative mt-20"
         >
           <Swiper
             ref={swiperRef2}
+            
             modules={[Autoplay, Mousewheel]}
             spaceBetween={40}
             slidesPerView={'auto'}
             centeredSlides={false}
-            loop={false}
+            loop={true}
             allowTouchMove={true}
             grabCursor={true}
             watchSlidesProgress={true}
@@ -574,10 +593,11 @@ export const LatestFromSynergos: React.FC = () => {
               releaseOnEdges: false
             }}
             autoplay={{
-              delay: 9000,
-              disableOnInteraction: true,
-              pauseOnMouseEnter: true
+            delay: 0,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: false
             }}
+            speed={6000}
             slidesOffsetAfter={20}
             resistance={true}
             resistanceRatio={0.85}
@@ -591,13 +611,13 @@ export const LatestFromSynergos: React.FC = () => {
             }}
             className="!overflow-visible !cursor-grab active:!cursor-grabbing"
           >
-            {additionalBlogPosts.map((post, index) => (
+           {infiniteAdditionalBlogPosts.map((post, index) => (
               <SwiperSlide key={post.id} className="!w-auto !h-auto">
                 <BlogCard post={post} index={index + 6} onHover={handleCardHover} onClick={() => handleCardClick(post)} />
               </SwiperSlide>
             ))}
           </Swiper>
-        </motion.div>
+        </div>
       </EditorialContentGrid>
     </UnifiedSectionWrapper>
   );

@@ -125,14 +125,14 @@ export default function SynergyEngine() {
         // Vector — counter-drift (heavier, stays in frame longer)
         tl.fromTo(deskVectorRef.current,
           { x: 0 },
-          { x: 350, duration: 0.8, ease: 'power1.inOut' },
+          { x: -550, duration: 0.8, ease: 'power1.inOut' },
           0.1
         );
 
         // Heading — drifts left with container
         tl.fromTo(deskHeadingRef.current,
           { x: 0 },
-          { x: -250, duration: 0.8, ease: 'power1.inOut' },
+          { x: -650, duration: 0.8, ease: 'power1.inOut' },
           0.1
         );
 

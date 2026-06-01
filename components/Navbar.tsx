@@ -74,20 +74,20 @@ export default function Navbar() {
               href="/"
               className="flex items-center"
             >
-              <div className="relative w-[100px] max-w-[120px] h-[40px] sm:w-[50px] sm:h-[50px] lg:max-w-[180px] lg:w-auto lg:h-auto lg:max-h-[80px]">
+              <div className="relative flex items-center w-[100px] max-w-[120px] h-[40px] sm:w-[50px] sm:h-[50px] lg:max-w-[180px] lg:w-auto lg:min-h-[48px]  lg:max-h-[80px] lg:h-full">
                 <motion.img
                   src="/images/logo.png"
                   alt="Synergos Logo"
                 
-                  className="w-full h-full object-contain w-[120px] h-full lg:w-[130px] lg:h-[80px]"
+                  className="w-full h-full object-contain w-[120px] h-full lg:w-[130px] lg:max-h-[80px] lg:h-full"
                   style={{ opacity: pngOpacity }}
                 />
                 <motion.img
-                  src="/images/logo.gif"
-                  alt="Synergos Logo"
-                  className="absolute top-0 left-0 w-full h-full object-contain pointer-events-none w-[40px] h-full lg:w-[50px] lg:h-full"
-                  style={{ opacity: gifOpacity }}
-                />
+  src="/images/logo.gif"
+  alt="Synergos Logo"
+  className="absolute top-0 left-0 h-full w-[40px] object-contain pointer-events-none lg:w-[50px] lg:min-h-[48px]"
+  style={{ opacity: gifOpacity }}
+/>
               </div>
             </Link>
 

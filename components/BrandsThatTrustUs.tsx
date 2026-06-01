@@ -25,7 +25,7 @@ const logos: LogoData[] = [
   { name: 'university', image: '/images/company-logos/the-university-logo.webp' },
   
   // Middle Row
-  { name: 'tyco', image: '/images/company-logos/tyco-logo.webp', featured: true },
+  { name: 'tyco', image: '/images/company-logos/tyco-logo.webp'},
   { name: 'johnson', image: '/images/company-logos/johnson-logo.webp' },
   { name: 'bosch', image: '/images/company-logos/bosch-logo.webp' },
   
@@ -167,7 +167,7 @@ export default function BrandsThatTrustUs() {
                     viewport={{ once: true, margin: "-50px" }}
                     style={{ transform: 'translateY(12px)' }}
                   >
-                    <div className="relative w-50 h-50 rounded-full flex items-center justify-center overflow-hidden transition-all duration-500 hover:-translate-y-3">
+                    <div className="relative w-50 h-50 rounded-full flex items-center justify-center overflow-visible transition-all duration-500 hover:-translate-y-3">
                       <img src={logos[0].image} alt={logos[0].name} className="w-3/4 h-3/4 object-contain transition-transform duration-500 hover:scale-105" />
                     </div>
                   </motion.div>
@@ -180,7 +180,7 @@ export default function BrandsThatTrustUs() {
                     viewport={{ once: true, margin: "-50px" }}
                     style={{ transform: 'translateY(12px)' }}
                   >
-                    <div className="relative w-50 h-50 rounded-full flex items-center justify-center overflow-hidden transition-all duration-500 hover:-translate-y-3">
+                    <div className="relative w-50 h-50 rounded-full flex items-center justify-center overflow-visible transition-all duration-500 hover:-translate-y-3">
                       <img src={logos[1].image} alt={logos[1].name} className="w-3/4 h-3/4 object-contain transition-transform duration-500 hover:scale-105" />
                     </div>
                   </motion.div>
@@ -193,7 +193,7 @@ export default function BrandsThatTrustUs() {
                     viewport={{ once: true, margin: "-50px" }}
                     style={{ transform: 'translateY(12px)' }}
                   >
-                    <div className="relative w-50 h-50 rounded-full flex items-center justify-center overflow-hidden transition-all duration-500 hover:-translate-y-3">
+                    <div className="relative w-50 h-50 rounded-full flex items-center justify-center overflow-visible transition-all duration-500 hover:-translate-y-3">
                       <img src={logos[2].image} alt={logos[2].name} className="w-3/4 h-3/4 object-contain transition-transform duration-500 hover:scale-105" />
                     </div>
                   </motion.div>
@@ -206,7 +206,7 @@ export default function BrandsThatTrustUs() {
                     viewport={{ once: true, margin: "-50px" }}
                     style={{ transform: 'translateY(12px)' }}
                   >
-                    <div className="relative w-50 h-50 rounded-full flex items-center justify-center overflow-hidden transition-all duration-500 hover:-translate-y-3">
+                    <div className="relative w-50 h-50 rounded-full flex items-center justify-center overflow-visible transition-all duration-500 hover:-translate-y-3">
                       <img src={logos[3].image} alt={logos[3].name} className="w-3/4 h-3/4 object-contain transition-transform duration-500 hover:scale-105" />
                     </div>
                   </motion.div>
@@ -223,7 +223,7 @@ export default function BrandsThatTrustUs() {
                     viewport={{ once: true, margin: "-50px" }}
                     style={{ transform: 'translateX(-16px)' }}
                   >
-                    <div className="relative w-50 h-50 rounded-full flex items-center justify-center overflow-hidden transition-all duration-500 hover:-translate-y-3">
+                    <div className="relative w-50 h-50 rounded-full flex items-center justify-center overflow-visible transition-all duration-500 hover:-translate-y-3">
                       <img src={logos[4].image} alt={logos[4].name} className="w-3/4 h-3/4 object-contain transition-transform duration-500 hover:scale-105" />
                     </div>
                     {logos[4].featured && (
@@ -238,7 +238,7 @@ export default function BrandsThatTrustUs() {
                     transition={{ duration: 0.8, delay: 1 * 0.08, ease: [0.23, 1, 0.32, 1] }}
                     viewport={{ once: true, margin: "-50px" }}
                   >
-                    <div className="relative w-50 h-50 rounded-full flex items-center justify-center overflow-hidden transition-all duration-500 hover:-translate-y-3">
+                    <div className="relative w-50 h-50 rounded-full flex items-center justify-center overflow-visible transition-all duration-500 hover:-translate-y-3">
                       <img src={logos[5].image} alt={logos[5].name} className="w-3/4 h-3/4 object-contain transition-transform duration-500 hover:scale-105" />
                     </div>
                   </motion.div>
@@ -251,7 +251,7 @@ export default function BrandsThatTrustUs() {
                     viewport={{ once: true, margin: "-50px" }}
                     style={{ transform: 'translateX(16px)' }}
                   >
-                    <div className="relative w-50 h-50 rounded-full flex items-center justify-center overflow-hidden transition-all duration-500 hover:-translate-y-3">
+                    <div className="relative w-50 h-50 rounded-full flex items-center justify-center overflow-visible transition-all duration-500 hover:-translate-y-3">
                       <img src={logos[6].image} alt={logos[6].name} className="w-3/4 h-3/4 object-contain transition-transform duration-500 hover:scale-105" />
                     </div>
                   </motion.div>
@@ -267,7 +267,7 @@ export default function BrandsThatTrustUs() {
                     transition={{ duration: 0.8, delay: 0 * 0.08, ease: [0.23, 1, 0.32, 1] }}
                     viewport={{ once: true, margin: "-50px" }}
                   >
-                    <div className="relative w-50 h-50 rounded-full flex items-center justify-center overflow-hidden transition-all duration-500 hover:-translate-y-3">
+                    <div className="relative w-50 h-50 rounded-full flex items-center justify-center overflow-visible transition-all duration-500 hover:-translate-y-3">
                       <img src={logos[7].image} alt={logos[7].name} className="w-3/4 h-3/4 object-contain transition-transform duration-500 hover:scale-105" />
                     </div>
                   </motion.div>
@@ -279,7 +279,7 @@ export default function BrandsThatTrustUs() {
                     transition={{ duration: 0.8, delay: 1 * 0.08, ease: [0.23, 1, 0.32, 1] }}
                     viewport={{ once: true, margin: "-50px" }}
                   >
-                    <div className="relative w-50 h-50 rounded-full flex items-center justify-center overflow-hidden transition-all duration-500 hover:-translate-y-3">
+                    <div className="relative w-50 h-50 rounded-full flex items-center justify-center overflow-visible transition-all duration-500 hover:-translate-y-3">
                       <img src={logos[8].image} alt={logos[8].name} className="w-3/4 h-3/4 object-contain transition-transform duration-500 hover:scale-105" />
                     </div>
                   </motion.div>
@@ -291,7 +291,7 @@ export default function BrandsThatTrustUs() {
                     transition={{ duration: 0.8, delay: 2 * 0.08, ease: [0.23, 1, 0.32, 1] }}
                     viewport={{ once: true, margin: "-50px" }}
                   >
-                    <div className="relative w-50 h-50 rounded-full flex items-center justify-center overflow-hidden transition-all duration-500 hover:-translate-y-3">
+                    <div className="relative w-50 h-50 rounded-full flex items-center justify-center overflow-visible transition-all duration-500 hover:-translate-y-3">
                       <img src={logos[9].image} alt={logos[9].name} className="w-3/4 h-3/4 object-contain transition-transform duration-500 hover:scale-105" />
                     </div>
                   </motion.div>
@@ -303,7 +303,7 @@ export default function BrandsThatTrustUs() {
                     transition={{ duration: 0.8, delay: 3 * 0.08, ease: [0.23, 1, 0.32, 1] }}
                     viewport={{ once: true, margin: "-50px" }}
                   >
-                    <div className="relative w-50 h-50 rounded-full flex items-center justify-center overflow-hidden transition-all duration-500 hover:-translate-y-3">
+                    <div className="relative w-50 h-50 rounded-full flex items-center justify-center overflow-visible transition-all duration-500 hover:-translate-y-3">
                       <img src={logos[10].image} alt={logos[10].name} className="w-3/4 h-3/4 object-contain transition-transform duration-500 hover:scale-105" />
                     </div>
                   </motion.div>
@@ -328,7 +328,7 @@ export default function BrandsThatTrustUs() {
                       viewport={{ once: true, margin: "-50px" }}
                     >
                       {/* Logo Container */}
-                      <div className={`relative w-50 h-50 rounded-full flex items-center justify-center overflow-hidden transition-all duration-500 hover:-translate-y-3 ${
+                      <div className={`relative w-50 h-50 rounded-full flex items-center justify-center overflow-visible transition-all duration-500 hover:-translate-y-3 ${
                         logo.featured 
                           ? '' 
                           : ''
@@ -364,7 +364,7 @@ export default function BrandsThatTrustUs() {
                       viewport={{ once: true, margin: "-50px" }}
                     >
                       {/* Logo Container */}
-                      <div className={`relative w-50 h-50 rounded-full flex items-center justify-center overflow-hidden transition-all duration-500 hover:-translate-y-3 ${
+                      <div className={`relative w-50 h-50 rounded-full flex items-center justify-center overflow-visible transition-all duration-500 hover:-translate-y-3 ${
                         logo.featured 
                           ? '' 
                           : ''
@@ -400,7 +400,7 @@ export default function BrandsThatTrustUs() {
                       viewport={{ once: true, margin: "-50px" }}
                     >
                       {/* Logo Container */}
-                      <div className={`relative w-50 h-50 rounded-full flex items-center justify-center overflow-hidden transition-all duration-500 hover:-translate-y-3 ${
+                      <div className={`relative w-50 h-50 rounded-full flex items-center justify-center overflow-visible transition-all duration-500 hover:-translate-y-3 ${
                         logo.featured 
                           ? '' 
                           : ''
@@ -436,7 +436,7 @@ export default function BrandsThatTrustUs() {
                       viewport={{ once: true, margin: "-50px" }}
                     >
                       {/* Logo Container */}
-                      <div className={`relative w-50 h-50 rounded-full flex items-center justify-center overflow-hidden transition-all duration-500 hover:-translate-y-3 ${
+                      <div className={`relative w-50 h-50 rounded-full flex items-center justify-center overflow-visible transition-all duration-500 hover:-translate-y-3 ${
                         logo.featured 
                           ? '' 
                           : ''
@@ -459,8 +459,8 @@ export default function BrandsThatTrustUs() {
             </div>
 
             {/* Decorative Elements */}
-            <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-br from-white/5 to-transparent rounded-full blur-2xl" />
-            <div className="absolute bottom-0 right-0 w-48 h-48 bg-gradient-to-tl from-white/5 to-transparent rounded-full blur-2xl" />
+            {/* <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-br from-white/5 to-transparent rounded-full blur-2xl" /> */}
+            {/* <div className="absolute bottom-0 right-0 w-48 h-48 bg-gradient-to-tl from-white/5 to-transparent rounded-full blur-2xl" /> */}
           </motion.div>
         </ContentBlock>
       </EditorialContentGrid>
