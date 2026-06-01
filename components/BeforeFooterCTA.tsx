@@ -185,7 +185,7 @@ export default function BeforeFooterCTA() {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, delay: 0.4 }}
               viewport={{ once: true }}
-              className="relative h-[330px] lg:h-[500px] flex items-center justify-center lg:justify-end order-2 lg:order-1"
+              className="relative h-[340px] lg:h-[500px] flex items-center justify-center lg:justify-end order-2 lg:order-1"
             >
               {/* Orbital background - hidden on mobile */}
               <div className="absolute -top-12 -right-64 hidden lg:block">

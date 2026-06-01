@@ -265,7 +265,7 @@ export default function AmbitionSection() {
   }, []);
 
   return (
-    <section className="relative min-h-[75vh] lg:min-h-[140vh] overflow-hidden pt-0 pb-0 lg:pb-40 lg:pt-20" style={{ backgroundColor: '#171717' }}>
+    <section className="relative min-h-[80vh] lg:min-h-[140vh] overflow-hidden pt-0 pb-0 lg:pb-40 lg:pt-20" style={{ backgroundColor: '#171717' }}>
       {/* Interactive Dots Background */}
       <InteractiveDots variant="dark" />
 
