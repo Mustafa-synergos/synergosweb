@@ -222,7 +222,7 @@ export default function SynergyEngine() {
       <InteractiveDots variant="red" />
 
       {/* ── Ambient glow ── */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="hidden lg:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/10 rounded-full blur-3xl pointer-events-none"  />
 
       {/* ==============================================================
           DESKTOP — Single-viewport tight composition (no gaps)

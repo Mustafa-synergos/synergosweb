@@ -22,7 +22,7 @@ export default function WhoWeAre() {
   }, []);
 
   return (
-    <section className="relative min-h-[70vh] md:min-h-screen overflow-hidden px-6 lg:px-8" style={{ backgroundColor: '#171717' }}>
+    <section className="relative min-h-[75vh] md:min-h-screen overflow-hidden px-6 lg:px-8" style={{ backgroundColor: '#171717' }}>
       {/* Interactive Dots Background */}
       <InteractiveDots variant="dark" />
 
