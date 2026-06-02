@@ -518,12 +518,12 @@ if (mouseData.influence > 0) {
   }, [animate, resizeCanvas, handlePointerMove, handlePointerDown, handlePointerUp, handlePointerLeave]);
 
   return (
-    <div className={`absolute inset-0 w-full h-full overflow-hidden ${className}`} style={{ zIndex: 1 }}>
+    <div className={`absolute inset-0 w-full h-full overflow-hidden ${className}`} style={{ zIndex: 1  }}>
       <canvas 
         ref={canvasRef} 
         className="block w-full h-full" 
-        style={{ pointerEvents: 'auto' }}
-        // style={{ pointerEvents: 'none' }}
+        // style={{ pointerEvents: 'auto' }}
+        style={{ pointerEvents: 'none' }}
       />
     </div>
   );
