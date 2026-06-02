@@ -15,7 +15,7 @@ export default function Footer() {
       {/* Interactive Dots Background */}
       <InteractiveDots variant="footer" />
 
-      <div className="relative z-10 px-4 sm:px-8 py-16 sm:py-16">
+      <div className="relative z-10 px-4 sm:px-8 py-14 sm:py-14">
         {/* Logo - centered at top */}
         <div className="text-center mb-8 sm:mb-16">
           <div className="relative w-[188px] h-[24px] sm:w-[254px] sm:h-[33.13px] mx-auto">
