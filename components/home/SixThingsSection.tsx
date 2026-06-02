@@ -127,9 +127,10 @@ export default function Sticky3DStackCards() {
   };
 
   return (
-    <section className="relative bg-[#050505]" pointerEvents="none">
+    <section className="relative bg-[#050505]">
       {/* DOTS */}
       <InteractiveDots 
+      
         containerRef={dotsViewportRef}
       variant="dark" />
 
