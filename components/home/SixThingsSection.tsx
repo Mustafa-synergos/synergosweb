@@ -13,6 +13,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Sticky3DStackCards() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const dotsViewportRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<HTMLDivElement[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -126,9 +127,11 @@ export default function Sticky3DStackCards() {
   };
 
   return (
-    <section className="relative bg-[#050505]">
+    <section className="relative bg-[#050505]" pointerEvents="none">
       {/* DOTS */}
-      <InteractiveDots variant="dark" />
+      <InteractiveDots 
+        containerRef={dotsViewportRef}
+      variant="dark" />
 
       <div className="relative z-10">
         {/* HERO */}
@@ -227,13 +230,24 @@ export default function Sticky3DStackCards() {
             height: `${services.length * 100}vh`,
           }}
         >
+          
           <div
+            ref={dotsViewportRef}
+
             className="sticky top-0 left-0 w-full h-screen"
             style={{
               perspective: "1200px",
               transformStyle: "preserve-3d",
             }}
           >
+             <div className="absolute inset-0 z-[1] pointer-events-none">
+
+                <InteractiveDots
+                  variant="dark"
+                  containerRef={dotsViewportRef}
+                />
+              </div>
+
             {services.map((service, index) => (
               <div
                 key={service.id}
@@ -358,6 +372,8 @@ export default function Sticky3DStackCards() {
               style={{ left: "calc(50% + 640px + 32px)" }}
             >
               {services.map((service, index) => (
+                
+
                 <button
                   key={service.id}
                   onClick={() => scrollToCard(index)}

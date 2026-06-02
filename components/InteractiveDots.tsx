@@ -470,7 +470,7 @@ if (mouseData.influence > 0) {
 
     window.addEventListener('resize', handleResize);
     // canvas.addEventListener('pointermove', handlePointerMove);
-    // canvas.addEventListener('pointerdown', handlePointerDown);
+    canvas.addEventListener('pointerdown', handlePointerDown);
     canvas.addEventListener('pointerup', handlePointerUp);
     canvas.addEventListener('pointerleave', handlePointerLeave);
     // window.addEventListener('pointerup', handlePointerUp);
@@ -522,8 +522,8 @@ if (mouseData.influence > 0) {
       <canvas 
         ref={canvasRef} 
         className="block w-full h-full" 
-        // style={{ pointerEvents: 'auto' }}
-        style={{ pointerEvents: 'none' }}
+        style={{ pointerEvents: 'auto' }}
+        // style={{ pointerEvents: 'none' }}
       />
     </div>
   );
