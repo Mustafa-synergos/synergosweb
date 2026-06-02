@@ -127,9 +127,10 @@ export default function Sticky3DStackCards() {
   };
 
   return (
-    <section className="relative bg-[#050505]" pointerEvents="none">
+    <section className="relative bg-[#050505]" >
       {/* DOTS */}
       <InteractiveDots 
+  
         containerRef={dotsViewportRef}
       variant="dark" />
 
@@ -232,7 +233,7 @@ export default function Sticky3DStackCards() {
         >
           
           <div
-            ref={dotsViewportRef}
+          
 
             className="sticky top-0 left-0 w-full h-screen"
             style={{
@@ -244,7 +245,7 @@ export default function Sticky3DStackCards() {
 
                 <InteractiveDots
                   variant="dark"
-                  containerRef={dotsViewportRef}
+                  
                 />
               </div>
 
