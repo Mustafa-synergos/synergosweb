@@ -29,7 +29,7 @@ export default function WhoWeAre() {
 
       {/* Two Column Layout */}
       <div className="relative z-10 flex items-center justify-center min-h-[70vh] md:min-h-screen py-12 md:py-20 lg:py-24">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto w-full md:ml-0 lg:mx-auto lg:max-w-auto lg:w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-16 lg:gap-24 items-center">
             
             {/* Left Column - Text Content */}
@@ -101,22 +101,23 @@ export default function WhoWeAre() {
 
             {/* Right Column - Rocket Image */}
             <div className="relative h-[80px] sm:h-[100px] md:h-[200px] lg:h-[200px] xl:h-[480px] 2xl:h-[650px] flex items-center justify-center">
-              <div className="relative w-full h-full max-w-md">
+              <div className="relative w-full h-full   max-w-md">
                 {/* Desktop rocket image */}
                 <Image
                   src="/images/vector-rocket.png"
                   alt="Rocket"
                   fill
                   style={{ objectFit: 'contain' }}
-                  className="object-contain hidden md:block"
+                  className="object-contain hidden md:hidden lg:block"
                 />
+
                 {/* Mobile alternative image */}
                 <Image
                   src="/images/exponential-impact-vector-2.webp"
                   alt="Particle wave effect"
                   width={200}
                   height={200}
-                  className="w-full h-auto object-contain relative z-10 block md:hidden"
+                  className="w-full h-auto object-contain relative z-10 block md:block lg:hidden"
                   loading="lazy"
                 />
               </div>

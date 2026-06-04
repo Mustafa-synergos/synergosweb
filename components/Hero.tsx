@@ -92,8 +92,11 @@ export default function Hero() {
         style={{ y, opacity }}
         className="relative z-10 flex items-center min-h-[88vh] lg:min-h-screen px-6 sm:px-8 lg:px-8 pt-20 sm:pt-24 lg:pt-20"
       >
-        <div className="max-w-7xl mx-auto w-full px-4 sm:px-0">
-          <div className="grid grid-cols-1 lg:flex lg:flex-row lg:justify-center lg:items-start gap-2 sm:gap-12 lg:gap-0">
+        <div className="max-w-7xl hero-content mx-auto w-full px-4 sm:px-0
+        
+        ">
+          {/* <div className="grid grid-cols-1 lg:flex lg:flex-row lg:justify-center lg:items-start gap-2 sm:gap-12 lg:gap-0"> */}
+          <div className="grid grid-cols-1 md:flex md:flex-row lg:flex lg:flex-row lg:justify-center lg:items-start gap-2 sm:gap-12 lg:gap-0">
             {/* Left Column - "CAN A BRAND" */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -101,8 +104,9 @@ export default function Hero() {
               transition={{ duration: 1, delay: 0.3 }}
               className="text-left flex items-center order-1 lg:order-1 mb-2 sm:mb-4 lg:mb-0"
             >
-              <div className="lg:translate-y-[30px] lg:translate-x-[-20px]">
-                <h2 className="responsive-h2 text-white italic font-black leading-[0.85] tracking-tighter">
+              <div className="lg:translate-y-[30px] lg:translate-x-[-20px] md:translate-y-[-140px] md:translate-x-[20px]">
+                <h2 className="responsive-h2 text-white italic font-black leading-[0.85] tracking-tighter 
+">
                   CAN A
                   <br />
                   BRAND
@@ -115,16 +119,18 @@ export default function Hero() {
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, delay: 0.4 }}
-              className="text-left order-2 lg:order-2 lg:w-[65%]"
+              className="text-left order-2 md:order-2 lg:order-2 w-full lg:w-[65%]"
             >
-              <h1 className="responsive-h1 text-white mb-4 sm:mb-6 lg:mb-6">
+              <h1 className="responsive-h1 text-white mb-4 sm:mb-6 lg:mb-6
+              
+              ">
                 GO
                 <br />
                 BEYOND.
               </h1>
               
               {/* Split paragraphs in 50-50 columns with button */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-6 lg:gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2  gap-3 sm:gap-6 md:gap-2 lg:gap-8">
                 <motion.p
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -161,7 +167,7 @@ export default function Hero() {
       </motion.div>
 
       {/* Banner Vector Left */}
-      <div className="hidden sm:block absolute bottom-0 w-64 h-96 max-w-[500px] xl:w-[450px] opacity-100 z-50" style={{ left: '-4rem' }}>
+      <div className="hidden sm:block absolute bottom-0 w-64 h-96 md:w-50 md:h-65 max-w-[500px] xl:w-[450px] opacity-100 z-50" style={{ left: '-4rem' }}>
         <Image
           src="/images/banner-vector-left.webp"
           alt="Banner vector decoration"
@@ -171,7 +177,7 @@ export default function Hero() {
       </div>
 
       {/* Banner Vector Right */}
-      <div className="hidden sm:block absolute right-0 w-[600px] h-[600px] max-w-[700px] xl:w-[700px] xl:h-[700px] opacity-100 " style={{ top: '-120px' }}>
+      <div className="hidden sm:block absolute right-0 w-[600px] h-[600px] md:w-[500px] md:h-[500px] max-w-[700px] xl:w-[700px] xl:h-[700px] opacity-100 " style={{ top: '-120px' }}>
         <Image
           src="/images/banner-vector-right.webp"
           alt="Banner vector decoration"

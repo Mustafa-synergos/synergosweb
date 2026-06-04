@@ -74,7 +74,7 @@ export default function Navbar() {
               href="/"
               className="flex items-center"
             >
-              <div className="relative flex items-center w-[100px] max-w-[120px] h-[40px] sm:w-[50px] sm:h-[50px] lg:max-w-[180px] lg:w-auto lg:min-h-[48px]  lg:max-h-[80px] lg:h-full">
+              <div className="relative flex items-center w-[100px] max-w-[120px] h-[40px] sm:w-[50px] sm:h-[50px] md:w-auto md-h-auto lg:max-w-[180px] lg:w-auto lg:min-h-[48px]  lg:max-h-[80px] lg:h-full">
                 <motion.img
                   src="/images/logo.png"
                   alt="Synergos Logo"
