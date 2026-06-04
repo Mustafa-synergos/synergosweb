@@ -28,8 +28,9 @@ export default function WhoWeAre() {
 
 
       {/* Two Column Layout */}
-      <div className="relative z-10 flex items-center justify-center min-h-[70vh] md:min-h-screen py-12 md:py-20 lg:py-24">
-        <div className="max-w-7xl mx-auto w-full md:ml-0">
+      <div className="relative z-10 flex sm:items-center md:items-start lg:items-center
+      items-center justify-center min-h-[70vh] md:min-h-screen py-12 md:py-10  lg:py-15">
+        <div className="max-w-7xl mx-auto w-full md:ml-0 lg:mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-16 lg:gap-24 items-center">
             
             {/* Left Column - Text Content */}
@@ -46,7 +47,7 @@ export default function WhoWeAre() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
                 viewport={{ once: true }}
-                className="mb-0 lg:mb-2 mt-0 lg:mt-2"
+                className="mb-0 lg:mb-2 mt-0"
               >
                 <span className="text-red-500 responsive-red-span !mb-0 lg:!mb-0" style={{ textTransform: 'capitalize' }}>
                   Who We Are
@@ -100,8 +101,8 @@ export default function WhoWeAre() {
             </motion.div>
 
             {/* Right Column - Rocket Image */}
-            <div className="relative h-[80px] sm:h-[100px] md:h-[200px] lg:h-[200px] xl:h-[480px] 2xl:h-[650px] flex items-center justify-center">
-              <div className="relative w-full h-full   max-w-md">
+            <div className="relative h-[80px] sm:h-[100px] md:h-[200px] lg:h-[200px] xl:h-[480px] 2xl:h-[650px] flex items-center justify-center md:items-end md:justify-center">
+              <div className="relative w-full h-full max-w-md md:max-w-lg">
                 {/* Desktop rocket image */}
                 <Image
                   src="/images/vector-rocket.png"

@@ -29,7 +29,8 @@ export const EditorialContentGrid: React.FC<EditorialContentGridProps> = ({
   className = '' 
 }) => {
   return (
-    <div className={`relative z-10 py-12 lg:py-16 ${className}`}>
+    <div className={`relative z-10 py-12 lg:py-16 md:pt-4
+     ${className}`}>
       {children}
     </div>
   );

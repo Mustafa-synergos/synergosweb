@@ -21,7 +21,7 @@ export default function ExponentialImpactSection() {
                 alt="Impact vector background"
                 width={500}
                 height={400}
-                className="hidden md:block absolute right-20 top-0 object-contain opacity-100 -z-10 transform scale-150 -translate-x-12 md:w-[300px] md:h-[200px]"
+                className="hidden md:block absolute right-20 top-0 object-contain opacity-100 -z-10 transform scale-150 -translate-x-12 md:w-[300px] md:h-[350px] lg:w-[500px] lg:h-[380px]"
                 loading="lazy"
               />
               <EditorialHeading size="large">
@@ -60,13 +60,14 @@ export default function ExponentialImpactSection() {
               viewport={{ once: true }}
               className="relative flex justify-end md:justify-start items-end"
             >
-              <div className="relative w-full max-w-lg">
+              <div className="relative w-full  max-w-[220px] sm:max-w-[280px] md:max-w-[350px] lg:max-w-[512px] mx-auto">
                 <Image
                   src="/images/exponential-impact-vector-2.webp"
                   alt="Particle wave effect"
                   width={512}
                   height={512}
-                  className="w-full h-auto object-contain relative z-10"
+                  className="w-full h-auto 
+                   object-contain relative z-10"
                   loading="lazy"
                 />
               </div>

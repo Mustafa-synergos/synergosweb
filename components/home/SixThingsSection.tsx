@@ -255,7 +255,8 @@ export default function Sticky3DStackCards() {
                 ref={(el) => {
                   if (el) cardRefs.current[index] = el;
                 }}
-                className="absolute inset-0 w-full h-screen flex items-center justify-center will-change-transform"
+                className="absolute inset-0 w-full h-screen flex items-center md-h-[600px]
+                justify-center will-change-transform"
                 style={{
                   zIndex: index + 1,
                   transformStyle: "preserve-3d",
