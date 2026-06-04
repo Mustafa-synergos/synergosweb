@@ -15,13 +15,13 @@ export default function ExponentialImpactSection() {
         <SectionHeader
           label="Exponential Impact"
           heading={
-            <div className="relative">
+            <div className="relative md:w-full]">
               <Image
                 src="/images/exponential-impact-vector-1.webp"
                 alt="Impact vector background"
                 width={500}
                 height={400}
-                className="hidden md:block absolute right-20 top-0 object-contain opacity-100 -z-10 transform scale-150 -translate-x-12"
+                className="hidden md:block absolute right-20 top-0 object-contain opacity-100 -z-10 transform scale-150 -translate-x-12 md:w-[300px] md:h-[200px]"
                 loading="lazy"
               />
               <EditorialHeading size="large">
@@ -58,7 +58,7 @@ export default function ExponentialImpactSection() {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2 }}
               viewport={{ once: true }}
-              className="relative flex justify-end items-end"
+              className="relative flex justify-end md:justify-start items-end"
             >
               <div className="relative w-full max-w-lg">
                 <Image

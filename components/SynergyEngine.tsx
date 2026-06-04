@@ -331,7 +331,9 @@ export default function SynergyEngine() {
             {engineCards.map((card, index) => (
               <div
                 key={index}
-                className="flex-shrink-0 w-[92vw] snap-center rounded-2xl p-5 flex flex-col relative z-10 overflow-hidden h-[450px] lg:h-[520px] mr-4 last:mr-0"
+                className="flex-shrink-0 w-[92vw] snap-center rounded-2xl p-5 flex flex-col relative z-10 overflow-hidden h-[450px] md:w-[48%] 
+                
+                lg:h-[520px] mr-4 last:mr-0"
                 style={{ backgroundColor: '#171717', isolation: 'isolate' }}
               >
                 {/* Interactive Dots Background */}
