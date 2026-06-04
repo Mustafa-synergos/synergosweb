@@ -90,7 +90,8 @@ export default function Hero() {
       {/* Hero Content - Split Layout */}
       <motion.div
         style={{ y, opacity }}
-        className="relative z-10 flex items-center max-h-[88vh] md:h-[70vh] lg:max-h-[88vh] lg:min-h-screen px-6 sm:px-8 lg:px-8 pt-20 sm:pt-24 lg:pt-20"
+        className="relative z-10 flex items-center min-h-[88vh]  max-h-[100vh] lg:min-h-screen px-6 sm:px-8 lg:px-8 pt-20 sm:pt-24 md:pt-10
+         lg:pt-20"
       >
         <div className="max-w-7xl hero-content mx-auto w-full px-4 sm:px-0
         
@@ -167,7 +168,7 @@ export default function Hero() {
       </motion.div>
 
       {/* Banner Vector Left */}
-      <div className="hidden sm:block absolute bottom-0 w-64 h-96 md:w-45 md:h-65 md:w-[400px] max-w-[500px] xl:w-[450px] opacity-100 z-50" style={{ left: '-4rem' }}>
+      <div className="hidden sm:block absolute bottom-0 w-64 h-96 md:w-45 md:h-65 md:w-[250px] max-w-[250px] xl:w-[450px] opacity-100 z-50" style={{ left: '-4rem' }}>
         <Image
           src="/images/banner-vector-left.webp"
           alt="Banner vector decoration"

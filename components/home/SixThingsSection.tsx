@@ -226,7 +226,7 @@ export default function Sticky3DStackCards() {
         {/* CINEMATIC STACKED CARDS */}
         <div
           ref={sectionRef}
-          className="relative w-full"
+          className="relative w-full md:min-w-full"
           style={{
             height: `${services.length * 100}vh`,
           }}
@@ -273,6 +273,8 @@ export default function Sticky3DStackCards() {
                     // w-[361px]
                     h-[627px]
                     lg:w-[1280px]
+                    md:w-[770px]
+                    md:h-[330px]
                     lg:h-auto
                     lg:min-h-[400px]
                     overflow-visible
@@ -286,7 +288,8 @@ export default function Sticky3DStackCards() {
                   <div className="absolute inset-0 bg-gradient-to-br from-white/[0.04] to-transparent pointer-events-none" />
 
                   <div className="relative z-10 p-8">
-                    <div className="flex flex-col lg:flex-row items-start gap-5 lg:gap-12">
+                    <div className="flex flex-col lg:flex-row md:flex-row
+                    items-start gap-5 lg:gap-12">
                       {/* LEFT */}
                       <div className="flex-1">
                         {/* NUMBER */}
@@ -349,7 +352,8 @@ export default function Sticky3DStackCards() {
                       </div>
 
                       {/* RIGHT */}
-                      <div className="w-full lg:w-auto flex justify-center lg:justify-end">
+                      <div className="w-full md:w-[280px]
+                      lg:w-auto flex justify-center lg:justify-end">
                         <div className="relative opacity-60">
                           <Image
                             src={service.illustration}
