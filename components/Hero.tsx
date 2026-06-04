@@ -51,7 +51,7 @@ export default function Hero() {
   const currentMedia = mediaSources[currentDevice];
 
   return (
-    <section className="relative min-h-[88vh] lg:min-h-screen overflow-hidden">
+    <section className="relative max-h-[88vh] md:h-[70vh] lg:max-h-screen overflow-hidden">
       {/* Background Media Layer */}
       <div className="absolute inset-0">
         {/* Video Background for All Devices */}
@@ -90,7 +90,7 @@ export default function Hero() {
       {/* Hero Content - Split Layout */}
       <motion.div
         style={{ y, opacity }}
-        className="relative z-10 flex items-center min-h-[88vh] lg:min-h-screen px-6 sm:px-8 lg:px-8 pt-20 sm:pt-24 lg:pt-20"
+        className="relative z-10 flex items-center max-h-[88vh]  lg:max-h-[88vh] lg:min-h-screen px-6 sm:px-8 lg:px-8 pt-20 sm:pt-24 lg:pt-20"
       >
         <div className="max-w-7xl hero-content mx-auto w-full px-4 sm:px-0
         
@@ -145,7 +145,7 @@ export default function Hero() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.7 }}
-                    className="responsive-paragraph text-white/80 !leading-[1.5]  !mb-1 max-w-full"
+                    className="responsive-paragraph text-white/80 !leading-[1.5]  !mb-1 max-w-full md:pr-20"
                   >
                     Synergos is a brand acceleration system built for brands that refuse to stay in one place. Strategy, storytelling, and delivery, firing together, for your next orbit.
                   </motion.p>
@@ -167,7 +167,7 @@ export default function Hero() {
       </motion.div>
 
       {/* Banner Vector Left */}
-      <div className="hidden sm:block absolute bottom-0 w-64 h-96 md:w-50 md:h-65 max-w-[500px] xl:w-[450px] opacity-100 z-50" style={{ left: '-4rem' }}>
+      <div className="hidden sm:block absolute bottom-0 w-64 h-96 md:w-45 md:h-65 md:w-[200px] max-w-[500px] xl:w-[450px] opacity-100 z-50" style={{ left: '-4rem' }}>
         <Image
           src="/images/banner-vector-left.webp"
           alt="Banner vector decoration"
@@ -177,7 +177,7 @@ export default function Hero() {
       </div>
 
       {/* Banner Vector Right */}
-      <div className="hidden sm:block absolute right-0 w-[600px] h-[600px] md:w-[500px] md:h-[500px] max-w-[700px] xl:w-[700px] xl:h-[700px] opacity-100 " style={{ top: '-120px' }}>
+      <div className="hidden sm:block absolute right-0 w-[600px] h-[600px] md:w-[400px] md:h-[500px] max-w-[700px] xl:w-[700px] xl:h-[700px] opacity-100 " style={{ top: '-120px' }}>
         <Image
           src="/images/banner-vector-right.webp"
           alt="Banner vector decoration"

@@ -286,7 +286,7 @@ export default function AmbitionSection() {
       </motion.div>
 
       {/* Content Wrapper - z-index to sit above canvas */}
-      <div className="relative z-10 px-6 lg:px-8 pt-4 lg:pt-0 hero-content">
+      <div className="relative z-10 px-6 lg:px-8 pt-4 lg:pt-0 ambition-content">
 
       <div ref={containerRef} className="relative z-10 max-w-7xl mx-auto min-h-auto lg:min-h-[100vh] flex flex-col justify-between">
         {/* Shared Logo - Absolutely positioned inside container */}
