@@ -90,7 +90,7 @@ export default function Hero() {
       {/* Hero Content - Split Layout */}
       <motion.div
         style={{ y, opacity }}
-        className="relative z-10 flex items-center max-h-[88vh]  lg:max-h-[88vh] lg:min-h-screen px-6 sm:px-8 lg:px-8 pt-20 sm:pt-24 lg:pt-20"
+        className="relative z-10 flex items-center min-h-[88vh]  lg:min-h-[88vh] md:min-h-[70vh] lg:min-h-screen px-6 sm:px-8 lg:px-8 pt-20 sm:pt-24 lg:pt-20"
       >
         <div className="max-w-7xl hero-content mx-auto w-full px-4 sm:px-0
         
