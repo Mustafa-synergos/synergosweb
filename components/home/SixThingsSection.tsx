@@ -136,9 +136,9 @@ export default function Sticky3DStackCards() {
 
       <div className="relative z-10">
         {/* HERO */}
-        <div className="relative min-h-[50vh] flex items-center px-6 lg:px-16 xl:px-24 pt-20">
+        <div className="relative min-h-[50vh] flex items-center px-6 lg:px-16 xl:px-24 pt-20 md:pt-10 md:items-start">
           <div className="max-w-7xl mx-auto w-full relative">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center ">
               {/* LEFT - FULL WIDTH */}
               <div className="lg:col-span-12">
                 <div className="!mb-0 lg:!mb-0">
@@ -226,7 +226,8 @@ export default function Sticky3DStackCards() {
         {/* CINEMATIC STACKED CARDS */}
         <div
           ref={sectionRef}
-          className="relative w-full md:min-w-full"
+          className="relative w-full md:min-w-full
+          "
           style={{
             height: `${services.length * 100}vh`,
           }}

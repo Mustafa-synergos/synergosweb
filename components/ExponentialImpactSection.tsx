@@ -60,7 +60,7 @@ export default function ExponentialImpactSection() {
               viewport={{ once: true }}
               className="relative flex justify-end md:justify-start items-end"
             >
-              <div className="relative w-full  max-w-[220px] sm:max-w-[280px] md:max-w-[350px] lg:max-w-[512px] mx-auto">
+              <div className="relative w-full  max-w-[220px] sm:max-w-[280px] md:max-w-[450px] lg:max-w-[512px] mx-auto">
                 <Image
                   src="/images/exponential-impact-vector-2.webp"
                   alt="Particle wave effect"

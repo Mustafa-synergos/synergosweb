@@ -22,14 +22,14 @@ export default function WhoWeAre() {
   }, []);
 
   return (
-    <section className="relative min-h-[75vh] md:min-h-screen overflow-hidden px-6 lg:px-8" style={{ backgroundColor: '#171717' }}>
+    <section className="relative min-h-[75vh] md:h-[65vh] overflow-hidden px-6 lg:px-8" style={{ backgroundColor: '#171717' }}>
       {/* Interactive Dots Background */}
       <InteractiveDots variant="dark" />
 
 
       {/* Two Column Layout */}
       <div className="relative z-10 flex sm:items-center md:items-start lg:items-center
-      items-center justify-center min-h-[70vh] md:min-h-screen py-12 md:py-10  lg:py-15">
+      items-center justify-center min-h-[70vh] md:min-h-[65vh] py-12 md:py-10  lg:py-15">
         <div className="max-w-7xl mx-auto w-full md:ml-0 lg:mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-16 lg:gap-24 items-center">
             
