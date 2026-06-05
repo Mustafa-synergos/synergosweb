@@ -257,10 +257,10 @@ export default function Sticky3DStackCards() {
                 ref={(el) => {
                   if (el) cardRefs.current[index] = el;
                 }}
-                className="absolute inset-0 w-full h-screen flex items-center  md:items-start
+                className="absolute inset-0 w-full h-screen md:h-[627px] flex items-center  md:items-start
 lg:items-center
 justify-center
-md:pt-6
+md:pt-20
 lg:pt-0
 
                 justify-center will-change-transform"
