@@ -63,7 +63,7 @@ export default function Footer() {
           <div>
             <h3 className="font-[clother] font-normal not-italic text-[18px] sm:text-[22px] leading-[100%] tracking-normal text-white/90 mb-4 sm:mb-6 uppercase">WHAT WE OFFER</h3>
             <div className="grid grid-cols-2
-             sm:grid-cols-2 md:grid-cols-2
+             sm:grid-cols-1 md:grid-cols-2
             gap-x-4 gap-y-3">
               <div className="space-y-3">
                 <div><Link href="#" className="font-[clother] font-light not-italic text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] tracking-normal text-gray-400 hover:text-white transition-colors duration-300 whitespace-nowrap">Strategy & Research</Link></div>
