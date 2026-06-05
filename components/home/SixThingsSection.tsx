@@ -230,14 +230,16 @@ export default function Sticky3DStackCards() {
           ref={sectionRef}
           className="relative w-full md:min-w-full"
           style={{
-            height: `${services.length * 100}vh`,
+            // height: `${services.length * 100}vh`,
+            height: `${(services.length - 1) * 110}vh`
+            // height: `${services.length * 100 - 100}vh`,
           }}
         >
           
           <div
             ref={dotsViewportRef}
 
-            className="sticky top-0 left-0 w-full h-screen md:pt-2"
+            className="sticky top-0 left-0 w-full h-screen  md:pt-2"
             style={{
               perspective: "1200px",
               transformStyle: "preserve-3d",
@@ -257,7 +259,7 @@ export default function Sticky3DStackCards() {
                 ref={(el) => {
                   if (el) cardRefs.current[index] = el;
                 }}
-                className="absolute inset-0 w-full h-screen md:h-[627px] flex items-center  md:items-start
+                className="absolute inset-0 w-full h-screen md:h-auto flex items-center  md:items-start
 lg:items-center
 justify-center
 md:pt-20
