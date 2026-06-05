@@ -125,7 +125,18 @@ export default function Sticky3DStackCards() {
     const targetScroll = sectionTop + index * window.innerHeight;
     window.scrollTo({ top: targetScroll, behavior: "smooth" });
   };
+const [isDesktop, setIsDesktop] = useState(false);
 
+useEffect(() => {
+  const handleResize = () => {
+    setIsDesktop(window.innerWidth >= 1024);
+  };
+
+  handleResize();
+  window.addEventListener("resize", handleResize);
+
+  return () => window.removeEventListener("resize", handleResize);
+}, []);
   return (
     <section className="relative bg-[#050505]">
       {/* DOTS */}
@@ -137,7 +148,7 @@ export default function Sticky3DStackCards() {
       <div className="relative z-10">
         {/* HERO */}
         <div className="relative min-h-auto md:min-h-[50vh] md:min-h-fit
-         flex items-center px-6 lg:px-16 xl:px-24 pt-20 md:pt-10 md:items-start">
+         flex items-center px-6 lg:px-16 xl:px-24 pt-20 md:pt-10 md:items-center">
           <div className="max-w-7xl mx-auto w-full relative">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center ">
               {/* LEFT - FULL WIDTH */}
@@ -231,7 +242,8 @@ export default function Sticky3DStackCards() {
           className="relative w-full md:min-w-full"
           style={{
             // height: `${services.length * 100}vh`,
-            height: `${(services.length - 1) * 110}vh`
+            // height: `${(services.length - 1) * 110}vh`
+  height: `${(services.length - 1) * (isDesktop ? 110 : 70)}vh`,
             // height: `${services.length * 100 - 100}vh`,
           }}
         >
@@ -259,7 +271,7 @@ export default function Sticky3DStackCards() {
                 ref={(el) => {
                   if (el) cardRefs.current[index] = el;
                 }}
-                className="absolute inset-0 w-full h-screen md:h-auto flex items-center  md:items-start
+                className="absolute inset-0 w-full h-screen md:h-auto flex items-center  md:items-center
 lg:items-center
 justify-center
 md:pt-20
