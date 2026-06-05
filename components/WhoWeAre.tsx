@@ -101,7 +101,7 @@ export default function WhoWeAre() {
             </motion.div>
 
             {/* Right Column - Rocket Image */}
-            <div className="relative h-[80px] sm:h-[100px] md:h-[200px] lg:h-[200px] xl:h-[480px] 2xl:h-[650px] flex items-center justify-center md:items-end md:justify-center">
+            <div className="relative h-[80px] sm:h-[100px] md:h-[200px] lg:h-[200px] xl:h-[480px] 2xl:h-[650px] flex items-center justify-center md:items-center md:justify-center">
               <div className="relative w-full h-full max-w-md md:max-w-lg">
                 {/* Desktop rocket image */}
                 <Image

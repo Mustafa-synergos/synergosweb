@@ -136,7 +136,7 @@ export default function Sticky3DStackCards() {
 
       <div className="relative z-10">
         {/* HERO */}
-        <div className="relative min-h-[50vh] md:min-h-[20vh]
+        <div className="relative min-h-auto md:min-h-[50vh] md:min-h-fit
          flex items-center px-6 lg:px-16 xl:px-24 pt-20 md:pt-10 md:items-start">
           <div className="max-w-7xl mx-auto w-full relative">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center ">
@@ -192,7 +192,7 @@ export default function Sticky3DStackCards() {
                 </h1>
 
                 <p
-                  className="text-white max-w-[850px] mb-10 text-base lg:text-lg"
+                  className="text-white max-w-[850px] mb-4 md:mb-2 lg:mb-10 text-base lg:text-lg"
                   style={{
                     fontFamily: '"clother", sans-serif',
                     fontWeight: 200,
@@ -237,7 +237,7 @@ export default function Sticky3DStackCards() {
           <div
             ref={dotsViewportRef}
 
-            className="sticky top-0 left-0 w-full h-screen"
+            className="sticky top-0 left-0 w-full h-screen md:pt-2"
             style={{
               perspective: "1200px",
               transformStyle: "preserve-3d",
@@ -257,7 +257,13 @@ export default function Sticky3DStackCards() {
                 ref={(el) => {
                   if (el) cardRefs.current[index] = el;
                 }}
-                className="absolute inset-0 w-full h-screen flex items-center md-h-[600px]
+                className="absolute inset-0 w-full h-screen flex items-center  md:items-start
+lg:items-center
+justify-center
+md:pt-6
+lg:pt-0
+md:-translate-y-[80px]
+lg:translate-y-0
                 justify-center will-change-transform"
                 style={{
                   zIndex: index + 1,
