@@ -262,8 +262,7 @@ lg:items-center
 justify-center
 md:pt-6
 lg:pt-0
-md:-translate-y-[80px]
-lg:translate-y-0
+
                 justify-center will-change-transform"
                 style={{
                   zIndex: index + 1,
