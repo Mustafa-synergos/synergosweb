@@ -265,7 +265,7 @@ export default function AmbitionSection() {
   }, []);
 
   return (
-    <section className="relative min-h-[80vh] lg:min-h-[140vh] overflow-hidden pt-0 pb-0 lg:pb-40 lg:pt-20 md:pt-4"
+    <section className="relative min-h-[80vh] lg:min-h-[140vh] overflow-hidden pt-0 pb-0 lg:pb-40 lg:pt-10 md:pt-20"
     style={{ backgroundColor: '#171717' }}>
       {/* Interactive Dots Background */}
       <InteractiveDots variant="dark" />
@@ -276,7 +276,7 @@ export default function AmbitionSection() {
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 1, ease: "easeInOut" }}
         viewport={{ once: true }}
-        className="hidden md:block   left-0 top-0 z-10" 
+        className="hidden md:hidden lg:block   left-0 top-0 z-10" 
         style={{ transform: 'translateY(var(--tw-translate-y, 0px))' }}
       >
         <img
@@ -387,7 +387,7 @@ export default function AmbitionSection() {
               viewport={{ once: true }}
               className="md:col-start-1 md:row-start-1"
             >
-              <h3 ref={desktopHeading1Ref} className={`${activeHeading === 1 ? 'text-white' : 'text-grey'} uppercase max-w-xs md:max-w-full lg:max-w-xs transition-colors duration-300`} style={{ fontFamily: 'clother', fontWeight: 400, fontStyle: 'normal',  fontSize: window.innerWidth < 1024 ? '32px' : '40px', lineHeight: window.innerWidth < 1024 ? '38px' : '48px', letterSpacing: '0%' }}>
+              <h3 ref={desktopHeading1Ref} className={`${activeHeading === 1 ? 'text-white' : 'text-grey'} uppercase max-w-xs md:max-w-full lg:max-w-xs transition-colors duration-300`} style={{ fontFamily: 'clother', fontWeight: 400, fontStyle: 'normal',  fontSize: window.innerWidth < 1024 ? '24px' : '40px', lineHeight: window.innerWidth < 1024 ? '28px' : '48px', letterSpacing: '0%' }}>
                 YOU BRING THE AMBITION.
               </h3>
             </motion.div>
@@ -400,7 +400,7 @@ export default function AmbitionSection() {
               viewport={{ once: true }}
               className="md:col-start-2 md:row-start-2 md:justify-self-end text-right md:text-left"
             >
-              <h3 ref={desktopHeading2Ref} className={`${activeHeading === 2 ? 'text-white' : 'text-grey'} uppercase max-w-sm md:max-w-full lg:max-w-sm ml-auto md:ml-0 transition-colors duration-300`} style={{ fontFamily: 'clother', fontWeight: 400, fontStyle: 'normal',  fontSize: window.innerWidth < 1024 ? '32px' : '40px', lineHeight: window.innerWidth < 1024 ? '38px' : '48px', letterSpacing: '0%' }}>
+              <h3 ref={desktopHeading2Ref} className={`${activeHeading === 2 ? 'text-white' : 'text-grey'} uppercase max-w-sm md:max-w-full lg:max-w-sm ml-auto md:ml-0 transition-colors duration-300`} style={{ fontFamily: 'clother', fontWeight: 400, fontStyle: 'normal',  fontSize: window.innerWidth < 1024 ? '24px' : '40px', lineHeight: window.innerWidth < 1024 ? '28px' : '48px', letterSpacing: '0%' }}>
                 WE BRING THE COMPASS,<br />
                 THE FUEL, AND THE THRUST.
               </h3>
@@ -414,7 +414,7 @@ export default function AmbitionSection() {
               viewport={{ once: true }}
               className="md:col-start-1 md:row-start-3"
             >
-              <h3 ref={desktopHeading3Ref} className={`${activeHeading === 3 ? 'text-white' : 'text-grey'} uppercase max-w-sm md:max-w-full lg:max-w-sm transition-colors duration-300`} style={{ fontFamily: 'clother', fontWeight: 400, fontStyle: 'normal',  fontSize: window.innerWidth < 1024 ? '32px' : '40px', lineHeight: window.innerWidth < 1024 ? '38px' : '48px', letterSpacing: '0%' }}>
+              <h3 ref={desktopHeading3Ref} className={`${activeHeading === 3 ? 'text-white' : 'text-grey'} uppercase max-w-sm md:max-w-full lg:max-w-sm transition-colors duration-300`} style={{ fontFamily: 'clother', fontWeight: 400, fontStyle: 'normal',  fontSize: window.innerWidth < 1024 ? '24px' : '40px', lineHeight: window.innerWidth < 1024 ? '28px' : '48px', letterSpacing: '0%' }}>
                 WE ARE NOT HERE FOR<br />
                 ONE CAMPAIGN.
               </h3>
@@ -428,7 +428,7 @@ export default function AmbitionSection() {
               viewport={{ once: true }}
               className="md:col-start-2 md:row-start-4 md:justify-self-end"
             >
-              <h3 ref={desktopHeading4Ref} className={`${activeHeading === 4 ? 'text-white' : 'text-grey'} uppercase max-w-sm md:max-w-full lg:max-w-sm ml-auto md:ml-0 transition-colors duration-300`} style={{ fontFamily: 'clother', fontWeight: 400, fontStyle: 'normal',  fontSize: window.innerWidth < 1024 ? '32px' : '40px', lineHeight: window.innerWidth < 1024 ? '38px' : '48px', letterSpacing: '0%' }}>
+              <h3 ref={desktopHeading4Ref} className={`${activeHeading === 4 ? 'text-white' : 'text-grey'} uppercase max-w-sm md:max-w-full lg:max-w-sm ml-auto md:ml-0 transition-colors duration-300`} style={{ fontFamily: 'clother', fontWeight: 400, fontStyle: 'normal',  fontSize: window.innerWidth < 1024 ? '24px' : '40px', lineHeight: window.innerWidth < 1024 ? '28px' : '48px', letterSpacing: '0%' }}>
                 WE ARE BUILT FOR<br />
                 THE LONG HAUL.
               </h3>

@@ -136,7 +136,7 @@ export default function Sticky3DStackCards() {
 
       <div className="relative z-10">
         {/* HERO */}
-        <div className="relative min-h-[50vh] md:min-h-[30vh]
+        <div className="relative min-h-[50vh] md:min-h-[20vh]
          flex items-center px-6 lg:px-16 xl:px-24 pt-20 md:pt-10 md:items-start">
           <div className="max-w-7xl mx-auto w-full relative">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center ">
@@ -144,9 +144,10 @@ export default function Sticky3DStackCards() {
               <div className="lg:col-span-12">
                 <div className="!mb-0 lg:!mb-0">
                   <span
-                    className="text-[#ff3b30] text-[18px] lg:text-[28px]"
+                    className="text-[#ff3b30] text-[18px] md:text-[20px] lg:text-[28px]"
                     style={{
                       fontFamily: '"clother", sans-serif',
+                      fontWeight: 400,
                       textTransform: 'capitalize',
                     }}
                   >
@@ -161,11 +162,11 @@ export default function Sticky3DStackCards() {
                     fontWeight: 700,
                   }}
                 >
-                  <span className="block lg:hidden text-[38px] leading-[40px]">
+                  <span className="block md:text-[80px] md:leading-[80px] lg:hidden text-[38px] leading-[40px]">
                     SIX THINGS WE
                   </span>
 
-                  <span className="block lg:hidden text-[38px] leading-[40px]">
+                  <span className="block md:text-[80px] md:leading-[80px] lg:hidden text-[38px] leading-[40px]">
                     ARE GOOD AT.
                   </span>
 

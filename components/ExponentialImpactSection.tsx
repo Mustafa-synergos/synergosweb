@@ -15,7 +15,7 @@ export default function ExponentialImpactSection() {
         <SectionHeader
           label="Exponential Impact"
           heading={
-            <div className="relative md:w-full]">
+            <div className="relative md:w-full">
               <Image
                 src="/images/exponential-impact-vector-1.webp"
                 alt="Impact vector background"
@@ -43,7 +43,7 @@ export default function ExponentialImpactSection() {
               viewport={{ once: true }}
               className="space-y-8"
             >
-              <h2 className="font-clother font-bold text-[24px] lg:text-[44px] leading-[32px] lg:leading-[52px] tracking-normal text-white uppercase">
+              <h2 className="font-clother font-bold text-[24px] lg:text-[44px] leading-[44px] sm:leading-[24px] lg:leading-[52px] tracking-normal text-white uppercase">
                 Impact Shaping Voices
               </h2>
               

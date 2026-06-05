@@ -133,7 +133,7 @@ export default function StickyCards() {
             ref={(el) => {
               if (el) cardRefs.current[index] = el;
             }}
-            className="stack-card absolute inset-0 w-full h-screen flex items-center justify-center will-change-transform"
+            className="stack-card absolute inset-0 w-full h-screen flex items-center md:items-center lg:items-center  pt-16 md:pt-0 lg:pt-0 justify-center will-change-transform"
             style={{
               zIndex: index + 1,
             }}

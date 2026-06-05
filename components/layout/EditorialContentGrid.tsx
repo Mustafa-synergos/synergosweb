@@ -61,7 +61,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
         transition={{ delay: 0.2, duration: 0.6 }}
         viewport={{ once: true }}
       >
-        <span className={`inline-block font-clother font-normal tracking-normal ${labelColor} text-[18px] lg:text-[28px] leading-[100%] !mb-0 lg:!mb-0`} style={{ textTransform: 'capitalize' }}>
+        <span className={`inline-block font-clother font-normal tracking-normal ${labelColor} text-[18px] md:text-[20px] lg:text-[28px] leading-[100%] !mb-0 lg:!mb-0`} style={{ textTransform: 'capitalize' }}>
           {label}
         </span>
       </motion.div>
@@ -140,13 +140,13 @@ export const EditorialHeading: React.FC<{
   const getSizeClass = () => {
     switch (size) {
       case 'large':
-        return 'text-[38px] lg:text-[134px] font-bold leading-[40px] lg:leading-[134px] tracking-normal uppercase';
+        return 'text-[38px] md:text-[80px] lg:text-[134px] font-bold leading-[40px] md:leading-[80px] lg:leading-[134px] tracking-normal uppercase';
       case 'medium':
         return 'text-3xl sm:text-4xl lg:text-5xl font-bold leading-[0.9] tracking-tight uppercase';
       case 'small':
         return 'text-2xl sm:text-3xl lg:text-4xl font-semibold leading-[0.95] tracking-tight uppercase';
       default:
-        return 'text-[38px] lg:text-[134px] font-bold leading-[40px] lg:leading-[134px] tracking-normal uppercase';
+        return 'text-[38px] md:text-[80px] lg:text-[134px] font-bold leading-[40px] md:leading-[80px] lg:leading-[134px] tracking-normal uppercase';
     }
   };
 
