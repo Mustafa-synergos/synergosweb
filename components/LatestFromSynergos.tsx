@@ -396,13 +396,30 @@ export const LatestFromSynergos: React.FC = () => {
   const [hoveredCard, setHoveredCard] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  const handleCardHover = (hovering: boolean) => {
-    setHoveredCard(hovering);
-    if (typeof window !== 'undefined' && (window as any).insightsCursorSetHovering) {
-      (window as any).insightsCursorSetHovering(hovering);
-    }
-  };
+ const handleCardHover = (hovering: boolean) => {
+  setHoveredCard(hovering);
 
+  const swiper1 = swiperRef.current?.swiper;
+  const swiper2 = swiperRef2.current?.swiper;
+
+  if (hovering) {
+    swiper1?.autoplay?.stop();
+    swiper2?.autoplay?.stop();
+
+    swiper1?.setTranslate(swiper1.getTranslate());
+    swiper2?.setTranslate(swiper2.getTranslate());
+  } else {
+    swiper1?.autoplay?.start();
+    swiper2?.autoplay?.start();
+  }
+
+  if (
+    typeof window !== "undefined" &&
+    (window as any).insightsCursorSetHovering
+  ) {
+    (window as any).insightsCursorSetHovering(hovering);
+  }
+};
   const handleCardClick = (post: BlogPost) => {
     // Navigate to article - placeholder for actual navigation
     console.log('Navigate to:', post.title);
@@ -541,11 +558,11 @@ export const LatestFromSynergos: React.FC = () => {
               releaseOnEdges: false
             }}
             autoplay={{
-  delay: 0,
+  delay: 1,
   disableOnInteraction: false,
-  pauseOnMouseEnter: false
+  pauseOnMouseEnter: true,
 }}
-speed={6000}
+speed={4000}
             slidesOffsetAfter={0}
             resistance={true}
             resistanceRatio={0.85}
@@ -593,9 +610,9 @@ speed={6000}
               releaseOnEdges: false
             }}
             autoplay={{
-            delay: 0,
+            delay: 1,
             disableOnInteraction: false,
-            pauseOnMouseEnter: false
+            pauseOnMouseEnter: true,
             }}
             speed={6000}
             slidesOffsetAfter={20}
