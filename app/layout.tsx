@@ -3,7 +3,6 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
 import SmoothScroll from '../components/SmoothScroll';
 
-
 export const metadata: Metadata = {
   title: 'Synergos | Collaboration Platform',
   description: 'A modern collaboration and services platform built with Next.js and Strapi.'
