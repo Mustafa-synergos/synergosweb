@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import WhoWeAre from '../components/WhoWeAre';
-import { SpeedInsights } from "@vercel/speed-insights/next";
+
 
 // Lazy-load heavy below-fold sections to reduce initial bundle and improve TTI
 const AmbitionSection = dynamic(() => import('../components/AmbitionSection'), { ssr: false });
@@ -55,7 +55,7 @@ export default function HomePage() {
       <section>
         <Footer />
       </section>
-        <SpeedInsights />
+
     </main>
   );
 }
