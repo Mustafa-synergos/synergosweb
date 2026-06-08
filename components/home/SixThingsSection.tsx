@@ -241,8 +241,8 @@ export default function Sticky3DStackCards() {
           ref={sectionRef}
           className="relative w-full md:min-w-full"
           style={{
-            // height: `${services.length * 100}vh`,
-            height: `${(services.length - 1) * 110}vh`
+            height: `${services.length * 100}vh`,
+            // height: `${(services.length - 1) * 110}vh`
   // height: `${(services.length - 1) * (isDesktop ? 110 : 70)}vh`,
             // height: `${services.length * 100 - 100}vh`,
           }}

@@ -32,7 +32,7 @@ export default function BeforeFooterCTA() {
       background="custom" 
       id="final-cta" 
       customBgColor="bg-[#171717]" 
-      className="h-[125vh] lg:h-[120vh] md:h-[80vh]"
+      className="h-[125vh] lg:h-[120vh] sm:h-[80vh] md:h-[100vh] md:min-h-[80vh] md:max-h-[110vh]"
       sectionRef={sectionRef}
       backgroundElement={<InteractiveDots variant="dark" containerRef={sectionRef} />}
     >

@@ -203,12 +203,27 @@ export default function SynergyEngine() {
     const slider = mobileSliderRef.current;
     if (!slider) return;
 
-    const handleScroll = () => {
-      const cardWidth = slider.offsetWidth * 0.88;
-      const index = Math.round(slider.scrollLeft / cardWidth);
-      setActiveCard((prev) => (prev !== index ? index : prev));
-    };
+const handleScroll = () => {
+  const slider = mobileSliderRef.current;
+  if (!slider) return;
 
+  const maxScroll = slider.scrollWidth - slider.clientWidth;
+  const progress = slider.scrollLeft / maxScroll;
+
+  console.log({
+    scrollLeft: slider.scrollLeft,
+    maxScroll,
+    progress,
+  });
+
+  if (progress < 0.33) {
+    setActiveCard(0);
+  } else if (progress < 0.66) {
+    setActiveCard(1);
+  } else {
+    setActiveCard(2);
+  }
+};
     slider.addEventListener('scroll', handleScroll);
     return () => {
       slider.removeEventListener('scroll', handleScroll);
@@ -331,7 +346,7 @@ export default function SynergyEngine() {
             {engineCards.map((card, index) => (
               <div
                 key={index}
-                className="flex-shrink-0 w-[92vw] snap-center rounded-2xl p-5 flex flex-col relative z-10 overflow-hidden h-[450px] md:w-[48%] 
+                className="flex-shrink-0 w-[100vw] max-w-[150vw] snap-center rounded-2xl p-5 flex flex-col relative z-10 overflow-hidden h-[450px] md:w-[48%] 
                 
                 lg:h-[520px] mr-4 last:mr-0"
                 style={{ backgroundColor: '#171717', isolation: 'isolate' }}
