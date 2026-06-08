@@ -274,7 +274,7 @@ export default function Sticky3DStackCards() {
                 className="absolute inset-0 w-full h-screen md:h-auto flex items-center  md:items-center
 lg:items-center
 justify-center
-md:pt-20
+md:pt-0
 lg:pt-0
 
                 justify-center will-change-transform"
