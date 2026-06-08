@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import SmoothScroll from '../components/SmoothScroll';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export const metadata: Metadata = {
   title: 'Synergos | Collaboration Platform',
@@ -18,6 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <SmoothScroll />
         {children}
+        <SpeedInsights />
       </body>
     </html>
   );
