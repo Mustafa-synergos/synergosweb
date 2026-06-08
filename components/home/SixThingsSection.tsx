@@ -125,18 +125,18 @@ export default function Sticky3DStackCards() {
     const targetScroll = sectionTop + index * window.innerHeight;
     window.scrollTo({ top: targetScroll, behavior: "smooth" });
   };
-const [isDesktop, setIsDesktop] = useState(false);
+// const [isDesktop, setIsDesktop] = useState(false);
 
-useEffect(() => {
-  const handleResize = () => {
-    setIsDesktop(window.innerWidth >= 1024);
-  };
+// useEffect(() => {
+//   const handleResize = () => {
+//     setIsDesktop(window.innerWidth >= 1024);
+//   };
 
-  handleResize();
-  window.addEventListener("resize", handleResize);
+//   handleResize();
+//   window.addEventListener("resize", handleResize);
 
-  return () => window.removeEventListener("resize", handleResize);
-}, []);
+//   return () => window.removeEventListener("resize", handleResize);
+// }, []);
   return (
     <section className="relative bg-[#050505]">
       {/* DOTS */}
@@ -242,8 +242,8 @@ useEffect(() => {
           className="relative w-full md:min-w-full"
           style={{
             // height: `${services.length * 100}vh`,
-            // height: `${(services.length - 1) * 110}vh`
-  height: `${(services.length - 1) * (isDesktop ? 110 : 70)}vh`,
+            height: `${(services.length - 1) * 110}vh`
+  // height: `${(services.length - 1) * (isDesktop ? 110 : 70)}vh`,
             // height: `${services.length * 100 - 100}vh`,
           }}
         >
