@@ -233,14 +233,11 @@ export default function Sticky3DStackCards() {
           ref={sectionRef}
           className="relative w-full md:min-w-full"
           style={{
-            // height: `${services.length * 100}vh`,
+            height: `${services.length * 100}vh`,
             // height: `${(services.length - 1) * 110}vh`
             // height: `${(services.length - 1) * (isDesktop ? 110 : 70)}vh`,
             // height: `${services.length * 100 - 100}vh`,
-            height:
-    window.innerWidth < 1024
-      ? `${(services.length - 1) * 75}vh`
-      : `${(services.length - 1) * 100}vh`,
+          
           }}
         >
           <div
@@ -389,7 +386,7 @@ lg:pt-0
             ))}
 
             {/* SQUARE NAVIGATION — Desktop: vertical right of card */}
-            <div className="hidden md:hidden lg:flex absolute top-1/2 right-40 -translate-y-1/3 z-50 flex-col items-center gap-3">
+            <div className="hidden md:hidden lg:flex absolute top-1/2 right-25 -translate-y-1/3 z-50 flex-col items-center gap-3">
               {services.map((service, index) => (
                 <button
                   key={service.id}
