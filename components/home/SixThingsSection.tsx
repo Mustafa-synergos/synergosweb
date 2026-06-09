@@ -61,7 +61,7 @@ export default function Sticky3DStackCards() {
             ease: "none",
             duration: 1,
           },
-          0
+          0,
         );
 
         // Previous card folds backward into depth
@@ -80,7 +80,7 @@ export default function Sticky3DStackCards() {
             ease: "none",
             duration: 1,
           },
-          0
+          0,
         );
 
         // Hide all older cards so only the active + immediate previous are visible
@@ -92,7 +92,7 @@ export default function Sticky3DStackCards() {
               ease: "none",
               duration: 1,
             },
-            0
+            0,
           );
         }
       });
@@ -106,7 +106,7 @@ export default function Sticky3DStackCards() {
         onUpdate: (self) => {
           const idx = Math.min(
             Math.floor(self.progress * services.length),
-            services.length - 1
+            services.length - 1,
           );
           setActiveIndex(idx);
         },
@@ -125,30 +125,26 @@ export default function Sticky3DStackCards() {
     const targetScroll = sectionTop + index * window.innerHeight;
     window.scrollTo({ top: targetScroll, behavior: "smooth" });
   };
-// const [isDesktop, setIsDesktop] = useState(false);
+  // const [isDesktop, setIsDesktop] = useState(false);
 
-// useEffect(() => {
-//   const handleResize = () => {
-//     setIsDesktop(window.innerWidth >= 1024);
-//   };
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     setIsDesktop(window.innerWidth >= 1024);
+  //   };
 
-//   handleResize();
-//   window.addEventListener("resize", handleResize);
+  //   handleResize();
+  //   window.addEventListener("resize", handleResize);
 
-//   return () => window.removeEventListener("resize", handleResize);
-// }, []);
+  //   return () => window.removeEventListener("resize", handleResize);
+  // }, []);
   return (
     <section className="relative bg-[#050505]">
       {/* DOTS */}
-      <InteractiveDots 
-      
-        containerRef={dotsViewportRef}
-      variant="dark" />
+      <InteractiveDots containerRef={dotsViewportRef} variant="dark" />
 
       <div className="relative z-10">
         {/* HERO */}
-        <div className="relative min-h-auto md:min-h-[50vh] md:min-h-fit
-         flex items-center px-6 lg:px-16 xl:px-24 pt-20 md:pt-10 md:items-center">
+        <div className="relative min-h-auto md:min-h-[50vh] md:min-h-fit flex items-center px-6 lg:px-16 xl:px-24 pt-20 md:pt-10 md:items-center">
           <div className="max-w-7xl mx-auto w-full relative">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center ">
               {/* LEFT - FULL WIDTH */}
@@ -159,7 +155,7 @@ export default function Sticky3DStackCards() {
                     style={{
                       fontFamily: '"clother", sans-serif',
                       fontWeight: 400,
-                      textTransform: 'capitalize',
+                      textTransform: "capitalize",
                     }}
                   >
                     Six Thrusters, One Engine
@@ -209,31 +205,27 @@ export default function Sticky3DStackCards() {
                     fontWeight: 200,
                     lineHeight: "1.5",
                     fontStyle: "normal",
-                    fontSize :"18px"
+                    fontSize: "18px",
                   }}
                 >
-                  Each capability is a thruster.
-                  Together, they are the engine
-                  that takes brands from the
-                  launchpad to orbit.
+                  Each capability is a thruster. Together, they are the engine
+                  that takes brands from the launchpad to orbit.
                 </p>
 
                 <PremiumCTA title="EXPLORE" hoverTitle="EXPLORE" />
               </div>
             </div>
-
-           
           </div>
-           {/* ORBIT IMAGE - OUTSIDE CONTAINER ON RIGHT */}
-            <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 xl:right-0">
-              <Image
-                src="/images/six-things-orbital.png"
-                alt="Six Things Orbital"
-                width={400}
-                height={400}
-                className="w-full h-full object-contain"
-              />
-            </div>
+          {/* ORBIT IMAGE - OUTSIDE CONTAINER ON RIGHT */}
+          <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 xl:right-0">
+            <Image
+              src="/images/six-things-orbital.png"
+              alt="Six Things Orbital"
+              width={400}
+              height={400}
+              className="w-full h-full object-contain"
+            />
+          </div>
         </div>
 
         {/* CINEMATIC STACKED CARDS */}
@@ -241,29 +233,27 @@ export default function Sticky3DStackCards() {
           ref={sectionRef}
           className="relative w-full md:min-w-full"
           style={{
-            height: `${services.length * 100}vh`,
+            // height: `${services.length * 100}vh`,
             // height: `${(services.length - 1) * 110}vh`
-  // height: `${(services.length - 1) * (isDesktop ? 110 : 70)}vh`,
+            // height: `${(services.length - 1) * (isDesktop ? 110 : 70)}vh`,
             // height: `${services.length * 100 - 100}vh`,
+            height:
+    window.innerWidth < 1024
+      ? `${(services.length - 1) * 75}vh`
+      : `${(services.length - 1) * 100}vh`,
           }}
         >
-          
           <div
             ref={dotsViewportRef}
-
             className="sticky top-0 left-0 w-full h-screen  md:pt-2"
             style={{
               perspective: "1200px",
               transformStyle: "preserve-3d",
             }}
           >
-             <div className="absolute inset-0 z-[1] pointer-events-none">
-
-                <InteractiveDots
-                  variant="dark"
-                  containerRef={dotsViewportRef}
-                />
-              </div>
+            <div className="absolute inset-0 z-[1] pointer-events-none">
+              <InteractiveDots variant="dark" containerRef={dotsViewportRef} />
+            </div>
 
             {services.map((service, index) => (
               <div
@@ -292,10 +282,11 @@ lg:pt-0
                     border-white/10
                     rounded-[15px]
                     shadow-2xl
-                    // w-[361px]
+                    w-full
+                    max-w-[1200px]
+                    lg:max-w-[1200px]
+                    md:max-w-[900px]
                     h-[627px]
-                    lg:w-[1280px]
-                    md:w-[770px]
                     md:h-[330px]
                     lg:h-auto
                     lg:min-h-[400px]
@@ -310,8 +301,10 @@ lg:pt-0
                   <div className="absolute inset-0 bg-gradient-to-br from-white/[0.04] to-transparent pointer-events-none" />
 
                   <div className="relative z-10 p-8">
-                    <div className="flex flex-col lg:flex-row md:flex-row
-                    items-start gap-5 lg:gap-12">
+                    <div
+                      className="flex flex-col lg:flex-row md:flex-row
+                    items-start gap-5 lg:gap-12"
+                    >
                       {/* LEFT */}
                       <div className="flex-1">
                         {/* NUMBER */}
@@ -374,8 +367,10 @@ lg:pt-0
                       </div>
 
                       {/* RIGHT */}
-                      <div className="w-full md:w-[280px]
-                      lg:w-auto flex justify-center lg:justify-end">
+                      <div
+                        className="w-full md:w-[280px]
+                      lg:w-auto flex justify-center lg:justify-end"
+                      >
                         <div className="relative opacity-60">
                           <Image
                             src={service.illustration}
@@ -394,13 +389,8 @@ lg:pt-0
             ))}
 
             {/* SQUARE NAVIGATION — Desktop: vertical right of card */}
-            <div
-              className="hidden lg:flex absolute top-1/2 -translate-y-1/2 z-50 flex-col items-center gap-3"
-              style={{ left: "calc(50% + 640px + 32px)" }}
-            >
+            <div className="hidden md:hidden lg:flex absolute top-1/2 right-40 -translate-y-1/3 z-50 flex-col items-center gap-3">
               {services.map((service, index) => (
-                
-
                 <button
                   key={service.id}
                   onClick={() => scrollToCard(index)}
