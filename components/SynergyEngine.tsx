@@ -346,7 +346,7 @@ const handleScroll = () => {
             {engineCards.map((card, index) => (
               <div
                 key={index}
-                className="flex-shrink-0 w-[100vw] max-w-[150vw] snap-center rounded-2xl p-5 flex flex-col relative z-10 overflow-hidden h-[450px] md:w-[48%] 
+                className="flex-shrink-0 w-[100%]  max-w-[150vw] snap-center rounded-2xl p-5 flex flex-col relative z-10 overflow-hidden h-[450px] md:w-[48%] 
                 
                 lg:h-[520px] mr-4 last:mr-0"
                 style={{ backgroundColor: '#171717', isolation: 'isolate' }}

@@ -188,7 +188,7 @@ export default function BeforeFooterCTA() {
               className="relative h-[340px] lg:h-[500px] flex items-center justify-center lg:justify-end order-2 lg:order-1"
             >
               {/* Orbital background - hidden on mobile */}
-              <div className="absolute -top-12 -right-64 hidden lg:block">
+              <div className="absolute -top-12 -right-64 hidden lg:block ">
                 <img
                   src="/images/we-redefine-the-finish-line-vector.webp"
                   alt="Orbital background"
