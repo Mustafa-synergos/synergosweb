@@ -231,7 +231,7 @@ const BlogCard: React.FC<{ post: BlogPost; index: number; onHover: (hovering: bo
           </p>
 
           {/* Metadata */}
-          <div className="text-[16px] text-gray-500 font-clother font-light tracking-[0.08rem] mt-3 sm:mt-4">
+          <div className="text-[16px] text-gray-500 font-clother font-light tracking-[0.08rem] mt-3 md:mt-[0.5rem] sm:mt-4">
             {post.category} | {post.date}
           </div>
         </div>
