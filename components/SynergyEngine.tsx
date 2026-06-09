@@ -346,7 +346,7 @@ const handleScroll = () => {
             {engineCards.map((card, index) => (
               <div
                 key={index}
-                className="flex-shrink-0 w-[100%]  max-w-[150vw] snap-center rounded-2xl p-5 flex flex-col relative z-10 overflow-hidden h-[450px] md:w-[48%] 
+                className="flex-shrink-0 w-[100%] max-w-[150vw] snap-center rounded-2xl p-5 flex flex-col relative z-10 overflow-hidden h-[450px] md:w-[48%] 
                 
                 lg:h-[520px] mr-4 last:mr-0"
                 style={{ backgroundColor: '#171717', isolation: 'isolate' }}
@@ -370,7 +370,7 @@ const handleScroll = () => {
                     <p className="text-white/80 text-sm leading-relaxed flex-1 overflow-hidden">
                       {card.description}
                     </p>
-                    <a href="#" className="text-red-500 text-sm lowercase flex-shrink-0">
+                    <a href="#" className="text-red-500 text-[18px] lowercase flex-shrink-0">
                       {card.question}
                     </a>
                   </div>
