@@ -386,7 +386,7 @@ lg:pt-0
             ))}
 
             {/* SQUARE NAVIGATION — Desktop: vertical right of card */}
-            <div className="hidden md:hidden lg:flex absolute top-1/2 right-25 -translate-y-1/3 z-50 flex-col items-center gap-3">
+            <div className="hidden md:hidden lg:flex absolute top-1/2 right-20 -translate-y-1/3 z-50 flex-col items-center gap-3">
               {services.map((service, index) => (
                 <button
                   key={service.id}
