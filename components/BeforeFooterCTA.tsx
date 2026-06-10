@@ -32,7 +32,7 @@ export default function BeforeFooterCTA() {
       background="custom" 
       id="final-cta" 
       customBgColor="bg-[#171717]" 
-      className="h-[125vh] lg:h-[120vh] sm:h-[80vh] md:h-[100vh] md:min-h-[80vh] md:max-h-[110vh]"
+      className="h-[125vh] lg:h-[120vh] md:h-[95vh] md:max-h-[100vh]"
       sectionRef={sectionRef}
       backgroundElement={<InteractiveDots variant="dark" containerRef={sectionRef} />}
     >
@@ -56,7 +56,7 @@ export default function BeforeFooterCTA() {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 viewport={{ once: true }}
               >
-                <span className="text-red-500 font-clother font-normal text-[18px] md:text-[20px] lg:text-[28px] leading-[100%] tracking-normal mb-0 lg:mb-2" style={{ textTransform: 'capitalize' }}>
+                <span className="text-red-500 font-clother font-normal text-[18px] lg:text-[28px] leading-[100%] tracking-normal mb-0 lg:mb-2" style={{ textTransform: 'capitalize' }}>
                   Let's connect
                 </span>
               </motion.div>
@@ -67,7 +67,7 @@ export default function BeforeFooterCTA() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, delay: 0.5 }}
                 viewport={{ once: true }}
-                className="text-white font-clother font-bold text-[38px] md:text-[80px] lg:text-[134px] leading-[40px] md:leading-[64px] lg:leading-[134px] tracking-normal uppercase whitespace-nowrap !mt-0 lg:!mt-0"
+                className="text-white font-clother font-bold text-[38px] lg:text-[134px] leading-[40px] lg:leading-[134px] tracking-normal uppercase whitespace-nowrap !mt-0 lg:!mt-0"
               >
                 WE REDEFINE THE
                 <br />
@@ -188,7 +188,7 @@ export default function BeforeFooterCTA() {
               className="relative h-[340px] lg:h-[500px] flex items-center justify-center lg:justify-end order-2 lg:order-1"
             >
               {/* Orbital background - hidden on mobile */}
-              <div className="absolute -top-12 -right-64 hidden lg:block ">
+              <div className="absolute -top-12 -right-64 hidden lg:block">
                 <img
                   src="/images/we-redefine-the-finish-line-vector.webp"
                   alt="Orbital background"

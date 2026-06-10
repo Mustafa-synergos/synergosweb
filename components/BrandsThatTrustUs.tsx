@@ -47,29 +47,27 @@ export default function BrandsThatTrustUs() {
     const ctx = gsap.context(() => {
       // Label animation
       gsap.fromTo(labelRef.current,
-        { opacity: 0, x: -30, force3D: true },
+        { opacity: 0, x: -30 },
         {
           opacity: 1,
           x: 0,
-          force3D: true,
           duration: 1,
           ease: 'power3.out',
           scrollTrigger: {
             trigger: sectionRef.current,
             start: 'top 80%',
             end: 'top 60%',
-            scrub: 0.5,
+            scrub: 1,
           }
         }
       );
 
       // Heading stagger animation
       gsap.fromTo(headingRef.current?.children || [],
-        { opacity: 0, y: 60, force3D: true },
+        { opacity: 0, y: 60 },
         {
           opacity: 1,
           y: 0,
-          force3D: true,
           duration: 1,
           stagger: 0.15,
           ease: 'power3.out',
@@ -77,25 +75,24 @@ export default function BrandsThatTrustUs() {
             trigger: headingRef.current,
             start: 'top 80%',
             end: 'top 50%',
-            scrub: 0.5,
+            scrub: 1,
           }
         }
       );
 
       // CTA button animation
       gsap.fromTo(ctaButtonRef.current,
-        { opacity: 0, y: 30, force3D: true },
+        { opacity: 0, y: 30 },
         {
           opacity: 1,
           y: 0,
-          force3D: true,
           duration: 1,
           ease: 'power3.out',
           scrollTrigger: {
             trigger: ctaButtonRef.current,
             start: 'top 85%',
             end: 'top 65%',
-            scrub: 0.5,
+            scrub: 1,
           }
         }
       );
@@ -104,12 +101,11 @@ export default function BrandsThatTrustUs() {
       const bubbles = bubblesRef.current?.querySelectorAll('.logo-bubble');
       if (bubbles) {
         gsap.fromTo(bubbles,
-          { opacity: 0, scale: 0.8, y: 40, force3D: true },
+          { opacity: 0, scale: 0.8, y: 40 },
           {
             opacity: 1,
             scale: 1,
             y: 0,
-            force3D: true,
             duration: 0.8,
             stagger: 0.08,
             ease: 'power3.out',
@@ -117,7 +113,7 @@ export default function BrandsThatTrustUs() {
               trigger: bubblesRef.current,
               start: 'top 75%',
               end: 'top 45%',
-              scrub: 0.5,
+              scrub: 1,
             }
           }
         );

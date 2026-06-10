@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { createIndexTracker, rafThrottle } from '../lib/scroll-utils';
 import InteractiveDots from './InteractiveDots';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -118,26 +117,29 @@ export default function SynergyEngine() {
 
         // Container — master leftward drift
         tl.fromTo(containerRef.current,
-          { x: 0, force3D: true },
-          { x: -900, duration: 0.8, ease: 'power1.inOut', force3D: true },
+          { x: 0 },
+          { x: -900, duration: 0.8, ease: 'power1.inOut' },
           0.1
         );
 
+        // Vector — counter-drift (heavier, stays in frame longer)
         tl.fromTo(deskVectorRef.current,
-          { x: 0, force3D: true },
-          { x: -550, duration: 0.8, ease: 'power1.inOut', force3D: true },
+          { x: 0 },
+          { x: -550, duration: 0.8, ease: 'power1.inOut' },
           0.1
         );
 
+        // Heading — drifts left with container
         tl.fromTo(deskHeadingRef.current,
-          { x: 0, force3D: true },
-          { x: -650, duration: 0.8, ease: 'power1.inOut', force3D: true },
+          { x: 0 },
+          { x: -650, duration: 0.8, ease: 'power1.inOut' },
           0.1
         );
 
+        // Cards — fastest drift, traverse from right to center
         tl.fromTo(deskCardsRef.current,
-          { x: 0, force3D: true },
-          { x: -500, duration: 0.8, ease: 'power1.inOut', force3D: true },
+          { x: 0 },
+          { x: -500, duration: 0.8, ease: 'power1.inOut' },
           0.1
         );
       }
@@ -147,14 +149,14 @@ export default function SynergyEngine() {
          ================================================================ */
       else {
         gsap.fromTo(mobHeadingRef.current,
-          { opacity: 0, y: 30, force3D: true },
+          { opacity: 0, y: 30 },
           {
-            opacity: 1, y: 0, force3D: true,
+            opacity: 1, y: 0,
             duration: 1, ease: 'power2.out',
             scrollTrigger: {
               trigger: mobHeadingRef.current,
               start: 'top 85%', end: 'top 60%',
-              scrub: 0.3,
+              scrub: 0.5,
             }
           }
         );
@@ -164,15 +166,14 @@ export default function SynergyEngine() {
           const cardElements = slider.children;
           if (cardElements.length > 0) {
             gsap.fromTo(cardElements,
-              { x: 60, force3D: true },
-              {
-                x: 0,
-                force3D: true,
+  { x: 60 },
+  {
+    x: 0,
                 duration: 0.8, stagger: 0.15, ease: 'power2.out',
                 scrollTrigger: {
                   trigger: mobCardsRef.current,
                   start: 'top 85%', end: 'bottom 60%',
-                  scrub: 0.3,
+                  scrub: 0.5,
                 }
               }
             );
@@ -202,22 +203,28 @@ export default function SynergyEngine() {
     const slider = mobileSliderRef.current;
     if (!slider) return;
 
-    const updateActiveCard = createIndexTracker(setActiveCard);
+const handleScroll = () => {
+  const slider = mobileSliderRef.current;
+  if (!slider) return;
 
-    const handleScroll = rafThrottle(() => {
-      const sliderEl = mobileSliderRef.current;
-      if (!sliderEl) return;
+  const maxScroll = slider.scrollWidth - slider.clientWidth;
+  const progress = slider.scrollLeft / maxScroll;
 
-      const maxScroll = sliderEl.scrollWidth - sliderEl.clientWidth;
-      if (maxScroll <= 0) return;
+  console.log({
+    scrollLeft: slider.scrollLeft,
+    maxScroll,
+    progress,
+  });
 
-      const progress = sliderEl.scrollLeft / maxScroll;
-      if (progress < 0.33) updateActiveCard(0);
-      else if (progress < 0.66) updateActiveCard(1);
-      else updateActiveCard(2);
-    });
-
-    slider.addEventListener('scroll', handleScroll, { passive: true });
+  if (progress < 0.33) {
+    setActiveCard(0);
+  } else if (progress < 0.66) {
+    setActiveCard(1);
+  } else {
+    setActiveCard(2);
+  }
+};
+    slider.addEventListener('scroll', handleScroll);
     return () => {
       slider.removeEventListener('scroll', handleScroll);
     };
