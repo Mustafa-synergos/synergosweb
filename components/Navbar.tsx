@@ -34,7 +34,7 @@ export default function Navbar() {
   const backdropBlur = useTransform(scrollY, [0, scrollThreshold, scrollThreshold + 20], [0, 8, 16]);
 
   // Container width and centering
-  const containerMaxWidth = useTransform(scrollY, [0, scrollThreshold, scrollThreshold + 20], ['100%', '100%', '1200px']);
+  const containerMaxWidth = useTransform(scrollY, [0, scrollThreshold, scrollThreshold + 20], ['100%', '100%', '1280px']);
   const containerPaddingY = useTransform(scrollY, [0, scrollThreshold, scrollThreshold + 20], [16, 16, 12]);
 
   // Border radius and gap
