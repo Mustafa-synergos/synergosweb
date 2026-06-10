@@ -29,7 +29,7 @@ export default function Footer() {
         </div>
 
         {/* Four columns - exact spacing */}
-        <div className="grid grid-cols-1 md:grid-cols-1
+        <div className="grid grid-cols-1  md:grid-cols-1
          lg:grid-cols-[0.8fr_0.7fr_1.4fr_0.7fr] gap-x-4 sm:gap-x-2 gap-y-6 sm:gap-y-8 mb-12 sm:mb-20 mx-auto" style={{ maxWidth: '100%' }}>
           {/* OFFICE LOCATION */}
           <div>
@@ -45,7 +45,7 @@ export default function Footer() {
           {/* BROWSE */}
           <div>
             <h3 className="font-[clother] font-normal not-italic text-[18px] sm:text-[22px] leading-[100%] tracking-normal text-white/90 mb-4 sm:mb-6 uppercase">BROWSE</h3>
-            <div className="grid grid-cols-2 gap-x-4 gap-y-3">
+            <div className="grid grid-cols-2 sm:grid-cols-1 md: gap-x-4 gap-y-3">
               <div className="space-y-3">
                 <div><Link href="#" className="font-[clother] font-light not-italic text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] tracking-normal text-gray-400 hover:text-white transition-colors duration-300 whitespace-nowrap">Who we are</Link></div>
                 <div><Link href="#" className="font-[clother] font-light not-italic text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] tracking-normal text-gray-400 hover:text-white transition-colors duration-300 whitespace-nowrap">What we offer</Link></div>
@@ -62,9 +62,7 @@ export default function Footer() {
           {/* WHAT WE OFFER */}
           <div>
             <h3 className="font-[clother] font-normal not-italic text-[18px] sm:text-[22px] leading-[100%] tracking-normal text-white/90 mb-4 sm:mb-6 uppercase">WHAT WE OFFER</h3>
-            <div className="grid grid-cols-2
-             sm:grid-cols-1 md:grid-cols-2
-            gap-x-4 gap-y-3">
+            <div className="grid grid-cols-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-x-4 gap-y-3">
               <div className="space-y-3">
                 <div><Link href="#" className="font-[clother] font-light not-italic text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] tracking-normal text-gray-400 hover:text-white transition-colors duration-300 whitespace-nowrap">Strategy & Research</Link></div>
                 <div><Link href="#" className="font-[clother] font-light not-italic text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] tracking-normal text-gray-400 hover:text-white transition-colors duration-300 whitespace-nowrap">Storytelling & Performance</Link></div>
