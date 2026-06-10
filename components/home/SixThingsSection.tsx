@@ -244,7 +244,7 @@ export default function Sticky3DStackCards() {
             ref={dotsViewportRef}
             className="sticky top-0 left-0 w-full h-screen  md:pt-2"
             style={{
-              perspective: "1200px",
+              perspective: "1280px",
               transformStyle: "preserve-3d",
             }}
           >
