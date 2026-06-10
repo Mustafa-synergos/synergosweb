@@ -120,7 +120,7 @@ export default function Hero() {
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, delay: 0.4 }}
-              className="text-left order-2 md:order-2 lg:order-2 w-full lg:w-[65%] md:w-[70%]"
+              className="text-left order-2 md:order-2 lg:order-2 w-full lg:w-[65%]"
             >
               <h1 className="responsive-h1 text-white mb-4 sm:mb-6 lg:mb-6
               
