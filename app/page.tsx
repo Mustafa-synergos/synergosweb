@@ -5,7 +5,6 @@ import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import WhoWeAre from '../components/WhoWeAre';
 
-
 // Lazy-load heavy below-fold sections to reduce initial bundle and improve TTI
 const AmbitionSection = dynamic(() => import('../components/AmbitionSection'), { ssr: false });
 const SynergyEngine = dynamic(() => import('../components/SynergyEngine'), { ssr: false });
@@ -55,7 +54,6 @@ export default function HomePage() {
       <section>
         <Footer />
       </section>
-
     </main>
   );
 }
