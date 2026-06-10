@@ -144,43 +144,6 @@ export default function SynergyEngine() {
         );
       }
 
-      /* ================================================================
-         MOBILE / TABLET — Vertical scroll with staggered reveals
-         ================================================================ */
-      else {
-        gsap.fromTo(mobHeadingRef.current,
-          { opacity: 0, y: 30 },
-          {
-            opacity: 1, y: 0,
-            duration: 1, ease: 'power2.out',
-            scrollTrigger: {
-              trigger: mobHeadingRef.current,
-              start: 'top 85%', end: 'top 60%',
-              scrub: 0.5,
-            }
-          }
-        );
-
-        const slider = mobileSliderRef.current;
-        if (slider) {
-          const cardElements = slider.children;
-          if (cardElements.length > 0) {
-            gsap.fromTo(cardElements,
-  { x: 60 },
-  {
-    x: 0,
-                duration: 0.8, stagger: 0.15, ease: 'power2.out',
-                scrollTrigger: {
-                  trigger: mobCardsRef.current,
-                  start: 'top 85%', end: 'bottom 60%',
-                  scrub: 0.5,
-                }
-              }
-            );
-          }
-        }
-      }
-
       // Refresh ScrollTrigger after setup
       ScrollTrigger.refresh();
     }, sectionRef);
@@ -203,28 +166,19 @@ export default function SynergyEngine() {
     const slider = mobileSliderRef.current;
     if (!slider) return;
 
-const handleScroll = () => {
-  const slider = mobileSliderRef.current;
-  if (!slider) return;
+    const handleScroll = () => {
+      const sliderEl = mobileSliderRef.current;
+      if (!sliderEl) return;
 
-  const maxScroll = slider.scrollWidth - slider.clientWidth;
-  const progress = slider.scrollLeft / maxScroll;
+      const maxScroll = sliderEl.scrollWidth - sliderEl.clientWidth;
+      if (maxScroll <= 0) return;
 
-  console.log({
-    scrollLeft: slider.scrollLeft,
-    maxScroll,
-    progress,
-  });
-
-  if (progress < 0.33) {
-    setActiveCard(0);
-  } else if (progress < 0.66) {
-    setActiveCard(1);
-  } else {
-    setActiveCard(2);
-  }
-};
-    slider.addEventListener('scroll', handleScroll);
+      const progress = sliderEl.scrollLeft / maxScroll;
+      if (progress < 0.33) setActiveCard(0);
+      else if (progress < 0.66) setActiveCard(1);
+      else setActiveCard(2);
+    };
+    slider.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
       slider.removeEventListener('scroll', handleScroll);
     };
@@ -316,7 +270,7 @@ const handleScroll = () => {
       </div>
 
       {/* ==============================================================
-          MOBILE / TABLET — Vertical stack layout with carousel
+          MOBILE / TABLET — Static layout with horizontal card carousel
           ============================================================== */}
       <div
   className="lg:hidden relative z-20 py-8 px-4 sm:px-6 pb-16 "
