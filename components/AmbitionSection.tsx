@@ -4,9 +4,17 @@ import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { createIndexTracker } from '../lib/scroll-utils';
 import InteractiveDots from './InteractiveDots';
 
 gsap.registerPlugin(ScrollTrigger);
+
+function getHeadingFromProgress(progress: number) {
+  if (progress < 0.33) return 0;
+  if (progress < 0.66) return 1;
+  if (progress < 1) return 2;
+  return 3;
+}
 
 export default function AmbitionSection() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -90,25 +98,19 @@ export default function AmbitionSection() {
     const pos3 = getLogoPosition(h3);
     const pos4 = getLogoPosition(h4);
 
+    const updateActiveHeading = createIndexTracker((index) =>
+      setActiveHeading(index + 1)
+    );
+
     // Create GSAP timeline with ScrollTrigger
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: container,
         start: 'top center',
         end: 'bottom center',
-        scrub: 1.5,
+        scrub: 1,
         onUpdate: (self) => {
-          const progress = self.progress;
-          // Determine which heading is active based on timeline progress
-          if (progress < 0.33) {
-            setActiveHeading(1);
-          } else if (progress < 0.66) {
-            setActiveHeading(2);
-          } else if (progress < 1) {
-            setActiveHeading(3);
-          } else {
-            setActiveHeading(4);
-          }
+          updateActiveHeading(getHeadingFromProgress(self.progress));
         }
       }
     });
@@ -203,18 +205,18 @@ export default function AmbitionSection() {
 
         gsap.set(mobileLogo, { x: pos1.x, y: pos1.y });
 
+        const updateMobileHeading = createIndexTracker((index) =>
+          setActiveHeading(index + 1)
+        );
+
         mTl = gsap.timeline({
           scrollTrigger: {
             trigger: mobileContainer,
             start: 'top center',
             end: 'bottom center',
-            scrub: 1.5,
+            scrub: 1,
             onUpdate: (self) => {
-              const progress = self.progress;
-              if (progress < 0.33) setActiveHeading(1);
-              else if (progress < 0.66) setActiveHeading(2);
-              else if (progress < 1) setActiveHeading(3);
-              else setActiveHeading(4);
+              updateMobileHeading(getHeadingFromProgress(self.progress));
             },
           },
         });

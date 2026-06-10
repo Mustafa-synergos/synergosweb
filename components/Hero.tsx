@@ -8,12 +8,24 @@ import PremiumCTA from './PremiumCTA';
 
 export default function Hero() {
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
-  const [currentDevice, setCurrentDevice] = useState<'desktop' | 'tablet' | 'mobile'>('desktop');
+  const [currentDevice, setCurrentDevice] = useState<'desktop' | 'tablet' | 'mobile'>(() => {
+    if (typeof window === 'undefined') return 'desktop';
+    const width = window.innerWidth;
+    if (width < 768) return 'mobile';
+    if (width < 1024) return 'tablet';
+    return 'desktop';
+  });
   const videoRef = useRef<HTMLVideoElement>(null);
   
   const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 500], [0, -150]);
-  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+  const parallaxY =
+    currentDevice === 'mobile' ? 30 : currentDevice === 'tablet' ? 70 : 120;
+  const y = useTransform(scrollY, [0, 500], [0, -parallaxY]);
+  const opacity = useTransform(
+    scrollY,
+    [0, 300],
+    currentDevice === 'mobile' ? [1, 0.95] : [1, 0]
+  );
 
   // Detect device type for responsive media
   useEffect(() => {
@@ -90,8 +102,7 @@ export default function Hero() {
       {/* Hero Content - Split Layout */}
       <motion.div
         style={{ y, opacity }}
-        className="relative z-10 flex items-center min-h-[88vh]  max-h-[100vh] lg:min-h-screen px-6 sm:px-8 lg:px-8 pt-20 sm:pt-24 md:pt-10
-         lg:pt-20"
+        className="relative z-10 flex items-center min-h-[88vh] max-h-[100vh] lg:min-h-screen px-6 sm:px-8 lg:px-8 pt-20 sm:pt-24 md:pt-10 lg:pt-20 gpu-layer"
       >
         <div className="max-w-7xl hero-content mx-auto w-full px-4 sm:px-0
         

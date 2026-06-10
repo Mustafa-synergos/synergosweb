@@ -85,6 +85,9 @@ export default function InteractiveDots({
   
   const dprRef = useRef<number>(1);
   const isMobileRef = useRef<boolean>(false);
+  const gridSpacingRef = useRef<number>(gridSpacing);
+  const resizeRafRef = useRef<number | null>(null);
+  const frameCounterRef = useRef<number>(0);
 
   const config = {
     dotColor: customDotColor || VARIANT_CONFIGS[variant].dotColor,
@@ -179,8 +182,9 @@ export default function InteractiveDots({
       displacementY: number;
     }> = [];
 
-    for (let x = gridSpacing / 2; x < canvasWidth; x += gridSpacing) {
-      for (let y = gridSpacing / 2; y < canvasHeight; y += gridSpacing) {
+    const spacing = gridSpacingRef.current;
+    for (let x = spacing / 2; x < canvasWidth; x += spacing) {
+      for (let y = spacing / 2; y < canvasHeight; y += spacing) {
         dots.push({
           x,
           y,
@@ -196,13 +200,16 @@ export default function InteractiveDots({
     }
 
     dotsRef.current = dots;
-  }, [gridSpacing]);
+  }, []);
 
   const resizeCanvas = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const dpr = window.devicePixelRatio || 1;
+    const rawDpr = window.devicePixelRatio || 1;
+    const dpr = isMobileRef.current
+      ? Math.min(rawDpr, 1.5)
+      : Math.min(rawDpr, 2);
     dprRef.current = dpr;
 
     // Use containerRef if provided, otherwise use parent
@@ -312,8 +319,15 @@ const newY =
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    // Skip animation if not in viewport or reduced motion is preferred
+    // Skip drawing when off-screen or reduced motion is preferred
     if (!isVisibleRef.current || prefersReducedMotionRef.current) {
+      animationFrameId.current = requestAnimationFrame(animate);
+      return;
+    }
+
+    // On mobile, draw every other frame to reduce main-thread load
+    frameCounterRef.current += 1;
+    if (isMobileRef.current && frameCounterRef.current % 2 !== 0) {
       animationFrameId.current = requestAnimationFrame(animate);
       return;
     }
@@ -455,18 +469,31 @@ if (mouseData.influence > 0) {
           isVisibleRef.current = entry.isIntersecting;
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0, rootMargin: '100px' }
     );
     observer.observe(canvas);
 
+    const applyDeviceProfile = () => {
+      isMobileRef.current = window.innerWidth < 768;
+      gridSpacingRef.current = isMobileRef.current
+        ? Math.max(gridSpacing, 42)
+        : gridSpacing;
+    };
+
+    applyDeviceProfile();
     resizeCanvas();
 
     const handleResize = () => {
-      isMobileRef.current = window.innerWidth < 768;
-      resizeCanvas();
+      applyDeviceProfile();
+      if (resizeRafRef.current !== null) {
+        cancelAnimationFrame(resizeRafRef.current);
+      }
+      resizeRafRef.current = requestAnimationFrame(() => {
+        resizeRafRef.current = null;
+        resizeCanvas();
+        initializeDots();
+      });
     };
-
-    isMobileRef.current = window.innerWidth < 768;
 
     window.addEventListener('resize', handleResize);
     // canvas.addEventListener('pointermove', handlePointerMove);
@@ -474,14 +501,22 @@ if (mouseData.influence > 0) {
     canvas.addEventListener('pointerup', handlePointerUp);
     canvas.addEventListener('pointerleave', handlePointerLeave);
     // window.addEventListener('pointerup', handlePointerUp);
-    window.addEventListener('pointermove', handlePointerMove);
+    if (!isMobileRef.current) {
+      window.addEventListener('pointermove', handlePointerMove, { passive: true });
+    }
 
     // Add ResizeObserver to watch parent container size changes
     let resizeObserver: ResizeObserver | null = null;
     if (canvas.parentElement && typeof ResizeObserver !== 'undefined') {
       resizeObserver = new ResizeObserver(() => {
-        resizeCanvas();
-        requestAnimationFrame(() => initializeDots()); // Re-initialize dots on resize
+        if (resizeRafRef.current !== null) {
+          cancelAnimationFrame(resizeRafRef.current);
+        }
+        resizeRafRef.current = requestAnimationFrame(() => {
+          resizeRafRef.current = null;
+          resizeCanvas();
+          initializeDots();
+        });
       });
       resizeObserver.observe(canvas.parentElement);
     }
@@ -494,6 +529,7 @@ if (mouseData.influence > 0) {
 
     return () => {
       window.removeEventListener('resize', handleResize);
+      window.removeEventListener('pointermove', handlePointerMove);
       // canvas.removeEventListener('pointermove', handlePointerMove);
       // canvas.removeEventListener('pointerdown', handlePointerDown);
       canvas.removeEventListener('pointerup', handlePointerUp);
@@ -507,6 +543,10 @@ if (mouseData.influence > 0) {
         resizeObserver.unobserve(canvas.parentElement);
       }
 
+      if (resizeRafRef.current !== null) {
+        cancelAnimationFrame(resizeRafRef.current);
+        resizeRafRef.current = null;
+      }
       if (animationFrameId.current) {
         cancelAnimationFrame(animationFrameId.current);
         animationFrameId.current = null;
