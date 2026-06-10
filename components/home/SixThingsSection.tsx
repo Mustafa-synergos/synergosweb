@@ -280,9 +280,10 @@ lg:pt-0
                     rounded-[15px]
                     shadow-2xl
                     w-full
-                    max-w-[1200px]
-                    lg:max-w-[1200px]
-                    md:max-w-[900px]
+                    max-w-[1280px]
+                    lg:max-w-[1280px]
+                    md:w-full
+                    md:max-w-[800px]
                     h-[627px]
                     md:h-[330px]
                     lg:h-auto
