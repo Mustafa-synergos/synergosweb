@@ -321,7 +321,7 @@ export default function AmbitionSection() {
           />
         </motion.div> */}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-4 gap-y-64 md:gap-y-72">
+        <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-4 gap-y-64 md:gap-y-72 lg:p-3 md:p-2">
           {/* Mobile: Stacked vertical layout with floating logo */}
           <div className="md:hidden space-y-32 flex flex-col items-center">
             {/* First line */}
