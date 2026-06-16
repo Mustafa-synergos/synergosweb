@@ -12,30 +12,12 @@ import PremiumCTA from "../PremiumCTA";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Sticky3DStackCards() {
-  const heroDotsRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const dotsViewportRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<HTMLDivElement[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [cardScrollDistance, setCardScrollDistance] = useState(0);
 
   useEffect(() => {
-    const getCardScrollDistance = () => {
-      if (window.innerWidth >= 1024) return window.innerHeight;
-      if (window.innerWidth >= 768) {
-        return Math.min(window.innerHeight * 0.58, 460);
-      }
-      return window.innerHeight;
-    };
-
-    const updateCardScrollDistance = () => {
-      setCardScrollDistance(getCardScrollDistance());
-      requestAnimationFrame(() => ScrollTrigger.refresh());
-    };
-
-    updateCardScrollDistance();
-    window.addEventListener("resize", updateCardScrollDistance);
-
     const ctx = gsap.context(() => {
       const cards = cardRefs.current.filter(Boolean);
 
@@ -64,8 +46,8 @@ export default function Sticky3DStackCards() {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: () => `top+=${(index - 1) * getCardScrollDistance()} top`,
-            end: () => `top+=${index * getCardScrollDistance()} top`,
+            start: () => `top+=${(index - 1) * window.innerHeight} top`,
+            end: () => `top+=${index * window.innerHeight} top`,
             scrub: 0.6,
             invalidateOnRefresh: true,
           },
@@ -133,17 +115,14 @@ export default function Sticky3DStackCards() {
       ScrollTrigger.refresh();
     }, sectionRef);
 
-    return () => {
-      window.removeEventListener("resize", updateCardScrollDistance);
-      ctx.revert();
-    };
+    return () => ctx.revert();
   }, []);
 
   const scrollToCard = (index: number) => {
     if (!sectionRef.current) return;
     const sectionTop =
       sectionRef.current.getBoundingClientRect().top + window.scrollY;
-    const targetScroll = sectionTop + index * (cardScrollDistance || window.innerHeight);
+    const targetScroll = sectionTop + index * window.innerHeight;
     window.scrollTo({ top: targetScroll, behavior: "smooth" });
   };
   // const [isDesktop, setIsDesktop] = useState(false);
@@ -160,17 +139,13 @@ export default function Sticky3DStackCards() {
   // }, []);
   return (
     <section className="relative bg-[#050505]">
+      {/* DOTS */}
+      <InteractiveDots containerRef={dotsViewportRef} variant="dark" />
+
       <div className="relative z-10">
         {/* HERO */}
-        <div
-          ref={heroDotsRef}
-          className="relative min-h-auto md:min-h-[50vh] md:min-h-fit flex items-center px-6 lg:px-16 xl:px-24 pt-20 md:pt-10 md:items-center overflow-hidden"
-        >
-          <div className="absolute inset-0 z-0 pointer-events-none">
-            <InteractiveDots containerRef={heroDotsRef} variant="dark" />
-          </div>
-
-          <div className="max-w-7xl mx-auto w-full relative z-10">
+        <div className="relative min-h-auto md:min-h-[50vh] md:min-h-fit flex items-center px-6 lg:px-16 xl:px-24 pt-20 md:pt-10 md:items-center">
+          <div className="max-w-7xl mx-auto w-full relative">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center ">
               {/* LEFT - FULL WIDTH */}
               <div className="lg:col-span-12">
@@ -242,7 +217,7 @@ export default function Sticky3DStackCards() {
             </div>
           </div>
           {/* ORBIT IMAGE - OUTSIDE CONTAINER ON RIGHT */}
-          <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 xl:right-0 z-10">
+          <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 xl:right-0">
             <Image
               src="/images/six-things-orbital.svg"
               alt="Six Things Orbital"
@@ -258,9 +233,7 @@ export default function Sticky3DStackCards() {
           ref={sectionRef}
           className="relative w-full md:min-w-full"
           style={{
-            height: cardScrollDistance
-              ? `calc(100vh + ${(services.length - 1) * cardScrollDistance}px)`
-              : `${services.length * 100}vh`,
+            height: `${services.length * 100}vh`,
             // height: `${(services.length - 1) * 110}vh`
             // height: `${(services.length - 1) * (isDesktop ? 110 : 70)}vh`,
             // height: `${services.length * 100 - 100}vh`,
@@ -269,14 +242,14 @@ export default function Sticky3DStackCards() {
         >
           <div
             ref={dotsViewportRef}
-            className="sticky top-0 left-0 w-full h-screen md:pt-0"
+            className="sticky top-0 left-0 w-full h-screen  md:pt-2"
             style={{
               perspective: "1280px",
               transformStyle: "preserve-3d",
             }}
           >
-            <div className="absolute inset-0 z-0 pointer-events-none">
-              <InteractiveDots containerRef={dotsViewportRef} variant="dark" />
+            <div className="absolute inset-0 z-[1] pointer-events-none">
+              <InteractiveDots variant="dark" containerRef={dotsViewportRef} />
             </div>
 
             {services.map((service, index) => (
@@ -288,8 +261,8 @@ export default function Sticky3DStackCards() {
                 className="absolute inset-0 w-full h-screen md:h-auto flex items-center  md:items-center
 lg:items-center
 justify-center
-md:py-6
-lg:py-0
+md:pt-0
+lg:pt-0
 
                 justify-center will-change-transform"
                 style={{
@@ -312,8 +285,7 @@ lg:py-0
                     md:w-full
                     md:max-w-[800px]
                     h-[627px]
-                    md:h-auto
-                    md:min-h-[330px]
+                    md:h-[330px]
                     lg:h-auto
                     lg:min-h-[400px]
                     overflow-visible
