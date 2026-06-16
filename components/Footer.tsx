@@ -214,9 +214,9 @@ export default function Footer() {
       {/* Decorative elements - exact positioning */}
       <div className="hidden lg:block absolute bottom-0 right-[15rem] w-[30rem] h-[30rem] opacity-50">
         <img
-          src="/images/foter-vector.webp"
+          src="/images/foter-vector.svg"
           alt="Decorative element"
-          className="w-full h-full object-contain"
+          className="w-full h-full object-contain opacity-40"
         />
       </div>
       {/* <div className="hidden lg:block absolute top-32 right-24 w-2 h-2 bg-white/30 rounded-full"></div> */}

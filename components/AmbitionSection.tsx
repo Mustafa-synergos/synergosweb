@@ -281,11 +281,7 @@ export default function AmbitionSection() {
         className="hidden md:hidden lg:block   left-0 top-0 z-10" 
         style={{ transform: 'translateY(var(--tw-translate-y, 0px))' }}
       >
-        <img
-          src="/images/who-we-are-vector.webp"
-          alt="Who We Are Vector"
-          className="w-auto h-[400px] object-contain"
-        />
+<img src="/images/who-we-are-vector.svg" alt="Who We Are Vector" className="w-auto h-[400px] object-contain opacity-40" />
       </motion.div>
 
       {/* Content Wrapper - z-index to sit above canvas */}

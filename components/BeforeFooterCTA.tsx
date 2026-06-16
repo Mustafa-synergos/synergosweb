@@ -190,14 +190,14 @@ export default function BeforeFooterCTA() {
               {/* Orbital background - hidden on mobile */}
               <div className="absolute -top-12 -right-48 xl:-right-56 2xl:-right-64 hidden lg:block">
                 <img
-                  src="/images/we-redefine-the-finish-line-vector.webp"
+                  src="/images/we-redefine-the-finish-line-vector.svg"
                   alt="Orbital background"
-                  className="w-[520px] h-[275px] min-w-[520px] min-h-[275px] xl:w-[580px] xl:h-[306px] xl:min-w-[580px] xl:min-h-[306px] 2xl:w-[625px] 2xl:h-[330px] 2xl:min-w-[625px] 2xl:min-h-[330px] object-contain opacity-60"
+                  className="w-[520px] h-[275px] min-w-[520px] min-h-[275px] xl:w-[580px] xl:h-[306px] xl:min-w-[580px] xl:min-h-[306px] 2xl:w-[625px] 2xl:h-[330px] 2xl:min-w-[625px] 2xl:min-h-[330px] object-contain opacity-20"
                 />
               </div>
 
               {/* Glowing particles */}
-              {[...Array(8)].map((_, i) => (
+              {/* {[...Array(8)].map((_, i) => (
                 <motion.div
                   key={`particle-${i}`}
                   style={{
@@ -216,7 +216,7 @@ export default function BeforeFooterCTA() {
                   }}
                   className="absolute w-1 h-1 bg-white rounded-full"
                 />
-              ))}
+              ))} */}
 
               {/* Rocket image */}
               <motion.div
