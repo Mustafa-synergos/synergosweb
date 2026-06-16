@@ -168,7 +168,7 @@ export default function Hero() {
       </motion.div>
 
       {/* Banner Vector Left */}
-      <div className="hidden sm:block absolute bottom-0 w-64 h-96 md:w-45 md:h-65 md:w-[250px] max-w-[450px] xl:w-[450px] opacity-100 z-50" style={{ left: '-4rem' }}>
+      <div className="hidden sm:block absolute bottom-0 w-64 h-96 md:w-45 md:h-65 md:w-[250px] max-w-[450px] xl:w-[450px] opacity-100 z-50" style={{ left: '-5rem' }}>
         <Image
           src="/images/banner-vector-left.webp"
           alt="Banner vector decoration"

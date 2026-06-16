@@ -39,7 +39,7 @@ export default function BeforeFooterCTA() {
       <EditorialContentGrid className="pb-16 lg:pb-24">
         {/* Two Column Layout - Text on left, Rocket on right */}
         <ContentBlock size="full">
-          <div className="grid grid-cols-1 lg:grid-cols-[80%_20%] gap-8 lg:gap-24 xl:gap-32 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_clamp(150px,16vw,220px)] gap-8 lg:gap-12 xl:gap-16 items-center">
             
             {/* Left side - Text content and CTA */}
             <motion.div 
@@ -67,7 +67,7 @@ export default function BeforeFooterCTA() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, delay: 0.5 }}
                 viewport={{ once: true }}
-                className="text-white font-clother font-bold text-[38px] lg:text-[134px] leading-[40px] lg:leading-[134px] tracking-normal uppercase whitespace-nowrap !mt-0 lg:!mt-0"
+                className="text-white font-clother font-bold text-[38px] md:text-[80px] lg:text-[clamp(92px,7.3vw,118px)] leading-[40px] md:leading-[80px] lg:leading-[clamp(92px,7.3vw,118px)] tracking-normal uppercase whitespace-nowrap !mt-0 lg:!mt-0"
               >
                 WE REDEFINE THE
                 <br />
@@ -91,7 +91,7 @@ export default function BeforeFooterCTA() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.7 }}
                 viewport={{ once: true }}
-                className="pt-8 lg:pt-32 w-full"
+                className="pt-8 lg:pt-20 xl:pt-28 w-full"
               >
                 <div className="relative flex flex-col lg:flex-row items-stretch lg:items-center w-full gap-6 lg:gap-0 lg:border-b lg:border-white/30 lg:focus-within:border-white/60 transition-colors duration-300 lg:pb-4">
                   <input
@@ -185,14 +185,14 @@ export default function BeforeFooterCTA() {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, delay: 0.4 }}
               viewport={{ once: true }}
-              className="relative h-[340px] lg:h-[500px] flex items-center justify-center lg:justify-end order-2 lg:order-1"
+              className="relative h-[340px] lg:h-[500px] flex items-center justify-center lg:justify-end order-2 lg:order-1 min-w-0"
             >
               {/* Orbital background - hidden on mobile */}
-              <div className="absolute -top-12 -right-64 hidden lg:block">
+              <div className="absolute -top-12 -right-48 xl:-right-56 2xl:-right-64 hidden lg:block">
                 <img
                   src="/images/we-redefine-the-finish-line-vector.webp"
                   alt="Orbital background"
-                  className="w-[625px] h-[330px] min-w-[625px] min-h-[330px] object-contain opacity-60"
+                  className="w-[520px] h-[275px] min-w-[520px] min-h-[275px] xl:w-[580px] xl:h-[306px] xl:min-w-[580px] xl:min-h-[306px] 2xl:w-[625px] 2xl:h-[330px] 2xl:min-w-[625px] 2xl:min-h-[330px] object-contain opacity-60"
                 />
               </div>
 
@@ -226,14 +226,14 @@ export default function BeforeFooterCTA() {
                   repeat: Infinity,
                   ease: "easeInOut"
                 }}
-                className="relative z-20 mt-40"
+                className="relative z-20 mt-24 xl:mt-32 2xl:mt-40"
               >
                 <Image
                   src="/images/rocket.png"
                   alt="Rocket"
                   width={92}
                   height={790}
-                  className="w-auto h-[350px] lg:h-[790px] object-contain drop-shadow-2xl"
+                  className="w-auto h-[350px] lg:h-[650px] xl:h-[720px] 2xl:h-[790px] object-contain drop-shadow-2xl"
                   style={{
                     filter: 'drop-shadow(0 0 30px rgba(59, 130, 246, 0.3))',
                   }}

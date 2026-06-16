@@ -139,13 +139,12 @@ export default function Sticky3DStackCards() {
   // }, []);
   return (
     <section className="relative bg-[#050505]">
-      {/* DOTS */}
-      <InteractiveDots containerRef={dotsViewportRef} variant="dark" />
-
       <div className="relative z-10">
         {/* HERO */}
-        <div className="relative min-h-auto md:min-h-[50vh] md:min-h-fit flex items-center px-6 lg:px-16 xl:px-24 pt-20 md:pt-10 md:items-center">
-          <div className="max-w-7xl mx-auto w-full relative">
+        <div className="relative min-h-auto md:min-h-[50vh] md:min-h-fit flex items-center px-6 lg:px-16 xl:px-24 pt-20 md:pt-10 md:items-center overflow-hidden">
+          <InteractiveDots variant="dark" />
+
+          <div className="max-w-7xl mx-auto w-full relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center ">
               {/* LEFT - FULL WIDTH */}
               <div className="lg:col-span-12">
@@ -180,8 +179,8 @@ export default function Sticky3DStackCards() {
                   <span
                     className="hidden lg:block"
                     style={{
-                      fontSize: "134px",
-                      lineHeight: "134px",
+                      fontSize: "clamp(92px, 7vw, 134px)",
+                      lineHeight: "clamp(92px, 7vw, 134px)",
                     }}
                   >
                     SIX THINGS WE
@@ -190,8 +189,8 @@ export default function Sticky3DStackCards() {
                   <span
                     className="hidden lg:block"
                     style={{
-                      fontSize: "134px",
-                      lineHeight: "134px",
+                      fontSize: "clamp(92px, 7vw, 134px)",
+                      lineHeight: "clamp(92px, 7vw, 134px)",
                     }}
                   >
                     ARE GOOD AT.
@@ -217,7 +216,7 @@ export default function Sticky3DStackCards() {
             </div>
           </div>
           {/* ORBIT IMAGE - OUTSIDE CONTAINER ON RIGHT */}
-          <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 xl:right-0">
+          <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 xl:right-0 z-10">
             <Image
               src="/images/six-things-orbital.png"
               alt="Six Things Orbital"
@@ -268,6 +267,7 @@ lg:pt-0
                 style={{
                   zIndex: index + 1,
                   transformStyle: "preserve-3d",
+                  pointerEvents: "none",
                 }}
               >
                 <div
@@ -280,8 +280,9 @@ lg:pt-0
                     rounded-[15px]
                     shadow-2xl
                     w-full
-                    max-w-[1280px]
-                    lg:max-w-[1280px]
+                    max-w-[calc(100vw-32px)]
+                    lg:max-w-[min(1280px,calc(100vw-220px))]
+                    2xl:max-w-[1280px]
                     md:w-full
                     md:max-w-[800px]
                     h-[627px]
@@ -293,6 +294,7 @@ lg:pt-0
                   style={{
                     transformStyle: "preserve-3d",
                     boxShadow: "0 30px 80px rgba(0,0,0,.55)",
+                    pointerEvents: "auto",
                   }}
                 >
                   {/* glow */}
@@ -319,8 +321,8 @@ lg:pt-0
                           <span
                             className="hidden lg:inline"
                             style={{
-                              fontSize: "42px",
-                              lineHeight: "50px",
+                              fontSize: "clamp(34px, 2.6vw, 42px)",
+                              lineHeight: "clamp(42px, 3.1vw, 50px)",
                             }}
                           >
                             {service.number}
@@ -344,8 +346,8 @@ lg:pt-0
                             className="hidden lg:inline"
                             style={{
                               fontWeight: 300,
-                              fontSize: "42px",
-                              lineHeight: "50px",
+                              fontSize: "clamp(34px, 2.6vw, 42px)",
+                              lineHeight: "clamp(42px, 3.1vw, 50px)",
                               textTransform: "none",
                             }}
                           >
@@ -387,7 +389,7 @@ lg:pt-0
             ))}
 
             {/* SQUARE NAVIGATION — Desktop: vertical right of card */}
-            <div className="hidden md:hidden lg:flex absolute top-1/2 right-20 -translate-y-1/3 z-50 flex-col items-center gap-3">
+            <div className="hidden md:hidden lg:flex absolute top-1/2 right-8 xl:right-12 2xl:right-20 -translate-y-1/3 z-50 flex-col items-center gap-3">
               {services.map((service, index) => (
                 <button
                   key={service.id}

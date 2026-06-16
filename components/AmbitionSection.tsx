@@ -64,12 +64,14 @@ export default function AmbitionSection() {
   const computedStyle = window.getComputedStyle(heading);
   const lineHeight = parseFloat(computedStyle.lineHeight);
 
-  // Left alignment with spacing
-  const x =
+  // Keep the logo inside the container even when the heading sits near the edge.
+  const x = Math.max(
+    0,
     headingRect.left -
-    containerRect.left -
-    logoWidth -
-    24;
+      containerRect.left -
+      logoWidth -
+      24
+  );
 
   // Align logo to FIRST text line center
   const y =
@@ -321,7 +323,7 @@ export default function AmbitionSection() {
           />
         </motion.div> */}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-4 gap-y-64 md:gap-y-72 lg:p-3 md:p-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-4 gap-y-64 md:gap-y-72 md:pl-24 md:pr-2 lg:pl-28 lg:pr-3 lg:py-3">
           {/* Mobile: Stacked vertical layout with floating logo */}
           <div className="md:hidden space-y-32 flex flex-col items-center">
             {/* First line */}

@@ -188,7 +188,7 @@ export default function SynergyEngine() {
     <section ref={sectionRef} className="relative min-h-[80vh] lg:min-h-screen overflow-hidden" style={{ backgroundColor: '#FF0000', isolation: 'isolate' }}>
 
       {/* ── Interactive Dots Background ── */}
-     <div className="hidden lg:block">
+     <div className="hidden lg:block opacity-85">
        <InteractiveDots variant="red" />
       </div>
       {/* ── Ambient glow ── */}
