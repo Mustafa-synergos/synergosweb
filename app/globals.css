@@ -349,7 +349,7 @@ body::-webkit-scrollbar-track {
    TABLET HERO ONLY
 ========================================= */
 
-@media (min-width: 768px) and (max-width: 1200px) {
+@media (min-width: 768px) and (max-width: 1280px) {
 
   /* Hero content positioning */
   .hero-content {
@@ -377,5 +377,33 @@ body::-webkit-scrollbar-track {
     max-width: 650px;
     width: auto;
     margin: 0 auto;
+  }
+}
+
+.star-field path {
+  transform-origin: center;
+  animation: twinkle 3s infinite ease-in-out;
+}
+
+/* Random-looking delays */
+.star-field path:nth-child(3n) {
+  animation-delay: 0.5s;
+}
+
+.star-field path:nth-child(5n) {
+  animation-delay: 1s;
+}
+
+.star-field path:nth-child(7n) {
+  animation-delay: 1.5s;
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.2;
+  }
+
+  50% {
+    opacity: 1;
   }
 }
