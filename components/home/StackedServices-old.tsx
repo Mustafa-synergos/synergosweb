@@ -15,7 +15,7 @@ gsap.registerPlugin(ScrollTrigger);
  * Scroll distance per card on desktop, as a fraction of one viewport height.
  * Lower = cards switch faster on scroll. 1 = one full screen per card.
  */
-const STEP_FACTOR = 1;
+const STEP_FACTOR = 0.6;
 
 /** Tuning for how the "passed" card peeks above the active one. */
 const PEEK = {
@@ -66,61 +66,48 @@ export default function StackedServices() {
     let lastIdx = -1;
 
     const ctx = gsap.context(() => {
-      // Matches the original SixThingsSection: incoming card rises from the
-      // bottom, the previous card folds backward into depth (origin bottom).
       const applyStack = (activeFloat: number) => {
         cards.forEach((card, i) => {
           const d = activeFloat - i;
-          const t = Math.min(Math.max(d, 0), 1); // fold progress for prev card
 
-          let yPercent = 0;
+          let yPercent: number;
           let scale = 1;
-          let scaleY = 1;
           let opacity = 1;
           let blur = 0;
           let rotateX = 0;
-          let rotateZ = 0;
-          let skewX = 0;
           let z = 0;
 
           if (d <= -1) {
-            // Future card waiting just below the viewport.
             yPercent = 100;
-          } else if (d <= 0) {
-            // Rising up to take over the viewport.
-            yPercent = -d * 100;
-          } else if (d <= 1) {
-            // Previous card folds backward into depth.
-            scale = 1 - 0.06 * t;
-            scaleY = 1 - 0.04 * t;
-            rotateX = 14 * t;
-            rotateZ = 0.6 * t;
-            skewX = 0.5 * t;
-            z = -100 * t;
-            opacity = 1 - 0.6 * t;
-            blur = 2 * t;
-          } else {
-            // Older cards hidden behind the stack.
-            scale = 0.94;
-            scaleY = 0.96;
-            rotateX = 14;
-            z = -100;
             opacity = 0;
-            blur = 2;
+          } else if (d <= 0) {
+            yPercent = -d * 100;
+            opacity = 1;
+          } else if (d <= 1) {
+            yPercent = -PEEK.lift * d;
+            scale = 1 - PEEK.scaleDrop * d;
+            opacity = 1 - (1 - PEEK.opacity) * d;
+            blur = PEEK.blur * d;
+            rotateX = PEEK.rotateX * d;
+            z = -PEEK.depth * d;
+          } else {
+            yPercent = -PEEK.lift;
+            scale = 1 - PEEK.scaleDrop;
+            opacity = 0;
+            blur = PEEK.blur;
+            rotateX = PEEK.rotateX;
+            z = -PEEK.depth;
           }
 
           gsap.set(card, {
             yPercent,
             scale,
-            scaleY,
-            rotateX,
-            rotateZ,
-            skewX,
-            z,
             opacity,
+            rotateX,
+            z,
             filter: blur ? `blur(${blur}px)` : "none",
-            transformOrigin: "center bottom",
-            transformPerspective: 1200,
+            transformOrigin: "center top",
+            transformPerspective: 1300,
           });
         });
       };
@@ -155,29 +142,7 @@ export default function StackedServices() {
       ScrollTrigger.refresh();
     }, sectionRef);
 
-    // Lazy-loaded sections above this one change the page height after mount,
-    // which leaves ScrollTrigger with stale positions (cards look hidden until
-    // you scroll far past). Re-measure as the layout settles.
-    const refresh = () => ScrollTrigger.refresh();
-    const rafId = requestAnimationFrame(refresh);
-    const settleTimer = window.setTimeout(refresh, 500);
-    window.addEventListener("load", refresh);
-
-    let debounce: number | undefined;
-    const ro = new ResizeObserver(() => {
-      if (debounce) window.clearTimeout(debounce);
-      debounce = window.setTimeout(refresh, 150);
-    });
-    ro.observe(document.body);
-
-    return () => {
-      cancelAnimationFrame(rafId);
-      window.clearTimeout(settleTimer);
-      if (debounce) window.clearTimeout(debounce);
-      window.removeEventListener("load", refresh);
-      ro.disconnect();
-      ctx.revert();
-    };
+    return () => ctx.revert();
   }, [isDesktop, count]);
 
   /* =========================================================
@@ -454,7 +419,7 @@ function ServiceCard({ service }: { service: Service }) {
       className="
         relative
         w-full max-w-[1280px]
-        h-auto lg:min-h-[400px]
+        h-auto
         rounded-[15px] border border-white/10 bg-[#1B1B1B]
       "
       style={{ boxShadow: "0 30px 80px rgba(0,0,0,.55)" }}
