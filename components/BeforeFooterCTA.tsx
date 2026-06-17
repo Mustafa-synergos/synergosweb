@@ -96,7 +96,7 @@ export default function BeforeFooterCTA() {
                 <div className="relative flex flex-col lg:flex-row items-stretch lg:items-center w-full gap-6 lg:gap-0 lg:border-b lg:border-white/30 lg:focus-within:border-white/60 transition-colors duration-300 lg:pb-4">
                   <input
                     type="email"
-                    placeholder="@youremailid"
+                    placeholder="your email id here"
                     onChange={(e) => setEmail(e.target.value)}
                     className="flex-1 min-w-0 bg-transparent text-white focus:outline-none pb-4 text-[16px] lg:text-[28px] border-b border-white/30 focus:border-white/60 transition-colors duration-300 lg:border-none"
                   />

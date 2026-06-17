@@ -187,12 +187,15 @@ export default function StackedServices() {
   ========================================================= */
   const goTo = (index: number) => {
     const clamped = Math.min(Math.max(index, 0), count - 1);
+    setActiveIndex(clamped);
 
     if (isDesktop) {
       const section = sectionRef.current;
       if (!section) return;
-      const start = section.offsetTop;
-      const end = start + section.offsetHeight - window.innerHeight;
+
+      const rect = section.getBoundingClientRect();
+      const start = rect.top + window.scrollY;
+      const end = start + Math.max(section.offsetHeight - window.innerHeight, 0);
       const ratio = count > 1 ? clamped / (count - 1) : 0;
       window.scrollTo({
         top: start + (end - start) * ratio,
@@ -200,8 +203,6 @@ export default function StackedServices() {
       });
       return;
     }
-
-    setActiveIndex(clamped);
   };
 
   // Vertical swipe to change cards. We lock the page scroll only while moving
@@ -322,7 +323,7 @@ export default function StackedServices() {
               textTransform: "capitalize",
             }}
           >
-            Six Thrusters, One Engine
+            Eleven Thrusters, One Engine
           </span>
 
           <h1
@@ -330,22 +331,22 @@ export default function StackedServices() {
             style={{ fontFamily: '"clother", sans-serif', fontWeight: 700 }}
           >
             <span className="block text-[38px] leading-[40px] md:text-[80px] md:leading-[80px] lg:hidden">
-              SIX THINGS WE
+              ELEVEN THINGS 
             </span>
             <span className="block text-[38px] leading-[40px] md:text-[80px] md:leading-[80px] lg:hidden">
-              ARE GOOD AT.
+              WE ARE GOOD AT.
             </span>
             <span
               className="hidden lg:block"
               style={{ fontSize: "134px", lineHeight: "134px" }}
             >
-              SIX THINGS WE
+              ELEVEN THINGS 
             </span>
             <span
               className="hidden lg:block"
               style={{ fontSize: "134px", lineHeight: "134px" }}
             >
-              ARE GOOD AT.
+             WE ARE GOOD AT.
             </span>
           </h1>
 
@@ -358,7 +359,7 @@ export default function StackedServices() {
               fontSize: "18px",
             }}
           >
-            Each capability is a thruster. Together, they are the engine that
+            Each capability is a thruster. Together, they direct the engine that
             takes brands from the launchpad to orbit.
           </p>
 
@@ -560,10 +561,15 @@ function DotNav({
       {Array.from({ length: count }).map((_, index) => (
         <button
           key={index}
-          onClick={() => onSelect(index)}
+          type="button"
+          onClick={(event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            onSelect(index);
+          }}
           aria-label={`Go to ${labelFor(index)}`}
           aria-current={index === activeIndex}
-          className={`rounded-full transition-all duration-300 ${
+          className={`relative rounded-full transition-all duration-300 before:absolute before:-inset-3 before:content-[''] ${
             index === activeIndex
               ? "h-2.5 w-2.5 bg-white"
               : "h-2 w-2 bg-white/30 hover:bg-white/60"

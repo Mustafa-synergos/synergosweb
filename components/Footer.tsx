@@ -33,7 +33,7 @@ export default function Footer() {
          lg:grid-cols-[0.8fr_0.7fr_1.4fr_0.7fr] gap-x-4 sm:gap-x-2 gap-y-6 sm:gap-y-8 mb-12 sm:mb-20 mx-auto" style={{ maxWidth: '100%' }}>
           {/* OFFICE LOCATION */}
           <div>
-            <h3 className="font-[clother] font-normal not-italic text-[18px] sm:text-[22px] leading-[100%] tracking-normal text-white/90 mb-4 sm:mb-6 uppercase">OFFICE LOCATION</h3>
+            <h3 className="font-[clother] font-normal not-italic text-[18px] sm:text-[22px] leading-[100%] tracking-normal text-white/90 mb-4 sm:mb-6 uppercase">REGISTERED ADDRESS</h3>
             <p className="font-[clother] font-light not-italic text-[16px] sm:text-[18px] leading-[22px] sm:leading-[26px] tracking-normal text-gray-400">
               Synergos Tech Consulting Services Pvt. Ltd<br />
               11/1, Krishna Road, Basavanagudi,<br />

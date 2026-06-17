@@ -23,7 +23,7 @@ const engineCards = [
   },
   {
     title: 'STORYTELLING',
-    description: 'The fuel. A strategy without narrative is a map without roads. We craft stories that burrow into memory — digital, film, offline — each channel speaking in the same voice. Storytelling answers the question that matters most:',
+    description: 'The fuel. A strategy without narrative is a map without roads. We craft stories that burrow into memory, whether digital, film, or offline, each channel speaking in the same voice. Storytelling answers the question that matters most:',
     question: 'how will they feel?',
     icon: (
       <img 
@@ -35,7 +35,7 @@ const engineCards = [
   },
   {
     title: 'DELIVERY',
-    description: 'The thrust. A vision without velocity remains a dream. From SEO to performance marketing, from social media to studio production. Delivery answers the question:',
+    description: 'The thrust. A vision without velocity remains a dream. From SEO to performance marketing, from social media to studio production, delivery answers the question:',
     question: 'what happens now?',
     icon: (
       <img 

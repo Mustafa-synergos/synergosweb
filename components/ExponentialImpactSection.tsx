@@ -13,7 +13,7 @@ export default function ExponentialImpactSection() {
       <InteractiveDots variant="dark" />
       <EditorialContentGrid>
         <SectionHeader
-          label="Exponential Impact"
+          label="Why Us"
           heading={
             <div className="relative md:w-full">
               <Image

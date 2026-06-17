@@ -127,7 +127,7 @@ export default function Hero() {
               ">
                 GO
                 <br />
-                BEYOND.
+                BEYOND?
               </h1>
               
               {/* Split paragraphs in 50-50 columns with button */}
@@ -138,7 +138,7 @@ export default function Hero() {
                   transition={{ duration: 0.8, delay: 0.6 }}
                   className="responsive-paragraph text-white/80 mb-0 lg:mb-3 sm:mb-4 lg:mb-0 max-w-full"
                 >
-                  The sky isn't limit. For us, it is <br/>just first checkpoint.
+                  The sky isn't the limit. For us, it is <br/>just the first checkpoint.
                 </motion.p>
 
                 <div className="flex flex-col gap-3 sm:gap-4 lg:gap-4">
