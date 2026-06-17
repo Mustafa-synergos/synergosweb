@@ -31,8 +31,10 @@ const PEEK = {
 const SWIPE_THRESHOLD = 45;
 
 export default function StackedServices() {
+  const heroRef = useRef<HTMLDivElement>(null);
+  const dotsViewportRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
-  const pinRef = useRef<HTMLDivElement>(null);
+
   const sliderRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<HTMLDivElement[]>([]);
 
@@ -306,8 +308,12 @@ export default function StackedServices() {
   return (
     <section className="relative bg-[#050505] text-white">
       {/* HERO */}
-      <div className="relative flex items-center px-6 lg:px-16 xl:px-24 pt-20 md:pt-10">
-        <div className="relative mx-auto w-full max-w-7xl">
+      <div ref={heroRef} className="relative flex items-center overflow-hidden px-6 lg:px-16 xl:px-24 pt-20 md:pt-10">
+        <div className="absolute inset-0 z-[1] pointer-events-none">
+          <InteractiveDots variant="dark" containerRef={heroRef} />
+        </div>
+
+        <div className="relative z-10 mx-auto w-full max-w-7xl">
           <span
             className="text-[#ff3b30] text-[18px] md:text-[20px] lg:text-[28px]"
             style={{
@@ -360,15 +366,15 @@ export default function StackedServices() {
         </div>
 
         {/* ORBIT IMAGE */}
-        <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2">
-          <Image
-            src="/images/six-things-orbital.png"
-            alt="Six Things Orbital"
-            width={400}
-            height={400}
-            className="h-full w-full object-contain"
-          />
-        </div>
+       <div className="hidden lg:block absolute z-10 right-0 top-1/2 -translate-y-1/2 xl:right-0">
+                   <Image
+                     src="/images/six-things-orbital.svg"
+                     alt="Six Things Orbital"
+                     width={400}
+                     height={400}
+                     className="w-full h-full object-contain opacity-40"
+                   />
+                 </div>
       </div>
 
       {/* STACKED CARDS */}
@@ -380,12 +386,12 @@ export default function StackedServices() {
           style={{ height: `${100 + (count - 1) * 100 * STEP_FACTOR}svh` }}
         >
           <div
-            ref={pinRef}
+            ref={dotsViewportRef}
             className="sticky top-0 left-0 h-[100svh] w-full overflow-hidden"
             style={{ perspective: "1300px", transformStyle: "preserve-3d" }}
           >
             <div className="absolute inset-0 z-[1] pointer-events-none">
-              <InteractiveDots variant="dark" containerRef={pinRef} />
+              <InteractiveDots variant="dark" containerRef={dotsViewportRef} />
             </div>
 
             {services.map((service, index) => (
@@ -394,7 +400,7 @@ export default function StackedServices() {
                 ref={(el) => {
                   if (el) cardRefs.current[index] = el;
                 }}
-                className="absolute inset-0 flex items-center justify-center px-4 sm:px-6 lg:px-16 py-5 sm:py-6 will-change-transform"
+                className="absolute inset-0 z-10 flex items-center justify-center px-4 sm:px-6 lg:px-16 py-5 sm:py-6 will-change-transform"
                 style={{ transformStyle: "preserve-3d" }}
               >
                 <ServiceCard service={service} />
@@ -421,7 +427,7 @@ export default function StackedServices() {
           </div>
 
           {/* Single-cell grid: container hugs the tallest card, cards overlap */}
-          <div className="relative mx-auto grid w-full max-w-[1280px] items-center">
+          <div className="relative z-10 mx-auto grid w-full max-w-[1280px] items-center">
             {services.map((service, index) => (
               <div
                 key={service.id}

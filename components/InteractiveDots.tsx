@@ -208,7 +208,9 @@ export default function InteractiveDots({
     // Use containerRef if provided, otherwise use parent
     const container = containerRef?.current || canvas.parentElement;
     const displayWidth = container?.clientWidth || window.innerWidth;
-    const displayHeight = container?.clientHeight || window.innerHeight;
+    const displayHeight =
+      Math.max(container?.clientHeight || 0, container?.scrollHeight || 0) ||
+      window.innerHeight;
 
     canvas.width = displayWidth * dpr;
     canvas.height = displayHeight * dpr;
@@ -251,52 +253,6 @@ const newY =
     mouseRef.current.lastX = newX;
     mouseRef.current.lastY = newY;
   }, []);
-
-  const handlePointerDown = useCallback((e: PointerEvent) => {
-    mouseRef.current.isDown = true;
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    const now = Date.now();
-
-    // Primary ripple - immediate and strong
-    ripples.current.push({
-      x,
-      y,
-      time: now,
-      intensity: rippleIntensity,
-      layer: 0,
-    });
-    
-    // Secondary delayed wave - 100ms delay for layered effect
-    setTimeout(() => {
-      ripples.current.push({
-        x,
-        y,
-        time: Date.now(),
-        intensity: rippleIntensity * 0.7,
-        layer: 1,
-      });
-    }, 100);
-
-    // Tertiary wave - 200ms delay for depth
-    setTimeout(() => {
-      ripples.current.push({
-        x,
-        y,
-        time: Date.now(),
-        intensity: rippleIntensity * 0.4,
-        layer: 2,
-      });
-    }, 200);
-
-    // Clean up old ripples
-    ripples.current = ripples.current.filter((ripple) => now - ripple.time < 5000);
-  }, [rippleIntensity]);
 
   const handlePointerUp = useCallback(() => {
     mouseRef.current.isDown = false;
@@ -470,20 +426,19 @@ if (mouseData.influence > 0) {
 
     window.addEventListener('resize', handleResize);
     // canvas.addEventListener('pointermove', handlePointerMove);
-    canvas.addEventListener('pointerdown', handlePointerDown);
-    canvas.addEventListener('pointerup', handlePointerUp);
-    canvas.addEventListener('pointerleave', handlePointerLeave);
-    // window.addEventListener('pointerup', handlePointerUp);
+    window.addEventListener('pointerup', handlePointerUp);
+    window.addEventListener('pointerleave', handlePointerLeave);
     window.addEventListener('pointermove', handlePointerMove);
 
     // Add ResizeObserver to watch parent container size changes
     let resizeObserver: ResizeObserver | null = null;
-    if (canvas.parentElement && typeof ResizeObserver !== 'undefined') {
+    const resizeTarget = containerRef?.current || canvas.parentElement;
+    if (resizeTarget && typeof ResizeObserver !== 'undefined') {
       resizeObserver = new ResizeObserver(() => {
         resizeCanvas();
         requestAnimationFrame(() => initializeDots()); // Re-initialize dots on resize
       });
-      resizeObserver.observe(canvas.parentElement);
+      resizeObserver.observe(resizeTarget);
     }
 
     // Initialize dots after initial resize with a small delay to ensure dimensions are set
@@ -495,16 +450,14 @@ if (mouseData.influence > 0) {
     return () => {
       window.removeEventListener('resize', handleResize);
       // canvas.removeEventListener('pointermove', handlePointerMove);
-      // canvas.removeEventListener('pointerdown', handlePointerDown);
-      canvas.removeEventListener('pointerup', handlePointerUp);
-      canvas.removeEventListener('pointerleave', handlePointerLeave);
-      // window.removeEventListener('pointerup', handlePointerUp);
+      window.removeEventListener('pointerup', handlePointerUp);
+      window.removeEventListener('pointerleave', handlePointerLeave);
 
       mediaQuery.removeEventListener('change', handleMediaChange);
       observer.disconnect();
 
-      if (resizeObserver && canvas.parentElement) {
-        resizeObserver.unobserve(canvas.parentElement);
+      if (resizeObserver && resizeTarget) {
+        resizeObserver.unobserve(resizeTarget);
       }
 
       if (animationFrameId.current) {
@@ -515,7 +468,7 @@ if (mouseData.influence > 0) {
       ripples.current = [];
       dotsRef.current = [];
     };
-  }, [animate, resizeCanvas, handlePointerMove, handlePointerDown, handlePointerUp, handlePointerLeave]);
+  }, [animate, resizeCanvas, handlePointerMove, handlePointerUp, handlePointerLeave]);
 
   return (
     <div className={`absolute inset-0 w-full h-full overflow-hidden ${className}`} style={{ zIndex: 1  }}>
