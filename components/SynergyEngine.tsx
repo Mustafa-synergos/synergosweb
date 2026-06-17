@@ -211,7 +211,7 @@ export default function SynergyEngine() {
                 className="w-full h-auto object-contain drop-shadow-2xl"
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-white/10 blur-3xl rounded-full -z-10" />
+              <div className="absolute inset-0 blur-3xl rounded-full -z-10" />
             </div>
 
             {/* ── Heading ── */}
