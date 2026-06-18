@@ -62,7 +62,7 @@ export default function ExponentialImpactSection() {
             >
               <div className="relative w-full  max-w-[220px] sm:max-w-[280px] md:max-w-[450px] lg:max-w-[512px] mx-auto">
                 <Image
-                  src="/images/exponential-impact-vector-2.webp"
+                  src="/images/exponential-impact-vector-2.svg"
                   alt="Particle wave effect"
                   width={512}
                   height={512}

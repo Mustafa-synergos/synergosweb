@@ -105,16 +105,17 @@ export default function WhoWeAre() {
               <div className="relative w-full h-full max-w-md md:max-w-lg">
                 {/* Desktop rocket image */}
                 <Image
-                  src="/images/vector-rocket.png"
+                  src="/images/vector-rocket.svg"
                   alt="Rocket"
                   fill
                   style={{ objectFit: 'contain' }}
                   className="object-contain hidden md:hidden lg:block"
                 />
 
+
                 {/* Mobile alternative image */}
                 <Image
-                  src="/images/exponential-impact-vector-2.webp"
+                  src="/images/exponential-impact-vector-2.svg"
                   alt="Particle wave effect"
                   width={200}
                   height={200}
@@ -130,3 +131,6 @@ export default function WhoWeAre() {
     </section>
   );
 }
+
+
+
