@@ -6,8 +6,8 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { services, type Service } from "../../data/services";
-import InteractiveDots from "../InteractiveDots";
-import PremiumCTA from "../PremiumCTA";
+import InteractiveDots from "./InteractiveDots";
+import PremiumCTA from "./PremiumCTA";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -30,7 +30,11 @@ const PEEK = {
 /** Minimum swipe distance (px) to trigger a slide on touch devices. */
 const SWIPE_THRESHOLD = 45;
 
-export default function StackedServices() {
+export default function StackedServices({
+  data: _data,
+}: {
+  data?: import('@/types/home-sections').ServicesSectionData;
+}) {
   const heroRef = useRef<HTMLDivElement>(null);
   const dotsViewportRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -326,8 +330,8 @@ export default function StackedServices() {
             Eleven Thrusters, One Engine
           </span>
 
-          <h1
-            className="text-white !mt-0 !mb-0 lg:!mb-2 uppercase"
+          <h2
+            className="responsive-large-h2 text-white !mt-0 !mb-0 lg:!mb-2 uppercase"
             style={{ fontFamily: '"clother", sans-serif', fontWeight: 700 }}
           >
             <span className="block text-[38px] leading-[40px] md:text-[80px] md:leading-[80px] lg:hidden">
@@ -348,7 +352,7 @@ export default function StackedServices() {
             >
              WE ARE GOOD AT.
             </span>
-          </h1>
+          </h2>
 
           <p
             className="text-white max-w-[850px] mb-4 md:mb-2 lg:mb-10"

@@ -12,6 +12,25 @@
   --font-body: "clother", sans-serif;
   font-weight: 200;
   font-style: normal;
+
+  /* Type scale — mobile → desktop (rem, 16px base) */
+  --type-h1: clamp(3.75rem, 2.25rem + 6vw, 9.375rem);   /* thank-you: 60px → 150px */
+  --type-h1-hero: clamp(2.25rem, 1.25rem + 4vw, 5rem);  /* page hero: 36px → 80px */
+  --type-h2: clamp(1.6875rem, 1.125rem + 2.2vw, 4.3125rem); /* 27px → 69px */
+  --type-h3: clamp(1.375rem, 1rem + 1.5vw, 3.25rem);    /* 22px → 52px */
+  --type-h4: clamp(1.25rem, 1rem + 1vw, 2.5rem);        /* 20px → 40px */
+  --type-h5: clamp(1.125rem, 1rem + 0.6vw, 1.75rem);    /* 18px → 28px */
+  --type-h6: clamp(1rem, 0.95rem + 0.35vw, 1.375rem);   /* 16px → 22px */
+  --type-p: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);     /* 16px → 18px */
+
+  --lh-h1: 1;
+  --lh-h1-hero: 1.02;
+  --lh-h2: 0.95;
+  --lh-h3: 1;
+  --lh-h4: 1.1;
+  --lh-h5: 1.2;
+  --lh-h6: 1.3;
+  --lh-p: 1.65;
 }
 
 
@@ -19,6 +38,7 @@
 body {
   font-family: var(--font-body);
   overflow-x: hidden;
+  background: #000000;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   /* background: #000; */
@@ -31,7 +51,73 @@ body {
   max-width: 1280px;
 }
 p {
-  line-height: 1.5;
+  font-family: var(--font-body);
+  font-size: var(--type-p);
+  line-height: var(--lh-p);
+  font-weight: 300;
+}
+
+@layer base {
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  h1.type-h1 {
+    font-size: var(--type-h1);
+    line-height: var(--lh-h1);
+  }
+
+  h1.type-h1-hero {
+    font-size: var(--type-h1-hero);
+    line-height: var(--lh-h1-hero);
+    letter-spacing: 0.01em;
+    font-weight: 400;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-size: var(--type-h2);
+    line-height: var(--lh-h2);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    font-family: var(--font-display);
+    font-size: var(--type-h3);
+    line-height: var(--lh-h3);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+  }
+
+  h4 {
+    font-family: var(--font-display);
+    font-size: var(--type-h4);
+    line-height: var(--lh-h4);
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  h5 {
+    font-family: var(--font-display);
+    font-size: var(--type-h5);
+    line-height: var(--lh-h5);
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  h6 {
+    font-family: var(--font-display);
+    font-size: var(--type-h6);
+    line-height: var(--lh-h6);
+    font-weight: 400;
+    text-transform: uppercase;
+  }
 }
 .text-grey {
   color: #AEAEAE;
@@ -54,6 +140,20 @@ body::-webkit-scrollbar-thumb {
 
 body::-webkit-scrollbar-track {
   background: transparent;
+}
+
+/* =========================================
+   FORM AUTOFILL (dark theme)
+========================================= */
+
+.contact-form-field:-webkit-autofill,
+.contact-form-field:-webkit-autofill:hover,
+.contact-form-field:-webkit-autofill:focus,
+.contact-form-field:-webkit-autofill:active {
+  -webkit-text-fill-color: #ffffff !important;
+  caret-color: #ffffff;
+  box-shadow: 0 0 0 1000px #050505 inset !important;
+  transition: background-color 99999s ease-out 0s;
 }
 
 /* =========================================
@@ -90,33 +190,86 @@ body::-webkit-scrollbar-track {
   ========================= */
 
   .glass-panel {
-    @apply bg-slate-950/65 backdrop-blur-xl border border-white/10;
+    @apply bg-black/65 backdrop-blur-xl border border-white/10;
   }
 
   /* =========================
-     RESPONSIVE H1
+     SHARED TYPE UTILITIES (h1–h6, p)
   ========================= */
 
-  .responsive-h1 {
+  .type-h1,
+  .responsive-h1,
+  h1.type-h1 {
     font-family: var(--font-display);
-    font-size: clamp(65px, 10vw, 194px);
-    line-height: 0.88;
+    font-size: var(--type-h1);
+    line-height: var(--lh-h1);
     font-weight: 700;
-    letter-spacing: var(--letter-extra-tight);
+    letter-spacing: 0.02em;
     text-transform: uppercase;
   }
 
-  /* =========================
-     RESPONSIVE H2
-  ========================= */
+  /* Page hero / inner banner h1 — 36px mobile, 52px tablet, 80px desktop */
+  .type-h1-hero,
+  h1.type-h1-hero {
+    font-family: var(--font-display);
+    font-size: var(--type-h1-hero);
+    line-height: var(--lh-h1-hero);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+  }
 
+  .type-h2,
   .responsive-h2 {
     font-family: var(--font-display);
-    font-size: clamp(27px, 4.5vw, 69px);
-    line-height: 0.95;
+    font-size: var(--type-h2);
+    line-height: var(--lh-h2);
     font-weight: 700;
-    letter-spacing: var(--letter-tight);
+    letter-spacing: -0.02em;
     text-transform: uppercase;
+  }
+
+  .type-h3,
+  .responsive-clother-h3 {
+    font-family: var(--font-display);
+    font-size: var(--type-h3);
+    line-height: var(--lh-h3);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+  }
+
+  .type-h4 {
+    font-family: var(--font-display);
+    font-size: var(--type-h4);
+    line-height: var(--lh-h4);
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  .type-h5 {
+    font-family: var(--font-display);
+    font-size: var(--type-h5);
+    line-height: var(--lh-h5);
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  .type-h6 {
+    font-family: var(--font-display);
+    font-size: var(--type-h6);
+    line-height: var(--lh-h6);
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  .type-p,
+  .responsive-paragraph {
+    font-family: var(--font-body);
+    font-size: var(--type-p);
+    line-height: var(--lh-p);
+    font-weight: 300;
+    color: var(--text-secondary);
   }
 
   /* =========================
@@ -146,38 +299,13 @@ body::-webkit-scrollbar-track {
   }
 
   /* =========================
-     H3 DISPLAY
-  ========================= */
-
-  .responsive-clother-h3 {
-    font-family: var(--font-display);
-    font-size: clamp(22px, 4vw, 52px);
-    line-height: 1;
-    font-weight: 200;
-    letter-spacing: -0.03em;
-    text-transform: uppercase;
-  }
-
-  /* =========================
-     PARAGRAPH
-  ========================= */
-
-  .responsive-paragraph {
-    font-family: var(--font-body);
-    font-size: clamp(16px, 1.1vw, 18px);
-    line-height: 1.5;
-    font-weight: 300;
-    color: var(--text-secondary);
-  }
-
-  /* =========================
-     CLOTHER PARAGRAPH
+     CLOTHER PARAGRAPH (alias → type-p)
   ========================= */
 
   .responsive-clother-paragraph {
     font-family: var(--font-display);
-    font-size: clamp(15px, 1vw, 16px);
-    line-height: 1.5;
+    font-size: var(--type-p);
+    line-height: var(--lh-p);
     font-weight: 300;
     color: var(--text-secondary);
   }
@@ -357,11 +485,17 @@ body::-webkit-scrollbar-track {
     width: auto;
     margin: auto;
   }
-  .responsive-h2{
-    font-size: 24px;
+  .responsive-h2 {
+    font-size: 2.5rem; /* 40px tablet */
   }
-  .responsive-h1{
-    font-size: 79px;
+  .type-h1,
+  .responsive-h1,
+  h1.type-h1 {
+    font-size: 5rem; /* 80px tablet — thank-you h1 */
+  }
+  .type-h1-hero,
+  h1.type-h1-hero {
+    font-size: 3.25rem; /* 52px tablet — page hero h1 */
   }
   .responsive-large-h2 {
     font-size: 80px;
@@ -406,4 +540,121 @@ body::-webkit-scrollbar-track {
   50% {
     opacity: 1;
   }
+}
+
+@keyframes about-marquee-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes about-marquee-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.about-marquee-left {
+  animation: about-marquee-left 28s linear infinite;
+}
+
+.about-marquee-right {
+  animation: about-marquee-right 32s linear infinite;
+}
+
+/* Hide reCAPTCHA v3 badge (required attribution shown in contact form) */
+.grecaptcha-badge {
+  visibility: hidden !important;
+}
+
+.dots-separator {
+ content: '';
+width: 10px;
+height: 10px;
+border-radius: 50%;
+display: inline-block;
+margin: 0 4px;
+opacity: 1;
+transition: all 0.3s ease-out;
+}
+/* =========================================
+   BLOG DETAIL RICH TEXT
+========================================= */
+
+.blog-content h1,
+.blog-content h2,
+.blog-content h3,
+.blog-content h4 {
+  font-family: "clother", sans-serif;
+  font-weight: 600;
+  color: #f87171;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.blog-content h1 { font-size: 1.5rem; }
+.blog-content h2 { font-size: 1.25rem; }
+.blog-content h3 { font-size: 1.1rem; }
+
+.blog-content p {
+  font-family: "clother", sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 300;
+  line-height: 1.85;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 1.25rem;
+}
+
+.blog-content ul,
+.blog-content ol {
+  padding-left: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.blog-content ul { list-style-type: disc; }
+.blog-content ol { list-style-type: decimal; }
+
+.blog-content li {
+  font-family: "clother", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 300;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.70);
+  margin-bottom: 0.35rem;
+}
+
+.blog-content strong {
+  font-weight: 600;
+  color: #fff;
+}
+
+.blog-content a {
+  color: #f87171;
+  text-decoration: none;
+}
+
+.blog-content a:hover {
+  text-decoration: underline;
+}
+
+.blog-content hr {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  margin: 2rem 0;
+}
+
+.blog-content blockquote {
+  border-left: 3px solid #f87171;
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  color: rgba(255,255,255,0.55);
+  font-style: italic;
 }

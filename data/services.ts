@@ -53,7 +53,7 @@ export const services: Service[] = [
     id: 7,
     number: "07",
     title: "Quick Commerce Marketing & Optimisation",
-    description: "The shelf is now a screen, and the decision takes three seconds. We optimise your presence online so when someone searches your category, your product is the one they find.",
+    description: "The shelf lives on a screen, and the decision takes three seconds. We optimise your presence online so when someone searches your category, your product is the one they find.",
     illustration: "/images/illustrations/Quick Commerce Marketing & Optimisation.svg"
   },
   {
@@ -81,7 +81,7 @@ export const services: Service[] = [
     id: 11,
     number: "11",
     title: "Brand Films & Multimedia Production",
-    description: "A great film does not just communicate; it makes people feel something they did not expect. We concept, script, produce, and deliver brand films and multimedia content that earn their place in the memory, not just the feed.",
+    description: "A great film does not just communicate; it makes people feel something they did not expect. We conceptualiseExponential Impact, script, produce, and deliver brand films and multimedia content that earn their place in the memory, not just the feed.",
     illustration: "/images/illustrations/Brand Films & Multimedia Production.svg"
   }
 ];

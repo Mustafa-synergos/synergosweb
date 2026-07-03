@@ -73,8 +73,8 @@ const UnifiedSectionWrapper: React.FC<UnifiedSectionWrapperProps> = ({
 
       {/* Unified Content Container - PERFECT ALIGNMENT SYSTEM */}
       <div className="relative z-10">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-0">
+          <div className="max-w-7xl mx-auto">
             {children}
           </div>
         </div>

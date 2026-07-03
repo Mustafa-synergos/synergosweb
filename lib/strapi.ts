@@ -1,13 +1,22 @@
 // lib/strapi.ts
 
-export const strapiBase =
-  process.env.NEXT_PUBLIC_STRAPI_API_URL || "http://localhost:1337";
+import { CACHE_TAGS } from '@/lib/cache-tags';
+import { getPreviewContext } from '@/lib/preview-server';
+import type { StrapiPublicationStatus } from '@/lib/preview';
+import { getMediaUrl, strapiBase } from '@/lib/strapi-media';
+
+export { getMediaUrl, strapiBase };
 
 const STRAPI_TOKEN = process.env.NEXT_PUBLIC_STRAPI_TOKEN;
+const STRAPI_SERVER_TOKEN = process.env.STRAPI_API_TOKEN;
+
+/** Cached with tags; cleared on-demand from Strapi. 1h fallback TTL. */
+const TAGGED_CACHE = { revalidate: 3600 };
 
 type FetchOptions = RequestInit & {
+  publicationStatus?: StrapiPublicationStatus;
   next?: {
-    revalidate?: number;
+    revalidate?: number | false;
     tags?: string[];
   };
 };
@@ -16,24 +25,48 @@ async function fetchAPI<T>(
   endpoint: string,
   options: FetchOptions = {}
 ): Promise<T> {
-  const url = `${strapiBase}${endpoint}`;
+  const { publicationStatus = 'published', next: nextConfig, ...requestInit } =
+    options;
+
+  const isDraft = publicationStatus === 'draft';
+  const separator = endpoint.includes('?') ? '&' : '?';
+  const url = isDraft
+    ? `${strapiBase}${endpoint}${separator}status=draft`
+    : `${strapiBase}${endpoint}`;
+
+  const authToken = isDraft
+    ? STRAPI_SERVER_TOKEN || STRAPI_TOKEN
+    : STRAPI_TOKEN;
 
   const headers: HeadersInit = {
     "Content-Type": "application/json",
-    ...(STRAPI_TOKEN && {
-      Authorization: `Bearer ${STRAPI_TOKEN}`,
+    ...(authToken && {
+      Authorization: `Bearer ${authToken}`,
     }),
-    ...options.headers,
+    ...(isDraft && {
+      "strapi-encode-source-maps": "true",
+    }),
+    ...requestInit.headers,
   };
+
+  const fetchNext = nextConfig
+    ? {
+        ...nextConfig,
+        revalidate: nextConfig.tags?.length
+          ? (nextConfig.revalidate ?? 3600)
+          : (nextConfig.revalidate ?? 60),
+      }
+    : undefined;
 
   try {
     const response = await fetch(url, {
-      ...options,
+      ...requestInit,
       headers,
-      next: {
-        revalidate: 60,
-        ...options.next,
-      },
+      ...(isDraft
+        ? { cache: 'no-store' as const }
+        : fetchNext
+          ? { next: fetchNext }
+          : {}),
     });
 
     if (!response.ok) {
@@ -62,6 +95,286 @@ async function fetchAPI<T>(
 
 function encodeSlug(slug: string) {
   return encodeURIComponent(slug);
+}
+
+const FOOTER_POPULATE =
+  'populate[Logo][fields][0]=url&populate[Logo][fields][1]=alternativeText&' +
+  'populate[RegisteredAddress]=*&' +
+  'populate[Browse][populate][LeftLinks]=*&populate[Browse][populate][RightLinks]=*&' +
+  'populate[WhatWeOffer][populate][LeftLinks]=*&populate[WhatWeOffer][populate][RightLinks]=*&' +
+  'populate[Connect][populate][LeftLinks]=*&populate[Connect][populate][RightLinks]=*&' +
+  'populate[LegalLinks][populate][Links]=*&' +
+  'populate[DecorativeImage][fields][0]=url&populate[DecorativeImage][fields][1]=alternativeText';
+
+export async function getFooter() {
+  const response = await fetchAPI<{ data: import('@/types/footer').FooterData | null }>(
+    `/api/footer?${FOOTER_POPULATE}`,
+    { next: { ...TAGGED_CACHE, tags: [CACHE_TAGS.footer] } }
+  );
+
+  return response.data;
+}
+
+const PAGE_POPULATE =
+  'populate[SeoInfo][populate]=*&populate[Sections][populate]=*';
+
+export async function getPageBySlug(slug: string) {
+  const { status } = await getPreviewContext();
+
+  const response = await fetchAPI<{ data: import('@/types/page').PageData[] }>(
+    `/api/pages?filters[Slug][$eq]=${encodeSlug(slug)}&${PAGE_POPULATE}`,
+    {
+      publicationStatus: status,
+      next:
+        status === 'published'
+          ? {
+              ...TAGGED_CACHE,
+              tags: [CACHE_TAGS.pages, CACHE_TAGS.page(slug)],
+            }
+          : undefined,
+    }
+  );
+
+  return response.data?.[0] ?? null;
+}
+
+export async function getPages() {
+  const response = await fetchAPI<{ data: import('@/types/page').PageData[] }>(
+    `/api/pages?fields[0]=Slug&fields[1]=Title&pagination[pageSize]=100`,
+    { next: { ...TAGGED_CACHE, tags: [CACHE_TAGS.pages] } }
+  );
+
+  return response.data ?? [];
+}
+
+/* =========================================================
+   BLOGS
+========================================================= */
+
+const BLOG_POPULATE =
+  'populate[SeoInfo][populate]=*&populate[FeaturedImage][populate]=*';
+
+export async function getBlogs() {
+  const response = await fetchAPI<{ data: import('@/types/blog').BlogData[] }>(
+    `/api/blogs?sort=publishedAt:desc&pagination[pageSize]=100&${BLOG_POPULATE}`,
+    { next: { ...TAGGED_CACHE, tags: [CACHE_TAGS.blogs] } }
+  );
+
+  return response.data ?? [];
+}
+
+export async function getBlogsPaginated(
+  page = 1,
+  pageSize = 9,
+  category?: string
+) {
+  const categoryFilter = category
+    ? `&filters[Category][$eq]=${encodeURIComponent(category)}`
+    : '';
+
+  const response = await fetchAPI<import('@/types/blog').BlogsResponse>(
+    `/api/blogs?sort=publishedAt:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}${categoryFilter}&${BLOG_POPULATE}`,
+    { next: { ...TAGGED_CACHE, tags: [CACHE_TAGS.blogs] } }
+  );
+
+  return response;
+}
+
+export async function getBlogsOffset(
+  start: number,
+  limit: number,
+  category?: string
+) {
+  const categoryFilter = category
+    ? `&filters[Category][$eq]=${encodeURIComponent(category)}`
+    : '';
+
+  const response = await fetchAPI<{
+    data: import('@/types/blog').BlogData[];
+    meta: { pagination: { start: number; limit: number; total: number } };
+  }>(
+    `/api/blogs?sort=publishedAt:desc&pagination[start]=${start}&pagination[limit]=${limit}${categoryFilter}&${BLOG_POPULATE}`,
+    { next: { ...TAGGED_CACHE, tags: [CACHE_TAGS.blogs] } }
+  );
+
+  return {
+    data: response.data ?? [],
+    total: response.meta?.pagination?.total ?? 0,
+  };
+}
+
+export async function getBlogCategories(): Promise<string[]> {
+  const response = await fetchAPI<{ data: import('@/types/blog').BlogData[] }>(
+    `/api/blogs?fields[0]=Category&pagination[pageSize]=100`,
+    { next: { ...TAGGED_CACHE, tags: [CACHE_TAGS.blogs] } }
+  );
+
+  const cats = (response.data ?? [])
+    .map((b) => b.Category)
+    .filter((c): c is string => Boolean(c));
+
+  return [...new Set(cats)].sort();
+}
+
+export async function getBlogBySlug(slug: string) {
+  const { status } = await getPreviewContext();
+
+  const response = await fetchAPI<{ data: import('@/types/blog').BlogData[] }>(
+    `/api/blogs?filters[Slug][$eq]=${encodeSlug(slug)}&${BLOG_POPULATE}`,
+    {
+      publicationStatus: status,
+      next:
+        status === 'published'
+          ? {
+              ...TAGGED_CACHE,
+              tags: [CACHE_TAGS.blogs, CACHE_TAGS.blog(slug)],
+            }
+          : undefined,
+    }
+  );
+
+  return response.data?.[0] ?? null;
+}
+
+/* =========================================================
+   ARTICLES
+========================================================= */
+
+const ARTICLE_POPULATE =
+  'populate[SeoInfo][populate]=*&populate[FeaturedImage][populate]=*';
+
+export async function getArticles() {
+  const response = await fetchAPI<{ data: import('@/types/article').ArticleData[] }>(
+    `/api/articles?sort=publishedAt:desc&pagination[pageSize]=100&${ARTICLE_POPULATE}`,
+    { next: { ...TAGGED_CACHE, tags: [CACHE_TAGS.articles] } }
+  );
+  return response.data ?? [];
+}
+
+export async function getArticlesPaginated(page = 1, pageSize = 9, category?: string) {
+  const categoryFilter = category
+    ? `&filters[Category][$eq]=${encodeURIComponent(category)}`
+    : '';
+  const response = await fetchAPI<import('@/types/article').ArticlesResponse>(
+    `/api/articles?sort=publishedAt:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}${categoryFilter}&${ARTICLE_POPULATE}`,
+    { next: { ...TAGGED_CACHE, tags: [CACHE_TAGS.articles] } }
+  );
+  return response;
+}
+
+export async function getArticlesOffset(start: number, limit: number, category?: string) {
+  const categoryFilter = category
+    ? `&filters[Category][$eq]=${encodeURIComponent(category)}`
+    : '';
+  const response = await fetchAPI<{
+    data: import('@/types/article').ArticleData[];
+    meta: { pagination: { start: number; limit: number; total: number } };
+  }>(
+    `/api/articles?sort=publishedAt:desc&pagination[start]=${start}&pagination[limit]=${limit}${categoryFilter}&${ARTICLE_POPULATE}`,
+    { next: { ...TAGGED_CACHE, tags: [CACHE_TAGS.articles] } }
+  );
+  return {
+    data: response.data ?? [],
+    total: response.meta?.pagination?.total ?? 0,
+  };
+}
+
+export async function getArticleCategories(): Promise<string[]> {
+  const response = await fetchAPI<{ data: import('@/types/article').ArticleData[] }>(
+    `/api/articles?fields[0]=Category&pagination[pageSize]=100`,
+    { next: { ...TAGGED_CACHE, tags: [CACHE_TAGS.articles] } }
+  );
+  const cats = (response.data ?? [])
+    .map((a) => a.Category)
+    .filter((c): c is string => Boolean(c));
+  return [...new Set(cats)].sort();
+}
+
+export async function getArticleBySlug(slug: string) {
+  const { status } = await getPreviewContext();
+  const response = await fetchAPI<{ data: import('@/types/article').ArticleData[] }>(
+    `/api/articles?filters[Slug][$eq]=${encodeSlug(slug)}&${ARTICLE_POPULATE}`,
+    {
+      publicationStatus: status,
+      next:
+        status === 'published'
+          ? { ...TAGGED_CACHE, tags: [CACHE_TAGS.articles, CACHE_TAGS.article(slug)] }
+          : undefined,
+    }
+  );
+  return response.data?.[0] ?? null;
+}
+
+/* =========================================================
+   CASE STUDIES
+========================================================= */
+
+const CASE_STUDY_POPULATE =
+  'populate[SeoInfo][populate]=*&populate[FeaturedImage][populate]=*';
+
+export async function getCaseStudies() {
+  const response = await fetchAPI<{ data: import('@/types/case-study').CaseStudyData[] }>(
+    `/api/case-studies?sort=publishedAt:desc&pagination[pageSize]=100&${CASE_STUDY_POPULATE}`,
+    { next: { ...TAGGED_CACHE, tags: [CACHE_TAGS.caseStudies] } }
+  );
+
+  return response.data ?? [];
+}
+
+export async function getCaseStudyBySlug(slug: string) {
+  const { status } = await getPreviewContext();
+
+  const response = await fetchAPI<{ data: import('@/types/case-study').CaseStudyData[] }>(
+    `/api/case-studies?filters[Slug][$eq]=${encodeSlug(slug)}&${CASE_STUDY_POPULATE}`,
+    {
+      publicationStatus: status,
+      next:
+        status === 'published'
+          ? {
+              ...TAGGED_CACHE,
+              tags: [CACHE_TAGS.caseStudies, CACHE_TAGS.caseStudy(slug)],
+            }
+          : undefined,
+    }
+  );
+
+  return response.data?.[0] ?? null;
+}
+
+/* =========================================================
+   CAREERS
+========================================================= */
+
+const CAREER_POPULATE =
+  'populate[SeoInfo][populate]=*&populate[Sections][populate]=*';
+
+export async function getCareers() {
+  const response = await fetchAPI<{ data: import('@/types/career-sections').CareerData[] }>(
+    `/api/careers?sort=Title:asc&pagination[pageSize]=100&fields[0]=Title&fields[1]=Slug&fields[2]=ShortDescription&fields[3]=ExperienceYears`,
+    { next: { ...TAGGED_CACHE, tags: [CACHE_TAGS.careers] } }
+  );
+
+  return response.data ?? [];
+}
+
+export async function getCareerBySlug(slug: string) {
+  const { status } = await getPreviewContext();
+
+  const response = await fetchAPI<{ data: import('@/types/career-sections').CareerData[] }>(
+    `/api/careers?filters[Slug][$eq]=${encodeSlug(slug)}&${CAREER_POPULATE}`,
+    {
+      publicationStatus: status,
+      next:
+        status === 'published'
+          ? {
+              ...TAGGED_CACHE,
+              tags: [CACHE_TAGS.careers, CACHE_TAGS.career(slug)],
+            }
+          : undefined,
+    }
+  );
+
+  return response.data?.[0] ?? null;
 }
 
 /* =========================================================
@@ -107,17 +420,12 @@ export async function deleteProject(id: number) {
 ========================================================= */
 
 export async function getBlogPosts() {
-  return fetchAPI<{ data: any[] }>(
-    `/api/blog-posts?populate=cover_image&sort=publishedAt:desc&pagination[limit]=6`
-  );
+  return getBlogs();
 }
 
 export async function getPostBySlug(slug: string) {
-  return fetchAPI<{ data: any[] }>(
-    `/api/blog-posts?filters[slug][$eq]=${encodeSlug(
-      slug
-    )}&populate=cover_image`
-  );
+  const post = await getBlogBySlug(slug);
+  return { data: post ? [post] : [] };
 }
 
 export async function createBlogPost(data: any) {
