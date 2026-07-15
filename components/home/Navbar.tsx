@@ -32,15 +32,15 @@ const navItems = [
 const browseMainItems = [
   { label: 'Who we are', href: '/about' },
   { label: 'Our work', href: '/projects' },
-  { label: 'Career', href: '/career' },
+  { label: 'Career', href: '/careers' },
   { label: 'Portfolio', href: '/portfolio' },
   { label: 'Our Client', href: '/clients' },
 ];
 
 const resourceItems = [
-  { label: 'Case Study', href: '/case-study' },
+  { label: 'Case Study', href: '/case-studies' },
   { label: 'Blogs', href: '/blog' },
-  { label: 'Articles', href: '/articles' },
+  { label: 'Articles', href: '/resources/articles' },
   { label: 'News', href: '/news' },
 ];
 

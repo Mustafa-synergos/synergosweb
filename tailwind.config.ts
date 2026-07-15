@@ -21,12 +21,15 @@ const config: Config = {
       fontFamily: {
         'clother': ['clother', 'sans-serif']
       },
-      colors: {
-        gray: {
-          400: '#AEAEAE',
-          500: '#AEAEAE',
-          DEFAULT: '#AEAEAE'
-        }
+      fontSize: {
+        h1: 'var(--type-h1)',
+        'h1-hero': 'var(--type-h1-hero)',
+        h2: 'var(--type-h2)',
+        h3: 'var(--type-h3)',
+        h4: 'var(--type-h4)',
+        h5: 'var(--type-h5)',
+        h6: 'var(--type-h6)',
+        p: 'var(--type-p)',
       }
     }
   },
@@ -35,28 +38,20 @@ const config: Config = {
       addUtilities({
         '.responsive-clother-h3': {
           fontFamily: 'clother, sans-serif',
+          fontSize: 'var(--type-h3)',
+          lineHeight: 'var(--lh-h3)',
           fontWeight: '400',
           fontStyle: 'normal',
-          fontSize: '22px',
-          lineHeight: '32px',
-          letterSpacing: '0%',
+          letterSpacing: '-0.03em',
           textTransform: 'uppercase',
-          '@screen xl': {
-            fontSize: '52px',
-            lineHeight: '54px'
-          }
         },
         '.responsive-clother-paragraph': {
           fontFamily: 'clother, sans-serif',
-          fontWeight: '300',
+          fontWeight: '200',
           fontStyle: 'normal',
-          fontSize: '16px',
-          lineHeight: '24px',
+          fontSize: 'var(--type-p)',
+          lineHeight: 'var(--lh-p)',
           letterSpacing: '0%',
-          '@screen xl': {
-            fontSize: '18px',
-            lineHeight: '26px'
-          }
         },
         '.responsive-clother-red-span': {
           fontFamily: 'clother, sans-serif',

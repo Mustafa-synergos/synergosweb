@@ -27,7 +27,7 @@ export default async function BlogListingSection({ data }: Props) {
 
   return (
     <>
-    
+      <BlogHero data={data} />
       <BlogListingContent
         initialBlogs={blogs}
         initialMeta={meta}

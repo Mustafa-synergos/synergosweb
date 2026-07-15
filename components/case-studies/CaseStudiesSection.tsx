@@ -3,12 +3,20 @@ import CaseStudyCard from '@/components/case-studies/CaseStudyCard';
 import CTA from '@/components/shared/CTA';
 import DotsSection from '@/components/shared/DotsSection';
 
-export default async function CaseStudiesSection() {
+type CaseStudiesSectionProps = {
+  showCta?: boolean;
+  limit?: number;
+};
+
+export default async function CaseStudiesSection({
+  showCta = true,
+  limit = 6,
+}: CaseStudiesSectionProps) {
   let caseStudies: Awaited<ReturnType<typeof getCaseStudies>> = [];
 
   try {
     const all = await getCaseStudies();
-    caseStudies = all.slice(0, 6);
+    caseStudies = all.slice(0, limit);
   } catch {
     // render empty state
   }
@@ -21,7 +29,9 @@ export default async function CaseStudiesSection() {
           <h2 className="text-[clamp(2.5rem,6vw,5rem)] font-bold uppercase leading-none text-white">
             CASE STUDIES
           </h2>
-          <CTA displayText="EXPLORE MORE" hoverText="EXPLORE MORE" link="/resources/case-studies" />
+          {showCta && (
+            <CTA displayText="EXPLORE MORE" hoverText="EXPLORE MORE" link="/case-studies" />
+          )}
         </div>
 
         {/* Cards grid: 3 columns on large, 2 on sm, 1 on mobile */}

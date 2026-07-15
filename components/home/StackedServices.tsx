@@ -367,7 +367,7 @@ export default function StackedServices({
             takes brands from the launchpad to orbit.
           </p>
 
-          <PremiumCTA title="EXPLORE" hoverTitle="EXPLORE" />
+          <PremiumCTA title="EXPLORE" hoverTitle="EXPLORE"  href="/services" />
         </div>
 
         {/* ORBIT IMAGE */}

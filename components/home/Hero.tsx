@@ -192,7 +192,7 @@ export default function Hero({ data }: HeroProps) {
                     {data?.CTA ? (
                       <CTA data={data.CTA} className="text-xs sm:text-sm lg:text-base" />
                     ) : (
-                      <PremiumCTA href="/projects" className="text-xs sm:text-sm lg:text-base" title="START PROJECT" hoverTitle="START PROJECT" />
+                      <PremiumCTA href="/contact" className="text-xs sm:text-sm lg:text-base" title="START PROJECT" hoverTitle="START PROJECT" />
                     )}
                   </motion.div>
                 </div>
