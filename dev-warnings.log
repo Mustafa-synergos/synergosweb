@@ -1,0 +1,14 @@
+
+> synergos-frontend@0.1.0 dev
+> next dev --port 3005
+
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3005
+  - Environments: .env.local, .env
+
+ ✓ Starting...
+ ✓ Ready in 2.7s
+ ✓ Compiled /middleware in 256ms (72 modules)
+ ○ Compiling / ...
+ ✓ Compiled / in 10.5s (1619 modules)
+ GET / 200 in 11333ms

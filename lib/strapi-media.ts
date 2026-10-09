@@ -1,4 +1,5 @@
 export const strapiBase =
+  process.env.NEXT_PUBLIC_STRAPI_URL?.replace(/\/$/, '') ||
   process.env.NEXT_PUBLIC_STRAPI_API_URL?.replace(/\/$/, '') ||
   'http://localhost:1337';
 
@@ -44,4 +45,10 @@ export function getMediaUrl(
   }
 
   return `${base.replace(/\/$/, '')}${url.startsWith('/') ? url : `/${url}`}`;
+}
+
+export function getStrapiMediaUrl(url?: string | null): string {
+  if (!url) return '';
+  if (url.startsWith('http')) return url;
+  return `${mediaBase}${url.startsWith('/') ? url : `/${url}`}`;
 }

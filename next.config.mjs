@@ -1,5 +1,7 @@
 const strapiHost = process.env.NEXT_PUBLIC_STRAPI_API_URL
   ? new URL(process.env.NEXT_PUBLIC_STRAPI_API_URL).hostname
+  : process.env.NEXT_PUBLIC_STRAPI_URL
+    ? new URL(process.env.NEXT_PUBLIC_STRAPI_URL).hostname
   : null;
 
 const mediaHost = process.env.NEXT_PUBLIC_MEDIA_URL
@@ -14,15 +16,15 @@ const nextConfig = {
         destination: '/privacy-policy',
         permanent: true,
       },
-      // Blog URL structure: parent /resources/ prefix
+      // Canonical blogs listing lives at /blogs
       {
         source: '/blog',
-        destination: '/resources/blogs',
+        destination: '/blogs',
         permanent: true,
       },
       {
-        source: '/blogs',
-        destination: '/resources/blogs',
+        source: '/resources/blogs',
+        destination: '/blogs',
         permanent: true,
       },
       {
@@ -55,11 +57,11 @@ const nextConfig = {
         destination: '/case-studies',
         permanent: true,
       },
-      {
-        source: '/news',
-        destination: '/resources/articles',
-        permanent: true,
-      },
+      // {
+      //   source: '/news',
+      //   destination: '/resources/articles',
+      //   permanent: true,
+      // },
     ];
   },
   images: {

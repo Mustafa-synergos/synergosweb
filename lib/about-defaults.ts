@@ -18,7 +18,7 @@ export const DEFAULT_STORY_OF_FLIGHT: StoryOfFlightSectionData = {
   PrimaryCTA: {
     DisplayText: 'SEE OUR WORK',
     HoverText: 'SEE OUR WORK',
-    Link: '/projects',
+    Link: '/case-studies',
   },
   SecondaryCTA: {
     DisplayText: 'TALK TO US',
@@ -85,7 +85,7 @@ export const DEFAULT_INDUSTRIES: IndustriesSectionData = {
   CTA: {
     DisplayText: 'SEE WHO WE WORK WITH',
     HoverText: 'SEE WHO WE WORK WITH',
-    Link: '/projects',
+    Link: '/clients',
   },
   RowOne: [
     { Label: 'Fintech & Financial Services' },
@@ -114,8 +114,8 @@ export const DEFAULT_ABOUT_CONNECT: AboutConnectCtaSectionData = {
   Eyebrow: "Let's connect",
   Heading: 'YOUR NEXT GROWTH\nPLATFORM IS HERE.',
   Description:
-    'We have spent over 16 years perfecting the mechanics of brand acceleration: imagination, craft, dexterity, and sheer will. Whatever is next for your brand, we are ready to build it with you.',
-  EmailPlaceholder: 'your email id here',
+    'We have spent over 16 years perfecting the mechanics of brand acceleration through imagination, craft, dexterity, and sheer will. Whatever is next for your brand, we are ready to build it with you.',
+  EmailPlaceholder: '@your email id here',
   PrimaryCTA: {
     DisplayText: "LET'S LIFT OFF",
     HoverText: "LET'S LIFT OFF",

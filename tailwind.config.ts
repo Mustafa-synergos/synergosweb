@@ -4,8 +4,10 @@ import plugin from 'tailwindcss/plugin';
 const config: Config = {
   content: [
     './app/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}'
+    './components/**/*.{js,ts,jsx,tsx}',
+    './data/**/*.{js,ts,jsx,tsx}'
   ],
+  safelist: ['invert'],
   theme: {
     extend: {
       maxWidth: {
@@ -34,6 +36,7 @@ const config: Config = {
     }
   },
   plugins: [
+    require('@tailwindcss/typography'),
     plugin(function({ addUtilities }) {
       addUtilities({
         '.responsive-clother-h3': {
