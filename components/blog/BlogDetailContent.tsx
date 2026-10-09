@@ -1,8 +1,13 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
 import Link from 'next/link';
 import BlogCard from '@/components/blog/BlogCard';
+import { dzBodyField } from '@/lib/dz-sections';
 import type { BlogData } from '@/types/blog';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 type Props = {
   blog: BlogData;
@@ -10,9 +15,13 @@ type Props = {
 };
 
 function ShareBar({ title, slug }: { title: string; slug: string }) {
-  if (typeof window === 'undefined') return null;
-  const url = `${window.location.origin}/resources/blog/${slug}`;
-  const encoded = encodeURIComponent(url);
+  const [shareUrl, setShareUrl] = useState('');
+
+  useEffect(() => {
+    setShareUrl(`${window.location.origin}/resources/blog/${slug}`);
+  }, [slug]);
+
+  const encoded = shareUrl ? encodeURIComponent(shareUrl) : '';
   const text = encodeURIComponent(title);
 
   return (
@@ -22,34 +31,38 @@ function ShareBar({ title, slug }: { title: string; slug: string }) {
       </span>
       <div className="flex items-center gap-3">
         <a
-          href={`https://www.facebook.com/sharer/sharer.php?u=${encoded}`}
-          target="_blank"
-          rel="noopener noreferrer"
+          href={shareUrl ? `https://www.facebook.com/sharer/sharer.php?u=${encoded}` : '#'}
+          target={shareUrl ? '_blank' : undefined}
+          rel={shareUrl ? 'noopener noreferrer' : undefined}
           className="transition-opacity hover:opacity-70"
+          onClick={(e) => { if (!shareUrl) e.preventDefault(); }}
         >
           <img src="/images/blog/facebook.svg" alt="Facebook" className="h-5 w-5" />
         </a>
         <a
-          href={`https://www.linkedin.com/shareArticle?mini=true&url=${encoded}&title=${text}`}
-          target="_blank"
-          rel="noopener noreferrer"
+          href={shareUrl ? `https://www.linkedin.com/shareArticle?mini=true&url=${encoded}&title=${text}` : '#'}
+          target={shareUrl ? '_blank' : undefined}
+          rel={shareUrl ? 'noopener noreferrer' : undefined}
           className="transition-opacity hover:opacity-70"
+          onClick={(e) => { if (!shareUrl) e.preventDefault(); }}
         >
           <img src="/images/blog/linkedin.svg" alt="LinkedIn" className="h-5 w-5" />
         </a>
         <a
-          href={`https://www.instagram.com/`}
-          target="_blank"
-          rel="noopener noreferrer"
+          href={shareUrl ? `https://www.instagram.com/` : '#'}
+          target={shareUrl ? '_blank' : undefined}
+          rel={shareUrl ? 'noopener noreferrer' : undefined}
           className="transition-opacity hover:opacity-70"
+          onClick={(e) => { if (!shareUrl) e.preventDefault(); }}
         >
           <img src="/images/blog/instagram.svg" alt="Instagram" className="h-5 w-5" />
         </a>
         <a
-          href={`https://x.com/intent/tweet?url=${encoded}&text=${text}`}
-          target="_blank"
-          rel="noopener noreferrer"
+          href={shareUrl ? `https://x.com/intent/tweet?url=${encoded}&text=${text}` : '#'}
+          target={shareUrl ? '_blank' : undefined}
+          rel={shareUrl ? 'noopener noreferrer' : undefined}
           className="transition-opacity hover:opacity-70"
+          onClick={(e) => { if (!shareUrl) e.preventDefault(); }}
         >
           <img src="/images/blog/x.svg" alt="X" className="h-5 w-5" />
         </a>
@@ -59,6 +72,8 @@ function ShareBar({ title, slug }: { title: string; slug: string }) {
 }
 
 export default function BlogDetailContent({ blog, related }: Props) {
+  // DZ body section wins when the entry is migrated; legacy field otherwise.
+  const content = dzBodyField<string>(blog, 'sections.blog-body', 'Content') ?? blog.Content;
   return (
     <section className="bg-[#111111] py-12 lg:py-16">
       <div className="mx-auto max-w-[1280px]">
@@ -68,11 +83,14 @@ export default function BlogDetailContent({ blog, related }: Props) {
           <div>
             <ShareBar title={blog.Title} slug={blog.Slug} />
 
-            {blog.Content ? (
+            {content ? (
               <div
-                className="blog-content max-w-none"
-                dangerouslySetInnerHTML={{ __html: blog.Content }}
-              />
+                className="prose prose-invert prose-p:font-light prose-p:text-white/75 prose-a:text-red-400 hover:prose-a:text-red-300 prose-headings:text-red-400 prose-headings:font-clother prose-headings:font-semibold max-w-none prose-ul:text-white/70 prose-ol:text-white/70 prose-li:text-white/70 prose-strong:text-white"
+              >
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {content}
+                </ReactMarkdown>
+              </div>
             ) : (
               <p className="text-white/30">No content available.</p>
             )}
@@ -80,7 +98,7 @@ export default function BlogDetailContent({ blog, related }: Props) {
             {/* Back link */}
             <div className="mt-12 border-t border-white/10 pt-8">
               <Link
-                href="/resources/blogs"
+                href="/blogs"
                 className="inline-flex items-center gap-2 text-[13px] font-light text-white/40 transition hover:text-white"
               >
                 <img src="/images/blog/arrow-2.svg" alt="" className="h-3 w-3 rotate-180" />

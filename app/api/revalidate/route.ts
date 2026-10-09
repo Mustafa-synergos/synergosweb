@@ -21,8 +21,14 @@ type RevalidateBody = {
 const CONTENT_TYPES = new Set<RevalidateContentType>([
   'page',
   'blog',
+  'article',
   'case-study',
   'career',
+  'service',
+  'footer',
+  'header',
+  'team',
+  'clients',
 ]);
 
 function safeRevalidateTag(tag: string, errors: string[]) {

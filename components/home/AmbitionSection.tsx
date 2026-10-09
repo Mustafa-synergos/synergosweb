@@ -5,14 +5,43 @@ import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import InteractiveDots from './InteractiveDots';
+import { getMediaUrl } from '@/lib/strapi-media';
 
 gsap.registerPlugin(ScrollTrigger);
 
+function MultilineText({ text }: { text: string }) {
+  const lines = text.split('\n');
+  return (
+    <>
+      {lines.map((line, index) => (
+        <span key={`${line}-${index}`}>
+          {line}
+          {index < lines.length - 1 && <br />}
+        </span>
+      ))}
+    </>
+  );
+}
+
+const DEFAULT_LINES = [
+  'YOU BRING THE AMBITION.',
+  'WE BRING THE COMPASS,\nTHE FUEL, AND THE THRUST.',
+  'WE ARE NOT HERE FOR\nONE CAMPAIGN.',
+  'WE ARE BUILT FOR\nTHE LONG HAUL.',
+];
+
 export default function AmbitionSection({
-  data: _data,
+  data,
 }: {
   data?: import('@/types/home-sections').AmbitionSectionData;
 }) {
+  // CMS-driven lines (editor order); missing entries fall back to defaults
+  // so the 4-slot scroll choreography always has content.
+  const lines = [0, 1, 2, 3].map(
+    (i) => data?.Lines?.[i]?.Text || DEFAULT_LINES[i]
+  );
+  const logoUrl = getMediaUrl(data?.LogoImage) ?? '/images/white-logo.webp';
+  const mobileLogoUrl = getMediaUrl(data?.MobileLogoImage) ?? logoUrl;
   const containerRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLImageElement>(null);
   const [activeHeading, setActiveHeading] = useState(1);
@@ -295,14 +324,14 @@ export default function AmbitionSection({
         {/* Shared Logo - Absolutely positioned inside container */}
         <img 
           ref={logoRef}
-          src="/images/white-logo.webp" 
+          src={logoUrl} 
           alt="Logo" 
           className="absolute w-16 h-16 hidden md:block will-change-transform"
           style={{ pointerEvents: 'none' }}
         />
         <img 
           ref={mobileLogoRef}
-          src="/images/white-logo.webp" 
+          src={mobileLogoUrl} 
           alt="Logo" 
           className="absolute w-12 h-12 md:hidden will-change-transform"
           style={{ pointerEvents: 'none' }}
@@ -335,7 +364,7 @@ export default function AmbitionSection({
               className="w-full"
             >
               <h3 ref={mobileHeading1Ref} className={`${activeHeading === 1 ? 'text-white' : 'text-grey'} uppercase block max-w-[450px] mx-auto pl-16 text-left transition-colors duration-300`} style={{ fontFamily: 'clother', fontWeight: 400, fontStyle: 'normal', fontSize: '17px', lineHeight: '20px', letterSpacing: '0%' }}>
-                YOU BRING THE AMBITION.
+                <MultilineText text={lines[0]} />
               </h3>
             </motion.div>
 
@@ -348,7 +377,7 @@ export default function AmbitionSection({
               className="w-full"
             >
               <h3 ref={mobileHeading2Ref} className={`${activeHeading === 2 ? 'text-white' : 'text-grey'} uppercase block max-w-[450px] mx-auto pl-16 text-left transition-colors duration-300`} style={{ fontFamily: 'clother', fontWeight: 400, fontStyle: 'normal', fontSize: '17px', lineHeight: '20px', letterSpacing: '0%' }}>
-                WE BRING THE COMPASS,<br />THE FUEL, AND THE THRUST.
+                <MultilineText text={lines[1]} />
               </h3>
             </motion.div>
 
@@ -361,7 +390,7 @@ export default function AmbitionSection({
               className="w-full"
             >
               <h3 ref={mobileHeading3Ref} className={`${activeHeading === 3 ? 'text-white' : 'text-grey'} uppercase block max-w-[450px] mx-auto pl-16 text-left transition-colors duration-300`} style={{ fontFamily: 'clother', fontWeight: 400, fontStyle: 'normal', fontSize: '17px', lineHeight: '20px', letterSpacing: '0%' }}>
-                WE ARE NOT HERE FOR<br />ONE CAMPAIGN.
+                <MultilineText text={lines[2]} />
               </h3>
             </motion.div>
 
@@ -374,7 +403,7 @@ export default function AmbitionSection({
               className="w-full"
             >
               <h3 ref={mobileHeading4Ref} className={`${activeHeading === 4 ? 'text-white' : 'text-grey'} uppercase block max-w-[450px] mx-auto pl-16 text-left transition-colors duration-300`} style={{ fontFamily: 'clother', fontWeight: 400, fontStyle: 'normal', fontSize: '17px', lineHeight: '20px', letterSpacing: '0%' }}>
-                WE ARE BUILT FOR<br />THE LONG HAUL.
+                <MultilineText text={lines[3]} />
               </h3>
             </motion.div>
           </div>
@@ -390,7 +419,7 @@ export default function AmbitionSection({
               className="md:col-start-1 md:row-start-1"
             >
               <h3 ref={desktopHeading1Ref} className={`${activeHeading === 1 ? 'text-white' : 'text-grey'} uppercase max-w-xs md:max-w-full lg:max-w-xs transition-colors duration-300`} style={{ fontFamily: 'clother', fontWeight: 400, fontStyle: 'normal',  fontSize: window.innerWidth < 1024 ? '24px' : '40px', lineHeight: window.innerWidth < 1024 ? '28px' : '48px', letterSpacing: '0%' }}>
-                YOU BRING THE AMBITION.
+                <MultilineText text={lines[0]} />
               </h3>
             </motion.div>
 
@@ -403,8 +432,7 @@ export default function AmbitionSection({
               className="md:col-start-2 md:row-start-2 md:justify-self-end text-right md:text-left"
             >
               <h3 ref={desktopHeading2Ref} className={`${activeHeading === 2 ? 'text-white' : 'text-grey'} uppercase max-w-sm md:max-w-full lg:max-w-sm ml-auto md:ml-0 transition-colors duration-300`} style={{ fontFamily: 'clother', fontWeight: 400, fontStyle: 'normal',  fontSize: window.innerWidth < 1024 ? '24px' : '40px', lineHeight: window.innerWidth < 1024 ? '28px' : '48px', letterSpacing: '0%' }}>
-                WE BRING THE COMPASS,<br />
-                THE FUEL, AND THE THRUST.
+                <MultilineText text={lines[1]} />
               </h3>
             </motion.div>
 
@@ -417,8 +445,7 @@ export default function AmbitionSection({
               className="md:col-start-1 md:row-start-3"
             >
               <h3 ref={desktopHeading3Ref} className={`${activeHeading === 3 ? 'text-white' : 'text-grey'} uppercase max-w-sm md:max-w-full lg:max-w-sm transition-colors duration-300`} style={{ fontFamily: 'clother', fontWeight: 400, fontStyle: 'normal',  fontSize: window.innerWidth < 1024 ? '24px' : '40px', lineHeight: window.innerWidth < 1024 ? '28px' : '48px', letterSpacing: '0%' }}>
-                WE ARE NOT HERE FOR<br />
-                ONE CAMPAIGN.
+                <MultilineText text={lines[2]} />
               </h3>
             </motion.div>
 
@@ -431,8 +458,7 @@ export default function AmbitionSection({
               className="md:col-start-2 md:row-start-4 md:justify-self-end"
             >
               <h3 ref={desktopHeading4Ref} className={`${activeHeading === 4 ? 'text-white' : 'text-grey'} uppercase max-w-sm md:max-w-full lg:max-w-sm ml-auto md:ml-0 transition-colors duration-300`} style={{ fontFamily: 'clother', fontWeight: 400, fontStyle: 'normal',  fontSize: window.innerWidth < 1024 ? '24px' : '40px', lineHeight: window.innerWidth < 1024 ? '28px' : '48px', letterSpacing: '0%' }}>
-                WE ARE BUILT FOR<br />
-                THE LONG HAUL.
+                <MultilineText text={lines[3]} />
               </h3>
             </motion.div>
           </div>

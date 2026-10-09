@@ -1,10 +1,6 @@
-import type { Metadata } from 'next';
-import CmsPage, { buildCmsPageMetadata } from '@/components/shared/CmsPage';
+import { permanentRedirect } from 'next/navigation';
 
-export async function generateMetadata(): Promise<Metadata> {
-  return buildCmsPageMetadata('blog');
-}
-
-export default function BlogListingPage() {
-  return <CmsPage slug="blog" className="min-h-screen bg-[#0f0f0f] text-white" />;
+// Canonical blogs listing now lives at /blogs — keep the old URL working.
+export default function LegacyBlogsRedirect() {
+  permanentRedirect('/blogs');
 }

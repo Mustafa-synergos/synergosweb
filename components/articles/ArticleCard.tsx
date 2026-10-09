@@ -38,18 +38,18 @@ export default function ArticleCard({ article, index = 0, hideExcerpt = false }:
     >
       <Link
         href={`/resources/article/${article.Slug}`}
-        className="group flex h-full min-h-[180px] flex-col justify-between rounded-[6px] border border-white/[0.08] bg-white/[0.02] p-5 transition-all duration-300 hover:border-white/[0.18] hover:bg-white/[0.05] sm:p-6"
+        className="group flex h-full min-h-[180px] flex-col justify-between rounded-[6px] border border-white/[0.08] p-5 transition-all duration-300 hover:border-white/[0.18] sm:p-6"
       >
         {/* Top: category + title + excerpt */}
         <div className="flex flex-col gap-2.5">
           {article.Category && <CategoryPill category={article.Category} />}
 
-          <h3 className="font-clother text-[20px] normal-case leading-[1.5] text-white line-clamp-3 sm:text-[16px]">
+          <h3 className="mb-2 text-[24px] font-normal uppercase leading-[36px] tracking-normal text-[#AEAEAE] line-clamp-3 lg:text-[28px]">
             {article.Title}
           </h3>
 
           {!hideExcerpt && article.Excerpt && (
-            <p className="mt-2 line-clamp-2 font-clother text-[18px] font-light leading-[1.3] text-white/45">
+            <p className="mt-2 line-clamp-2 text-[16px] leading-[24px] tracking-normal">
               {article.Excerpt}
             </p>
           )}

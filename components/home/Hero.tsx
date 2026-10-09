@@ -30,7 +30,7 @@ export default function Hero({ data }: HeroProps) {
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
   const [currentDevice, setCurrentDevice] = useState<'desktop' | 'tablet' | 'mobile'>('desktop');
   const videoRef = useRef<HTMLVideoElement>(null);
-  
+
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 500], [0, -150]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
@@ -50,27 +50,22 @@ export default function Hero({ data }: HeroProps) {
   }, []);
 
   // Media sources based on device
+  // NOTE: no static hero poster images ship in /public/images,
+  // so only use a poster when the CMS provides one (avoids 404s).
   const mediaSources = {
     desktop: {
       video: '/videos/2547170_Travel_Futuristic_1920x1080.mp4',
-      poster: '/images/hero-desktop.jpg',
-      fallback: '/images/hero-desktop.jpg'
     },
     tablet: {
       video: '/videos/2547170_Travel_Futuristic_1920x1080.mp4',
-      poster: '/images/hero-tablet.jpg',
-      fallback: '/images/hero-tablet.jpg'
     },
     mobile: {
       video: '/videos/2547170_Travel_Futuristic_1920x1080.mp4',
-      poster: '/images/hero-mobile.jpg',
-      fallback: '/images/hero-mobile.jpg'
     }
   };
 
   const currentMedia = mediaSources[currentDevice];
-  const posterUrl =
-    getMediaUrl(data?.PosterImage) ?? currentMedia.poster;
+  const posterUrl = getMediaUrl(data?.PosterImage) ?? undefined;
   const videoUrl =
     getMediaUrl(data?.BackgroundVideo) ?? currentMedia.video;
   const vectorLeftUrl =
@@ -105,7 +100,7 @@ export default function Hero({ data }: HeroProps) {
           >
             <source src={videoUrl} type="video/mp4" />
           </video>
-          
+
           {/* Video Fallback Image */}
           {/* <motion.img
             src={currentMedia.fallback}
@@ -120,8 +115,8 @@ export default function Hero({ data }: HeroProps) {
         {/* Overlay Gradients */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/60" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30" />
-        
-              </div>
+
+      </div>
 
       {/* Hero Content - Split Layout */}
       <motion.div
@@ -161,7 +156,7 @@ export default function Hero({ data }: HeroProps) {
               ">
                 <MultilineText text={headingRight} />
               </h1>
-              
+
               {/* Split paragraphs in 50-50 columns with button */}
               <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2  gap-3 sm:gap-6 md:gap-2 lg:gap-8">
                 <motion.p
@@ -174,7 +169,7 @@ export default function Hero({ data }: HeroProps) {
                 </motion.p>
 
                 <div className="flex flex-col gap-3 sm:gap-4 lg:gap-4">
-                 <motion.p
+                  <motion.p
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.7 }}
@@ -182,7 +177,7 @@ export default function Hero({ data }: HeroProps) {
                   >
                     {paragraphRight}
                   </motion.p>
-                  
+
                   {/* START PROJECT Button */}
                   <motion.div
                     initial={{ opacity: 0, y: 30 }}

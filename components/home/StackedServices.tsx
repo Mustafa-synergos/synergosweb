@@ -8,6 +8,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { services, type Service } from "../../data/services";
 import InteractiveDots from "./InteractiveDots";
 import PremiumCTA from "./PremiumCTA";
+import CTA from "@/components/shared/CTA";
+import { getMediaUrl } from "@/lib/strapi-media";
+import type {
+  RichTextInlineNode,
+  RichTextLinkNode,
+} from "@/types/rich-text";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -30,11 +36,97 @@ const PEEK = {
 /** Minimum swipe distance (px) to trigger a slide on touch devices. */
 const SWIPE_THRESHOLD = 45;
 
+type ServiceItemLink = import('@/types/home-sections').ServiceItemData['Link'];
+
+/**
+ * CMS Link field → URL string. Editors either paste a path/URL as text or
+ * use a real link node — a link `url` wins when present, otherwise the
+ * visible text is used (trimmed).
+ */
+function linkText(value?: ServiceItemLink): string {
+  if (!value) return '';
+  if (typeof value === 'string') return value;
+  if (!Array.isArray(value)) return '';
+
+  const urls: string[] = [];
+  const texts: string[] = [];
+  const collectInline = (
+    nodes: readonly (RichTextInlineNode | RichTextLinkNode)[],
+  ) => {
+    for (const node of nodes) {
+      if (node.type === 'link') {
+        if (node.url) urls.push(node.url);
+        collectInline(node.children);
+      } else {
+        texts.push(node.text);
+      }
+    }
+  };
+
+  for (const block of value) {
+    if (block.type === 'list') {
+      for (const item of block.children) collectInline(item.children);
+    } else {
+      collectInline(block.children);
+    }
+  }
+
+  return (urls[0] ?? texts.join('')).trim();
+}
+
+/**
+ * Card destination: the CMS Link wins when set (bare `slug` or `path` is
+ * rooted, `/services/<slug>` and full URLs pass through untouched);
+ * otherwise the matching static entry's detail-page slug applies.
+ */
+function resolveServiceItemLink(link: ServiceItemLink, fallbackSlug?: string): string | undefined {
+  const text = linkText(link).trim();
+  if (!text) return fallbackSlug;
+  if (/^https?:\/\//i.test(text)) return text;
+  if (text.startsWith('/')) return text;
+  if (text.startsWith('#')) return text;
+  return `/${text}`;
+}
+
 export default function StackedServices({
-  data: _data,
+  data,
 }: {
   data?: import('@/types/home-sections').ServicesSectionData;
 }) {
+  // CMS-driven service list (editor order); falls back to the static list so
+  // the stacking choreography always has cards. Illustrations/slugs fall back
+  // to the matching static entry by title.
+  const staticByTitle = new Map(
+    services.map((s) => [s.title.toLowerCase(), s])
+  );
+  const list: Service[] =
+    data?.Services?.length
+      ? data.Services.map((item, i) => {
+          const fb =
+            staticByTitle.get((item.Title || '').toLowerCase()) ??
+            services[i % services.length];
+          return {
+            id: item.id ?? 1000 + i,
+            number:
+              item.Number || fb.number || String(i + 1).padStart(2, '0'),
+            title: item.Title || fb.title,
+            description: item.Description || fb.description,
+            illustration:
+              getMediaUrl(item.Illustration) || fb.illustration,
+            slug: resolveServiceItemLink(item.Link, fb.slug),
+          };
+        })
+      : services;
+  const eyebrow = data?.Eyebrow ?? 'Eleven Thrusters, One Engine';
+  const headingLines = (
+    data?.Heading ?? 'ELEVEN THINGS\nWE ARE GOOD AT.'
+  ).split('\n');
+  const headingLine1 = headingLines[0] ?? 'ELEVEN THINGS';
+  const headingLine2 = headingLines[1] ?? 'WE ARE GOOD AT.';
+  const description =
+    data?.Description ??
+    'Each capability is a thruster. Together, they direct the engine that takes brands from the launchpad to orbit.';
+  const heroCta = data?.CTA;
   const heroRef = useRef<HTMLDivElement>(null);
   const dotsViewportRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -46,7 +138,7 @@ export default function StackedServices({
   const [activeIndex, setActiveIndex] = useState(0);
   const activeIndexRef = useRef(0);
 
-  const count = services.length;
+  const count = list.length;
 
   useEffect(() => {
     activeIndexRef.current = activeIndex;
@@ -327,7 +419,7 @@ export default function StackedServices({
               textTransform: "capitalize",
             }}
           >
-            Eleven Thrusters, One Engine
+            {eyebrow}
           </span>
 
           <h2
@@ -335,22 +427,22 @@ export default function StackedServices({
             style={{ fontFamily: '"clother", sans-serif', fontWeight: 700 }}
           >
             <span className="block text-[38px] leading-[40px] md:text-[80px] md:leading-[80px] lg:hidden">
-              ELEVEN THINGS 
+              {headingLine1}
             </span>
             <span className="block text-[38px] leading-[40px] md:text-[80px] md:leading-[80px] lg:hidden">
-              WE ARE GOOD AT.
+              {headingLine2}
             </span>
             <span
               className="hidden lg:block"
               style={{ fontSize: "134px", lineHeight: "134px" }}
             >
-              ELEVEN THINGS 
+              {headingLine1}
             </span>
             <span
               className="hidden lg:block"
               style={{ fontSize: "134px", lineHeight: "134px" }}
             >
-             WE ARE GOOD AT.
+              {headingLine2}
             </span>
           </h2>
 
@@ -363,11 +455,14 @@ export default function StackedServices({
               fontSize: "18px",
             }}
           >
-            Each capability is a thruster. Together, they direct the engine that
-            takes brands from the launchpad to orbit.
+            {description}
           </p>
 
-          <PremiumCTA title="EXPLORE" hoverTitle="EXPLORE"  href="/services" />
+          {heroCta ? (
+            <CTA data={heroCta} displayText="EXPLORE" hoverText="EXPLORE" link="/services" />
+          ) : (
+            <PremiumCTA title="EXPLORE" hoverTitle="EXPLORE"  href="/services" />
+          )}
         </div>
 
         {/* ORBIT IMAGE */}
@@ -399,7 +494,7 @@ export default function StackedServices({
               <InteractiveDots variant="dark" containerRef={dotsViewportRef} />
             </div>
 
-            {services.map((service, index) => (
+            {list.map((service, index) => (
               <div
                 key={service.id}
                 ref={(el) => {
@@ -416,7 +511,7 @@ export default function StackedServices({
               count={count}
               activeIndex={activeIndex}
               onSelect={goTo}
-              labelFor={(i) => services[i].title}
+              labelFor={(i) => list[i].title}
             />
           </div>
         </div>
@@ -433,7 +528,7 @@ export default function StackedServices({
 
           {/* Single-cell grid: container hugs the tallest card, cards overlap */}
           <div className="relative z-10 mx-auto grid w-full max-w-[1280px] items-center">
-            {services.map((service, index) => (
+            {list.map((service, index) => (
               <div
                 key={service.id}
                 className="col-start-1 row-start-1"
@@ -448,7 +543,7 @@ export default function StackedServices({
             count={count}
             activeIndex={activeIndex}
             onSelect={goTo}
-            labelFor={(i) => services[i].title}
+            labelFor={(i) => list[i].title}
           />
         </div>
       )}
@@ -520,7 +615,7 @@ function ServiceCard({ service }: { service: Service }) {
               {service.description}
             </p>
 
-            <PremiumCTA title="EXPLORE" hoverTitle="EXPLORE" />
+            <PremiumCTA title="EXPLORE" hoverTitle="EXPLORE" href={service.slug} />
           </div>
 
           {/* RIGHT */}

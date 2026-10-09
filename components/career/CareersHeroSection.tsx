@@ -14,6 +14,8 @@ type HeroContent = {
   WhyJoinHeading: string;
   WhyJoinDescription: string;
   Highlights?: CareerHighlightCardData[] | null;
+  ApplyNowText?: string | null;
+  ApplyNowLink?: string | null;
 };
 
 type CareersHeroSectionProps = {
@@ -22,16 +24,22 @@ type CareersHeroSectionProps = {
 
 export default function CareersHeroSection({ content }: CareersHeroSectionProps) {
   const highlights = content.Highlights ?? [];
+  // Connected to Strapi `page.page` → careers hero/list section:
+  // editors control the label/link at https://api.synergostech.in/admin.
+  // Empty link falls back to the Open roles list (fed by /api/careers).
+  const applyLabel = content.ApplyNowText?.trim() || 'APPLY NOW';
+  const applyLink = content.ApplyNowLink?.trim() || '#open-roles';
+  const isExternal = /^https?:\/\//i.test(applyLink);
 
   return (
     <section className="relative overflow-hidden bg-black text-white">
       <InteractiveDots variant="dark" />
 
-       <DecorativeVectorImage
-                    src={decorativeUrl}
-                    className="hidden lg:block absolute top-0 right-0 w-[30%] h-[30rem]"
-                    delay={0.3}
-                  />
+      <DecorativeVectorImage
+        src={decorativeUrl}
+        className="hidden lg:block absolute top-0 right-0 w-[30%] h-[30rem]"
+        delay={0.3}
+      />
       <div className="relative z-10 mx-auto w-full max-w-[1280px] px-4 py-16 sm:px-8 sm:py-20 lg:px-0 lg:py-24">
         <div className="relative">
           <div className="lg:pt-8">
@@ -41,12 +49,18 @@ export default function CareersHeroSection({ content }: CareersHeroSectionProps)
             <p className="mt-6 max-w-[520px] text-sm font-light leading-[1.8] text-[#B9B9B9] sm:text-[16px] sm:leading-[1.9]">
               {content.WhyJoinDescription}
             </p>
-            <div className="mt-8">
-              <button className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm uppercase tracking-[0.3em] text-white transition hover:border-white/40">
-                APPLY NOW
-              </button>
-            </div>
-           
+            {/* <div className="mt-8">
+              <a
+                href={applyLink}
+                {...(isExternal
+                  ? { target: '_blank', rel: 'noreferrer' }
+                  : {})}
+                className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm uppercase tracking-[0.3em] text-white transition hover:border-white/40"
+              >
+                {applyLabel}
+              </a>
+            </div> */}
+
           </div>
 
           {highlights.length > 0 && (
@@ -54,11 +68,10 @@ export default function CareersHeroSection({ content }: CareersHeroSectionProps)
               {highlights.map((highlight, index) => (
                 <div
                   key={`${highlight.Title}-${index}`}
-                  className={`flex h-full w-full ${getPillarCardTransformClass(index)} ${
-                    index === 2
+                  className={`flex h-full w-full ${getPillarCardTransformClass(index)} ${index === 2
                       ? 'sm:col-span-2 sm:mx-auto sm:max-w-[calc(50%-0.75rem)] lg:col-span-1 lg:max-w-none'
                       : ''
-                  }`}
+                    }`}
                 >
                   <motion.div
                     initial={{ opacity: 0, y: 36 }}

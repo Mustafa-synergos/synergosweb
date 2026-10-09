@@ -52,7 +52,7 @@ export default function StoryOfFlightSection({ data }: StoryOfFlightSectionProps
               </span>
             ))}
           </h2>
-          <p className="mt-6 max-w-3xl font-clother text-[18px] font-light leading-relaxed text-white/90 lg:mt-8 lg:text-[22px]">
+          <p className="mt-6 max-w-3xl font-clother text-[18px] font-light leading-relaxed text-[#AEAEAE] lg:mt-8 lg:text-[22px]">
             {content.Subtitle}
           </p>
 
@@ -61,6 +61,7 @@ export default function StoryOfFlightSection({ data }: StoryOfFlightSectionProps
             src={decorativeUrl}
             className="hidden lg:block absolute -right-8 top-0 h-[min(42vw,420px)] w-[min(42vw,420px)]"
             delay={0.3}
+            targetOpacity={0.6}
           />
 
         </motion.div>
@@ -92,10 +93,10 @@ export default function StoryOfFlightSection({ data }: StoryOfFlightSectionProps
             viewport={{ once: true }}
             className="space-y-6 lg:pt-4"
           >
-            <p className="responsive-clother-paragraph  text-white/85">
+            <p className="responsive-clother-paragraph  text-[#AEAEAE]">
               {content.ParagraphOne}
             </p>
-            <p className="responsive-clother-paragraph  text-white/80">
+            <p className="responsive-clother-paragraph  text-[#AEAEAE]">
               {content.ParagraphTwo}
             </p>
 

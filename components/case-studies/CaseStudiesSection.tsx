@@ -4,19 +4,31 @@ import CTA from '@/components/shared/CTA';
 import DotsSection from '@/components/shared/DotsSection';
 
 type CaseStudiesSectionProps = {
+  data?: {
+    Heading?: string | null;
+    CTAText?: string | null;
+    CTALink?: string | null;
+    PostCount?: number | null;
+  } | null;
   showCta?: boolean;
   limit?: number;
 };
 
 export default async function CaseStudiesSection({
+  data,
   showCta = true,
   limit = 6,
 }: CaseStudiesSectionProps) {
   let caseStudies: Awaited<ReturnType<typeof getCaseStudies>> = [];
 
+  const heading = data?.Heading ?? 'CASE STUDIES';
+  const ctaText = data?.CTAText ?? 'EXPLORE MORE';
+  const ctaLink = data?.CTALink ?? '/case-studies';
+  const postCount = data?.PostCount ?? limit;
+
   try {
     const all = await getCaseStudies();
-    caseStudies = all.slice(0, limit);
+    caseStudies = all.slice(0, postCount);
   } catch {
     // render empty state
   }
@@ -27,10 +39,10 @@ export default async function CaseStudiesSection({
         {/* Header row */}
         <div className="mb-10 flex items-center justify-between">
           <h2 className="text-[clamp(2.5rem,6vw,5rem)] font-bold uppercase leading-none text-white">
-            CASE STUDIES
+            {heading}
           </h2>
           {showCta && (
-            <CTA displayText="EXPLORE MORE" hoverText="EXPLORE MORE" link="/case-studies" />
+            <CTA displayText={ctaText} hoverText={ctaText} link={ctaLink} />
           )}
         </div>
 

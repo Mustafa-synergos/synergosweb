@@ -7,13 +7,41 @@ import UnifiedSectionWrapper from '../layout/UnifiedSectionWrapper';
 import { EditorialContentGrid, SectionHeader, EditorialHeading, EditorialCTA, ContentBlock } from '../layout/EditorialContentGrid';
 import InteractiveDots from './InteractiveDots';
 import PremiumCTA from './PremiumCTA';
+import CTA from '@/components/shared/CTA';
 import DecorativeVectorImage from '@/components/shared/DecorativeVectorImage';
+import { getMediaUrl } from '@/lib/strapi-media';
+
+function MultilineText({ text }: { text: string }) {
+  const lines = text.split('\n');
+  return (
+    <>
+      {lines.map((line, index) => (
+        <span key={`${line}-${index}`}>
+          {line}
+          {index < lines.length - 1 && <br />}
+        </span>
+      ))}
+    </>
+  );
+}
 
 export default function BeforeFooterCTA({
-  data: _data,
+  data,
 }: {
   data?: import('@/types/home-sections').BeforeFooterCtaSectionData;
 }) {
+  const eyebrow = data?.Eyebrow ?? "Let's connect";
+  const heading = data?.Heading ?? 'WE REDEFINE THE\nFINISH LINE';
+  const description =
+    data?.Description ??
+    'We have spent over a decade and a half perfecting the mechanics of flight through imagination, craft, dexterity, and sheer will. Your next launch is already on the pad.';
+  const emailPlaceholder = data?.EmailPlaceholder ?? '@your email id here';
+  const ctaText = data?.CTA?.DisplayText ?? "LET'S LIFT OFF";
+  const sectionCta = data?.CTA;
+  const orbitalUrl =
+    getMediaUrl(data?.OrbitalImage) ??
+    '/images/we-redefine-the-finish-line-vector.svg';
+  const rocketUrl = getMediaUrl(data?.RocketImage) ?? '/images/rocket.svg';
   const [email, setEmail] = useState('');
   const [isHovered, setIsHovered] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -33,10 +61,10 @@ export default function BeforeFooterCTA({
   const rocketFloat = useSpring(useTransform(scrollYProgress, [0, 0.5, 1], [0, -10, 0]), { stiffness: 200, damping: 20 });
 
   return (
-    <UnifiedSectionWrapper 
-      background="custom" 
-      id="final-cta" 
-      customBgColor="bg-[#171717]" 
+    <UnifiedSectionWrapper
+      background="custom"
+      id="final-cta"
+      customBgColor="bg-[#171717]"
       className="h-[125vh] lg:h-[120vh] md:h-[95vh] md:max-h-[100vh]"
       sectionRef={sectionRef}
       backgroundElement={<InteractiveDots variant="dark" containerRef={sectionRef} />}
@@ -45,9 +73,9 @@ export default function BeforeFooterCTA({
         {/* Two Column Layout - Text on left, Rocket on right */}
         <ContentBlock size="full">
           <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_clamp(150px,16vw,220px)] gap-8 lg:gap-12 xl:gap-16 items-center">
-            
+
             {/* Left side - Text content and CTA */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, delay: 0.3 }}
@@ -62,7 +90,7 @@ export default function BeforeFooterCTA({
                 viewport={{ once: true }}
               >
                 <span className="text-red-500 font-clother font-normal text-[18px] lg:text-[28px] leading-[100%] tracking-normal mb-0 lg:mb-2" style={{ textTransform: 'capitalize' }}>
-                  Let's connect
+                  {eyebrow}
                 </span>
               </motion.div>
 
@@ -74,9 +102,7 @@ export default function BeforeFooterCTA({
                 viewport={{ once: true }}
                 className="responsive-large-h2 whitespace-nowrap text-white !mt-0 lg:!mt-0"
               >
-                WE REDEFINE THE
-                <br />
-                FINISH LINE
+                <MultilineText text={heading} />
               </motion.h2>
 
               {/* Supporting paragraph */}
@@ -87,7 +113,7 @@ export default function BeforeFooterCTA({
                 viewport={{ once: true }}
                 className="font-clother font-light text-[16px] lg:text-[18px] tracking-normal mt-2 lg:mt-3"
               >
-                We have spent over a decade and a half perfecting the mechanics of flight through imagination, craft, dexterity, and sheer will. Your next launch is already on the pad.
+                {description}
               </motion.p>
 
               {/* Email input and CTA */}
@@ -101,9 +127,9 @@ export default function BeforeFooterCTA({
                 <div className="relative flex flex-col lg:flex-row items-stretch lg:items-center w-full gap-6 lg:gap-0 lg:border-b lg:border-white/30 lg:focus-within:border-white/60 transition-colors duration-300 lg:pb-4">
                   <input
                     type="email"
-                    placeholder="your email id here"
+                    placeholder={emailPlaceholder}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="flex-1 min-w-0 bg-transparent text-white focus:outline-none pb-4 text-[16px] lg:text-[28px] border-b border-white/30 focus:border-white/60 transition-colors duration-300 lg:border-none"
+                    className="flex-1 min-w-0 bg-transparent text-white focus:outline-none pb-4 text-[16px] lg:text-[20px] border-b border-white/30 focus:border-white/60 transition-colors duration-300 lg:border-none"
                   />
 
                   {/* Desktop button — unchanged */}
@@ -116,14 +142,14 @@ export default function BeforeFooterCTA({
                     onTouchStart={() => setIsHovered(true)}
                     onTouchEnd={() => setIsHovered(false)}
                     onTouchCancel={() => setIsHovered(false)}
-                    className="hidden lg:flex items-center gap-1 lg:gap-2 text-white uppercase text-[16px] lg:text-[28px] font-[300] lg:font-[300] shrink-0 ml-2"
+                    className="hidden lg:flex items-center gap-1 lg:gap-2 text-white uppercase text-[16px] lg:text-[20px] font-[300] lg:font-[300] shrink-0 ml-2"
                   >
                     <motion.span
                       initial="rest"
                       animate={isHovered ? 'hover' : 'rest'}
                       className="relative flex overflow-hidden"
                     >
-                      {"LET'S LIFT OFF".split('').map((char, i) => (
+                      {ctaText.split('').map((char, i) => (
                         <span
                           key={i}
                           className="relative inline-block overflow-hidden"
@@ -178,14 +204,18 @@ export default function BeforeFooterCTA({
 
                   {/* Mobile CTA */}
                   <div className="flex lg:hidden justify-end pt-2">
-                    <PremiumCTA title="LET'S LIFT OFF" hoverTitle="LET'S LIFT OFF" className="text-[16px]" />
+                    {sectionCta ? (
+                      <CTA data={sectionCta} className="text-[16px]" />
+                    ) : (
+                      <PremiumCTA title="LET'S LIFT OFF" hoverTitle="LET'S LIFT OFF" className="text-[16px]" />
+                    )}
                   </div>
                 </div>
               </motion.div>
             </motion.div>
 
             {/* Right side - Rocket and orbital elements */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, delay: 0.4 }}
@@ -194,7 +224,7 @@ export default function BeforeFooterCTA({
             >
               {/* Orbital background - hidden on mobile */}
               <DecorativeVectorImage
-                src="/images/we-redefine-the-finish-line-vector.svg"
+                src={orbitalUrl}
                 className="absolute -top-12 -right-48 xl:-right-56 2xl:-right-64 hidden lg:block"
                 imgClassName="w-[520px] h-[275px] min-w-[520px] min-h-[275px] xl:w-[580px] xl:h-[306px] xl:min-w-[580px] xl:min-h-[306px] 2xl:w-[625px] 2xl:h-[330px] 2xl:min-w-[625px] 2xl:min-h-[330px] object-contain opacity-20"
                 delay={0.2}
@@ -233,7 +263,7 @@ export default function BeforeFooterCTA({
                 className="relative z-20 mt-24 xl:mt-32 2xl:mt-40"
               >
                 <Image
-                  src="/images/rocket.svg"
+                  src={rocketUrl}
                   alt="Rocket"
                   width={92}
                   height={790}

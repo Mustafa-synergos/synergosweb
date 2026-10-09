@@ -3,12 +3,26 @@ import ArticleCard from '@/components/articles/ArticleCard';
 import CTA from '@/components/shared/CTA';
 import DotsSection from '@/components/shared/DotsSection';
 
-export default async function ArticlesSection() {
+type ArticlesSectionProps = {
+  data?: {
+    Heading?: string | null;
+    CTAText?: string | null;
+    CTALink?: string | null;
+    PostCount?: number | null;
+  } | null;
+};
+
+export default async function ArticlesSection({ data }: ArticlesSectionProps = {}) {
   let articles: Awaited<ReturnType<typeof getArticles>> = [];
+
+  const heading = data?.Heading ?? 'ARTICLES';
+  const ctaText = data?.CTAText ?? 'EXPLORE MORE';
+  const ctaLink = data?.CTALink ?? '/resources/articles';
+  const postCount = data?.PostCount ?? 4;
 
   try {
     const all = await getArticles();
-    articles = all.slice(0, 4);
+    articles = all.slice(0, postCount);
   } catch {
     // render empty state
   }
@@ -19,9 +33,9 @@ export default async function ArticlesSection() {
         {/* Header row */}
         <div className="mb-4 flex items-center justify-between">
           <h2 className="text-[clamp(2.5rem,6vw,5rem)] font-bold uppercase leading-none text-white">
-            ARTICLES
+            {heading}
           </h2>
-          <CTA displayText="EXPLORE MORE" hoverText="EXPLORE MORE" link="/resources/articles" />
+          <CTA displayText={ctaText} hoverText={ctaText} link={ctaLink} />
         </div>
 
         {/* Article list */}

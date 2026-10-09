@@ -12,6 +12,20 @@ import UnifiedSectionWrapper from '../layout/UnifiedSectionWrapper';
 import { EditorialContentGrid, SectionHeader, EditorialHeading } from '../layout/EditorialContentGrid';
 import InteractiveDots from './InteractiveDots';
 
+function MultilineText({ text }: { text: string }) {
+  const lines = text.split('\n');
+  return (
+    <>
+      {lines.map((line, index) => (
+        <span key={`${line}-${index}`}>
+          {line}
+          {index < lines.length - 1 && <br />}
+        </span>
+      ))}
+    </>
+  );
+}
+
 interface Testimonial {
   id: number;
   name: string;
@@ -25,35 +39,35 @@ const testimonials: Testimonial[] = [
     id: 1,
     name: "John Doe",
     role: "Head of lorem ipsum",
-    content: "Great experience overall. They delivered intuitive design with strong attention to detail and clear communication. Highly recommended.",
+    content: "Great experience overall. They delivered intuitive design with strong attention to detail and clear communication. Highly recommended",
     highlightedWords: [2, 6]
   },
   {
     id: 2,
     name: "Sarah Chen",
     role: "Chief Technology Officer",
-    content: "Outstanding technical execution and strategic vision. The team transformed our digital presence with exceptional results.",
+    content: "Outstanding technical execution and strategic vision. The team transformed our digital presence with exceptional results",
     highlightedWords: [1, 4]
   },
   {
     id: 3,
     name: "Michael Roberts",
     role: "Product Design Lead",
-    content: "Incredible attention to user experience. They understood our needs perfectly and exceeded all expectations.",
+    content: "Incredible attention to user experience. They understood our needs perfectly and exceeded all expectations",
     highlightedWords: [0, 3]
   },
   {
     id: 4,
     name: "Emily Watson",
     role: "Marketing Director",
-    content: "Strategic brilliance meets creative excellence. Their approach revolutionized our brand positioning.",
+    content: "Strategic brilliance meets creative excellence. Their approach revolutionized our brand positioning",
     highlightedWords: [1, 5]
   },
   {
     id: 5,
     name: "David Kim",
     role: "CEO & Founder",
-    content: "Game-changing partnership. The ROI and impact on our business has been extraordinary.",
+    content: "Game-changing partnership. The ROI and impact on our business has been extraordinary",
     highlightedWords: [0, 4]
   }
 ];
@@ -72,21 +86,21 @@ const OrbitalGraphic: React.FC = () => {
         animate={{ rotate: 360 }}
         transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
       />
-      
+
       {/* Middle orbit ring */}
       <motion.div
         className="absolute inset-4 border border-white/5 rounded-full"
         animate={{ rotate: -360 }}
         transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
       />
-      
+
       {/* Inner orbit ring */}
       <motion.div
         className="absolute inset-8 border border-white/3 rounded-full"
         animate={{ rotate: 360 }}
         transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
       />
-      
+
       {/* Floating particles */}
       {[...Array(6)].map((_, i) => (
         <motion.div
@@ -108,7 +122,7 @@ const OrbitalGraphic: React.FC = () => {
           }}
         />
       ))}
-      
+
       {/* Central glow */}
       <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 rounded-full blur-xl" />
     </motion.div>
@@ -133,14 +147,16 @@ const ProgressBar: React.FC<{ activeIndex: number; totalSlides: number }> = ({ a
 };
 
 const TestimonialSlide: React.FC<{ testimonial: Testimonial; isActive: boolean; activeIndex: number; totalSlides: number }> = ({ testimonial, isActive, activeIndex, totalSlides }) => {
-  const words = testimonial.content.split(' ');
-  
+  // Design has no trailing full stop on testimonial copy — strip any
+  // trailing `.` / `...` from the source text so all slides render clean.
+  const words = testimonial.content.replace(/\s*[.…]+\s*$/, '').split(' ');
+
   return (
     <motion.div
       className="flex flex-col lg:flex-row items-start gap-0 lg:gap-[7rem] text-center lg:text-left px-5 lg:px-0 pl-4 lg:pl-[10rem]"
       initial={{ opacity: 0, y: 20 }}
-      animate={{ 
-        opacity: isActive ? 1 : 0.3, 
+      animate={{
+        opacity: isActive ? 1 : 0.3,
         y: isActive ? 0 : 10,
         scale: isActive ? 1 : 0.95
       }}
@@ -150,7 +166,7 @@ const TestimonialSlide: React.FC<{ testimonial: Testimonial; isActive: boolean; 
       <div className="flex-1 max-w-4xl lg:max-w-4xl">
         {/* Progress Bar */}
         <ProgressBar activeIndex={activeIndex} totalSlides={totalSlides} />
-        
+
         {/* Client Info and Testimonial Content */}
         <div className="flex flex-col lg:flex-row items-start gap-4 lg:gap-[7rem]">
           {/* Quote Icon + Client Info - Mobile Row, Desktop Column */}
@@ -165,7 +181,7 @@ const TestimonialSlide: React.FC<{ testimonial: Testimonial; isActive: boolean; 
                 />
               </div>
             </div>
-            
+
             {/* Client Info */}
             <div className="space-y-1 text-left">
               <h3 className="text-white font-clother font-normal text-[22px] lg:text-[22px] leading-[22px] lg:leading-[26px] tracking-normal">
@@ -176,7 +192,7 @@ const TestimonialSlide: React.FC<{ testimonial: Testimonial; isActive: boolean; 
               </p>
             </div>
           </div>
-          
+
           {/* Testimonial Content */}
           <div className="flex-1 text-left">
             <p className="text-gray-400 font-clother font-light text-[16px] lg:text-[30px] tracking-normal">
@@ -202,10 +218,24 @@ const TestimonialSlide: React.FC<{ testimonial: Testimonial; isActive: boolean; 
 
 export const Testimonials: React.FC<{
   data?: import('@/types/home-sections').TestimonialsSectionData;
-}> = ({ data: _data }) => {
+}> = ({ data }) => {
   const [mounted, setMounted] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const swiperRef = useRef<any>(null);
+
+  // CMS-driven slides (editor order); falls back to the static set.
+  const slides: Testimonial[] =
+    data?.Items?.length
+      ? data.Items.map((item, i) => ({
+          id: item.id ?? i + 1,
+          name: item.Name || '',
+          role: item.Role || '',
+          content: item.Content || '',
+        }))
+      : testimonials;
+  const label = data?.Label ?? 'Real Stories. Lasting Impressions.';
+  const heading = data?.Heading ?? 'VOICES OF REAL\nEXPERIENCES';
+  const safeActiveIndex = slides.length ? activeIndex % slides.length : 0;
 
   useEffect(() => {
     setMounted(true);
@@ -255,12 +285,10 @@ export const Testimonials: React.FC<{
       <InteractiveDots variant="dark" />
       <EditorialContentGrid>
         <SectionHeader
-          label="Real Stories. Lasting Impressions."
+          label={label}
           heading={
             <EditorialHeading size="large">
-              VOICES OF REAL
-              <br />
-              EXPERIENCES
+              <MultilineText text={heading} />
             </EditorialHeading>
           }
         />
@@ -305,20 +333,20 @@ export const Testimonials: React.FC<{
             }}
             className="testimonial-swiper !overflow-hidden !pb-10 lg:!pb-12"
           >
-            {testimonials.map((testimonial) => (
+            {slides.map((testimonial) => (
               <SwiperSlide key={testimonial.id} className="!h-auto">
                 <TestimonialSlide
                   testimonial={testimonial}
-                  isActive={testimonials[activeIndex].id === testimonial.id}
-                  activeIndex={activeIndex}
-                  totalSlides={testimonials.length}
+                  isActive={slides[safeActiveIndex].id === testimonial.id}
+                  activeIndex={safeActiveIndex}
+                  totalSlides={slides.length}
                 />
               </SwiperSlide>
             ))}
           </Swiper>
         </motion.div>
       </EditorialContentGrid>
-      
+
     </UnifiedSectionWrapper>
   );
 };

@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { services } from '@/data/services';
+import { getMediaUrl, getServiceBySlug, getServices } from '@/lib/strapi';
+import { mapServiceDataToService, resolveServiceSections } from '@/lib/map-service';
 import Footer from '@/components/home/Footer';
 import Navbar from '@/components/home/Navbar';
 import ServiceDetail from '@/components/services/ServiceDetail';
@@ -11,39 +12,73 @@ type PageProps = {
 };
 
 export async function generateStaticParams() {
-  return services
-    .filter((service): service is typeof service & { slug: string } =>
-      Boolean(service.slug && service.slug.startsWith('/services/'))
-    )
-    .map((service) => ({ slug: service.slug.split('/').pop() ?? service.slug }));
+  const apiServices = await getServices();
+  return apiServices
+    .map((service) => {
+      const raw = service.slug ?? service.Slug ?? '';
+      return { slug: raw.startsWith('/services/') ? (raw.split('/').pop() ?? raw) : raw };
+    })
+    .filter((item) => Boolean(item.slug));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const service = services.find(
-    (s) => s.slug === `/services/${slug}` || s.slug?.split('/').pop() === slug
-  );
+
+  const apiService = await getServiceBySlug(slug);
+
+  if (!apiService) {
+    return {
+      title: 'Services | Synergos',
+      description:
+        'Explore a range of services designed to help brands grow and evolve.',
+    };
+  }
+
+  const title = `${apiService.title ?? apiService.Title ?? 'Services'} | Services | Synergos`;
+  const description =
+    apiService.shortDescription ?? apiService.Description ??
+    'Explore a range of services designed to help brands grow and evolve.';
+  const image =
+    getMediaUrl(apiService.heroImage) ??
+    getMediaUrl(apiService.thumbnail) ??
+    undefined;
 
   return {
-    title: service ? `${service.title} | Services | Synergos` : 'Services | Synergos',
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url: `/services/${slug}`,
+      images: image ? [{ url: image }] : undefined,
+    },
   };
 }
 
 export default async function ServiceDetailPage({ params }: PageProps) {
   const { slug } = await params;
 
-  const service = services.find(
-    (s) => s.slug === `/services/${slug}` || s.slug?.split('/').pop() === slug
-  );
+  const apiService = await getServiceBySlug(slug);
 
-  if (!service) {
+  if (!apiService) {
+    notFound();
+  }
+
+  const service = mapServiceDataToService(apiService);
+  const detail = service.detail;
+
+  if (!detail) {
     notFound();
   }
 
   return (
     <main className="min-h-screen bg-[#0f0f0f] text-white">
       <Navbar />
-      <ServiceDetail service={service} />
+      <ServiceDetail
+        title={service.title}
+        detail={detail}
+        sections={resolveServiceSections(apiService)}
+      />
       <Footer />
     </main>
   );

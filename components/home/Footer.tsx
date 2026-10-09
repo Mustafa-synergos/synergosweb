@@ -13,9 +13,10 @@ import DecorativeVectorImage from '@/components/shared/DecorativeVectorImage';
 import { getFooter } from '@/lib/strapi';
 import { getMediaUrl } from '@/lib/strapi-media';
 import type { FooterData, FooterLink, FooterLinkColumn } from '@/types/footer';
-import { DEFAULT_FOOTER_DATA } from '@/types/footer';
+import { DEFAULT_FOOTER_DATA, resolveFooterHref, resolveFooterLabel } from '@/types/footer';
 
 const SOCIAL_ICONS: Record<string, IconType> = {
+
   linkedin: FaLinkedinIn,
   facebook: FaFacebookF,
   instagram: FaInstagram,
@@ -31,12 +32,12 @@ const headingClassName =
 function FooterTextLink({ link }: { link: FooterLink }) {
   return (
     <Link
-      href={link.Link || '#'}
+      href={resolveFooterHref(link.DisplayText, link.Link)}
       target={link.IsOpenNewTab ? '_blank' : undefined}
       rel={link.IsOpenNewTab ? 'noopener noreferrer' : undefined}
       className={linkClassName}
     >
-      {link.DisplayText}
+      {resolveFooterLabel(link.DisplayText)}
     </Link>
   );
 }
@@ -47,7 +48,7 @@ function FooterSocialLink({ link }: { link: FooterLink }) {
 
   return (
     <Link
-      href={link.Link || '#'}
+      href={resolveFooterHref(link.DisplayText, link.Link)}
       target={link.IsOpenNewTab ? '_blank' : undefined}
       rel={link.IsOpenNewTab ? 'noopener noreferrer' : undefined}
       className="group inline-flex items-center gap-2 overflow-hidden"
@@ -131,6 +132,7 @@ function FooterContent({ footer }: { footer: FooterData }) {
               src={logoUrl}
               alt="Synergos Logo"
               fill
+              sizes="(max-width: 640px) 188px, 254px"
               style={{ objectFit: 'contain' }}
               unoptimized={logoUrl.startsWith('http')}
             />
@@ -177,7 +179,7 @@ function FooterContent({ footer }: { footer: FooterData }) {
                   <span key={link.id ?? link.DisplayText}>
                     {index > 0 && ' | '}
                     <Link
-                      href={link.Link || '#'}
+                      href={resolveFooterHref(link.DisplayText, link.Link)}
                       target={link.IsOpenNewTab ? '_blank' : undefined}
                       rel={
                         link.IsOpenNewTab ? 'noopener noreferrer' : undefined

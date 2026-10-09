@@ -5,8 +5,35 @@ import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import InteractiveDots from './InteractiveDots';
+import { getMediaUrl } from '@/lib/strapi-media';
 
 gsap.registerPlugin(ScrollTrigger);
+
+function MultilineText({ text }: { text: string }) {
+  const normalized = text.replace(/\\n/g, '\n').trim();
+  let lines = normalized
+    .split('\n')
+    .map((line) => line.trim())
+    .filter(Boolean);
+  // Force "THE SYNERGY ENGINE" (single-line CMS value) into 3 lines:
+  // THE / SYNERGY / ENGINE
+  if (lines.length === 1) {
+    const words = lines[0].split(/\s+/).filter(Boolean);
+    if (words.length === 3) {
+      lines = words;
+    }
+  }
+  return (
+    <>
+      {lines.map((line, index) => (
+        <span key={`${line}-${index}`} className="block">
+          {line}
+          {index < lines.length - 1 && <br />}
+        </span>
+      ))}
+    </>
+  );
+}
 
 const engineCards = [
   {
@@ -14,9 +41,9 @@ const engineCards = [
     description: 'The compass. Before ignition, there must be sight. We excavate the deeper truths buried in data, behaviour, and market friction. Strategy answers the fundamental question:',
     question: 'why?',
     icon: (
-      <img 
-        src="/images/strategy.svg" 
-        alt="Strategy" 
+      <img
+        src="/images/strategy.svg"
+        alt="Strategy"
         className="w-full h-full max-w-full object-contain"
       />
     )
@@ -26,9 +53,9 @@ const engineCards = [
     description: 'The fuel. A strategy without narrative is a map without roads. We craft stories that burrow into memory, whether digital, film, or offline, each channel speaking in the same voice. Storytelling answers the question that matters most:',
     question: 'how will they feel?',
     icon: (
-      <img 
-        src="/images/Storytelling.svg" 
-        alt="Storytelling" 
+      <img
+        src="/images/Storytelling.svg"
+        alt="Storytelling"
         className="w-full h-full max-w-full object-contain"
       />
     )
@@ -38,9 +65,9 @@ const engineCards = [
     description: 'The thrust. A vision without velocity remains a dream. From SEO to performance marketing, from social media to studio production, delivery answers the question:',
     question: 'what happens now?',
     icon: (
-      <img 
-        src="/images/Delivery.svg" 
-        alt="Delivery" 
+      <img
+        src="/images/Delivery.svg"
+        alt="Delivery"
         className="w-full h-full max-w-full object-contain"
       />
     )
@@ -60,10 +87,41 @@ const engineCards = [
 ];
 
 export default function SynergyEngine({
-  data: _data,
+  data,
 }: {
   data?: import('@/types/home-sections').SynergyEngineSectionData;
 }) {
+  // CMS-driven copy (editor order); falls back to the static set so the
+  // scroll choreography always has cards to work with.
+  const heading = data?.Heading ?? 'THE\nSYNERGY\nENGINE';
+  const description =
+    data?.Description ?? 'Three Pillars, Always Together:';
+  const cards =
+    data?.Cards?.length
+      ? data.Cards.map((card, i) => {
+        const fallback =
+          engineCards.find(
+            (c) => c.title.toLowerCase() === (card.Title || '').toLowerCase()
+          ) ??
+          engineCards[i % engineCards.length];
+        const iconUrl = getMediaUrl(card.Icon);
+        return {
+          title: card.Title || fallback.title,
+          description: card.Description || fallback.description,
+          question: card.Question || fallback.question,
+          icon: iconUrl ? (
+            <img
+              src={iconUrl}
+              alt={card.Title || fallback.title}
+              className="w-full h-full max-w-full object-contain"
+            />
+          ) : (
+            fallback.icon
+          ),
+        };
+      })
+      : engineCards;
+  const vectorUrl = getMediaUrl(data?.VectorImage) ?? '/images/Frame 71.png';
   const sectionRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const deskVectorRef = useRef<HTMLDivElement>(null);
@@ -77,7 +135,7 @@ export default function SynergyEngine({
   useEffect(() => {
 
 
- 
+
     const elements = document.querySelectorAll(
       '.responsive-clother-paragraph'
     ) as NodeListOf<HTMLElement>;
@@ -192,11 +250,11 @@ export default function SynergyEngine({
     <section ref={sectionRef} className="relative min-h-[80vh] lg:min-h-screen overflow-hidden" style={{ backgroundColor: '#FF0000', isolation: 'isolate' }}>
 
       {/* ── Interactive Dots Background ── */}
-     <div className="hidden lg:block opacity-85">
-       <InteractiveDots variant="red" />
+      <div className="hidden lg:block opacity-85">
+        <InteractiveDots variant="red" />
       </div>
       {/* ── Ambient glow ── */}
-      <div className="hidden lg:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/10 rounded-full blur-3xl pointer-events-none"  />
+      <div className="hidden lg:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/10 rounded-full blur-3xl pointer-events-none" />
 
       {/* ==============================================================
           DESKTOP — Single-viewport tight composition (no gaps)
@@ -208,7 +266,7 @@ export default function SynergyEngine({
             {/* ── Vector ── */}
             <div ref={deskVectorRef} className="jsx-96a4049c8728edbe relative flex-shrink-0 animate-float" style={{ width: '564px', height: '397px', left: '-50px', top: '-18px' }}>
               <Image
-                src="/images/Frame 71.png"
+                src={vectorUrl}
                 alt="Synergy Engine Vector"
                 width={564}
                 height={397}
@@ -221,20 +279,16 @@ export default function SynergyEngine({
             {/* ── Heading ── */}
             <div ref={deskHeadingRef} className="flex-shrink-0">
               <h2 className="responsive-synergy-heading text-white mb-4">
-                THE
-                <br />
-                SYNERGY
-                <br />
-                ENGINE
+                <MultilineText text={heading} />
               </h2>
-              <p className="synergy-select-text text-white/90 hidden md:block mt-2" style={{ textTransform: 'none' , letterSpacing: '0.01em' }}>
-                Three Pillars, Always Together:
+              <p className="synergy-select-text text-white/90 hidden md:block mt-2" style={{ textTransform: 'none', letterSpacing: '0.01em' }}>
+                {description}
               </p>
             </div>
 
             {/* ── Cards (all 4, tight) ── */}
             <div ref={deskCardsRef} className="flex gap-6 xl:gap-8 flex-shrink-0 will-change-transform">
-              {engineCards.map((card, index) => (
+              {cards.map((card, index) => (
                 <div
                   key={index}
                   className="flex-shrink-0 w-[480px] h-[730px] rounded-[28px] shadow-2xl p-7 xl:p-8 flex flex-col transition-all duration-500 hover:scale-[1.02] relative overflow-hidden" style={{ backgroundColor: '#171717' }}
@@ -260,9 +314,9 @@ export default function SynergyEngine({
                           {card.description}
                         </p>
                       </div>
-                      <a href='#' className="responsive-clother-red-span text-red-500 lowercase mt-3">
+                      <p className="responsive-clother-red-span text-red-500 lowercase mt-3">
                         {card.question}
-                      </a>
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -277,19 +331,15 @@ export default function SynergyEngine({
           MOBILE / TABLET — Static layout with horizontal card carousel
           ============================================================== */}
       <div
-  className="lg:hidden relative z-20 py-8 px-4 sm:px-6 pb-16 "
-  style={{
-    isolation: 'isolate'
-  }}
->
+        className="lg:hidden relative z-20 py-8 px-4 sm:px-6 pb-16 "
+        style={{
+          isolation: 'isolate'
+        }}
+      >
         {/* Heading - Left aligned at top */}
         <div ref={mobHeadingRef} className="relative mb-8">
           <h2 className="responsive-synergy-heading text-white text-left">
-            THE
-            <br />
-            SYNERGY
-            <br />
-            ENGINE
+            <MultilineText text={heading} />
           </h2>
         </div>
 
@@ -301,7 +351,7 @@ export default function SynergyEngine({
             className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth pb-6 hide-scrollbar"
             style={{ WebkitOverflowScrolling: 'touch' }}
           >
-            {engineCards.map((card, index) => (
+            {cards.map((card, index) => (
               <div
                 key={index}
                 className="flex-shrink-0 w-[100%] max-w-[150vw] snap-center rounded-2xl p-5 flex flex-col relative z-10 overflow-hidden h-[450px] md:w-[48%] 
@@ -310,7 +360,7 @@ export default function SynergyEngine({
                 style={{ backgroundColor: '#171717', isolation: 'isolate' }}
               >
                 {/* Interactive Dots Background */}
-                 <div className="hidden lg:block"><InteractiveDots variant="card" className="rounded-2xl" /></div>
+                <div className="hidden lg:block"><InteractiveDots variant="card" className="rounded-2xl" /></div>
                 {/* Content overlay */}
                 <div className="relative z-10 flex flex-col h-full">
                   {/* Icon */}
@@ -339,7 +389,7 @@ export default function SynergyEngine({
 
           {/* Pagination Dots */}
           <div className="flex justify-center gap-2 mt-6">
-            {engineCards.map((_, index) => (
+            {cards.map((_, index) => (
               <button
                 key={index}
                 onClick={() => {
@@ -348,11 +398,10 @@ export default function SynergyEngine({
                     behavior: 'smooth',
                   });
                 }}
-                className={`transition-all duration-300 rounded-full ${
-                  activeCard === index
-                    ? 'w-6 bg-white'
-                    : 'w-2 bg-gray-500'
-                } h-2`}
+                className={`transition-all duration-300 rounded-full ${activeCard === index
+                  ? 'w-6 bg-white'
+                  : 'w-2 bg-gray-500'
+                  } h-2`}
               />
             ))}
           </div>
@@ -370,8 +419,8 @@ export default function SynergyEngine({
       `}</style>
       <script>
         {window.innerWidth >= 1024 && (
-  <InteractiveDots variant="red" />
-)}
+          <InteractiveDots variant="red" />
+        )}
       </script>
     </section>
   );

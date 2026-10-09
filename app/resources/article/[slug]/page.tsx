@@ -4,7 +4,6 @@ import { notFound } from 'next/navigation';
 import Navbar from '@/components/home/Navbar';
 import Footer from '@/components/home/Footer';
 import ArticleDetail from '@/components/articles/ArticleDetail';
-import { FALLBACK_ARTICLES, getFallbackArticleBySlug } from '@/data/articles';
 import { getArticleBySlug, getArticles } from '@/lib/strapi';
 
 type PageProps = {
@@ -14,16 +13,16 @@ type PageProps = {
 export async function generateStaticParams() {
   try {
     const articles = await getArticles();
-    return [...articles, ...FALLBACK_ARTICLES].map((article) => ({ slug: article.Slug }));
+    return articles.map((article) => ({ slug: article.Slug }));
   } catch {
-    return FALLBACK_ARTICLES.map((article) => ({ slug: article.Slug }));
+    return [];
   }
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   try {
-    const article = await getArticleBySlug(slug) ?? getFallbackArticleBySlug(slug);
+    const article = await getArticleBySlug(slug);
     if (!article) return {};
     return {
       title: article.SeoInfo?.MetaTitle ?? `${article.Title} | Synergos`,
@@ -37,19 +36,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function ArticleDetailPage({ params }: PageProps) {
   const { slug } = await params;
 
-  let article, allArticles;
+  let article: Awaited<ReturnType<typeof getArticleBySlug>> | null = null;
+  let allArticles: Awaited<ReturnType<typeof getArticles>> = [];
   try {
     [article, allArticles] = await Promise.all([
       getArticleBySlug(slug),
       getArticles(),
     ]);
   } catch {
-    article = getFallbackArticleBySlug(slug);
-    allArticles = FALLBACK_ARTICLES;
+    // keep defaults
   }
-
-  article = article ?? getFallbackArticleBySlug(slug);
-  allArticles = allArticles?.length ? allArticles : FALLBACK_ARTICLES;
 
   if (!article) notFound();
 

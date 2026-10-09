@@ -14,7 +14,9 @@ type PageProps = {
 export async function generateStaticParams() {
   try {
     const blogs = await getBlogs();
-    return blogs.map((b) => ({ slug: b.Slug }));
+    return blogs
+      .map((b) => ({ slug: b.Slug }))
+      .filter((item) => Boolean(item.slug));
   } catch {
     return [];
   }

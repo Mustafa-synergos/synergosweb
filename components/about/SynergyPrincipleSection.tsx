@@ -98,14 +98,23 @@ export default function SynergyPrincipleSection({ data }: SynergyPrincipleSectio
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, delay: index * 0.12 }}
                   viewport={{ once: true }}
-                  className="flex h-full min-h-[340px] w-full flex-col rounded-[28px] border border-white/10 bg-[#ffffff]/25 p-6 backdrop-blur-sm transition-[border-color,box-shadow] duration-500 hover:border-white/20 sm:min-h-[420px] lg:p-8"
+                  className="flex h-full min-h-[340px] w-full flex-col rounded-[28px] border border-white/10 p-6 transition-[border-color,box-shadow] duration-500 hover:border-white/20 sm:min-h-[420px] lg:p-8"
+                  style={{
+                    background:
+                      'linear-gradient(180.17deg, rgba(0, 0, 0, 0.5) -55.31%, rgba(255, 255, 255, 0) 99.84%)',
+                    borderImageSource:
+                      'linear-gradient(175.43deg, #FFFFFF 11.81%, rgba(255, 255, 255, 0) 34.54%, rgba(255, 255, 255, 0.528862) 67.43%, rgba(255, 255, 255, 0.77) 95.28%)',
+                    borderImageSlice: '50%',
+                    backdropFilter: 'blur(50px)',
+                    WebkitBackdropFilter: 'blur(50px)',
+                  }}
                 >
                   <h3 className="responsive-clother-h3 font-bold text-white">
                     {pillar.Title}
                     <br />
                     {pillar.Subtitle}
                   </h3>
-                  <p className="responsive-clother-paragraph mt-5 flex-1 text-white/78">
+                  <p className="responsive-clother-paragraph mt-5 flex-1 text-[#AEAEAE]">
                     {pillar.Description}
                   </p>
                   {pillar.LinkText && (

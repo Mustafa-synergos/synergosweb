@@ -12,12 +12,13 @@ type Props = {
   initialArticles: ArticleData[];
   initialMeta: PaginationMeta;
   categories: string[];
+  sectionHeading?: string;
 };
 
 const LOAD_MORE_SIZE = 9;
 const INITIAL_SIZE = 9;
 
-export default function ArticleListingContent({ initialArticles, initialMeta, categories }: Props) {
+export default function ArticleListingContent({ initialArticles, initialMeta, categories, sectionHeading = 'LATEST' }: Props) {
   const [articles, setArticles] = useState<ArticleData[]>(initialArticles);
   const [total, setTotal] = useState(initialMeta.total);
   const [activeCategory, setActiveCategory] = useState('');
@@ -58,13 +59,13 @@ export default function ArticleListingContent({ initialArticles, initialMeta, ca
 
       {/* Heading block */}
       {/* Featured block */}
-<div className="bg-white/[0.04]">
+<div>
   <div className="mx-auto max-w-[1280px] px-6 pb-10 pt-14 sm:px-8 sm:pb-12 sm:pt-16 lg:px-0 lg:pb-14 lg:pt-20">
 
     {/* Heading + filter */}
     <div className="mb-6 flex items-end justify-between gap-4 sm:mb-8">
       <h2 className="font-clother text-[80px] font-bold leading-none tracking-[-0.03em] text-white sm:text-[100px] lg:text-[130px]">
-        LATEST
+        {sectionHeading}
       </h2>
 
       {categories.length > 0 && (

@@ -14,7 +14,7 @@ type OpenRolesSectionProps = {
 
 export default function OpenRolesSection({ content, careers }: OpenRolesSectionProps) {
   return (
-    <section className="relative overflow-hidden bg-[#050505] text-white">
+    <section id="open-roles" className="relative scroll-mt-24 overflow-hidden bg-[#050505] text-white">
       <InteractiveDots variant="dark" />
 
       <div className="relative z-10 mx-auto w-full max-w-[1280px] px-4 py-16 sm:px-8 sm:py-20 lg:px-0 lg:py-24">

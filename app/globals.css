@@ -14,14 +14,22 @@
   font-style: normal;
 
   /* Type scale — mobile → desktop (rem, 16px base) */
-  --type-h1: clamp(3.75rem, 2.25rem + 6vw, 9.375rem);   /* thank-you: 60px → 150px */
-  --type-h1-hero: clamp(2.25rem, 1.25rem + 4vw, 5rem);  /* page hero: 36px → 80px */
-  --type-h2: clamp(1.6875rem, 1.125rem + 2.2vw, 4.3125rem); /* 27px → 69px */
-  --type-h3: clamp(1.375rem, 1rem + 1.5vw, 3.25rem);    /* 22px → 52px */
-  --type-h4: clamp(1.25rem, 1rem + 1vw, 2.5rem);        /* 20px → 40px */
-  --type-h5: clamp(1.125rem, 1rem + 0.6vw, 1.75rem);    /* 18px → 28px */
-  --type-h6: clamp(1rem, 0.95rem + 0.35vw, 1.375rem);   /* 16px → 22px */
-  --type-p: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);     /* 16px → 18px */
+  --type-h1: clamp(3.75rem, 2.25rem + 6vw, 9.375rem);
+  /* thank-you: 60px → 150px */
+  --type-h1-hero: clamp(2.25rem, 1.25rem + 4vw, 5rem);
+  /* page hero: 36px → 80px */
+  --type-h2: clamp(1.6875rem, 1.125rem + 2.2vw, 4.3125rem);
+  /* 27px → 69px */
+  --type-h3: clamp(1.375rem, 1rem + 1.5vw, 3.25rem);
+  /* 22px → 52px */
+  --type-h4: clamp(1.25rem, 1rem + 1vw, 2.5rem);
+  /* 20px → 40px */
+  --type-h5: clamp(1.125rem, 1rem + 0.6vw, 1.75rem);
+  /* 18px → 28px */
+  --type-h6: clamp(1rem, 0.95rem + 0.35vw, 1.375rem);
+  /* 16px → 22px */
+  --type-p: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  /* 16px → 18px */
 
   --lh-h1: 1;
   --lh-h1-hero: 1.02;
@@ -47,9 +55,10 @@ body {
   transform-style: preserve-3d; */
 }
 
-.max-w-7xl{
+.max-w-7xl {
   max-width: 1280px;
 }
+
 p {
   font-family: var(--font-body);
   font-size: var(--type-p);
@@ -119,12 +128,15 @@ p {
     text-transform: uppercase;
   }
 }
+
 .text-grey {
   color: #AEAEAE;
 }
-.text-grey-400{
-   color: #AEAEAE;
+
+.text-grey-400 {
+  color: #AEAEAE;
 }
+
 /* =========================================
    SCROLLBAR
 ========================================= */
@@ -161,6 +173,7 @@ body::-webkit-scrollbar-track {
 ========================================= */
 
 @layer utilities {
+
   .text-gray,
   .text-gray-400,
   .text-gray-500 {
@@ -219,7 +232,29 @@ body::-webkit-scrollbar-track {
     text-transform: uppercase;
   }
 
-  .type-h2,
+  .type-h2 {
+    font-family: var(--font-display);
+    font-size: 38px;
+    line-height: 40px;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  @media (min-width: 640px) {
+    .type-h2 {
+      font-size: 80px;
+      line-height: 90px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .type-h2 {
+      font-size: 134px;
+      line-height: 134px;
+    }
+  }
+
   .responsive-h2 {
     font-family: var(--font-display);
     font-size: var(--type-h2);
@@ -416,7 +451,7 @@ body::-webkit-scrollbar-track {
 }
 
 /* =========================================
-   MOBILE OPTIMIZATION
+   MOBILE OPTIMISATION
 ========================================= */
 
 @media screen and (max-width: 768px) {
@@ -485,28 +520,38 @@ body::-webkit-scrollbar-track {
     width: auto;
     margin: auto;
   }
+
   .responsive-h2 {
-    font-size: 2.5rem; /* 40px tablet */
+    font-size: 2.5rem;
+    /* 40px tablet */
   }
+
   .type-h1,
   .responsive-h1,
   h1.type-h1 {
-    font-size: 5rem; /* 80px tablet — thank-you h1 */
+    font-size: 5rem;
+    /* 80px tablet — thank-you h1 */
   }
+
   .type-h1-hero,
   h1.type-h1-hero {
-    font-size: 3.25rem; /* 52px tablet — page hero h1 */
+    font-size: 3.25rem;
+    /* 52px tablet — page hero h1 */
   }
+
   .responsive-large-h2 {
     font-size: 80px;
   }
-  .responsive-synergy-heading{
-     font-size: 80px;
+
+  .responsive-synergy-heading {
+    font-size: 80px;
   }
-  .responsive-red-span{
+
+  .responsive-red-span {
     font-size: 20px;
   }
-  .ambition-content{
+
+  .ambition-content {
     padding-top: 0;
     max-width: 650px;
     width: auto;
@@ -533,7 +578,9 @@ body::-webkit-scrollbar-track {
 }
 
 @keyframes twinkle {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 0.2;
   }
 
@@ -546,6 +593,7 @@ body::-webkit-scrollbar-track {
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }
@@ -555,6 +603,7 @@ body::-webkit-scrollbar-track {
   0% {
     transform: translateX(-50%);
   }
+
   100% {
     transform: translateX(0);
   }
@@ -574,15 +623,16 @@ body::-webkit-scrollbar-track {
 }
 
 .dots-separator {
- content: '';
-width: 10px;
-height: 10px;
-border-radius: 50%;
-display: inline-block;
-margin: 0 4px;
-opacity: 1;
-transition: all 0.3s ease-out;
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0 4px;
+  opacity: 1;
+  transition: all 0.3s ease-out;
 }
+
 /* =========================================
    BLOG DETAIL RICH TEXT
 ========================================= */
@@ -600,16 +650,24 @@ transition: all 0.3s ease-out;
   letter-spacing: -0.01em;
 }
 
-.blog-content h1 { font-size: 1.5rem; }
-.blog-content h2 { font-size: 1.25rem; }
-.blog-content h3 { font-size: 1.1rem; }
+.blog-content h1 {
+  font-size: 1.5rem;
+}
+
+.blog-content h2 {
+  font-size: 1.25rem;
+}
+
+.blog-content h3 {
+  font-size: 1.1rem;
+}
 
 .blog-content p {
   font-family: "clother", sans-serif;
   font-size: 0.9375rem;
   font-weight: 300;
   line-height: 1.85;
-  color: rgba(255,255,255,0.75);
+  color: rgba(255, 255, 255, 0.75);
   margin-bottom: 1.25rem;
 }
 
@@ -619,15 +677,20 @@ transition: all 0.3s ease-out;
   margin-bottom: 1.25rem;
 }
 
-.blog-content ul { list-style-type: disc; }
-.blog-content ol { list-style-type: decimal; }
+.blog-content ul {
+  list-style-type: disc;
+}
+
+.blog-content ol {
+  list-style-type: decimal;
+}
 
 .blog-content li {
   font-family: "clother", sans-serif;
   font-size: 0.875rem;
   font-weight: 300;
   line-height: 1.8;
-  color: rgba(255,255,255,0.70);
+  color: rgba(255, 255, 255, 0.70);
   margin-bottom: 0.35rem;
 }
 
@@ -647,7 +710,7 @@ transition: all 0.3s ease-out;
 
 .blog-content hr {
   border: none;
-  border-top: 1px solid rgba(255,255,255,0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   margin: 2rem 0;
 }
 
@@ -655,6 +718,128 @@ transition: all 0.3s ease-out;
   border-left: 3px solid #f87171;
   padding-left: 1rem;
   margin: 1.5rem 0;
-  color: rgba(255,255,255,0.55);
+  color: rgba(255, 255, 255, 0.55);
+  font-style: italic;
+}
+
+/* =========================================
+   FLIPBOOK LAYOUT
+========================================= */
+
+.stf__block {
+  inset: 0 !important;
+}
+
+.stf__parent {
+  margin: 0 auto !important;
+}
+
+/* Modal Swiper slides should center their content vertically/horizontally */
+.modal-swiper .swiper-slide {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* =========================================
+   CASE STUDY RICH TEXT (Strapi HTML content)
+========================================= */
+
+.case-study-rich {
+  color: #ffffff;
+}
+
+.case-study-rich h1,
+.case-study-rich h2,
+.case-study-rich h3,
+.case-study-rich h4 {
+  font-family: "clother", sans-serif;
+  font-weight: 600;
+  color: #ffffff;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+
+.case-study-rich h1 {
+  font-size: 1.75rem;
+}
+
+.case-study-rich h2 {
+  font-size: 1.5rem;
+}
+
+.case-study-rich h3 {
+  font-size: 1.25rem;
+}
+
+.case-study-rich h4 {
+  font-size: 1.1rem;
+}
+
+.case-study-rich p {
+  font-family: "clother", sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 26px;
+  color: #FFFFFF;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .case-study-rich p {
+    font-size: 18px;
+  }
+}
+
+.case-study-rich ul,
+.case-study-rich ol {
+  padding-left: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.case-study-rich ul {
+  list-style-type: disc;
+}
+
+.case-study-rich ol {
+  list-style-type: decimal;
+}
+
+.case-study-rich li {
+  font-family: "clother", sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 26px;
+  color: #FFFFFF;
+  margin-bottom: 0.5rem;
+}
+
+.case-study-rich strong {
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.case-study-rich a {
+  color: #ff202a;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.case-study-rich a:hover {
+  color: #ffffff;
+}
+
+.case-study-rich hr {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 1.5rem 0;
+}
+
+.case-study-rich blockquote {
+  border-left: 3px solid #ff202a;
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  color: rgba(255, 255, 255, 0.55);
   font-style: italic;
 }

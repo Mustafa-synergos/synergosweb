@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay, Mousewheel } from 'swiper/modules';
@@ -12,7 +13,22 @@ import 'swiper/css/pagination';
 import UnifiedSectionWrapper from '../layout/UnifiedSectionWrapper';
 import { EditorialContentGrid, SectionHeader, EditorialHeading } from '../layout/EditorialContentGrid';
 import PremiumCTA from './PremiumCTA';
+import CTA from '@/components/shared/CTA';
 import InteractiveDots from './InteractiveDots';
+
+function MultilineText({ text }: { text: string }) {
+  const lines = text.split('\n');
+  return (
+    <>
+      {lines.map((line, index) => (
+        <span key={`${line}-${index}`}>
+          {line}
+          {index < lines.length - 1 && <br />}
+        </span>
+      ))}
+    </>
+  );
+}
 
 interface BlogPost {
   id: number;
@@ -21,6 +37,7 @@ interface BlogPost {
   category: string;
   date: string;
   readTime: string;
+  link?: string;
 }
 
 const blogPosts: BlogPost[] = [
@@ -159,19 +176,6 @@ const additionalBlogPosts: BlogPost[] = [
   
 
 ];  
-const infiniteBlogPosts = [
-  ...blogPosts,
-  ...blogPosts,
-  ...blogPosts,
-  ...blogPosts,
-];
-
-const infiniteAdditionalBlogPosts = [
-  ...additionalBlogPosts,
-  ...additionalBlogPosts,
-  ...additionalBlogPosts,
-  ...additionalBlogPosts,
-];
 const BlogCard: React.FC<{ post: BlogPost; index: number; onHover: (hovering: boolean) => void; onClick: () => void }> = ({ post, index, onHover, onClick }) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -391,12 +395,42 @@ const InsightsCursor: React.FC = () => {
 
 export const LatestFromSynergos: React.FC<{
   data?: import('@/types/home-sections').LatestPostsSectionData;
-}> = ({ data: _data }) => {
+}> = ({ data }) => {
   const [mounted, setMounted] = useState(false);
   const swiperRef = useRef<any>(null);
   const swiperRef2 = useRef<any>(null);
   const [hoveredCard, setHoveredCard] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+
+  // CMS-driven posts (editor order); falls back to the static sets so the
+  // marquees always have slides to loop.
+  const cmsPosts: BlogPost[] = (data?.Posts ?? []).map((p, i) => ({
+    id: p.id ?? i + 1,
+    title: p.Title || '',
+    excerpt: p.Excerpt || '',
+    category: p.Category || '',
+    date: p.Date || '',
+    readTime: p.ReadTime || '',
+    link: p.Link || undefined,
+  }));
+  const primaryPosts = cmsPosts.length ? cmsPosts : blogPosts;
+  const secondaryPosts = cmsPosts.length ? cmsPosts : additionalBlogPosts;
+  const infinitePrimaryPosts = [
+    ...primaryPosts,
+    ...primaryPosts,
+    ...primaryPosts,
+    ...primaryPosts,
+  ];
+  const infiniteSecondaryPosts = [
+    ...secondaryPosts,
+    ...secondaryPosts,
+    ...secondaryPosts,
+    ...secondaryPosts,
+  ];
+  const label = data?.Label ?? 'Insights';
+  const heading = data?.Heading ?? 'LATEST FROM\nSYNERGOS';
+  const sectionCta = data?.CTA;
 
  const handleCardHover = (hovering: boolean) => {
   setHoveredCard(hovering);
@@ -423,6 +457,10 @@ export const LatestFromSynergos: React.FC<{
   }
 };
   const handleCardClick = (post: BlogPost) => {
+    if (post.link) {
+      router.push(post.link);
+      return;
+    }
     // Navigate to article - placeholder for actual navigation
     console.log('Navigate to:', post.title);
   };
@@ -522,16 +560,18 @@ export const LatestFromSynergos: React.FC<{
       <InsightsCursor />
       <EditorialContentGrid>
         <SectionHeader
-          label="Insights"
+          label={label}
           heading={
             <EditorialHeading size="large">
-              LATEST FROM
-              <br />
-              SYNERGOS
+              <MultilineText text={heading} />
             </EditorialHeading>
           }
           cta={
-            <PremiumCTA title="View All Posts" hoverTitle="View All Posts" />
+            sectionCta ? (
+              <CTA data={sectionCta} displayText="View All Posts" hoverText="View All Posts" />
+            ) : (
+              <PremiumCTA title="View All Posts" hoverTitle="View All Posts" />
+            )
           }
         />
 
@@ -578,8 +618,8 @@ speed={4000}
             }}
             className="!overflow-visible !cursor-grab active:!cursor-grabbing"
           >
-{infiniteBlogPosts.map((post, index) => (
-                <SwiperSlide key={post.id} className="!w-auto !h-auto">
+{infinitePrimaryPosts.map((post, index) => (
+                <SwiperSlide key={`${post.id}-${index}`} className="!w-auto !h-auto">
                 <BlogCard post={post} index={index} onHover={handleCardHover} onClick={() => handleCardClick(post)} />
               </SwiperSlide>
             ))}
@@ -630,8 +670,8 @@ speed={4000}
             }}
             className="!overflow-visible !cursor-grab active:!cursor-grabbing"
           >
-           {infiniteAdditionalBlogPosts.map((post, index) => (
-              <SwiperSlide key={post.id} className="!w-auto !h-auto">
+           {infiniteSecondaryPosts.map((post, index) => (
+              <SwiperSlide key={`${post.id}-${index}`} className="!w-auto !h-auto">
                 <BlogCard post={post} index={index + 6} onHover={handleCardHover} onClick={() => handleCardClick(post)} />
               </SwiperSlide>
             ))}

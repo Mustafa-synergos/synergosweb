@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from 'react';
 import ArticleCard from '@/components/articles/ArticleCard';
 import InteractiveDots from '@/components/home/InteractiveDots';
 import { parseArticleContent } from '@/lib/article-parser';
+import { dzBodyField } from '@/lib/dz-sections';
 import type { ArticleData } from '@/types/article';
 
 type ArticleDetailProps = {
@@ -248,9 +249,8 @@ function ArticleBody({ content }: { content: string }) {
         return (
           <div
             key={idx}
-            className={`my-8 grid grid-cols-1 items-start gap-6 sm:my-10 sm:gap-8 lg:grid-cols-[666px_1fr] lg:gap-10 ${
-              block.reverse ? 'lg:[&>*:first-child]:order-2' : ''
-            }`}
+            className={`my-8 grid grid-cols-1 items-start gap-6 sm:my-10 sm:gap-8 lg:grid-cols-[666px_1fr] lg:gap-10 ${block.reverse ? 'lg:[&>*:first-child]:order-2' : ''
+              }`}
           >
             <div
               className="text-[15px] leading-[1.8] text-[#CFCFCF] sm:text-[17px] sm:leading-[2] lg:text-[18px] [&_p]:mb-4 sm:[&_p]:mb-6 [&_p:last-child]:mb-0"
@@ -300,6 +300,11 @@ function RelatedArticles({ articles }: { articles: ArticleData[] }) {
 ============================================================= */
 
 export default function ArticleDetail({ article, related }: ArticleDetailProps) {
+  // DZ body section wins when the entry is migrated; legacy field otherwise.
+  const content =
+    dzBodyField<string>(article, 'sections.article-body', 'Content') ?? article.Content;
+  const readTime =
+    dzBodyField<string>(article, 'sections.article-body', 'ReadTime') ?? article.ReadTime;
   return (
     <section className="relative overflow-hidden bg-[#111111] px-4 pt-20 pb-12 sm:px-6 sm:pt-20 sm:pb-16 lg:px-0 lg:pt-24 lg:pb-16">
       <div className="pointer-events-none">
@@ -317,11 +322,11 @@ export default function ArticleDetail({ article, related }: ArticleDetailProps) 
       />
 
       <div className="relative mx-auto max-w-[1280px] px-0 sm:px-6 lg:px-8 lg:py-16 lg:mt-20 sm:mt-16">
-        <ArticleHero article={article} />
+        <ArticleHero article={readTime !== article.ReadTime ? { ...article, ReadTime: readTime } : article} />
 
         <div className="mt-16 w-full sm:mt-20 md:mt-24 lg:mt-28">
-          {article.Content ? (
-            <ArticleBody content={article.Content} />
+          {content ? (
+            <ArticleBody content={content} />
           ) : (
             <p className="text-white/30">No content available.</p>
           )}

@@ -60,7 +60,7 @@ export default function BlogListingContent({
         <InteractiveDots variant="dark" />
       </div>
       {/* ── Featured block (different bg): LATEST + filter + top 2 cards ── */}
-      <div className="bg-white/[0.04]">
+      <div>
         <div className="mx-auto max-w-[1280px] px-6 pb-10 pt-14 sm:px-8 sm:pb-12 sm:pt-16 lg:px-0 lg:pb-14 lg:pt-20">
 
           {/* Heading + filter */}

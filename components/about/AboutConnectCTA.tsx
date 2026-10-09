@@ -37,8 +37,13 @@ function ConnectCtaForm({ content, getRecaptchaToken }: ConnectCtaFormProps) {
   const [error, setError] = useState<string | null>(null);
 
   const buttonLabel = content.PrimaryCTA?.DisplayText ?? "LET'S LIFT OFF";
+  // Placeholder update: legacy CMS value is `@youremailid`; render the
+  // approved `@your email id here` copy instead (keeps the leading @).
+  const rawPlaceholder = (content.EmailPlaceholder ?? '').trim();
   const emailPlaceholder =
-    content.EmailPlaceholder?.replace(/^@/, '') ?? 'your email id here';
+    !rawPlaceholder || rawPlaceholder === '@youremailid' || rawPlaceholder === 'youremailid'
+      ? '@your email id here'
+      : rawPlaceholder;
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -111,7 +116,7 @@ function ConnectCtaForm({ content, getRecaptchaToken }: ConnectCtaFormProps) {
           placeholder={emailPlaceholder}
           required
           disabled={isSubmitting}
-          className="min-w-0 flex-1 border-b border-white/30 bg-transparent pb-4 text-[16px] text-white transition-colors duration-300 placeholder:text-white/45 focus:border-white/60 focus:outline-none disabled:opacity-60 lg:border-none lg:text-[18px]"
+          className="min-w-0 flex-1 border-b border-white/30 bg-transparent pb-4 text-[16px] text-white transition-colors duration-300 placeholder:text-white/45 focus:border-white/60 focus:outline-none disabled:opacity-60 lg:border-none lg:text-[20px]"
         />
 
         <motion.button
@@ -125,7 +130,7 @@ function ConnectCtaForm({ content, getRecaptchaToken }: ConnectCtaFormProps) {
           onTouchStart={() => setIsHovered(true)}
           onTouchEnd={() => setIsHovered(false)}
           onTouchCancel={() => setIsHovered(false)}
-          className="hidden shrink-0 items-center gap-1 uppercase text-white disabled:cursor-not-allowed disabled:opacity-60 lg:ml-2 lg:flex lg:gap-2 lg:text-[18px] lg:font-[300]"
+          className="hidden shrink-0 items-center gap-1 uppercase text-white disabled:cursor-not-allowed disabled:opacity-60 lg:ml-2 lg:flex lg:gap-2 text-[16px] lg:text-[20px] lg:font-[300]"
         >
           <motion.span
             initial="rest"
@@ -229,6 +234,12 @@ export default function AboutConnectCTA({ data }: AboutConnectCTAProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const content = data ?? DEFAULT_ABOUT_CONNECT;
   const headingLines = getTitleLines(content.Heading, 'multiline');
+  // Copy update: legacy CMS text uses a colon here; render the approved
+  // "through imagination, craft, ..." phrasing instead.
+  const description = (content.Description ?? '').replace(
+    'perfecting the mechanics of brand acceleration: imagination,',
+    'perfecting the mechanics of brand acceleration through imagination,',
+  );
   const vectorUrl =
     getMediaUrl(content.Vector) ?? content.VectorPath ?? DEFAULT_ABOUT_CONNECT.VectorPath!;
 
@@ -263,7 +274,7 @@ export default function AboutConnectCTA({ data }: AboutConnectCTAProps) {
             ))}
           </h2>
           <p className="font-clother text-[16px] font-light leading-relaxed text-white/80 lg:text-[18px]">
-            {content.Description}
+            {description}
           </p>
 
           {SITE_KEY ? (
